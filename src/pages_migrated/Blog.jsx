@@ -23,10 +23,9 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import BlogCard, { getReadingTime, calculateReadingStats, getSnippet, getBlogImage, formatDate } from "../components/BlogCard.jsx";
+import BlogCard, { calculateReadingStats } from "../components/BlogCard.jsx";
 import ApiErrorState from "../components/ApiErrorState.jsx";
 import AdSenseBanner from "../components/AdSenseBanner.jsx";
-import { LogoImg } from "../assets/assets.js";
 import { toast } from "react-toastify";
 
 const BLOGS_PER_PAGE = 24;
@@ -80,12 +79,6 @@ function Blog() {
 
     return result;
   }, [blogs, selectedCategory]);
-
-  // Latest publication for hero spotlight card (most recent createdAt)
-  const latestBlog = useMemo(() => {
-    if (!blogs || blogs.length === 0) return null;
-    return [...blogs].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0] || null;
-  }, [blogs]);
 
   // Extract popular tags
   const activeTags = useMemo(() => {
@@ -185,205 +178,23 @@ function Blog() {
     setSearchParams(searchParams);
   };
 
-  const latestBlogImage = latestBlog ? getBlogImage(latestBlog) : null;
-
   return (
     <div className="bg-white dark:bg-slate-950 min-h-screen font-sans text-slate-800 dark:text-slate-100 transition-colors duration-200">
-      {/* Modern Redesigned Hero Section */}
-      <section className="relative bg-gradient-to-b from-teal-50/40 via-slate-50/50 to-white dark:from-slate-900/80 dark:via-slate-900/50 dark:to-slate-950 border-b border-slate-200/80 dark:border-slate-800/80 pt-10 sm:pt-14 pb-12 sm:pb-16 overflow-hidden">
-        {/* Subtle decorative background glow */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-teal-500/5 dark:bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/2 -right-24 w-80 h-80 bg-teal-200/20 dark:bg-teal-500/10 rounded-full blur-2xl pointer-events-none" />
+      {/* Professional Editorial Hero Section - Solid Clean Background */}
+      <section className="relative bg-white dark:bg-slate-950 pt-6 sm:pt-8 pb-3 sm:pb-4">
+        <div className="max-w-3xl px-4 sm:px-6 lg:px-17 text-start space-y-2.5 sm:space-y-3">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white font-heading leading-tight">
+            Articles &amp; <span className="text-teal-600 dark:text-teal-400">Publications</span>
+          </h1>
 
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Column: Heading, Subtitle & Interactive Search */}
-            <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200/80 dark:border-teal-800/60 text-[11px] font-bold text-teal-700 dark:text-teal-300 font-mono tracking-wider uppercase shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
-                <span>Al-Mukhtar Journal &amp; Academic Archive</span>
-              </div>
-
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white font-heading leading-[1.2]">
-                Scholarly Insights &amp; <span className="text-teal-600 dark:text-teal-400">Islamic Reflections</span>
-              </h1>
-
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-xl">
-                Explore in-depth Quranic commentaries, Arabic linguistics, classical jurisprudence essays, and academic campus announcements curated by certified faculty.
-              </p>
-
-              {/* Integrated Hero Search Bar */}
-              <div className="pt-2 max-w-lg">
-                <div className="relative flex items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus-within:border-teal-600 dark:focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-teal-500/20 rounded-full shadow-sm transition-all p-1">
-                  <Search className="ml-3.5 w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => {
-                      setSearchQuery(e.target.value);
-                      setCurrentPage(1);
-                    }}
-                    placeholder="Search articles by title, subject, or keyword..."
-                    className="w-full px-3 py-2 bg-transparent text-xs sm:text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 outline-none"
-                  />
-                  {searchQuery && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSearchQuery("");
-                        setCurrentPage(1);
-                      }}
-                      className="p-1.5 mr-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
-                      title="Clear search"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  )}
-                </div>
-
-                {/* Quick Topic Chips below Search */}
-                {activeTags.length > 0 && (
-                  <div className="flex items-center gap-1.5 flex-wrap pt-3 text-[11px] text-slate-500 dark:text-slate-400">
-                    <span className="font-mono text-[10.5px] text-slate-400 dark:text-slate-500 uppercase font-semibold">Popular:</span>
-                    {activeTags.slice(0, 4).map((tag) => (
-                      <button
-                        key={tag}
-                        type="button"
-                        onClick={() => handleCategorySelect(tag)}
-                        className="px-2.5 py-0.5 rounded-full bg-white/80 dark:bg-slate-900 hover:bg-teal-50 dark:hover:bg-teal-950/60 border border-slate-200/80 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-teal-700 dark:hover:text-teal-300 text-xs font-medium transition-colors cursor-pointer shadow-sm"
-                      >
-                        #{tag}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Credibility Trust Strip */}
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 text-xs text-slate-500 dark:text-slate-400 font-mono">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 size={14} className="text-teal-600 dark:text-teal-400" />
-                  Verified Scholarship
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 size={14} className="text-teal-600 dark:text-teal-400" />
-                  Peer-Reviewed
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 size={14} className="text-teal-600 dark:text-teal-400" />
-                  Open Academic Archive
-                </span>
-              </div>
-            </div>
-
-            {/* Right Column: Latest Publication Spotlight Card */}
-            <div className="lg:col-span-5">
-              {latestBlog ? (
-                <div className="relative group bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:border-teal-500/50 dark:hover:border-teal-500/50 hover:shadow-md transition-all duration-300 overflow-hidden p-4">
-                  {/* Spotlight Top Badge: Latest Publication */}
-                  <div className="flex items-center justify-between pb-3">
-                    <div className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200/80 dark:border-teal-800/60 text-[10px] font-bold font-mono uppercase tracking-wider">
-                      <Sparkles className="w-3 h-3 text-teal-600 dark:text-teal-400" />
-                      <span>Latest Publication</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-[10.5px] text-slate-400 dark:text-slate-500 font-mono">
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-slate-400 dark:text-slate-500" />
-                        {getReadingTime(latestBlog)}
-                      </span>
-                      <span>·</span>
-                      <span className="flex items-center gap-1">
-                        <Eye className="w-3 h-3 text-slate-400 dark:text-slate-500" />
-                        {latestBlog.views || 1}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Thumbnail Banner */}
-                  <Link
-                    to={`/blog/${latestBlog.slug || latestBlog._id}`}
-                    className="relative w-full h-44 sm:h-48 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 block group/img"
-                  >
-                    {latestBlogImage ? (
-                      <img
-                        src={latestBlogImage}
-                        onError={(e) => {
-                          e.currentTarget.onerror = null;
-                          e.currentTarget.src = LogoImg;
-                          e.currentTarget.className = "max-h-24 max-w-[75%] object-contain m-auto drop-shadow-sm";
-                        }}
-                        alt={latestBlog.title}
-                        className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-tr from-slate-100 dark:from-slate-800 via-teal-50/40 dark:via-slate-800/60 to-slate-50 dark:to-slate-900 flex items-center justify-center p-4">
-                        <img
-                          src={LogoImg}
-                          alt="Al-Mukhtar Institute"
-                          className="max-h-24 max-w-[75%] object-contain drop-shadow-sm group-hover/img:scale-105 transition-transform duration-300"
-                        />
-                      </div>
-                    )}
-                    <div className="absolute top-3 left-3">
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-900/85 text-white backdrop-blur-sm shadow-sm font-mono">
-                        <Tag className="w-2.5 h-2.5 text-teal-400" />
-                        {latestBlog.subject || "General"}
-                      </span>
-                    </div>
-                  </Link>
-
-                  {/* Content snippet */}
-                  <div className="pt-3.5 space-y-1.5">
-                    <div className="text-[10.5px] text-slate-400 dark:text-slate-500 font-mono">
-                      <span>Al-Mukhtar Institute</span> · <span>{formatDate(latestBlog.createdAt)}</span>
-                    </div>
-                    <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors line-clamp-2 font-heading leading-snug">
-                      <Link to={`/blog/${latestBlog.slug || latestBlog._id}`}>
-                        {latestBlog.title}
-                      </Link>
-                    </h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed font-normal">
-                      {latestBlog.description || getSnippet(latestBlog.content, 120)}
-                    </p>
-
-                    <div className="pt-2.5 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 text-xs">
-                      <span className="text-[11px] font-mono text-slate-400 dark:text-slate-500">New Release</span>
-                      <Link
-                        to={`/blog/${latestBlog.slug || latestBlog._id}`}
-                        className="inline-flex items-center gap-1 font-bold text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 group-hover:gap-1.5 transition-all"
-                      >
-                        <span>Read Publication</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm p-6 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 shrink-0">
-                      <img src={LogoImg} alt="Al-Mukhtar Logo" className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <h4 className="font-heading text-base font-bold text-slate-900 dark:text-white">Al-Mukhtar Institute</h4>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">Center for Quranic &amp; Islamic Studies</p>
-                    </div>
-                  </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                    Advancing high standards of Islamic academic research, Quranic recitation mastery, and classical Arabic linguistics.
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
         </div>
       </section>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-8 sm:py-12">
+      <main className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-3 sm:pt-4 pb-12 sm:pb-16">
         <div className="space-y-6">
           {/* Category Pills & Toolbar Row */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-2">
             {/* Category Pills (Horizontal Scroll) */}
             <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none flex-nowrap whitespace-nowrap">
               {Object.entries(displayedCategories).map(([cat, count]) => {
@@ -469,22 +280,23 @@ function Blog() {
               <div
                 className={
                   viewMode === "list"
-                    ? "grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
-                    : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
+                    ? "grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8"
+                    : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
                 }
               >
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((n) =>
+                {[1, 2, 3, 4, 5, 6].map((n) =>
                   viewMode === "list" ? (
                     <div
                       key={n}
-                      className="p-4 rounded-2xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 animate-pulse flex flex-row items-center justify-between gap-4"
+                      className="p-2 sm:p-3 bg-transparent animate-pulse flex flex-row items-start justify-between gap-4 sm:gap-6"
                     >
                       <div className="flex-1 space-y-2.5 py-1 min-w-0">
                         <div className="w-20 h-3 bg-slate-200 dark:bg-slate-700 rounded" />
-                        <div className="w-4/5 h-4 bg-slate-200 dark:bg-slate-700 rounded" />
-                        <div className="w-full h-3 bg-slate-200 dark:bg-slate-700 rounded" />
+                        <div className="w-4/5 h-5 bg-slate-200 dark:bg-slate-700 rounded" />
+                        <div className="w-full h-3.5 bg-slate-200 dark:bg-slate-700 rounded" />
+                        <div className="w-3/4 h-3.5 bg-slate-200 dark:bg-slate-700 rounded" />
                       </div>
-                      <div className="w-24 h-24 sm:w-28 sm:h-28 bg-slate-200 dark:bg-slate-700 rounded-2xl shrink-0" />
+                      <div className="w-28 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 bg-slate-200 dark:bg-slate-700 rounded-2xl shrink-0" />
                     </div>
                   ) : (
                     <div
@@ -543,8 +355,8 @@ function Blog() {
                 <div
                   className={
                     viewMode === "list"
-                      ? "grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
-                      : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6"
+                      ? "grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8"
+                      : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
                   }
                 >
                   {paginatedBlogs.map((blog) => (
@@ -559,7 +371,7 @@ function Blog() {
 
                 {/* Pagination Toolbar when totalPages > 1 */}
                 {totalPages > 1 ? (
-                  <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-slate-100 dark:border-slate-800">
+                  <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">
                       Showing <span className="font-bold text-slate-900 dark:text-white">{(safeCurrentPage - 1) * BLOGS_PER_PAGE + 1}</span>–<span className="font-bold text-slate-900 dark:text-white">{Math.min(safeCurrentPage * BLOGS_PER_PAGE, filteredBlogs.length)}</span> of <span className="font-bold text-slate-900 dark:text-white">{filteredBlogs.length}</span> articles
                     </p>
@@ -622,7 +434,7 @@ function Blog() {
                   </div>
                 ) : (
                   /* Feed Summary when 1 page only */
-                  <div className="pt-6 border-t border-slate-100 dark:border-slate-800 text-center text-xs text-slate-400 dark:text-slate-500 font-mono">
+                  <div className="pt-6 text-center text-xs text-slate-400 dark:text-slate-500 font-mono">
                     Showing {filteredBlogs.length} of {blogs.length} published articles
                   </div>
                 )}

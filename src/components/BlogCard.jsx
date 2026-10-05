@@ -90,10 +90,9 @@ export function calculateReadingStats(contentOrHtml, imagesCount = 0) {
     return { words: 0, images: 0, seconds: 60, minutes: 1, text: "1 min read" };
   }
 
-  // Standard adult reading speed: 200 words per minute (3.33 words per second)
+  // Standard adult reading speed: 200 words per minute
   const wordSeconds = (wordCount / 200) * 60;
 
-  // Staggered image viewing calculation: 12s, 11s, 10s... min 3s
   let imageSeconds = 0;
   for (let i = 1; i <= totalImages; i++) {
     imageSeconds += Math.max(3, 13 - i);
@@ -123,95 +122,80 @@ export function getBlogImage(blog) {
   return null;
 }
 
+export function getAuthorInfo(blog) {
+  let name = "Al-Mukhtar Faculty";
+
+  const isObjectId = (str) => typeof str === "string" && /^[0-9a-fA-F]{24}$/.test(str.trim());
+
+  if (blog?.author) {
+    if (typeof blog.author === "string") {
+      if (!isObjectId(blog.author)) {
+        name = blog.author;
+      }
+    } else if (typeof blog.author === "object") {
+      if (blog.author.name && !isObjectId(blog.author.name)) {
+        name = blog.author.name;
+      } else if (blog.author.fullName && !isObjectId(blog.author.fullName)) {
+        name = blog.author.fullName;
+      } else if (blog.author.username && !isObjectId(blog.author.username)) {
+        name = blog.author.username;
+      }
+    }
+  } else if (blog?.authorName) {
+    if (!isObjectId(blog.authorName)) {
+      name = blog.authorName;
+    }
+  }
+
+  const parts = name.trim().split(/\s+/);
+  const initials = parts.length > 1
+    ? (parts[0][0] + parts[1][0]).toUpperCase()
+    : name.slice(0, 2).toUpperCase() || "AM";
+
+  return { name, initials };
+}
+
 function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
   const [imgError, setImgError] = useState(false);
 
   if (!blog) return null;
 
   const rawImage = getBlogImage(blog);
-  const snippet = blog.description || getSnippet(blog.content, layout === "list" ? 180 : 130);
+  const snippet =
+    blog.description && blog.description.length > 150
+      ? blog.description
+      : getSnippet(blog.content || blog.description, layout === "list" ? 500 : 420);
   const readTime = getReadingTime(blog);
   const formattedDate = formatDate(blog.createdAt || blog.publishedAt);
   const blogUrl = `/blog/${blog.slug || blog._id}`;
-  const category = blog.subject || blog.category || "GENERAL";
+  const category = blog.subject || blog.category || "General";
   const viewsCount = typeof blog.views === "number" ? blog.views : 0;
+  const { name: authorName, initials: authorInitials } = getAuthorInfo(blog);
 
   const thumbnailSrc = !imgError && rawImage ? rawImage : LogoImg;
   const isFallbackLogo = imgError || !rawImage;
 
+  /* ─────────────────────────────────────────────────────────────
+     LIST VIEW (Matches 2-in-a-row list card style)
+     - Image floats right (float-right) with compact height
+     - Excerpt is standard block text (NO line-clamp) so it wraps directly underneath the image
+     - No border, no shadow (clean solid flat look)
+     ───────────────────────────────────────────────────────────── */
   if (layout === "list") {
     return (
-      <article className="group bg-transparent sm:bg-white sm:dark:bg-slate-900 rounded-none border-0 hover:border-transparent shadow-none sm:shadow-xs sm:hover:shadow-md transition-all duration-300 overflow-visible sm:overflow-hidden h-full flex flex-col justify-between font-sans">
-        <div className="flex flex-row items-center sm:items-start justify-between p-0 sm:p-4 gap-3 sm:gap-4.5 h-full">
-          {/* List Content (Left Side) */}
-          <div className="flex-1 min-w-0 flex flex-col justify-between h-full space-y-2">
-            <div className="space-y-1.5 min-w-0">
-              {/* Category Badge */}
-              <div className="flex items-center flex-wrap gap-1.5 sm:gap-2 text-xs">
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    if (onCategoryClick) {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      onCategoryClick(category);
-                    }
-                  }}
-                  className="text-[10px] min-[400px]:text-[11px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-none bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200/70 dark:border-teal-800/60 hover:bg-teal-600 hover:text-white dark:hover:bg-teal-600 dark:hover:text-white transition-colors cursor-pointer"
-                >
-                  {category}
-                </button>
-              </div>
-
-              {/* Title */}
-              <h2 className="text-[18px] min-[400px]:text-[20px] sm:text-base lg:text-[18px] font-bold font-heading text-slate-900 dark:text-white leading-[1.3] tracking-tight group-hover:text-teal-600 dark:group-hover:text-teal-300 transition-colors line-clamp-2">
-                <Link to={blogUrl}>{blog.title}</Link>
-              </h2>
-
-              {/* Excerpt */}
-              {snippet && (
-                <p className="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-4 font-normal">
-                  {snippet}
-                </p>
-              )}
-            </div>
-
-            {/* List Footer */}
-            <div className="pt-2 flex items-center justify-between gap-2 text-xs border-t border-slate-100 dark:border-slate-800/80 mt-1">
-              <div className="flex items-center flex-wrap gap-1.5 min-[400px]:gap-2 text-[10px] min-[400px]:text-[11px] text-slate-400 dark:text-slate-500 font-mono">
-                <span>{formattedDate}</span>
-                <span className="text-slate-300 dark:text-slate-600 select-none">•</span>
-                <span className="inline-flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-teal-600 dark:text-teal-400 shrink-0" />
-                  <span>{readTime}</span>
-                </span>
-                <span className="text-slate-300 dark:text-slate-600 select-none">•</span>
-                <span className="inline-flex items-center gap-1">
-                  <Eye className="w-3 h-3 text-slate-400 dark:text-slate-500 shrink-0" />
-                  <span>{viewsCount} views</span>
-                </span>
-              </div>
-              <Link
-                to={blogUrl}
-                className="inline-flex items-center gap-1 font-bold text-xs text-teal-600 dark:text-teal-400 group-hover:gap-1.5 transition-all ml-auto shrink-0"
-              >
-                <span>Read</span>
-                <span aria-hidden="true">&rarr;</span>
-              </Link>
-            </div>
-          </div>
-
-          {/* List Small Thumbnail (Right Side) */}
+      <article className="group w-full p-0.5 sm:p-1 bg-transparent font-sans transition-all">
+        <div className="flow-root">
+          {/* Float-Right Thumbnail Image */}
           <Link
             to={blogUrl}
-            className="relative w-20 h-20 min-[400px]:w-24 min-[400px]:h-24 sm:w-28 sm:h-28 rounded-none overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 block group/img border border-slate-200/80 dark:border-slate-800 shadow-xs"
+            className="float-right ml-3 sm:ml-4 mb-2 relative w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-28 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 block group/img shadow-2xs hover:shadow-xs transition-all"
           >
             <Image
               src={thumbnailSrc}
               alt={blog.title || "Blog article"}
               fill
-              sizes="(max-width: 640px) 96px, 120px"
-              className={`transition-transform duration-300 ease-out group-hover:scale-105 rounded-none ${
+              sizes="(max-width: 640px) 112px, (max-width: 1024px) 144px, 176px"
+              className={`transition-transform duration-500 ease-out group-hover:scale-105 rounded-2xl ${
                 isFallbackLogo
                   ? "object-contain p-3 opacity-75"
                   : "object-cover object-center"
@@ -220,69 +204,135 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
               unoptimized
             />
           </Link>
+
+          {/* 1. Date */}
+          <div className="text-xs text-slate-500 dark:text-slate-400">
+            <span>{formattedDate}</span>
+          </div>
+
+          {/* 2. Title */}
+          <h2 className="mt-1 text-base sm:text-lg lg:text-[19px] font-bold font-heading text-slate-900 dark:text-white leading-snug tracking-tight group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+            <Link to={blogUrl} className="hover:underline">
+              {blog.title}
+            </Link>
+          </h2>
+
+          {/* 3. Excerpt (Standard flow: wraps around and underneath the floated image) */}
+          {snippet && (
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+              {snippet}
+            </p>
+          )}
+
+          {/* 4. Bottom Badges / Metadata */}
+          <div className="mt-3 flex items-center flex-wrap gap-2 text-xs text-slate-500 dark:text-slate-400">
+            <button
+              type="button"
+              onClick={(e) => {
+                if (onCategoryClick) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onCategoryClick(category);
+                }
+              }}
+              className="px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[11px] font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
+            >
+              {category}
+            </button>
+
+            <span className="inline-flex items-center gap-1 text-[11px]">
+              <Clock className="w-3 h-3 text-slate-400 dark:text-slate-500 shrink-0" />
+              <span>{readTime}</span>
+            </span>
+
+            <span className="text-slate-400 dark:text-slate-600 select-none">·</span>
+
+            <span className="inline-flex items-center gap-1 text-[11px]">
+              <Eye className="w-3 h-3 text-slate-400 dark:text-slate-500 shrink-0" />
+              <span>{viewsCount} views</span>
+            </span>
+          </div>
         </div>
       </article>
     );
   }
 
-  // Default Grid Layout
+  /* ─────────────────────────────────────────────────────────────
+     GRID VIEW (Up to 3 cards per row)
+     - Top: Full rounded image (rounded-2xl)
+     - Category label (uppercase tracking-wider)
+     - Title (bold prominent font)
+     - Meta Row: Date • Views • Read time
+     - Excerpt (up to 4 lines)
+     ───────────────────────────────────────────────────────────── */
   return (
-    <article className="w-full bg-transparent border-0 shadow-none font-sans">
-      <Link
-        to={blogUrl}
-        className="group block w-full text-left cursor-pointer select-none"
-      >
-        {/* Thumbnail Image */}
-        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-none bg-slate-100 dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-800 shadow-xs group-hover:shadow-md transition-all">
-          <Image
-            src={thumbnailSrc}
-            alt={blog.title || "Blog article"}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-            className={`transition-transform duration-300 ease-out group-hover:scale-105 rounded-none ${
-              isFallbackLogo
-                ? "object-contain p-6 opacity-75"
-                : "object-cover object-center"
-            }`}
-            onError={() => setImgError(true)}
-            unoptimized
-          />
-        </div>
+    <article className="w-full bg-transparent font-sans">
+      <div className="group block w-full text-left">
+        {/* Top Rounded Thumbnail Image with sleek 16:9 aspect ratio */}
+        <Link to={blogUrl} className="block overflow-hidden rounded-2xl">
+          <div className="relative aspect-[16/9] sm:aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800 shadow-xs group-hover:shadow-md transition-all">
+            <Image
+              src={thumbnailSrc}
+              alt={blog.title || "Blog article"}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className={`transition-transform duration-500 ease-out group-hover:scale-105 rounded-2xl ${
+                isFallbackLogo
+                  ? "object-contain p-5 opacity-75"
+                  : "object-cover object-center"
+              }`}
+              onError={() => setImgError(true)}
+              unoptimized
+            />
+          </div>
+        </Link>
 
         {/* Category Label */}
-        <div className="mt-3.5">
-          <span className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-teal-600 dark:text-teal-400 block">
+        <div className="mt-3">
+          <button
+            type="button"
+            onClick={(e) => {
+              if (onCategoryClick) {
+                e.preventDefault();
+                e.stopPropagation();
+                onCategoryClick(category);
+              }
+            }}
+            className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer inline-block"
+          >
             {category}
-          </span>
+          </button>
         </div>
 
         {/* Title */}
-        <h2 className="mt-1.5 text-[20px] min-[400px]:text-[22px] sm:text-base lg:text-[18px] font-bold font-heading text-slate-900 dark:text-slate-100 leading-[1.3] tracking-tight line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-300 transition-colors">
-          {blog.title}
+        <h2 className="mt-1 text-base sm:text-lg lg:text-[19px] font-bold font-heading text-slate-900 dark:text-white leading-snug tracking-tight line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+          <Link to={blogUrl} className="hover:underline">
+            {blog.title}
+          </Link>
         </h2>
 
-        {/* Meta Row */}
-        <div className="mt-2 flex items-center flex-wrap gap-2 text-[11px] sm:text-xs text-slate-400 dark:text-slate-400 font-normal font-mono">
+        {/* Metadata Row: Date • Views • Read Time */}
+        <div className="mt-1.5 flex items-center flex-wrap gap-2 text-xs text-slate-500 dark:text-slate-400 font-normal">
           <span>{formattedDate}</span>
           <span className="text-slate-300 dark:text-slate-600 select-none">•</span>
           <span className="inline-flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400 shrink-0" />
-            <span>{readTime}</span>
+            <Eye className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 shrink-0" />
+            <span>{viewsCount} views</span>
           </span>
           <span className="text-slate-300 dark:text-slate-600 select-none">•</span>
           <span className="inline-flex items-center gap-1">
-            <Eye className="w-3.5 h-3.5 text-slate-400 dark:text-slate-400 shrink-0" />
-            <span>{viewsCount} views</span>
+            <Clock className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500 shrink-0" />
+            <span>{readTime}</span>
           </span>
         </div>
 
-        {/* Excerpt */}
+        {/* Excerpt (up to 4 lines) */}
         {snippet && (
-          <p className="mt-2 text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-4 font-normal">
+          <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-4 font-normal">
             {snippet}
           </p>
         )}
-      </Link>
+      </div>
     </article>
   );
 }

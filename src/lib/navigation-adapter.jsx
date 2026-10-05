@@ -27,13 +27,15 @@ export const Link = React.forwardRef(function CustomLink(
 /**
  * Compatible NavLink with isActive callback support
  */
-export function NavLink({ to, href, className, style, children, ...props }) {
+export function NavLink({ to, href, className, style, children, end, ...props }) {
   const pathname = usePathname();
   const destination = href || to || "";
   const isActive =
     destination === "/"
       ? pathname === "/"
-      : pathname?.startsWith(destination);
+      : end || destination === "/admin"
+      ? pathname === destination
+      : pathname === destination || (destination && pathname?.startsWith(`${destination}/`));
 
   const resolvedClass =
     typeof className === "function" ? className({ isActive }) : className;

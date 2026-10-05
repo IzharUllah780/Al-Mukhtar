@@ -14,8 +14,9 @@ export async function GET(req) {
       );
     }
 
-    const count = await User.countDocuments({ isVerified: true });
-    return NextResponse.json({ success: true, count });
+    const total = await User.countDocuments({});
+    const verified = await User.countDocuments({ isVerified: true });
+    return NextResponse.json({ success: true, count: total, total, verifiedCount: verified });
   } catch (error) {
     console.error("GetUserCount error:", error);
     return NextResponse.json(
@@ -24,3 +25,4 @@ export async function GET(req) {
     );
   }
 }
+

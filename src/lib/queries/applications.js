@@ -23,7 +23,11 @@ export function useApplicationStats() {
     queryKey: applicationKeys.stats,
     queryFn: async () => {
       const res = await api.get("/api/applications/stats");
-      return res.data?.stats || null;
+      return {
+        stats: res.data?.stats || { total: 0, pending: 0, approved: 0, rejected: 0 },
+        trend: res.data?.trend || [],
+        recent: res.data?.recent || [],
+      };
     },
     staleTime: 60 * 1000,
   });

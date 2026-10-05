@@ -268,330 +268,266 @@ export default function AdminCoursePdfResultsPage() {
   };
 
   return (
-    <div className="p-3 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
-      {/* Top Header Card */}
-      <div className="p-5 sm:p-7 rounded-3xl bg-gradient-to-br from-[#0A2540] via-[#0B1E2D] to-[#081724] text-white shadow-xl relative overflow-hidden border border-slate-800">
-        <div className="absolute right-0 top-0 w-80 h-80 bg-[#0F6E8C]/15 rounded-full blur-3xl pointer-events-none" />
+    <div className="space-y-5 font-sans text-slate-800 dark:text-slate-100">
+      {/* Page Header - Clean & Non-card */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-800">
+        <div>
+          <h1 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight font-heading">
+            Course Examination Results
+          </h1>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+            Manage certified student gazettes, upload result PDFs, and control live publication status.
+          </p>
+        </div>
 
-        <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-5">
-          <div className="space-y-1.5 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0F6E8C]/30 border border-[#8FB3AA]/30 text-[#8FB3AA] text-[11px] font-semibold uppercase tracking-wider">
-              <Sparkles size={12} />
-              Course Results Admin
-            </div>
-            <h1 className="text-2xl sm:text-3xl font-bold font-serif tracking-tight text-white">
-              Course Result PDF Uploads
-            </h1>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Upload course result PDF documents, specify the course name, and toggle results between <strong>Released (Live)</strong> and <strong>On Hold</strong>.
-            </p>
-          </div>
+        <div className="flex items-center gap-2 self-start sm:self-auto shrink-0">
+          <button
+            type="button"
+            onClick={fetchResults}
+            disabled={loading}
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all cursor-pointer shadow-2xs disabled:opacity-50"
+            title="Refresh results list"
+          >
+            <RefreshCw size={12} className={`text-teal-600 dark:text-teal-400 ${loading ? "animate-spin" : ""}`} />
+            <span>{loading ? "Refreshing..." : "Refresh"}</span>
+          </button>
 
           <button
+            type="button"
             onClick={handleOpenUploadModal}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-[#0F6E8C] to-[#0B5C74] hover:brightness-110 text-white text-xs sm:text-sm font-bold shadow-lg shadow-[#0F6E8C]/30 transition active:scale-95 cursor-pointer shrink-0"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold transition-all shadow-xs cursor-pointer active:scale-95"
           >
-            <Upload size={16} />
-            Upload Course Result PDF
+            <Upload size={13} />
+            <span>Upload PDF Gazette</span>
           </button>
         </div>
       </div>
 
       {/* Success Alert */}
       {successNotice && (
-        <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs sm:text-sm font-medium flex items-center gap-2.5 animate-fadeIn">
-          <CheckCircle2 size={18} className="text-emerald-500 shrink-0" />
-          <span>{successNotice}</span>
+        <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-medium flex items-center justify-between gap-2 animate-fadeIn">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 size={15} className="text-emerald-500 shrink-0" />
+            <span>{successNotice}</span>
+          </div>
+          <button type="button" onClick={() => setSuccessNotice("")} className="text-emerald-500 hover:text-emerald-700">
+            <X size={14} />
+          </button>
         </div>
       )}
 
-      {/* Responsive KPI Metrics */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-        <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#0F6E8C]/10 text-[#0F6E8C] dark:text-[#8FB3AA] flex items-center justify-center shrink-0">
-              <FileText size={20} />
-            </div>
-            <div>
-              <span className="text-[10px] uppercase font-mono font-bold text-slate-400 block">
-                Total Course Results
-              </span>
-              <span className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">
-                {totalCount}
-              </span>
-            </div>
-          </div>
+      {/* Inline Minimal Metrics Summary (No bulky cards) */}
+      <div className="flex flex-wrap items-center gap-3 text-xs py-1">
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 font-mono text-[11px]">
+          <span className="text-slate-500 dark:text-slate-400">Total Gazettes:</span>
+          <strong className="text-slate-900 dark:text-white font-bold">{totalCount}</strong>
         </div>
 
-        <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0">
-              <Unlock size={20} />
-            </div>
-            <div>
-              <span className="text-[10px] uppercase font-mono font-bold text-slate-400 block">
-                Released (Live for Students)
-              </span>
-              <span className="text-lg sm:text-xl font-black text-emerald-600 dark:text-emerald-400">
-                {results.filter((r) => r.isReleased !== false).length}
-              </span>
-            </div>
-          </div>
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200/70 dark:border-emerald-800/60 font-mono text-[11px]">
+          <span className="text-emerald-700 dark:text-emerald-300 flex items-center gap-1">
+            <Unlock size={11} />
+            Live / Released:
+          </span>
+          <strong className="text-emerald-700 dark:text-emerald-300 font-bold">
+            {results.filter((r) => r.isReleased !== false).length}
+          </strong>
         </div>
 
-        <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center shrink-0">
-              <Lock size={20} />
-            </div>
-            <div>
-              <span className="text-[10px] uppercase font-mono font-bold text-slate-400 block">
-                On Hold (Withheld / Hidden)
-              </span>
-              <span className="text-lg sm:text-xl font-black text-amber-600 dark:text-amber-400">
-                {results.filter((r) => r.isReleased === false).length}
-              </span>
-            </div>
-          </div>
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200/70 dark:border-amber-800/60 font-mono text-[11px]">
+          <span className="text-amber-700 dark:text-amber-300 flex items-center gap-1">
+            <Lock size={11} />
+            On Hold:
+          </span>
+          <strong className="text-amber-700 dark:text-amber-300 font-bold">
+            {results.filter((r) => r.isReleased === false).length}
+          </strong>
         </div>
       </div>
 
-      {/* Filter & Search Bar */}
-      <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs space-y-3">
-        <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
-          {/* Search Query */}
-          <form onSubmit={handleSearchSubmit} className="sm:col-span-6 relative">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by course name, title, session..."
-              className="w-full px-4 py-2.5 pl-9 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs focus:outline-hidden focus:ring-2 focus:ring-[#0F6E8C]"
-            />
-            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-          </form>
-
-          {/* Filter Course */}
-          <div className="sm:col-span-4">
-            <select
-              value={filterCourse}
-              onChange={(e) => setFilterCourse(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs focus:outline-hidden"
+      {/* Integrated Search & Filter Toolbar - Fully Mobile Responsive */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-1">
+        <form onSubmit={handleSearchSubmit} className="relative flex-1 w-full sm:max-w-md">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search by course name, examination title, session..."
+            className="w-full px-3 py-1.5 pl-8 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-teal-600 dark:focus:border-teal-400"
+          />
+          <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400" />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => {
+                setSearchQuery("");
+                setTimeout(() => fetchResults(), 50);
+              }}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
             >
-              <option value="all">All Courses</option>
-              {coursesList.map((c, i) => (
-                <option key={i} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
-          </div>
+              <X size={12} />
+            </button>
+          )}
+        </form>
+
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          {/* Filter Course */}
+          <select
+            value={filterCourse}
+            onChange={(e) => setFilterCourse(e.target.value)}
+            className="flex-1 sm:flex-initial px-2.5 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-200 outline-none cursor-pointer focus:border-teal-600"
+          >
+            <option value="all">All Courses ({coursesList.length})</option>
+            {coursesList.map((c, i) => (
+              <option key={i} value={c}>
+                {c}
+              </option>
+            ))}
+          </select>
 
           {/* Filter Release Status */}
-          <div className="sm:col-span-2">
-            <select
-              value={filterReleaseStatus}
-              onChange={(e) => setFilterReleaseStatus(e.target.value)}
-              className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs focus:outline-hidden"
-            >
-              <option value="all">All Status</option>
-              <option value="true">Live Only</option>
-              <option value="false">On Hold Only</option>
-            </select>
-          </div>
+          <select
+            value={filterReleaseStatus}
+            onChange={(e) => setFilterReleaseStatus(e.target.value)}
+            className="flex-1 sm:flex-initial px-2.5 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-200 outline-none cursor-pointer focus:border-teal-600"
+          >
+            <option value="all">All Status</option>
+            <option value="true">Live Only</option>
+            <option value="false">On Hold Only</option>
+          </select>
         </div>
       </div>
 
-      {/* Results View: Responsive Dual Mode */}
-      {/* 1. Mobile Cards View */}
-      <div className="block md:hidden space-y-3">
-        {loading ? (
-          <div className="p-8 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-slate-400">
-            <RefreshCw size={20} className="animate-spin mx-auto mb-2 text-[#0F6E8C]" />
-            Loading results...
-          </div>
-        ) : results.length === 0 ? (
-          <div className="p-8 text-center bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 text-slate-400">
-            <AlertCircle size={24} className="mx-auto mb-2 text-slate-400" />
-            No course results found. Tap <strong>Upload Course Result PDF</strong>.
-          </div>
-        ) : (
-          results.map((r) => (
-            <div
-              key={r._id}
-              className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs space-y-3"
-            >
-              <div className="flex items-start justify-between gap-2">
-                <div>
-                  <h3 className="font-bold text-sm text-slate-900 dark:text-white">
-                    {r.courseName}
-                  </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
-                    {r.title || "Examination Result"} • {r.session}
-                  </p>
-                </div>
-
-                <button
-                  onClick={() => handleToggleRelease(r)}
-                  disabled={togglingId === r._id}
-                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold border transition cursor-pointer active:scale-95 ${
-                    r.isReleased !== false
-                      ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30 hover:bg-amber-500/15 hover:text-amber-600 hover:border-amber-500/30"
-                      : "bg-amber-500/15 text-amber-600 border-amber-500/30 hover:bg-emerald-500/10 hover:text-emerald-600"
-                  }`}
-                >
-                  {r.isReleased !== false ? (
-                    <>
-                      <Unlock size={11} /> Released
-                    </>
-                  ) : (
-                    <>
-                      <Lock size={11} /> On Hold
-                    </>
-                  )}
-                </button>
-              </div>
-
-              <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                <span className="text-xs font-mono font-bold text-rose-600 dark:text-rose-400 flex items-center gap-1">
-                  <FileText size={13} />
-                  {r.pdfName ? (r.pdfName.length > 16 ? `${r.pdfName.slice(0, 14)}...` : r.pdfName) : "PDF"}
-                  {r.pdfSize && <span className="text-slate-400 font-normal">({r.pdfSize})</span>}
-                </span>
-
-                <div className="flex items-center gap-1">
-                  <button
-                    onClick={() => {
-                      setSelectedResult(r);
-                      setShowPreviewModal(true);
-                    }}
-                    className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-[#0F6E8C]"
-                    title="View PDF"
-                  >
-                    <Eye size={15} />
-                  </button>
-                  <button
-                    onClick={() => handleEdit(r)}
-                    className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-amber-600"
-                    title="Edit"
-                  >
-                    <Edit size={15} />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(r._id)}
-                    className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-rose-600"
-                    title="Delete"
-                  >
-                    <Trash2 size={15} />
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))
-        )}
-      </div>
-
-      {/* 2. Desktop Table View */}
-      <div className="hidden md:block bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-xs">
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-slate-50 dark:bg-slate-800/80 text-slate-500 uppercase font-mono tracking-wider border-b border-slate-200 dark:border-slate-800">
+      {/* Main Results Table - Scrollable on x-axis on mobile with scrollbars hidden */}
+      <div className="bg-white dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 rounded-xl overflow-hidden shadow-2xs">
+        <div className="overflow-x-auto no-scrollbar scroll-smooth">
+          <table className="w-full text-left text-xs min-w-[650px]">
+            <thead className="bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 uppercase font-mono text-[10.5px] tracking-wider border-b border-slate-200/80 dark:border-slate-800">
               <tr>
-                <th className="py-3.5 px-4">Course Name</th>
-                <th className="py-3.5 px-4">Result Title & Session</th>
-                <th className="py-3.5 px-4 text-center">PDF Document</th>
-                <th className="py-3.5 px-4 text-center">Status</th>
-                <th className="py-3.5 px-4 text-right">Actions</th>
+                <th className="py-2.5 px-3.5 whitespace-nowrap">Course Discipline</th>
+                <th className="py-2.5 px-3.5 whitespace-nowrap">Examination & Session</th>
+                <th className="py-2.5 px-3.5 text-center whitespace-nowrap">Gazette Document</th>
+                <th className="py-2.5 px-3.5 text-center whitespace-nowrap">Visibility</th>
+                <th className="py-2.5 px-3.5 text-right whitespace-nowrap">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60">
               {loading ? (
                 <tr>
                   <td colSpan={5} className="py-12 text-center text-slate-400">
-                    <RefreshCw size={20} className="animate-spin mx-auto mb-2 text-[#0F6E8C]" />
-                    Loading course results...
+                    <RefreshCw size={18} className="animate-spin mx-auto mb-2 text-teal-600 dark:text-teal-400" />
+                    <span>Loading examination results...</span>
                   </td>
                 </tr>
               ) : results.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-12 text-center text-slate-400">
-                    <AlertCircle size={24} className="mx-auto mb-2 text-slate-400" />
-                    No course result PDFs uploaded. Click <strong>Upload Course Result PDF</strong> to add one.
+                  <td colSpan={5} className="py-12 text-center text-slate-400 dark:text-slate-500">
+                    <AlertCircle size={20} className="mx-auto mb-1.5 text-slate-400" />
+                    <p className="text-xs">No examination result gazettes found.</p>
+                    <button
+                      type="button"
+                      onClick={handleOpenUploadModal}
+                      className="mt-2 text-xs font-bold text-teal-600 dark:text-teal-400 hover:underline cursor-pointer"
+                    >
+                      + Upload First Gazette PDF
+                    </button>
                   </td>
                 </tr>
               ) : (
                 results.map((r) => (
-                  <tr key={r._id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/40 transition">
-                    <td className="py-3.5 px-4 font-bold text-slate-900 dark:text-white">
+                  <tr key={r._id} className="hover:bg-slate-50/60 dark:hover:bg-slate-800/40 transition-colors">
+                    {/* 1. Course Discipline */}
+                    <td className="py-3 px-3.5 font-bold text-slate-900 dark:text-white whitespace-nowrap">
                       <div className="flex items-center gap-2">
-                        <BookOpen size={15} className="text-[#0F6E8C]" />
-                        <span>{r.courseName}</span>
+                        <BookOpen size={14} className="text-teal-600 dark:text-teal-400 shrink-0" />
+                        <span className="truncate max-w-[200px] sm:max-w-[240px]">{r.courseName}</span>
                       </div>
                     </td>
-                    <td className="py-3.5 px-4">
+
+                    {/* 2. Examination & Session */}
+                    <td className="py-3 px-3.5 whitespace-nowrap">
                       <div className="font-semibold text-slate-800 dark:text-slate-200">
-                        {r.title || "Examination Result"}
+                        {r.title || "Annual Examination Result"}
                       </div>
-                      <div className="text-[11px] text-slate-400 font-mono">
-                        Session: {r.session}
+                      <div className="text-[10.5px] text-slate-400 font-mono">
+                        Session: {r.session || "2025-2026"}
                       </div>
                     </td>
-                    <td className="py-3.5 px-4 text-center">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 font-mono text-[11px] font-bold border border-rose-500/20">
-                        <FileText size={13} />
-                        {r.pdfName ? (r.pdfName.length > 20 ? `${r.pdfName.slice(0, 18)}...` : r.pdfName) : "Result.pdf"}
-                        {r.pdfSize && <span className="text-slate-400 font-normal">({r.pdfSize})</span>}
-                      </span>
-                    </td>
-                    <td className="py-3.5 px-4 text-center">
+
+                    {/* 3. PDF Document */}
+                    <td className="py-3 px-3.5 text-center whitespace-nowrap">
                       <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedResult(r);
+                          setShowPreviewModal(true);
+                        }}
+                        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 font-mono text-[11px] font-semibold border border-rose-200/80 dark:border-rose-900 hover:bg-rose-100 dark:hover:bg-rose-900/60 transition cursor-pointer"
+                        title="Click to view PDF"
+                      >
+                        <FileText size={12} className="text-rose-500" />
+                        <span className="truncate max-w-[130px]">
+                          {r.pdfName ? (r.pdfName.length > 18 ? `${r.pdfName.slice(0, 16)}...` : r.pdfName) : "Gazette.pdf"}
+                        </span>
+                        {r.pdfSize && <span className="text-[9.5px] opacity-75">({r.pdfSize})</span>}
+                      </button>
+                    </td>
+
+                    {/* 4. Release Status Toggle */}
+                    <td className="py-3 px-3.5 text-center whitespace-nowrap">
+                      <button
+                        type="button"
                         onClick={() => handleToggleRelease(r)}
                         disabled={togglingId === r._id}
-                        className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border transition cursor-pointer active:scale-95 ${
+                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold border transition cursor-pointer active:scale-95 ${
                           r.isReleased !== false
-                            ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30 hover:bg-amber-500/15 hover:text-amber-600 hover:border-amber-500/30"
-                            : "bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30 hover:bg-emerald-500/10 hover:text-emerald-600"
+                            ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/80 hover:bg-amber-50 dark:hover:bg-amber-950/40 hover:text-amber-700 hover:border-amber-300"
+                            : "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/80 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 hover:text-emerald-700"
                         }`}
                         title={r.isReleased !== false ? "Click to Hold (Hide) Result" : "Click to Release (Make Live) Result"}
                       >
                         {togglingId === r._id ? (
-                          <RefreshCw size={12} className="animate-spin" />
+                          <RefreshCw size={11} className="animate-spin" />
                         ) : r.isReleased !== false ? (
                           <>
-                            <Unlock size={12} /> Released (Live)
+                            <Unlock size={11} /> <span>Live</span>
                           </>
                         ) : (
                           <>
-                            <Lock size={12} /> On Hold (Hidden)
+                            <Lock size={11} /> <span>On Hold</span>
                           </>
                         )}
                       </button>
                     </td>
-                    <td className="py-3.5 px-4 text-right">
-                      <div className="flex items-center justify-end gap-1.5">
+
+                    {/* 5. Actions */}
+                    <td className="py-3 px-3.5 text-right whitespace-nowrap">
+                      <div className="flex items-center justify-end gap-1">
                         <button
+                          type="button"
                           onClick={() => {
                             setSelectedResult(r);
                             setShowPreviewModal(true);
                           }}
-                          className="p-2 rounded-xl text-slate-500 hover:text-[#0F6E8C] hover:bg-[#0F6E8C]/10 transition cursor-pointer"
-                          title="View PDF Document"
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
+                          title="View PDF"
                         >
-                          <Eye size={15} />
+                          <Eye size={14} />
                         </button>
                         <button
+                          type="button"
                           onClick={() => handleEdit(r)}
-                          className="p-2 rounded-xl text-slate-500 hover:text-amber-600 hover:bg-amber-500/10 transition cursor-pointer"
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
                           title="Edit Details"
                         >
-                          <Edit size={15} />
+                          <Edit size={14} />
                         </button>
                         <button
+                          type="button"
                           onClick={() => handleDelete(r._id)}
-                          className="p-2 rounded-xl text-slate-500 hover:text-rose-600 hover:bg-rose-500/10 transition cursor-pointer"
-                          title="Delete PDF"
+                          className="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
+                          title="Delete Gazette"
                         >
-                          <Trash2 size={15} />
+                          <Trash2 size={14} />
                         </button>
                       </div>
                     </td>
@@ -618,32 +554,32 @@ export default function AdminCoursePdfResultsPage() {
             </button>
 
             {/* Header */}
-            <div className="flex items-center gap-3.5 mb-5 pb-4 border-b border-slate-100 dark:border-slate-800">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0F6E8C] to-[#0B5C74] text-white flex items-center justify-center shrink-0 shadow-md">
-                <FileText size={24} />
+            <div className="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div className="w-9 h-9 rounded-lg bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0 border border-teal-200/80 dark:border-teal-800">
+                <FileText size={18} />
               </div>
               <div>
-                <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
-                  {editingId ? "Edit Course Result Document" : "Upload Course Result PDF"}
+                <h2 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white font-heading">
+                  {editingId ? "Edit Examination Gazette" : "Upload Course Result PDF"}
                 </h2>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
-                  Specify the course name, attach the official PDF result file, and select release status.
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                  Specify course discipline, attach the certified PDF, and configure publication status.
                 </p>
               </div>
             </div>
 
             {formError && (
-              <div className="mb-4 p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-xs border border-rose-200 dark:border-rose-900 flex items-center gap-2">
-                <AlertCircle size={16} className="shrink-0" />
+              <div className="mb-3.5 p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 text-xs border border-rose-200 dark:border-rose-900 flex items-center gap-2">
+                <AlertCircle size={15} className="shrink-0" />
                 <span>{formError}</span>
               </div>
             )}
 
-            <form onSubmit={handleFormSubmit} className="space-y-4">
+            <form onSubmit={handleFormSubmit} className="space-y-3.5">
               {/* PDF Dropzone Area */}
               <div>
-                <label className="block text-xs font-bold uppercase font-mono text-slate-500 mb-1.5">
-                  Result PDF Document (.pdf) <span className="text-rose-500">*</span>
+                <label className="block text-xs font-bold uppercase font-mono text-slate-600 dark:text-slate-400 mb-1">
+                  Result PDF Gazette (.pdf) <span className="text-rose-500">*</span>
                 </label>
                 <div
                   onDragOver={(e) => {
@@ -658,12 +594,12 @@ export default function AdminCoursePdfResultsPage() {
                     processPdfFile(file);
                   }}
                   onClick={() => fileInputRef.current?.click()}
-                  className={`border-2 border-dashed rounded-3xl p-6 sm:p-8 text-center transition cursor-pointer ${
+                  className={`border-2 border-dashed rounded-xl p-5 sm:p-6 text-center transition cursor-pointer ${
                     isDragging
-                      ? "border-[#0F6E8C] bg-[#0F6E8C]/10 scale-[1.01]"
+                      ? "border-teal-600 bg-teal-50/50 dark:bg-teal-950/20 scale-[1.01]"
                       : formData.pdfUrl
-                      ? "border-emerald-500/50 bg-emerald-50/40 dark:bg-emerald-950/20"
-                      : "border-slate-300 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-800/40 hover:border-[#0F6E8C]"
+                      ? "border-emerald-500/60 bg-emerald-50/30 dark:bg-emerald-950/20"
+                      : "border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/40 hover:border-teal-600"
                   }`}
                 >
                   <input
@@ -674,30 +610,30 @@ export default function AdminCoursePdfResultsPage() {
                     className="hidden"
                   />
                   {formData.pdfUrl ? (
-                    <div className="space-y-2">
-                      <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
-                        <FileCheck2 size={26} />
+                    <div className="space-y-1.5">
+                      <div className="w-10 h-10 rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto">
+                        <FileCheck2 size={22} />
                       </div>
-                      <p className="text-sm font-bold text-slate-900 dark:text-white">
+                      <p className="text-xs font-bold text-slate-900 dark:text-white">
                         {formData.pdfName || "Result_Document.pdf"}
                       </p>
-                      <span className="inline-block px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 font-mono text-xs font-bold">
+                      <span className="inline-block px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono text-[10.5px] font-bold">
                         {formData.pdfSize || "PDF Attached"}
                       </span>
-                      <p className="text-[11px] text-slate-400">
-                        Click or drop another file to replace
+                      <p className="text-[10px] text-slate-400">
+                        Click or drag new PDF to replace
                       </p>
                     </div>
                   ) : (
-                    <div className="space-y-2">
-                      <div className="w-12 h-12 rounded-2xl bg-[#0F6E8C]/10 text-[#0F6E8C] dark:text-[#8FB3AA] flex items-center justify-center mx-auto">
-                        <Upload size={24} />
+                    <div className="space-y-1.5">
+                      <div className="w-10 h-10 rounded-lg bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center mx-auto">
+                        <Upload size={20} />
                       </div>
-                      <p className="text-sm font-bold text-slate-800 dark:text-slate-200">
+                      <p className="text-xs font-bold text-slate-800 dark:text-slate-200">
                         Click to select or drag & drop course result PDF
                       </p>
-                      <p className="text-xs text-slate-400 font-mono">
-                        Format: Strictly PDF (.pdf) only
+                      <p className="text-[11px] text-slate-400 font-mono">
+                        File format: Strictly PDF (.pdf) only
                       </p>
                     </div>
                   )}
@@ -706,30 +642,30 @@ export default function AdminCoursePdfResultsPage() {
 
               {/* Course Name Input + Quick Presets */}
               <div>
-                <label className="block text-xs font-bold uppercase font-mono text-slate-600 dark:text-slate-300 mb-1.5">
-                  Course Name <span className="text-rose-500">*</span>
+                <label className="block text-xs font-bold uppercase font-mono text-slate-600 dark:text-slate-400 mb-1">
+                  Course Discipline <span className="text-rose-500">*</span>
                 </label>
                 <input
                   type="text"
                   required
                   value={formData.courseName}
                   onChange={(e) => setFormData({ ...formData, courseName: e.target.value })}
-                  placeholder="e.g. Quran Recitation & Tajweed, Arabic Language, Hifz Program"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-[#0F6E8C] mb-2"
+                  placeholder="e.g. Quran Recitation & Tajweed, Arabic Language, Dars-e-Nizami"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-teal-600 mb-1.5"
                 />
 
                 {/* Quick Course Presets from DB */}
                 {coursesList.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-1">
                     {coursesList.map((preset, idx) => (
                       <button
                         key={idx}
                         type="button"
                         onClick={() => setFormData({ ...formData, courseName: preset })}
-                        className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold border transition cursor-pointer ${
+                        className={`px-2 py-0.5 rounded text-[10.5px] font-semibold border transition cursor-pointer ${
                           formData.courseName === preset
-                            ? "bg-[#0F6E8C] text-white border-[#0F6E8C]"
-                            : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-200"
+                            ? "bg-teal-600 text-white border-teal-600"
+                            : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700"
                         }`}
                       >
                         {preset}
@@ -740,91 +676,89 @@ export default function AdminCoursePdfResultsPage() {
               </div>
 
               {/* Title & Session */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold uppercase font-mono text-slate-600 dark:text-slate-300 mb-1.5">
-                    Result Title / Examination Name
+                  <label className="block text-xs font-bold uppercase font-mono text-slate-600 dark:text-slate-400 mb-1">
+                    Examination Title
                   </label>
                   <input
                     type="text"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                     placeholder="e.g. Annual Examination 2025-2026 Gazette"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-teal-600"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase font-mono text-slate-600 dark:text-slate-300 mb-1.5">
-                    Session / Academic Year
+                  <label className="block text-xs font-bold uppercase font-mono text-slate-600 dark:text-slate-400 mb-1">
+                    Academic Session
                   </label>
                   <input
                     type="text"
                     value={formData.session}
                     onChange={(e) => setFormData({ ...formData, session: e.target.value })}
                     placeholder="e.g. 2025-2026"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-teal-600"
                   />
                 </div>
               </div>
 
               {/* Option of On Hold Result */}
-              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">
-                      Release or Hold Result
-                    </span>
-                    <p className="text-[11px] text-slate-400">
-                      When On Hold, this course result is hidden from the public website.
-                    </p>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setFormData({ ...formData, isReleased: !formData.isReleased })}
-                    className={`py-2 px-4 rounded-xl border text-xs font-bold flex items-center gap-1.5 cursor-pointer transition ${
-                      formData.isReleased
-                        ? "bg-emerald-500/10 text-emerald-600 border-emerald-500/30 hover:bg-emerald-500/20"
-                        : "bg-amber-500/15 text-amber-600 border-amber-500/30 hover:bg-amber-500/25"
-                    }`}
-                  >
-                    {formData.isReleased ? (
-                      <>
-                        <Unlock size={14} /> Released (Live)
-                      </>
-                    ) : (
-                      <>
-                        <Lock size={14} /> On Hold (Hidden)
-                      </>
-                    )}
-                  </button>
+              <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-center justify-between">
+                <div>
+                  <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">
+                    Public Release Visibility
+                  </span>
+                  <p className="text-[10.5px] text-slate-400">
+                    When On Hold, this examination result is hidden from the students result lookup page.
+                  </p>
                 </div>
+
+                <button
+                  type="button"
+                  onClick={() => setFormData({ ...formData, isReleased: !formData.isReleased })}
+                  className={`py-1.5 px-3 rounded-lg border text-xs font-bold flex items-center gap-1.5 cursor-pointer transition ${
+                    formData.isReleased
+                      ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800"
+                      : "bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800"
+                  }`}
+                >
+                  {formData.isReleased ? (
+                    <>
+                      <Unlock size={12} /> <span>Live (Released)</span>
+                    </>
+                  ) : (
+                    <>
+                      <Lock size={12} /> <span>On Hold (Hidden)</span>
+                    </>
+                  )}
+                </button>
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-end gap-2.5">
+              <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setShowUploadModal(false)}
-                  className="px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+                  className="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={savingResult}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#0F6E8C] to-[#0B5C74] hover:brightness-110 text-white text-xs font-bold shadow-md transition disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold shadow-xs transition disabled:opacity-50 cursor-pointer active:scale-95"
                 >
                   {savingResult ? (
                     <>
-                      <RefreshCw size={14} className="animate-spin" />
-                      Saving PDF...
+                      <RefreshCw size={12} className="animate-spin" />
+                      <span>Saving Gazette...</span>
                     </>
                   ) : (
                     <>
-                      <Save size={14} />
-                      {editingId ? "Update Result" : "Publish Course Result PDF"}
+                      <Save size={13} />
+                      <span>{editingId ? "Save Changes" : "Publish Result Gazette"}</span>
                     </>
                   )}
                 </button>
@@ -838,13 +772,13 @@ export default function AdminCoursePdfResultsPage() {
       {/* FULLSCREEN PDF PREVIEW MODAL */}
       {/* ========================================================================= */}
       {showPreviewModal && selectedResult && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-900/85 backdrop-blur-sm overflow-y-auto">
-          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-4xl w-full shadow-2xl overflow-hidden relative max-h-[95vh] flex flex-col">
-            <div className="flex items-center justify-between px-5 py-4 bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <FileText size={20} className="text-[#0F6E8C] dark:text-[#8FB3AA] shrink-0" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-900/80 backdrop-blur-xs overflow-y-auto">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-4xl w-full shadow-xl overflow-hidden relative max-h-[95vh] flex flex-col">
+            <div className="flex items-center justify-between px-4 py-3 bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700">
+              <div className="flex items-center gap-2 min-w-0">
+                <FileText size={16} className="text-teal-600 dark:text-teal-400 shrink-0" />
                 <div className="min-w-0">
-                  <h3 className="text-sm font-bold text-slate-900 dark:text-white truncate">
+                  <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
                     {selectedResult.courseName} — {selectedResult.title || "Examination Result"}
                   </h3>
                   <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
@@ -855,13 +789,13 @@ export default function AdminCoursePdfResultsPage() {
 
               <button
                 onClick={() => setShowPreviewModal(false)}
-                className="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-white transition cursor-pointer"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white transition cursor-pointer"
               >
-                <X size={18} />
+                <X size={16} />
               </button>
             </div>
 
-            <div className="w-full h-[600px] sm:h-[750px] bg-slate-100 dark:bg-slate-950 relative">
+            <div className="w-full h-[580px] sm:h-[700px] bg-slate-100 dark:bg-slate-950 relative">
               <iframe
                 src={`${selectedResult.pdfUrl}#toolbar=1&navpanes=0&scrollbar=1`}
                 className="w-full h-full border-0"

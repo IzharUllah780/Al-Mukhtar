@@ -22,7 +22,7 @@ export function useUserCount() {
     queryKey: userKeys.count,
     queryFn: async () => {
       const res = await api.get("/api/admin/users/count");
-      return res.data?.total || 0;
+      return res.data?.total ?? res.data?.count ?? 0;
     },
     staleTime: 60 * 1000,
   });

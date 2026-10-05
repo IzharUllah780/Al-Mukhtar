@@ -95,27 +95,27 @@ function Home() {
   return (
     <div className="bg-white dark:bg-slate-950 font-sans text-slate-800 dark:text-slate-100 transition-colors duration-200">
       {/* ── PREMIER UNIVERSITY HERO SECTION (MASJID BACKGROUND WITH CRISP OVERLAY, ZERO CARDS, ZERO ROUNDED IMAGES) ── */}
-      <section className="relative overflow-hidden text-slate-900 dark:text-white py-12 sm:py-16 transition-colors">
+      <section className="relative overflow-hidden text-white py-12 sm:py-16 transition-colors">
         {/* Masjid Background Image with Enhanced Visibility */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img
             src={MasjidImage}
             alt="Masjid"
-            className="w-full h-full object-cover object-center rounded-none brightness-[0.98] contrast-[1.05]"
+            className="w-full h-full object-cover object-center rounded-none brightness-[0.96] contrast-[1.05]"
           />
-          {/* Lighter balanced gradient overlay for high image visibility + crisp text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/60 to-white/20 dark:from-slate-950/90 dark:via-slate-950/65 dark:to-slate-950/30" />
+          {/* Light-dark overlay for light mode, deep dark overlay for dark mode */}
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/60 to-slate-950/25 dark:from-slate-950/90 dark:via-slate-950/65 dark:to-slate-950/30" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
           <div className="max-w-4xl space-y-4 sm:space-y-5 text-left">
             {/* Dignified Academic Headline (Refined, Compact Proportion) */}
-            <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
-              Your Journey Towards Islamic Knowledge Begins Here.
+            <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight tracking-tight">
+              Your Journey Towards Islamic Knowledge Begins Here — Learn, Reflect & Grow with Al-Mukhtar
             </h1>
 
             {/* Institutional Overview Description with Line Break */}
-            <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm sm:text-base leading-relaxed font-normal max-w-3xl">
+            <p className="text-slate-200 text-xs sm:text-sm sm:text-base leading-relaxed font-normal max-w-3xl">
               <span>Explore the world of Islamic knowledge with Al-Mukhtar. We offer structured Islamic education, Dars-e-Nizami and weekend short courses to help students strengthen their understanding of Deen.</span>
               <span className="block mt-2">Guided by qualified Islamic scholars holding authentic chains of transmission (Sanad), our programs provide a disciplined, step-by-step learning journey tailored for university students, professionals, and seekers of all backgrounds.</span>
             </p>
@@ -127,50 +127,50 @@ function Home() {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-3 text-xs sm:text-sm transition-all text-center rounded-xl shadow-xs hover:shadow-md active:scale-98"
               >
                 <span>Explore Courses</span>
-                <ArrowRight size={15} className="shrink-0" />
               </Link>
               <Link
-                to="/apply"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 font-bold px-6 py-3 text-xs sm:text-sm transition-all text-center rounded-xl shadow-xs hover:shadow-md active:scale-98"
+                to="/blog"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/25 font-bold px-6 py-3 text-xs sm:text-sm transition-all text-center rounded-xl shadow-xs hover:shadow-md active:scale-98 backdrop-blur-xs"
               >
-                <span>Apply Now</span>
+                <span>Read Blogs</span>
+                <ArrowRight size={15} className="shrink-0" />
               </Link>
             </div>
 
             {/* Institutional Quality Indicators */}
-            <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2 sm:gap-x-6 pt-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">
+            <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2 sm:gap-x-6 pt-2 text-xs sm:text-sm text-slate-200 font-medium">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={15} className="text-teal-600 dark:text-teal-400 shrink-0" />
+                <CheckCircle2 size={15} className="text-teal-400 shrink-0" />
                 <span>Experienced Islamic Scholars</span>
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={15} className="text-teal-600 dark:text-teal-400 shrink-0" />
+                <CheckCircle2 size={15} className="text-teal-400 shrink-0" />
                 <span>Flexible Shifts (Morning &amp; Evening)</span>
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 size={15} className="text-teal-600 dark:text-teal-400 shrink-0" />
+                <CheckCircle2 size={15} className="text-teal-400 shrink-0" />
                 <span>Recognized Certification</span>
               </span>
             </div>
           </div>
 
           {/* Quick Metrics Ribbon (Compact, Unboxed - Zero Cards) */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-6 sm:mt-8 pt-6 text-left border-t border-slate-200/60 dark:border-slate-800/60">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 mt-6 sm:mt-8 pt-6 text-left border-t border-slate-700/60 dark:border-slate-800/60">
             <div className="space-y-0.5">
-              <p className="font-heading text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-white">100+</p>
-              <p className="text-teal-700 dark:text-teal-400 text-[11px] sm:text-xs uppercase tracking-wider font-semibold">Students Taught</p>
+              <p className="font-heading text-xl sm:text-2xl md:text-3xl font-black text-white">100+</p>
+              <p className="text-teal-300 dark:text-teal-400 text-[11px] sm:text-xs uppercase tracking-wider font-semibold">Students Taught</p>
             </div>
             <div className="space-y-0.5">
-              <p className="font-heading text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-white">10+</p>
-              <p className="text-teal-700 dark:text-teal-400 text-[11px] sm:text-xs uppercase tracking-wider font-semibold">Scholars &amp; Faculty</p>
+              <p className="font-heading text-xl sm:text-2xl md:text-3xl font-black text-white">10+</p>
+              <p className="text-teal-300 dark:text-teal-400 text-[11px] sm:text-xs uppercase tracking-wider font-semibold">Scholars &amp; Faculty</p>
             </div>
             <div className="space-y-0.5">
-              <p className="font-heading text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-white">3</p>
-              <p className="text-teal-700 dark:text-teal-400 text-[11px] sm:text-xs uppercase tracking-wider font-semibold">Years of Service</p>
+              <p className="font-heading text-xl sm:text-2xl md:text-3xl font-black text-white">3</p>
+              <p className="text-teal-300 dark:text-teal-400 text-[11px] sm:text-xs uppercase tracking-wider font-semibold">Years of Service</p>
             </div>
             <div className="space-y-0.5">
-              <p className="font-heading text-xl sm:text-2xl md:text-3xl font-black text-slate-900 dark:text-white">5</p>
-              <p className="text-teal-700 dark:text-teal-400 text-[11px] sm:text-xs uppercase tracking-wider font-semibold">Certified Programs</p>
+              <p className="font-heading text-xl sm:text-2xl md:text-3xl font-black text-white">5</p>
+              <p className="text-teal-300 dark:text-teal-400 text-[11px] sm:text-xs uppercase tracking-wider font-semibold">Certified Programs</p>
             </div>
           </div>
         </div>
@@ -262,24 +262,24 @@ function Home() {
       </section>
 
       {/* ── ABOUT SECTION (BACKGROUND IMAGE WITH CONTENT ON TOP) ── */}
-      <section className="relative overflow-hidden text-slate-900 dark:text-white py-12 sm:py-16 md:py-20 lg:py-24 flex items-center transition-colors">
+      <section className="relative overflow-hidden text-white py-12 sm:py-16 md:py-20 lg:py-24 flex items-center transition-colors">
         {/* Full Background Image */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <img
             src={BackgroundImage}
             alt="About Al-Mukhtar Institute Background"
-            className="w-full h-full object-cover object-center rounded-none brightness-[0.98] contrast-[1.05]"
+            className="w-full h-full object-cover object-center rounded-none brightness-[0.95] contrast-[1.05]"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/92 via-white/80 to-white/60 dark:from-slate-950/95 dark:via-slate-950/85 dark:to-slate-950/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/70 to-slate-950/35 dark:from-slate-950/92 dark:via-slate-950/80 dark:to-slate-950/60" />
         </div>
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
           <div className="max-w-3xl space-y-4 sm:space-y-5 text-left">
-            <h2 className="font-heading text-lg sm:text-xl md:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
+            <h2 className="font-heading text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight leading-snug">
               A trusted center of learning, guidance, and character
             </h2>
 
-            <div className="space-y-3 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+            <div className="space-y-3 text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
               <p>
                 Founded with the vision to cultivate intellect, spiritual clarity, and moral discipline, Al-Mukhtar Institute serves students through structured Islamic and classical Dars-e-Nizami programs. Our academy revives traditional sciences in a disciplined, modern academic atmosphere.
               </p>
@@ -301,8 +301,8 @@ function Home() {
                 "Recognized Certification & Sanad",
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2">
-                  <CheckCircle2 size={15} className="text-teal-600 dark:text-teal-400 shrink-0" />
-                  <span className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium">{item}</span>
+                  <CheckCircle2 size={15} className="text-teal-400 shrink-0" />
+                  <span className="text-xs sm:text-sm text-slate-100 font-medium">{item}</span>
                 </div>
               ))}
             </div>
@@ -310,7 +310,7 @@ function Home() {
             <div className="pt-2">
               <Link
                 to="/about"
-                className="inline-flex items-center gap-1.5 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 text-xs sm:text-sm font-semibold hover:underline transition-colors"
+                className="inline-flex items-center gap-1.5 text-teal-300 hover:text-teal-200 dark:text-teal-400 dark:hover:text-teal-300 text-xs sm:text-sm font-semibold hover:underline transition-colors"
               >
                 <span>Learn more about our institute</span>
                 <ArrowRight size={14} className="shrink-0" />
@@ -534,7 +534,7 @@ function Home() {
 
           {!blogsLoading && !isBlogsError && recentBlogs.length > 0 && (
             <div className="space-y-6 sm:space-y-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-start">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
                 {recentBlogs.map((blog) => (
                   <BlogCard key={blog._id || blog.slug} blog={blog} />
                 ))}

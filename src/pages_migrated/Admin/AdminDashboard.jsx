@@ -5,6 +5,7 @@ import { Link } from "@/lib/navigation-adapter";
 import {
   useApplicationStats,
   useUserCount,
+  useAdminUsers,
   useAdminBlogs,
   useCourses,
   useTeachers,
@@ -49,6 +50,7 @@ function Dashboard() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const { data: statsData, isLoading, refetch: refetchApplicationStats } = useApplicationStats();
   const { data: userCountData = 0, refetch: refetchUserCount } = useUserCount();
+  const { data: adminUsers = [], refetch: refetchAdminUsers } = useAdminUsers();
   const { data: adminBlogs = [], refetch: refetchAdminBlogs } = useAdminBlogs();
   const { data: courses = [], refetch: refetchCourses } = useCourses();
   const { data: teachers = [], refetch: refetchTeachers } = useTeachers();
@@ -60,6 +62,7 @@ function Dashboard() {
     await Promise.allSettled([
       refetchApplicationStats?.(),
       refetchUserCount?.(),
+      refetchAdminUsers?.(),
       refetchAdminBlogs?.(),
       refetchCourses?.(),
       refetchApplications?.(),
@@ -71,6 +74,12 @@ function Dashboard() {
 
   const blogCount = adminBlogs.length;
   const courseCount = courses.length;
+  const registeredUsersCount =
+    typeof userCountData === "number" && userCountData > 0
+      ? userCountData
+      : Array.isArray(adminUsers)
+      ? adminUsers.length
+      : 0;
 
   const stats = [
     {
@@ -93,7 +102,7 @@ function Dashboard() {
     },
     {
       label: "Registered Users",
-      value: userCountData ?? "—",
+      value: registeredUsersCount,
       meta: "Active student accounts",
       icon: Users,
       to: "/admin/users",
