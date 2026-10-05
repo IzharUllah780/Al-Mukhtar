@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import BlogCard, { getReadingTime, calculateReadingStats, getSnippet, getBlogImage, formatDate } from "../components/BlogCard.jsx";
 import ApiErrorState from "../components/ApiErrorState.jsx";
+import AdSenseBanner from "../components/AdSenseBanner.jsx";
 import { LogoImg } from "../assets/assets.js";
 import { toast } from "react-toastify";
 
@@ -627,6 +628,8 @@ function Blog() {
                 )}
               </>
             )}
+            {/* AdSense Unit at Blog Page Ending */}
+            <AdSenseBanner className="mt-10 max-w-5xl mx-auto" />
           </div>
         </div>
       </main>

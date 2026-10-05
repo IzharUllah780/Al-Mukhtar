@@ -58,6 +58,11 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="google-adsense-account" content="ca-pub-5967341765221118" />
         <meta name="google-site-verification" content="X4KwyEHF-QaAKtrY1ctfAEeMaC2QG2j_lT63WGuOJOg" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5967341765221118"
+          crossOrigin="anonymous"
+        />
       </head>
       <body className="antialiased font-sans bg-slate-50 text-slate-900 dark:bg-[#080f19] dark:text-slate-100 min-h-screen">
         <Providers>

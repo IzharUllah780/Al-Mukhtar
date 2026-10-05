@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { usePublicResults, useResultsMeta } from "@/lib/queries/results";
+import AdSenseBanner from "@/components/AdSenseBanner";
 import {
   FileText,
   Download,
@@ -272,6 +273,9 @@ export default function PublicCourseResultsPage() {
             <ChevronRight size={12} />
           </a>
         </div>
+
+        {/* AdSense Unit at Results Page Ending */}
+        <AdSenseBanner className="mt-6" />
 
       </main>
 

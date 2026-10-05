@@ -34,6 +34,7 @@ import {
 } from "lucide-react";
 import { LogoImg, getImageUrl } from "../assets/assets.js";
 import ApiErrorState from "../components/ApiErrorState.jsx";
+import AdSenseBanner from "../components/AdSenseBanner.jsx";
 import { toast } from "react-toastify";
 import { formatDate, getReadingTime, getSnippet } from "../components/BlogCard.jsx";
 
@@ -826,6 +827,9 @@ function BlogDetail() {
                 </Link>
               </div>
             </div>
+
+            {/* AdSense Unit at Blog Article Ending */}
+            <AdSenseBanner className="mt-8 mb-2" />
           </div>
 
           {/* Sticky Table of Contents & Sidebar on the RIGHT Side (Compact lg:col-span-3) */}
