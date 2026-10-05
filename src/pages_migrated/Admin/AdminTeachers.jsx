@@ -254,7 +254,7 @@ function AdminTeachers() {
             <h1 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
               Faculty & Instructors
             </h1>
-            <span className="px-2 py-0.5 text-[11px] font-semibold rounded-full bg-[#0F6E8C]/10 text-[#0F6E8C] dark:bg-[#0F6E8C]/20 dark:text-teal-300 font-mono">
+            <span className="px-2 py-0.5 text-[11px] font-semibold rounded-full bg-[#0D9488]/10 text-[#0D9488] dark:bg-[#0D9488]/20 dark:text-teal-300 font-mono">
               {teachers.length}
             </span>
           </div>
@@ -267,9 +267,9 @@ function AdminTeachers() {
           <button
             onClick={handleRefresh}
             title="Refresh list"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0F6E8C] hover:text-[#0F6E8C] dark:hover:border-teal-400 dark:hover:text-teal-400 text-xs font-medium shadow-2xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0D9488] hover:text-[#0D9488] dark:hover:border-teal-400 dark:hover:text-teal-400 text-xs font-medium shadow-2xs transition-colors cursor-pointer"
           >
-            <RefreshCw size={13} className={isRefreshing ? "animate-spin text-[#0F6E8C]" : ""} />
+            <RefreshCw size={13} className={isRefreshing ? "animate-spin text-[#0D9488]" : ""} />
             <span className="hidden sm:inline">Refresh</span>
           </button>
           <button
@@ -280,7 +280,7 @@ function AdminTeachers() {
                 setShowForm(true);
               }
             }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0F6E8C] text-white text-xs font-semibold shadow-xs hover:bg-[#0B5C74] active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-semibold shadow-xs hover:bg-[#0F766E] active:scale-95 transition-all cursor-pointer"
           >
             {showForm ? <X size={13} /> : <Plus size={13} />}
             <span>{showForm ? "Close Form" : "Add Teacher"}</span>
@@ -308,8 +308,8 @@ function AdminTeachers() {
 
       {/* ── Metric Badges Strip ────────────────────────────────────── */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-[#0F6E8C]/10 dark:bg-[#0F6E8C]/20 text-[#0F6E8C] dark:text-teal-300 flex items-center justify-center shrink-0">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg bg-[#0D9488]/10 dark:bg-[#0D9488]/20 text-[#0D9488] dark:text-teal-300 flex items-center justify-center shrink-0">
             <Users size={18} />
           </div>
           <div className="min-w-0">
@@ -322,7 +322,7 @@ function AdminTeachers() {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
             <UserCheck size={18} />
           </div>
@@ -336,7 +336,7 @@ function AdminTeachers() {
           </div>
         </div>
 
-        <div className="col-span-2 sm:col-span-1 bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
+        <div className="col-span-2 sm:col-span-1 bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
             <Building2 size={18} />
           </div>
@@ -353,10 +353,10 @@ function AdminTeachers() {
 
       {/* ── Add / Edit Teacher Form — On Screen directly for Mobile, Card for Desktop/Laptop ── */}
       {showForm && (
-        <div className="bg-transparent sm:bg-white sm:dark:bg-[#0c1827] border-0 sm:border border-slate-200 dark:border-slate-800 rounded-none sm:rounded-xl p-0 sm:p-6 shadow-none sm:shadow-sm space-y-5 animate-in fade-in duration-200">
+        <div className="bg-transparent sm:bg-white sm:dark:bg-[#0f172a] border-0 sm:border border-slate-200 dark:border-slate-800 rounded-none sm:rounded-xl p-0 sm:p-6 shadow-none sm:shadow-sm space-y-5 animate-in fade-in duration-200">
           <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-3">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-md bg-[#0F6E8C] text-white flex items-center justify-center">
+              <div className="w-6 h-6 rounded-md bg-[#0D9488] text-white flex items-center justify-center">
                 {editingTeacher ? <Pencil size={12} /> : <Plus size={12} />}
               </div>
               <h2 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
@@ -382,7 +382,7 @@ function AdminTeachers() {
                 <input
                   type="text"
                   placeholder="e.g. Mufti Muhammad Ismail"
-                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
+                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
                     errors.name ? "border-rose-400" : "border-slate-300 dark:border-slate-700"
                   }`}
                   {...register("name", { required: "Teacher name is required" })}
@@ -400,7 +400,7 @@ function AdminTeachers() {
                 <input
                   type="text"
                   placeholder="e.g. Senior Scholar & Director"
-                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
+                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
                     errors.role ? "border-rose-400" : "border-slate-300 dark:border-slate-700"
                   }`}
                   {...register("role", { required: "Role is required" })}
@@ -418,7 +418,7 @@ function AdminTeachers() {
                 <input
                   type="text"
                   placeholder="e.g. Islamic Jurisprudence & Hadith"
-                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
+                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
                     errors.department ? "border-rose-400" : "border-slate-300 dark:border-slate-700"
                   }`}
                   {...register("department", { required: "Department is required" })}
@@ -436,7 +436,7 @@ function AdminTeachers() {
                 <input
                   type="text"
                   placeholder="e.g. 10+ Years"
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
                   {...register("experienceYears")}
                 />
               </div>
@@ -449,7 +449,7 @@ function AdminTeachers() {
                 <input
                   type="text"
                   placeholder="e.g. 800+"
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
                   {...register("studentsMentored")}
                 />
               </div>
@@ -462,7 +462,7 @@ function AdminTeachers() {
                 <input
                   type="email"
                   placeholder="teacher@almukhtar.edu"
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
                   {...register("email")}
                 />
               </div>
@@ -475,7 +475,7 @@ function AdminTeachers() {
                 <input
                   type="text"
                   placeholder="+92 300 1234567"
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
                   {...register("phone")}
                 />
               </div>
@@ -486,7 +486,7 @@ function AdminTeachers() {
                   Status
                 </label>
                 <select
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 cursor-pointer transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 cursor-pointer transition-all"
                   {...register("status")}
                 >
                   <option value="active">Active Faculty</option>
@@ -502,7 +502,7 @@ function AdminTeachers() {
                 <input
                   type="text"
                   placeholder="e.g. Fiqh, Usul-ul-Fiqh, Hadith Studies, Tafseer"
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
                   {...register("specializations")}
                 />
                 <span className="text-[10px] text-slate-400 mt-1 block">
@@ -518,7 +518,7 @@ function AdminTeachers() {
                 <textarea
                   rows={3}
                   placeholder="e.g. Our mission is to cultivate principled scholars anchored in classical authenticity..."
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl p-3.5 text-xs sm:text-sm min-h-[90px] sm:min-h-[110px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 leading-relaxed transition-all resize-y"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl p-3.5 text-xs sm:text-sm min-h-[90px] sm:min-h-[110px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 leading-relaxed transition-all resize-y"
                   {...register("quote")}
                 />
               </div>
@@ -536,7 +536,7 @@ function AdminTeachers() {
                 <textarea
                   rows={7}
                   placeholder="Comprehensive academic dossier: seminary education, teachers, ijazaat (licenses to teach), published treatises, research work, departmental responsibilities, and mentorship methodology..."
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm min-h-[180px] sm:min-h-[220px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 leading-relaxed transition-all resize-y"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm min-h-[180px] sm:min-h-[220px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 leading-relaxed transition-all resize-y"
                   {...register("bio")}
                 />
               </div>
@@ -572,8 +572,8 @@ function AdminTeachers() {
                   )}
 
                   <div className="flex-1 space-y-2">
-                    <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0F6E8C] dark:hover:border-teal-400 text-xs font-medium cursor-pointer shadow-2xs transition-colors">
-                      <Upload size={13} className="text-[#0F6E8C] dark:text-teal-400" />
+                    <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0D9488] dark:hover:border-teal-400 text-xs font-medium cursor-pointer shadow-2xs transition-colors">
+                      <Upload size={13} className="text-[#0D9488] dark:text-teal-400" />
                       <span>{imagePreview ? "Change Photo" : "Upload Photo"}</span>
                       <input
                         type="file"
@@ -603,7 +603,7 @@ function AdminTeachers() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-[#0F6E8C] hover:bg-[#0B5C74] text-white text-xs font-semibold shadow-xs disabled:opacity-50 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-semibold shadow-xs disabled:opacity-50 transition-all cursor-pointer"
               >
                 {isPending && <Loader2 size={13} className="animate-spin" />}
                 <span>{editingTeacher ? "Update Teacher" : "Save Teacher"}</span>
@@ -615,8 +615,8 @@ function AdminTeachers() {
 
       {/* ── Teachers Grid / Cards ───────────────────────────────────── */}
       {isLoading ? (
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-xl p-12 text-center">
-          <Loader2 size={28} className="animate-spin text-[#0F6E8C] dark:text-teal-400 mx-auto" />
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl p-12 text-center">
+          <Loader2 size={28} className="animate-spin text-[#0D9488] dark:text-teal-400 mx-auto" />
           <p className="text-xs text-slate-500 mt-2 font-medium">Loading faculty members...</p>
         </div>
       ) : isError ? (
@@ -626,8 +626,8 @@ function AdminTeachers() {
           onRetry={refetchTeachers}
         />
       ) : teachers.length === 0 ? (
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-xl p-12 text-center space-y-3">
-          <div className="w-12 h-12 rounded-full bg-[#0F6E8C]/10 text-[#0F6E8C] dark:bg-[#0F6E8C]/20 dark:text-teal-300 flex items-center justify-center mx-auto">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl p-12 text-center space-y-3">
+          <div className="w-12 h-12 rounded-full bg-[#0D9488]/10 text-[#0D9488] dark:bg-[#0D9488]/20 dark:text-teal-300 flex items-center justify-center mx-auto">
             <GraduationCap size={24} />
           </div>
           <div className="space-y-1">
@@ -644,7 +644,7 @@ function AdminTeachers() {
                 resetForm();
                 setShowForm(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0F6E8C] text-white text-xs font-semibold shadow-xs hover:bg-[#0B5C74] transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-semibold shadow-xs hover:bg-[#0F766E] transition-colors"
             >
               <Plus size={13} />
               <span>Add First Teacher</span>
@@ -658,7 +658,7 @@ function AdminTeachers() {
             return (
               <div
                 key={teacher._id || teacher.id}
-                className="bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800/80 hover:border-[#0F6E8C]/40 dark:hover:border-teal-500/30 rounded-xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between transition-all group relative"
+                className="bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800/80 hover:border-[#0D9488]/40 dark:hover:border-teal-500/30 rounded-xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between transition-all group relative"
               >
                 {/* Card Top: Photo + Details + Status */}
                 <div className="space-y-3.5">
@@ -674,7 +674,7 @@ function AdminTeachers() {
                         className="w-14 h-14 rounded-xl object-cover object-top border border-slate-100 dark:border-slate-700 shadow-2xs shrink-0"
                       />
                     ) : (
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#0F6E8C]/20 to-[#0B1E2D]/20 text-[#0F6E8C] dark:text-teal-300 flex items-center justify-center font-bold text-base border border-slate-200 dark:border-slate-700 shrink-0">
+                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#0D9488]/20 to-[#09131F]/20 text-[#0D9488] dark:text-teal-300 flex items-center justify-center font-bold text-base border border-slate-200 dark:border-slate-700 shrink-0">
                         {teacher.name?.charAt(0) || "T"}
                       </div>
                     )}
@@ -703,13 +703,13 @@ function AdminTeachers() {
                         )}
                       </div>
 
-                      <h3 className="text-sm font-bold text-slate-900 dark:text-white truncate font-heading group-hover:text-[#0F6E8C] dark:group-hover:text-teal-300 transition-colors">
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-white truncate font-heading group-hover:text-[#0D9488] dark:group-hover:text-teal-300 transition-colors">
                         {teacher.name}
                       </h3>
                       <p className="text-[11px] font-medium text-slate-600 dark:text-slate-300 truncate">
                         {teacher.role}
                       </p>
-                      <p className="text-[10px] text-[#0F6E8C] dark:text-teal-400 font-mono font-medium truncate mt-0.5">
+                      <p className="text-[10px] text-[#0D9488] dark:text-teal-400 font-mono font-medium truncate mt-0.5">
                         {teacher.department}
                       </p>
                     </div>
@@ -763,7 +763,7 @@ function AdminTeachers() {
                     <button
                       onClick={() => openEdit(teacher)}
                       title="Edit teacher"
-                      className="p-1.5 rounded-lg text-slate-500 hover:text-[#0F6E8C] dark:hover:text-teal-300 hover:bg-[#0F6E8C]/10 transition-colors cursor-pointer"
+                      className="p-1.5 rounded-lg text-slate-500 hover:text-[#0D9488] dark:hover:text-teal-300 hover:bg-[#0D9488]/10 transition-colors cursor-pointer"
                     >
                       <Pencil size={14} />
                     </button>
@@ -789,7 +789,7 @@ function AdminTeachers() {
           onClick={() => setViewingTeacher(null)}
         >
           <div
-            className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 max-w-lg w-full shadow-xl space-y-4 max-h-[90vh] overflow-y-auto"
+            className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 max-w-lg w-full shadow-xl space-y-4 max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between">
@@ -805,7 +805,7 @@ function AdminTeachers() {
                     className="w-16 h-16 rounded-2xl object-cover object-top border border-slate-200 dark:border-slate-700 shadow-sm"
                   />
                 ) : (
-                  <div className="w-16 h-16 rounded-2xl bg-[#0F6E8C]/20 text-[#0F6E8C] flex items-center justify-center font-bold text-xl">
+                  <div className="w-16 h-16 rounded-2xl bg-[#0D9488]/20 text-[#0D9488] flex items-center justify-center font-bold text-xl">
                     {viewingTeacher.name?.charAt(0)}
                   </div>
                 )}
@@ -816,7 +816,7 @@ function AdminTeachers() {
                   <p className="text-xs font-semibold text-slate-600 dark:text-slate-300">
                     {viewingTeacher.role}
                   </p>
-                  <p className="text-[11px] text-[#0F6E8C] dark:text-teal-400 font-mono">
+                  <p className="text-[11px] text-[#0D9488] dark:text-teal-400 font-mono">
                     {viewingTeacher.department}
                   </p>
                 </div>
@@ -849,7 +849,7 @@ function AdminTeachers() {
             </div>
 
             {viewingTeacher.quote && (
-              <div className="p-3 rounded-xl bg-[#0F6E8C]/5 dark:bg-[#0F6E8C]/15 border border-[#0F6E8C]/20 text-xs text-slate-700 dark:text-slate-200 italic">
+              <div className="p-3 rounded-xl bg-[#0D9488]/5 dark:bg-[#0D9488]/15 border border-[#0D9488]/20 text-xs text-slate-700 dark:text-slate-200 italic">
                 "{viewingTeacher.quote}"
               </div>
             )}
@@ -891,7 +891,7 @@ function AdminTeachers() {
                   setViewingTeacher(null);
                   openEdit(t);
                 }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0F6E8C] text-white text-xs font-semibold hover:bg-[#0B5C74]"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-semibold hover:bg-[#0F766E]"
               >
                 <Pencil size={12} />
                 <span>Edit Profile</span>
@@ -908,7 +908,7 @@ function AdminTeachers() {
           onClick={() => setTeacherToDelete(null)}
         >
           <div
-            className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 max-w-sm w-full shadow-xl space-y-4"
+            className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 max-w-sm w-full shadow-xl space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 flex items-center justify-center mx-auto">

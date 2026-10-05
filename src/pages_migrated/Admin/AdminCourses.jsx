@@ -1,10 +1,11 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useCourses } from "@/lib/queries";
 import api from "../../lib/api.js";
+import ReactQuill from "@/components/QuillEditor";
 import { LogoImg, getImageUrl } from "../../assets/assets.js";
 import {
   Plus,
@@ -22,6 +23,8 @@ import {
   BookOpen,
   Search,
   ExternalLink,
+  FileText,
+  Sparkles,
 } from "lucide-react";
 import { toast } from "react-toastify";
 import ApiErrorState from "../../components/ApiErrorState.jsx";
@@ -31,6 +34,19 @@ const LEVEL_COLORS = {
   Beginner: "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60",
   Intermediate: "bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800/60",
   Advanced: "bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800/60",
+};
+
+const quillModules = {
+  toolbar: [
+    [{ header: [1, 2, 3, 4, false] }],
+    ["bold", "italic", "underline", "strike"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ indent: "-1" }, { indent: "+1" }],
+    ["blockquote", "code-block"],
+    ["link"],
+    [{ color: [] }, { background: [] }],
+    ["clean"],
+  ],
 };
 
 function CoursePost() {
@@ -47,9 +63,18 @@ function CoursePost() {
   const {
     register,
     handleSubmit,
+    control,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title: "",
+      level: "Beginner",
+      duration: "",
+      description: "",
+      detail: "",
+    },
+  });
 
   const {
     data: courses = [],
@@ -127,7 +152,13 @@ function CoursePost() {
   });
 
   const resetForm = () => {
-    reset();
+    reset({
+      title: "",
+      level: "Beginner",
+      duration: "",
+      description: "",
+      detail: "",
+    });
     removeImage();
     setShowForm(false);
     setEditingCourse(null);
@@ -136,10 +167,11 @@ function CoursePost() {
   const openEdit = (course) => {
     setEditingCourse(course);
     reset({
-      title: course.title,
-      level: course.level,
-      duration: course.duration,
+      title: course.title || "",
+      level: course.level || "Beginner",
+      duration: course.duration || "",
       description: course.description || "",
+      detail: course.detail || "",
     });
     setImagePreview(course.image || null);
     setImageBase64(null);
@@ -150,9 +182,10 @@ function CoursePost() {
     setApiMsg(null);
     const payload = {
       title: formData.title,
-      level: formData.level,
-      duration: formData.duration,
-      description: formData.description,
+      level: formData.level || "Beginner",
+      duration: formData.duration || "",
+      description: formData.description || "",
+      detail: formData.detail || "",
       image: imageBase64 || (editingCourse ? editingCourse.image : null),
     };
     if (editingCourse) {
@@ -180,7 +213,7 @@ function CoursePost() {
           <button
             onClick={handleRefresh}
             title="Refresh database"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0F6E8C] hover:text-[#0F6E8C] dark:hover:border-teal-400 dark:hover:text-teal-400 text-xs font-medium shadow-2xs transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0D9488] hover:text-[#0D9488] dark:hover:border-teal-400 dark:hover:text-teal-400 text-xs font-medium shadow-2xs transition-colors"
           >
             <RefreshCw size={13} className={isRefreshing ? "animate-spin" : ""} />
             <span className="hidden sm:inline">Refresh</span>
@@ -195,7 +228,7 @@ function CoursePost() {
                 setShowForm(true);
               }
             }}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0F6E8C] text-white text-xs font-semibold shadow-xs hover:bg-[#0B5C74] transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-semibold shadow-xs hover:bg-[#0F766E] transition-colors"
           >
             {showForm ? <X size={13} /> : <Plus size={13} />}
             <span>{showForm ? "Cancel" : "Add Course"}</span>
@@ -222,7 +255,7 @@ function CoursePost() {
 
       {/* Course Form — On Screen directly for Mobile, Card for Desktop/Laptop */}
       {showForm && (
-        <div className="bg-transparent sm:bg-white sm:dark:bg-[#0c1827] border-0 sm:border border-slate-200 dark:border-slate-800 rounded-none sm:rounded-xl p-0 sm:p-5 shadow-none sm:shadow-sm space-y-4">
+        <div className="bg-transparent sm:bg-white sm:dark:bg-[#0f172a] border-0 sm:border border-slate-200 dark:border-slate-800 rounded-none sm:rounded-xl p-0 sm:p-5 shadow-none sm:shadow-sm space-y-4">
           <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-3 sm:pb-2.5">
             <h2 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider font-mono">
               {editingCourse ? "Edit Course Details" : "Create New Course"}
@@ -238,6 +271,7 @@ function CoursePost() {
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-3.5 sm:gap-4">
+              {/* Course Title (Only Required Field) */}
               <div className="sm:col-span-8">
                 <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1.5">
                   Course Title <span className="text-rose-500">*</span>
@@ -245,7 +279,7 @@ function CoursePost() {
                 <input
                   type="text"
                   placeholder="e.g. Arabic Language & Syntax (Nahw)"
-                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
+                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
                     errors.title ? "border-rose-400" : "border-slate-300 dark:border-slate-700"
                   }`}
                   {...register("title", { required: "Course title is required" })}
@@ -253,43 +287,38 @@ function CoursePost() {
                 {errors.title && <p className="text-[10px] text-rose-500 mt-1">{errors.title.message}</p>}
               </div>
 
+              {/* Academic Level (Optional) */}
               <div className="sm:col-span-4">
                 <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1.5">
-                  Academic Level <span className="text-rose-500">*</span>
+                  Academic Level <span className="text-slate-400 font-normal">(Optional)</span>
                 </label>
                 <select
-                  defaultValue=""
-                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 cursor-pointer transition-all ${
-                    errors.level ? "border-rose-400" : "border-slate-300 dark:border-slate-700"
-                  }`}
-                  {...register("level", { required: "Select level" })}
+                  className="w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 cursor-pointer transition-all border-slate-300 dark:border-slate-700"
+                  {...register("level")}
                 >
-                  <option value="" disabled>Select level</option>
                   <option value="Beginner">Beginner</option>
                   <option value="Intermediate">Intermediate</option>
                   <option value="Advanced">Advanced</option>
                 </select>
-                {errors.level && <p className="text-[10px] text-rose-500 mt-1">{errors.level.message}</p>}
               </div>
 
+              {/* Duration (Optional) */}
               <div className="sm:col-span-4">
                 <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1.5">
-                  Duration <span className="text-rose-500">*</span>
+                  Duration <span className="text-slate-400 font-normal">(Optional)</span>
                 </label>
                 <input
                   type="text"
                   placeholder="e.g. 6 Months / 2 Semesters"
-                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
-                    errors.duration ? "border-rose-400" : "border-slate-300 dark:border-slate-700"
-                  }`}
-                  {...register("duration", { required: "Duration is required" })}
+                  className="w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all border-slate-300 dark:border-slate-700"
+                  {...register("duration")}
                 />
-                {errors.duration && <p className="text-[10px] text-rose-500 mt-1">{errors.duration.message}</p>}
               </div>
 
+              {/* Cover Image (Optional) */}
               <div className="sm:col-span-8">
                 <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 block mb-1.5">
-                  Cover Image
+                  Cover Image <span className="text-slate-400 font-normal">(Optional)</span>
                 </label>
                 <div className="flex items-center gap-3">
                   {imagePreview ? (
@@ -304,7 +333,7 @@ function CoursePost() {
                       </button>
                     </div>
                   ) : null}
-                  <label className="flex items-center gap-2 px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] border border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-xs sm:text-sm text-slate-600 dark:text-slate-300 hover:border-[#0F6E8C] dark:hover:border-teal-400 cursor-pointer bg-slate-50 dark:bg-slate-800/60 transition-all">
+                  <label className="flex items-center gap-2 px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] border border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-xs sm:text-sm text-slate-600 dark:text-slate-300 hover:border-[#0D9488] dark:hover:border-teal-400 cursor-pointer bg-slate-50 dark:bg-slate-800/60 transition-all">
                     <Upload size={14} className="text-slate-400 dark:text-slate-500" />
                     <span>{imagePreview ? "Change Image" : "Upload Thumbnail"}</span>
                     <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
@@ -312,21 +341,41 @@ function CoursePost() {
                 </div>
               </div>
 
-              {/* Description & Detailed Syllabus (Very Big Height) */}
+              {/* Short Description (Top / Card Overview) (Optional) */}
               <div className="sm:col-span-12">
                 <div className="flex items-center justify-between mb-1.5">
                   <label className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider font-mono block">
-                    Detailed Course Description &amp; Curriculum Overview
+                    Short Description &amp; Header Summary <span className="text-slate-400 font-normal font-sans">(Optional - Shown in hero and cards)</span>
                   </label>
-                  <span className="text-[11px] text-slate-400 dark:text-slate-500">
-                    Comprehensive syllabus, requirements &amp; outcomes
-                  </span>
                 </div>
                 <textarea
-                  rows={6}
-                  placeholder="Provide detailed description of the course, curriculum breakdown, modules covered, prerequisites, learning outcomes, and expected student commitments..."
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm min-h-[160px] sm:min-h-[190px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 leading-relaxed transition-all resize-y"
+                  rows={3}
+                  placeholder="Provide a brief summary or introduction of the course for the top hero header and catalog listings..."
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm min-h-[90px] sm:min-h-[100px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 leading-relaxed transition-all resize-y"
                   {...register("description")}
+                />
+              </div>
+
+              {/* Detailed Course Content & Syllabus (Rich Text ReactQuill) (Optional) */}
+              <div className="sm:col-span-12">
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider font-mono block">
+                    Course Details, Syllabus &amp; Curriculum Content <span className="text-slate-400 font-normal font-sans">(Optional - Rich text detail rendered after hero)</span>
+                  </label>
+                </div>
+                <Controller
+                  name="detail"
+                  control={control}
+                  render={({ field }) => (
+                    <ReactQuill
+                      theme="snow"
+                      value={field.value || ""}
+                      onChange={field.onChange}
+                      modules={quillModules}
+                      className="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden [&>.ql-container]:min-h-[280px] sm:[&>.ql-container]:min-h-[340px] [&>.ql-container]:rounded-b-2xl [&>.ql-toolbar]:rounded-t-2xl [&>.ql-container]:text-base border border-slate-200 dark:border-slate-700"
+                      placeholder="Write comprehensive course details, curriculum outline, weekly modules, prerequisites, learning outcomes, textbook references, and assessment policies..."
+                    />
+                  )}
                 />
               </div>
             </div>
@@ -335,7 +384,7 @@ function CoursePost() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="inline-flex items-center gap-1.5 bg-[#0F6E8C] text-white text-xs sm:text-sm font-semibold px-5 py-2.5 sm:py-2 rounded-xl hover:bg-[#0B5C74] shadow-xs transition-all disabled:opacity-60 cursor-pointer active:scale-95"
+                className="inline-flex items-center gap-1.5 bg-[#0D9488] text-white text-xs sm:text-sm font-semibold px-5 py-2.5 sm:py-2 rounded-xl hover:bg-[#0F766E] shadow-xs transition-all disabled:opacity-60 cursor-pointer active:scale-95"
               >
                 {isPending ? (
                   <>
@@ -360,7 +409,7 @@ function CoursePost() {
 
       {/* Search & Meta Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-        <div className="flex items-center gap-2 bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 sm:py-2 min-h-[46px] sm:min-h-[38px] w-full sm:w-80 shadow-2xs focus-within:border-[#0F6E8C] dark:focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-[#0F6E8C]/15 transition-all">
+        <div className="flex items-center gap-2 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 sm:py-2 min-h-[46px] sm:min-h-[38px] w-full sm:w-80 shadow-2xs focus-within:border-[#0D9488] dark:focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-[#0D9488]/15 transition-all">
           <Search size={14} className="text-slate-400 dark:text-slate-500 shrink-0" />
           <input
             type="text"
@@ -376,10 +425,10 @@ function CoursePost() {
       </div>
 
       {/* Professional Data Table */}
-      <div className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-2xs">
+      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-2xs">
         {isLoading ? (
           <div className="p-5 space-y-3 animate-pulse">
-            <div className="flex items-center gap-2 text-xs font-mono text-[#0F6E8C] dark:text-teal-400">
+            <div className="flex items-center gap-2 text-xs font-mono text-[#0D9488] dark:text-teal-400">
               <Loader2 size={13} className="animate-spin" />
               <span>Loading academic catalog...</span>
             </div>
@@ -459,15 +508,15 @@ function CoursePost() {
                       {/* Duration */}
                       <td className="py-2.5 px-3 whitespace-nowrap font-mono text-[11px] text-slate-600 dark:text-slate-300">
                         <span className="flex items-center gap-1">
-                          <Clock size={12} className="text-[#0F6E8C] dark:text-teal-400" />
-                          {course.duration}
+                          <Clock size={12} className="text-[#0D9488] dark:text-teal-400" />
+                          {course.duration || "Flexible"}
                         </span>
                       </td>
 
                       {/* Applicants */}
                       <td className="py-2.5 px-3 whitespace-nowrap font-mono text-[11px] text-slate-600 dark:text-slate-300">
                         <span className="flex items-center gap-1 font-semibold text-slate-800 dark:text-slate-200">
-                          <Users size={12} className="text-[#0F6E8C] dark:text-teal-400" />
+                          <Users size={12} className="text-[#0D9488] dark:text-teal-400" />
                           {course.applicationCount || course.students || 0}
                         </span>
                       </td>
@@ -478,7 +527,7 @@ function CoursePost() {
                           <button
                             onClick={() => openEdit(course)}
                             title="Edit course"
-                            className="p-1.5 rounded-md text-slate-500 dark:text-slate-400 hover:text-[#0F6E8C] dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                            className="p-1.5 rounded-md text-slate-500 dark:text-slate-400 hover:text-[#0D9488] dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                           >
                             <Pencil size={13} />
                           </button>
@@ -505,7 +554,7 @@ function CoursePost() {
       {courseToDelete && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-150">
           <div
-            className="bg-white dark:bg-[#0c1827] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 max-w-md w-full p-6 space-y-5 animate-in zoom-in-95 duration-200"
+            className="bg-white dark:bg-[#0f172a] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 max-w-md w-full p-6 space-y-5 animate-in zoom-in-95 duration-200"
             role="dialog"
             aria-modal="true"
           >

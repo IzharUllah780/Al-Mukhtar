@@ -254,7 +254,7 @@ function AdminStudents() {
             <h1 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
               Alumni &amp; Graduates
             </h1>
-            <span className="px-2 py-0.5 text-[11px] font-semibold rounded-full bg-[#0F6E8C]/10 text-[#0F6E8C] dark:bg-[#0F6E8C]/20 dark:text-teal-300 font-mono">
+            <span className="px-2 py-0.5 text-[11px] font-semibold rounded-full bg-[#0D9488]/10 text-[#0D9488] dark:bg-[#0D9488]/20 dark:text-teal-300 font-mono">
               {students.length}
             </span>
           </div>
@@ -267,9 +267,9 @@ function AdminStudents() {
           <button
             onClick={handleRefresh}
             title="Refresh list"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0F6E8C] hover:text-[#0F6E8C] dark:hover:border-teal-400 dark:hover:text-teal-400 text-xs font-medium shadow-2xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0D9488] hover:text-[#0D9488] dark:hover:border-teal-400 dark:hover:text-teal-400 text-xs font-medium shadow-2xs transition-colors cursor-pointer"
           >
-            <RefreshCw size={13} className={isRefreshing ? "animate-spin text-[#0F6E8C]" : ""} />
+            <RefreshCw size={13} className={isRefreshing ? "animate-spin text-[#0D9488]" : ""} />
             <span className="hidden sm:inline">Refresh</span>
           </button>
           <button
@@ -280,7 +280,7 @@ function AdminStudents() {
                 setShowForm(true);
               }
             }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0F6E8C] text-white text-xs font-semibold shadow-xs hover:bg-[#0B5C74] active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-semibold shadow-xs hover:bg-[#0F766E] active:scale-95 transition-all cursor-pointer"
           >
             {showForm ? <X size={13} /> : <Plus size={13} />}
             <span>{showForm ? "Close Form" : "Add Graduate"}</span>
@@ -308,8 +308,8 @@ function AdminStudents() {
 
       {/* ── Metric Badges Strip ────────────────────────────────────── */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-[#0F6E8C]/10 dark:bg-[#0F6E8C]/20 text-[#0F6E8C] dark:text-teal-300 flex items-center justify-center shrink-0">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
+          <div className="w-9 h-9 rounded-lg bg-[#0D9488]/10 dark:bg-[#0D9488]/20 text-[#0D9488] dark:text-teal-300 flex items-center justify-center shrink-0">
             <GraduationCap size={18} />
           </div>
           <div className="min-w-0">
@@ -322,7 +322,7 @@ function AdminStudents() {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
             <Star size={18} />
           </div>
@@ -336,7 +336,7 @@ function AdminStudents() {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
             <Globe size={18} />
           </div>
@@ -350,7 +350,7 @@ function AdminStudents() {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800/80 p-3.5 rounded-xl shadow-2xs flex items-center gap-3">
           <div className="w-9 h-9 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
             <Award size={18} />
           </div>
@@ -367,10 +367,10 @@ function AdminStudents() {
 
       {/* ── Add / Edit Student Form — On Screen directly for Mobile, Card for Desktop/Laptop ── */}
       {showForm && (
-        <div className="bg-transparent sm:bg-white sm:dark:bg-[#0c1827] border-0 sm:border border-slate-200 dark:border-slate-800 rounded-none sm:rounded-xl p-0 sm:p-6 shadow-none sm:shadow-sm space-y-5 animate-in fade-in duration-200">
+        <div className="bg-transparent sm:bg-white sm:dark:bg-[#0f172a] border-0 sm:border border-slate-200 dark:border-slate-800 rounded-none sm:rounded-xl p-0 sm:p-6 shadow-none sm:shadow-sm space-y-5 animate-in fade-in duration-200">
           <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-3">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 rounded-md bg-[#0F6E8C] text-white flex items-center justify-center">
+              <div className="w-6 h-6 rounded-md bg-[#0D9488] text-white flex items-center justify-center">
                 {editingStudent ? <Pencil size={12} /> : <Plus size={12} />}
               </div>
               <h2 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
@@ -396,7 +396,7 @@ function AdminStudents() {
                 <input
                   type="text"
                   placeholder="e.g. Hafiz Usman Tariq"
-                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
+                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
                     errors.name ? "border-rose-400" : "border-slate-300 dark:border-slate-700"
                   }`}
                   {...register("name", { required: "Name is required" })}
@@ -414,7 +414,7 @@ function AdminStudents() {
                 <input
                   type="text"
                   placeholder="e.g. Fazil Dars-e-Nizami (Alimiyyah)"
-                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
+                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
                     errors.program ? "border-rose-400" : "border-slate-300 dark:border-slate-700"
                   }`}
                   {...register("program", { required: "Program is required" })}
@@ -432,7 +432,7 @@ function AdminStudents() {
                 <input
                   type="text"
                   placeholder="e.g. Class of 2022"
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
                   {...register("batchYear")}
                 />
               </div>
@@ -443,7 +443,7 @@ function AdminStudents() {
                   Category / Field
                 </label>
                 <select
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 cursor-pointer transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 cursor-pointer transition-all"
                   {...register("category")}
                 >
                   {CATEGORIES.map((cat) => (
@@ -462,7 +462,7 @@ function AdminStudents() {
                 <input
                   type="text"
                   placeholder="e.g. Senior Lecturer in Hadith & Fiqh"
-                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
+                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
                     errors.currentRole ? "border-rose-400" : "border-slate-300 dark:border-slate-700"
                   }`}
                   {...register("currentRole", { required: "Current role is required" })}
@@ -477,7 +477,7 @@ function AdminStudents() {
                 <input
                   type="text"
                   placeholder="e.g. Jamia Al-Hikmah International"
-                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
+                  className={`w-full border rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all ${
                     errors.currentOrganization ? "border-rose-400" : "border-slate-300 dark:border-slate-700"
                   }`}
                   {...register("currentOrganization", { required: "Organization is required" })}
@@ -492,7 +492,7 @@ function AdminStudents() {
                 <input
                   type="text"
                   placeholder="e.g. Manchester, United Kingdom"
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
                   {...register("location")}
                 />
               </div>
@@ -503,7 +503,7 @@ function AdminStudents() {
                   Display Status
                 </label>
                 <select
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 cursor-pointer transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 cursor-pointer transition-all"
                   {...register("status")}
                 >
                   <option value="active">Active (Visible)</option>
@@ -520,7 +520,7 @@ function AdminStudents() {
                 <input
                   type="text"
                   placeholder="e.g. Published 2 academic treatises on Usul al-Hadith and teaches 200+ undergraduate students."
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
                   {...register("keyAchievement")}
                 />
               </div>
@@ -538,7 +538,7 @@ function AdminStudents() {
                 <textarea
                   rows={6}
                   placeholder="Detailed student reflection: what they learned at Al-Mukhtar, teacher mentorship experience, classical grounding, career trajectory, community leadership contributions, and advice to prospective applicants..."
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm min-h-[160px] sm:min-h-[190px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 leading-relaxed transition-all resize-y"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm min-h-[160px] sm:min-h-[190px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 leading-relaxed transition-all resize-y"
                   {...register("message")}
                 />
               </div>
@@ -573,8 +573,8 @@ function AdminStudents() {
                   )}
 
                   <div className="flex-1 space-y-2">
-                    <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0F6E8C] dark:hover:border-teal-400 text-xs font-medium cursor-pointer shadow-2xs transition-colors">
-                      <Upload size={13} className="text-[#0F6E8C] dark:text-teal-400" />
+                    <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0D9488] dark:hover:border-teal-400 text-xs font-medium cursor-pointer shadow-2xs transition-colors">
+                      <Upload size={13} className="text-[#0D9488] dark:text-teal-400" />
                       <span>{imagePreview ? "Change Photo" : "Upload Photo"}</span>
                       <input
                         type="file"
@@ -604,7 +604,7 @@ function AdminStudents() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-[#0F6E8C] hover:bg-[#0B5C74] text-white text-xs font-semibold shadow-xs disabled:opacity-50 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-semibold shadow-xs disabled:opacity-50 transition-all cursor-pointer"
               >
                 {isPending && <Loader2 size={13} className="animate-spin" />}
                 <span>{editingStudent ? "Update Profile" : "Save Profile"}</span>
@@ -616,8 +616,8 @@ function AdminStudents() {
 
       {/* ── Students Grid / Cards ───────────────────────────────────── */}
       {isLoading ? (
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-xl p-12 text-center">
-          <Loader2 size={28} className="animate-spin text-[#0F6E8C] dark:text-teal-400 mx-auto" />
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl p-12 text-center">
+          <Loader2 size={28} className="animate-spin text-[#0D9488] dark:text-teal-400 mx-auto" />
           <p className="text-xs text-slate-500 mt-2 font-medium">Loading alumni profiles...</p>
         </div>
       ) : isError ? (
@@ -627,8 +627,8 @@ function AdminStudents() {
           onRetry={refetchStudents}
         />
       ) : students.length === 0 ? (
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-xl p-12 text-center space-y-3">
-          <div className="w-12 h-12 rounded-full bg-[#0F6E8C]/10 text-[#0F6E8C] dark:bg-[#0F6E8C]/20 dark:text-teal-300 flex items-center justify-center mx-auto">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl p-12 text-center space-y-3">
+          <div className="w-12 h-12 rounded-full bg-[#0D9488]/10 text-[#0D9488] dark:bg-[#0D9488]/20 dark:text-teal-300 flex items-center justify-center mx-auto">
             <GraduationCap size={24} />
           </div>
           <div className="space-y-1">
@@ -645,7 +645,7 @@ function AdminStudents() {
                 resetForm();
                 setShowForm(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0F6E8C] text-white text-xs font-semibold shadow-xs hover:bg-[#0B5C74] transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-semibold shadow-xs hover:bg-[#0F766E] transition-colors"
             >
               <Plus size={13} />
               <span>Add First Graduate</span>
@@ -661,7 +661,7 @@ function AdminStudents() {
             return (
               <div
                 key={student._id || student.id}
-                className="bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800/80 hover:border-[#0F6E8C]/40 dark:hover:border-teal-500/30 rounded-xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between transition-all group relative"
+                className="bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800/80 hover:border-[#0D9488]/40 dark:hover:border-teal-500/30 rounded-xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between transition-all group relative"
               >
                 {/* Card Top: Photo + Name + Program */}
                 <div className="space-y-3">
@@ -677,7 +677,7 @@ function AdminStudents() {
                         className="w-12 h-12 rounded-full object-cover object-top border border-slate-100 dark:border-slate-700 shadow-2xs shrink-0"
                       />
                     ) : (
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0F6E8C]/20 to-[#0B1E2D]/20 text-[#0F6E8C] dark:text-teal-300 flex items-center justify-center font-bold text-sm border border-slate-200 dark:border-slate-700 shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#0D9488]/20 to-[#09131F]/20 text-[#0D9488] dark:text-teal-300 flex items-center justify-center font-bold text-sm border border-slate-200 dark:border-slate-700 shrink-0">
                         {student.name?.charAt(0) || "S"}
                       </div>
                     )}
@@ -702,10 +702,10 @@ function AdminStudents() {
                         </span>
                       </div>
 
-                      <h3 className="text-sm font-bold text-slate-900 dark:text-white truncate font-heading group-hover:text-[#0F6E8C] dark:group-hover:text-teal-300 transition-colors">
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-white truncate font-heading group-hover:text-[#0D9488] dark:group-hover:text-teal-300 transition-colors">
                         {student.name}
                       </h3>
-                      <p className="text-[11px] font-medium text-[#0F6E8C] dark:text-teal-400 truncate">
+                      <p className="text-[11px] font-medium text-[#0D9488] dark:text-teal-400 truncate">
                         {student.program}
                       </p>
                     </div>
@@ -722,7 +722,7 @@ function AdminStudents() {
                     </p>
                     {student.location && (
                       <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1 pt-0.5">
-                        <MapPin size={10} className="text-[#0F6E8C] dark:text-teal-400 shrink-0" />
+                        <MapPin size={10} className="text-[#0D9488] dark:text-teal-400 shrink-0" />
                         <span className="truncate">{student.location}</span>
                       </p>
                     )}
@@ -730,7 +730,7 @@ function AdminStudents() {
 
                   {/* Reflection quote */}
                   {student.message && (
-                    <p className="text-[11px] text-slate-600 dark:text-slate-300 italic line-clamp-2 border-l-2 border-[#0F6E8C]/40 dark:border-teal-400/40 pl-2">
+                    <p className="text-[11px] text-slate-600 dark:text-slate-300 italic line-clamp-2 border-l-2 border-[#0D9488]/40 dark:border-teal-400/40 pl-2">
                       "{student.message}"
                     </p>
                   )}
@@ -764,7 +764,7 @@ function AdminStudents() {
                     <button
                       onClick={() => openEdit(student)}
                       title="Edit graduate profile"
-                      className="p-1.5 rounded-lg text-slate-500 hover:text-[#0F6E8C] dark:hover:text-teal-300 hover:bg-[#0F6E8C]/10 transition-colors cursor-pointer"
+                      className="p-1.5 rounded-lg text-slate-500 hover:text-[#0D9488] dark:hover:text-teal-300 hover:bg-[#0D9488]/10 transition-colors cursor-pointer"
                     >
                       <Pencil size={14} />
                     </button>
@@ -790,7 +790,7 @@ function AdminStudents() {
           onClick={() => setViewingStudent(null)}
         >
           <div
-            className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 max-w-lg w-full shadow-xl space-y-4 max-h-[90vh] overflow-y-auto"
+            className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 max-w-lg w-full shadow-xl space-y-4 max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start justify-between">
@@ -806,7 +806,7 @@ function AdminStudents() {
                     className="w-14 h-14 rounded-full object-cover object-top border border-slate-200 dark:border-slate-700 shadow-sm"
                   />
                 ) : (
-                  <div className="w-14 h-14 rounded-full bg-[#0F6E8C]/20 text-[#0F6E8C] flex items-center justify-center font-bold text-lg">
+                  <div className="w-14 h-14 rounded-full bg-[#0D9488]/20 text-[#0D9488] flex items-center justify-center font-bold text-lg">
                     {viewingStudent.name?.charAt(0)}
                   </div>
                 )}
@@ -814,7 +814,7 @@ function AdminStudents() {
                   <h3 className="text-base font-bold text-slate-900 dark:text-white font-heading">
                     {viewingStudent.name}
                   </h3>
-                  <p className="text-xs font-semibold text-[#0F6E8C] dark:text-teal-400">
+                  <p className="text-xs font-semibold text-[#0D9488] dark:text-teal-400">
                     {viewingStudent.program}
                   </p>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
@@ -845,7 +845,7 @@ function AdminStudents() {
                   <span>{viewingStudent.currentOrganization}</span>
                 </span>
                 <span className="flex items-center gap-1 font-mono text-[11px]">
-                  <MapPin size={11} className="text-[#0F6E8C] dark:text-teal-400" />
+                  <MapPin size={11} className="text-[#0D9488] dark:text-teal-400" />
                   <span>{viewingStudent.location}</span>
                 </span>
               </div>
@@ -856,7 +856,7 @@ function AdminStudents() {
                 <span className="text-[11px] font-bold text-slate-700 dark:text-slate-300 font-mono uppercase tracking-wider block">
                   Graduate Testimonial
                 </span>
-                <p className="text-xs text-slate-600 dark:text-slate-400 italic bg-[#0F6E8C]/5 dark:bg-[#0F6E8C]/15 p-3 rounded-xl border border-[#0F6E8C]/20 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-400 italic bg-[#0D9488]/5 dark:bg-[#0D9488]/15 p-3 rounded-xl border border-[#0D9488]/20 leading-relaxed">
                   "{viewingStudent.message}"
                 </p>
               </div>
@@ -881,7 +881,7 @@ function AdminStudents() {
                   setViewingStudent(null);
                   openEdit(s);
                 }}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0F6E8C] text-white text-xs font-semibold hover:bg-[#0B5C74]"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-semibold hover:bg-[#0F766E]"
               >
                 <Pencil size={12} />
                 <span>Edit Profile</span>
@@ -898,7 +898,7 @@ function AdminStudents() {
           onClick={() => setStudentToDelete(null)}
         >
           <div
-            className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 max-w-sm w-full shadow-xl space-y-4"
+            className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 sm:p-6 max-w-sm w-full shadow-xl space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-10 h-10 rounded-xl bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 flex items-center justify-center mx-auto">

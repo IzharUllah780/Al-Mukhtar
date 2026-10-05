@@ -1,4 +1,5 @@
 import React, { Suspense } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import MainLayoutShell from "@/components/MainLayoutShell";
@@ -43,17 +44,28 @@ export const metadata = {
     shortcut: "/favicon.ico",
     apple: "/icon-192.png",
   },
+  verification: {
+    google: "X4KwyEHF-QaAKtrY1ctfAEeMaC2QG2j_lT63WGuOJOg",
+  },
+  other: {
+    "google-adsense-account": "ca-pub-5967341765221118",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased bg-slate-50 text-slate-900 dark:bg-[#080f19] dark:text-slate-100 min-h-screen">
+      <head>
+        <meta name="google-adsense-account" content="ca-pub-5967341765221118" />
+        <meta name="google-site-verification" content="X4KwyEHF-QaAKtrY1ctfAEeMaC2QG2j_lT63WGuOJOg" />
+      </head>
+      <body className="antialiased font-sans bg-slate-50 text-slate-900 dark:bg-[#080f19] dark:text-slate-100 min-h-screen">
         <Providers>
           <Suspense fallback={null}>
             <MainLayoutShell>{children}</MainLayoutShell>
           </Suspense>
         </Providers>
+        <Analytics />
       </body>
     </html>
   );

@@ -8,7 +8,7 @@ import { useAuth } from "./AuthContext.jsx";
 function AuthLoader() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
-      <div className="w-8 h-8 border-4 border-teal-200 border-t-[#0F6E8C] rounded-full animate-spin" />
+      <div className="w-8 h-8 border-4 border-teal-200 border-t-[#0D9488] rounded-full animate-spin" />
     </div>
   );
 }

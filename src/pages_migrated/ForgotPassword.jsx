@@ -38,7 +38,7 @@ function StepEmail({ onNext }) {
   return (
     <div className="w-full max-w-[420px]">
       <div className="mb-8">
-        <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0F6E8C] flex items-center justify-center mb-5 border border-teal-100">
+        <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center mb-5 border border-teal-100">
           <Mail size={22} />
         </div>
         <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 mb-1.5 tracking-tight">
@@ -63,7 +63,7 @@ function StepEmail({ onNext }) {
           <input
             type="email"
             placeholder="you@example.com"
-            className={`w-full px-4 py-2.5 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] ${errors.email ? "border-rose-400 bg-rose-50/30" : "border-slate-200 bg-white"
+            className={`w-full px-4 py-2.5 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] ${errors.email ? "border-rose-400 bg-rose-50/30" : "border-slate-200 bg-white"
               }`}
             {...register("email", {
               required: "Email is required",
@@ -76,14 +76,14 @@ function StepEmail({ onNext }) {
         <button
           type="submit"
           disabled={mutation.isPending}
-          className="w-full bg-[#0F6E8C] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0B5C74] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed text-center"
+          className="w-full bg-[#0D9488] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0F766E] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed text-center"
         >
           {mutation.isPending ? "Sending OTP..." : "Send OTP"}
         </button>
       </form>
 
       <p className="text-xs sm:text-sm text-center text-slate-500 mt-6">
-        <Link to="/login" className="inline-flex items-center gap-1.5 text-[#0F6E8C] font-bold hover:underline">
+        <Link to="/login" className="inline-flex items-center gap-1.5 text-[#0D9488] font-bold hover:underline">
           <ArrowLeft size={14} /> Back to Login
         </Link>
       </p>
@@ -113,7 +113,7 @@ function StepOtp({ email, onNext }) {
   return (
     <div className="w-full max-w-[420px]">
       <div className="mb-8">
-        <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0F6E8C] flex items-center justify-center mb-5 border border-teal-100">
+        <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center mb-5 border border-teal-100">
           <KeyRound size={22} />
         </div>
         <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 mb-1.5 tracking-tight">
@@ -144,7 +144,7 @@ function StepOtp({ email, onNext }) {
             type="text"
             maxLength={6}
             placeholder="e.g. 482910"
-            className={`w-full px-4 py-2.5 rounded-xl border text-center text-2xl font-bold tracking-[0.4em] text-slate-900 outline-none transition-all focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] bg-white ${errors.otp ? "border-rose-400 bg-rose-50/30" : "border-slate-200"
+            className={`w-full px-4 py-2.5 rounded-xl border text-center text-2xl font-bold tracking-[0.4em] text-slate-900 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] bg-white ${errors.otp ? "border-rose-400 bg-rose-50/30" : "border-slate-200"
               }`}
             {...register("otp", {
               required: "OTP is required",
@@ -157,7 +157,7 @@ function StepOtp({ email, onNext }) {
         <button
           type="submit"
           disabled={mutation.isPending}
-          className="w-full bg-[#0F6E8C] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0B5C74] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed text-center"
+          className="w-full bg-[#0D9488] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0F766E] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed text-center"
         >
           {mutation.isPending ? "Verifying..." : "Verify OTP"}
         </button>
@@ -168,7 +168,7 @@ function StepOtp({ email, onNext }) {
         <button
           onClick={() => resendMutation.mutate()}
           disabled={resendMutation.isPending}
-          className="text-[#0F6E8C] font-bold hover:underline disabled:opacity-50"
+          className="text-[#0D9488] font-bold hover:underline disabled:opacity-50"
         >
           {resendMutation.isPending ? "Sending..." : "Resend OTP"}
         </button>
@@ -199,7 +199,7 @@ function StepNewPassword({ resetToken, onDone }) {
   return (
     <div className="w-full max-w-[420px]">
       <div className="mb-8">
-        <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0F6E8C] flex items-center justify-center mb-5 border border-teal-100">
+        <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center mb-5 border border-teal-100">
           <Lock size={22} />
         </div>
         <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 mb-1.5 tracking-tight">
@@ -223,7 +223,7 @@ function StepNewPassword({ resetToken, onDone }) {
             <input
               type={showPwd ? "text" : "password"}
               placeholder="Enter new password"
-              className={`w-full px-4 py-2.5 pr-11 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] bg-white ${errors.newPassword ? "border-rose-400 bg-rose-50/30" : "border-slate-200"
+              className={`w-full px-4 py-2.5 pr-11 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] bg-white ${errors.newPassword ? "border-rose-400 bg-rose-50/30" : "border-slate-200"
                 }`}
               {...register("newPassword", {
                 required: "Password is required",
@@ -248,7 +248,7 @@ function StepNewPassword({ resetToken, onDone }) {
             <input
               type={showConfirm ? "text" : "password"}
               placeholder="Confirm new password"
-              className={`w-full px-4 py-2.5 pr-11 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] bg-white ${errors.confirmPassword ? "border-rose-400 bg-rose-50/30" : "border-slate-200"
+              className={`w-full px-4 py-2.5 pr-11 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] bg-white ${errors.confirmPassword ? "border-rose-400 bg-rose-50/30" : "border-slate-200"
                 }`}
               {...register("confirmPassword", {
                 required: "Please confirm your password",
@@ -272,7 +272,7 @@ function StepNewPassword({ resetToken, onDone }) {
         <button
           type="submit"
           disabled={mutation.isPending}
-          className="w-full bg-[#0F6E8C] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0B5C74] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed text-center"
+          className="w-full bg-[#0D9488] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0F766E] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed text-center"
         >
           {mutation.isPending ? "Resetting..." : "Reset Password"}
         </button>
@@ -288,7 +288,7 @@ function StepSuccess() {
   const navigate = useNavigate();
   return (
     <div className="w-full max-w-[420px] text-center">
-      <div className="w-16 h-16 rounded-2xl bg-teal-50 text-[#0F6E8C] flex items-center justify-center mx-auto mb-6 border border-teal-100">
+      <div className="w-16 h-16 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center mx-auto mb-6 border border-teal-100">
         <CheckCircle2 size={32} />
       </div>
       <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 mb-2 tracking-tight">Password reset!</h2>
@@ -297,7 +297,7 @@ function StepSuccess() {
       </p>
       <button
         onClick={() => navigate("/login")}
-        className="w-full bg-[#0F6E8C] text-white py-3 rounded-xl font-bold hover:bg-[#0B5C74] transition-all text-sm shadow-sm text-center"
+        className="w-full bg-[#0D9488] text-white py-3 rounded-xl font-bold hover:bg-[#0F766E] transition-all text-sm shadow-sm text-center"
       >
         Go to Login
       </button>
@@ -321,23 +321,23 @@ function ForgotPassword() {
   return (
     <div className="min-h-screen min-h-[100dvh] w-full flex bg-slate-50 font-sans">
       {/* Left Panel */}
-      <div className="hidden lg:flex lg:w-[42%] relative bg-gradient-to-br from-[#0A2540] via-[#081E2E] to-[#0F6E8C] overflow-hidden">
+      <div className="hidden lg:flex lg:w-[42%] relative bg-gradient-to-br from-[#0A2540] via-[#081E2E] to-[#0D9488] overflow-hidden">
         <img
           src={moon_light}
           alt=""
           className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-25 pointer-events-none"
         />
-        <div className="absolute top-0 right-0 w-80 h-80 bg-[#8FB3AA]/15 rounded-full blur-[100px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#0F6E8C]/20 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#5EEAD4]/15 rounded-full blur-[100px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#0D9488]/20 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 pointer-events-none" />
 
         <div className="relative z-10 flex flex-col justify-between p-12 xl:p-14 w-full">
           <div className="flex items-center gap-3">
-            <img src={Logo} alt="Logo" className="w-11 h-11 rounded-xl object-cover ring-2 ring-[#8FB3AA]/40 shadow-sm" />
+            <img src={Logo} alt="Logo" className="w-11 h-11 rounded-none object-cover ring-2 ring-[#5EEAD4]/40 shadow-sm" />
             <span className="text-white font-heading font-extrabold text-lg tracking-tight">Al-Mukhtar Institute</span>
           </div>
 
           <div className="py-8">
-            <span className="inline-block text-[#8FB3AA] text-[11px] font-bold tracking-widest uppercase mb-3 font-mono">
+            <span className="inline-block text-[#5EEAD4] text-[11px] font-bold tracking-widest uppercase mb-3 font-mono">
               Account Recovery
             </span>
             <h1 className="font-heading text-3xl xl:text-4xl font-black text-white leading-tight mb-4 tracking-tight">
@@ -354,7 +354,7 @@ function ForgotPassword() {
               <div key={i} className="flex items-center gap-3">
                 <div
                   className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold font-mono shrink-0 transition-all ${i < stepIndex
-                      ? "bg-[#8FB3AA] text-[#0A2540]"
+                      ? "bg-[#5EEAD4] text-[#0A2540]"
                       : i === stepIndex
                         ? "bg-white text-[#0A2540]"
                         : "bg-white/10 border border-white/20 text-white/50"
@@ -381,7 +381,7 @@ function ForgotPassword() {
           <div className="mb-4 sm:mb-6 self-start">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#0F6E8C] bg-white hover:bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200/80 transition-all group shadow-2xs"
+              className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#0D9488] bg-white hover:bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200/80 transition-all group shadow-2xs"
             >
               <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
               <span>Back to Home</span>
@@ -390,7 +390,7 @@ function ForgotPassword() {
 
           {/* Mobile logo */}
           <div className="flex lg:hidden items-center gap-2.5 mb-6 self-start">
-            <img src={Logo} alt="Logo" className="w-9 h-9 rounded-xl object-cover shadow-2xs" />
+            <img src={Logo} alt="Logo" className="w-9 h-9 rounded-none object-cover shadow-2xs" />
             <span className="font-heading font-extrabold text-base text-slate-900">Al-Mukhtar Institute</span>
           </div>
 

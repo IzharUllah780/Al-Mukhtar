@@ -91,7 +91,7 @@ export default function PdfResultViewer({ result, onBack }) {
 
           <button
             onClick={handleDownload}
-            className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#0F6E8C] to-[#0B5C74] rounded-2xl shadow-md hover:shadow-lg hover:brightness-105 transition active:scale-95 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#0D9488] to-[#0F766E] rounded-2xl shadow-md hover:shadow-lg hover:brightness-105 transition active:scale-95 cursor-pointer"
           >
             <Download size={14} />
             <span>Download PDF</span>
@@ -101,15 +101,15 @@ export default function PdfResultViewer({ result, onBack }) {
 
       {/* Main Student Header & Verification Card */}
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-5 sm:p-8 shadow-xl relative overflow-hidden">
-        <div className="h-2.5 bg-gradient-to-r from-[#0B1E2D] via-[#0F6E8C] to-[#8FB3AA] absolute top-0 left-0 right-0" />
+        <div className="h-2.5 bg-gradient-to-r from-[#0B1E2D] via-[#0D9488] to-[#5EEAD4] absolute top-0 left-0 right-0" />
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-5">
           <div className="flex items-center gap-3.5">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#0F6E8C]/10 text-[#0F6E8C] dark:text-[#8FB3AA] flex items-center justify-center shrink-0 border border-[#0F6E8C]/20 shadow-xs">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-[#0D9488]/10 text-[#0D9488] dark:text-[#5EEAD4] flex items-center justify-center shrink-0 border border-[#0D9488]/20 shadow-xs">
               <FileText size={26} />
             </div>
             <div>
-              <span className="text-[10px] font-bold uppercase font-mono tracking-widest text-[#0F6E8C] dark:text-[#8FB3AA] block">
+              <span className="text-[10px] font-bold uppercase font-mono tracking-widest text-[#0D9488] dark:text-[#5EEAD4] block">
                 Certified Examination Result
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
@@ -144,7 +144,7 @@ export default function PdfResultViewer({ result, onBack }) {
             <span className="text-[10px] uppercase font-mono text-slate-400 block mb-0.5">
               Roll / Reg No
             </span>
-            <span className="font-bold font-mono text-[#0F6E8C] dark:text-[#8FB3AA]">
+            <span className="font-bold font-mono text-[#0D9488] dark:text-[#5EEAD4]">
               {result.rollNumber || "—"}
             </span>
           </div>
@@ -180,7 +180,7 @@ export default function PdfResultViewer({ result, onBack }) {
           <div className="flex items-center gap-2 shrink-0">
             <button
               onClick={handleDownload}
-              className="inline-flex items-center gap-1 text-xs font-semibold text-[#0F6E8C] dark:text-[#8FB3AA] hover:underline cursor-pointer"
+              className="inline-flex items-center gap-1 text-xs font-semibold text-[#0D9488] dark:text-[#5EEAD4] hover:underline cursor-pointer"
             >
               <Download size={13} />
               <span className="hidden sm:inline">Download</span>

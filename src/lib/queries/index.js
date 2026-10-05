@@ -5,3 +5,4 @@ export * from "./students.js";
 export * from "./notifications.js";
 export * from "./applications.js";
 export * from "./users.js";
+export * from "./videos.js";

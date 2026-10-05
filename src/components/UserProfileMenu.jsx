@@ -46,8 +46,8 @@ function UserProfileMenu() {
     : "AM";
 
   return (
-    <div className="relative" ref={menuRef}>
-      {/* Profile trigger button (clean circle avatar + chevron icon without wrapper background) */}
+    <div className="relative font-sans" ref={menuRef}>
+      {/* Profile trigger button */}
       <button
         type="button"
         onClick={() => setOpen(!open)}
@@ -55,33 +55,33 @@ function UserProfileMenu() {
         aria-label="User profile menu"
         aria-expanded={open}
       >
-        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#0F6E8C] to-[#0A2540] text-white flex items-center justify-center text-xs font-extrabold shrink-0 shadow-xs ring-2 ring-transparent group-hover:ring-[#0F6E8C]/30 dark:group-hover:ring-teal-400/30 transition-all duration-200 group-hover:scale-105">
+        <div className="w-9 h-9 rounded-full bg-teal-600 text-white flex items-center justify-center text-xs font-extrabold shrink-0 shadow-xs ring-2 ring-transparent group-hover:ring-teal-500/30 dark:group-hover:ring-teal-400/30 transition-all duration-200 group-hover:scale-105">
           {initials}
         </div>
         <ChevronDown
           size={15}
-          className={`text-slate-500 dark:text-slate-400 transition-transform duration-200 group-hover:text-[#0F6E8C] dark:group-hover:text-[#38BDF8] ${
-            open ? "rotate-180 text-[#0F6E8C] dark:text-[#38BDF8]" : ""
+          className={`text-slate-500 dark:text-slate-400 transition-transform duration-200 group-hover:text-teal-600 dark:group-hover:text-teal-400 ${
+            open ? "rotate-180 text-teal-600 dark:text-teal-400" : ""
           }`}
         />
       </button>
 
-      {/* Dropdown card - Highly visible & professional */}
+      {/* Dropdown card */}
       <div
-        className={`absolute right-0 top-full mt-2.5 w-80 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-750 shadow-2xl shadow-slate-900/15 dark:shadow-black/70 overflow-hidden z-50 transition-all duration-200 origin-top-right backdrop-blur-md ${
+        className={`absolute right-0 top-full mt-2.5 w-80 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-[0_10px_30px_-5px_rgba(15,23,42,0.12)] dark:shadow-black/70 overflow-hidden z-50 transition-all duration-200 origin-top-right backdrop-blur-md ${
           open
             ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
             : "opacity-0 scale-95 -translate-y-2 pointer-events-none"
         }`}
       >
-        {/* User Info Header with subtle background gradient */}
-        <div className="p-4 bg-gradient-to-b from-slate-50 to-slate-100/60 dark:from-slate-800/90 dark:to-slate-900/80 border-b border-slate-150 dark:border-slate-800">
+        {/* User Info Header */}
+        <div className="p-4 bg-slate-50 dark:bg-slate-800/70 border-b border-slate-200/80 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0F6E8C] via-[#0B5C74] to-[#0A2540] text-white flex items-center justify-center text-sm font-extrabold shadow-md ring-2 ring-white dark:ring-slate-800 shrink-0">
+            <div className="w-11 h-11 rounded-xl bg-teal-600 text-white flex items-center justify-center text-sm font-extrabold shadow-xs ring-2 ring-white dark:ring-slate-800 shrink-0">
               {initials}
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-slate-900 dark:text-white font-bold text-sm truncate leading-tight">
+              <p className="text-slate-900 dark:text-white font-bold text-sm truncate leading-tight font-heading">
                 {user?.username}
               </p>
               <p className="text-slate-500 dark:text-slate-400 text-xs truncate mt-0.5 font-sans">
@@ -89,7 +89,7 @@ function UserProfileMenu() {
               </p>
               <div className="mt-1.5 flex items-center gap-1.5">
                 {isAdmin ? (
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-[#0F6E8C] dark:text-teal-300 border border-teal-200/80 dark:border-teal-800/80 font-mono shadow-3xs">
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200/80 dark:border-teal-800/80 font-mono">
                     <ShieldCheck size={11} className="text-teal-600 dark:text-teal-400" />
                     <span>{user?.role || "Admin"}</span>
                   </span>
@@ -104,20 +104,20 @@ function UserProfileMenu() {
           </div>
         </div>
 
-        {/* Admin Dashboard Featured Action (only if admin) */}
+        {/* Admin Dashboard Featured Action */}
         {isAdmin && (
           <div className="p-3 border-b border-slate-100 dark:border-slate-800 bg-teal-50/40 dark:bg-teal-950/20">
             <Link
               to="/admin"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-between p-2.5 rounded-xl bg-gradient-to-r from-teal-500/15 via-[#0F6E8C]/15 to-sky-500/10 dark:from-teal-500/25 dark:via-[#0F6E8C]/30 dark:to-sky-950/40 border border-teal-400/30 dark:border-teal-500/30 text-[#0F6E8C] dark:text-teal-300 hover:border-teal-500/50 dark:hover:border-teal-400/50 hover:shadow-xs transition-all group"
+              className="flex items-center justify-between p-2.5 rounded-xl bg-teal-50/70 dark:bg-teal-950/40 border border-teal-200/80 dark:border-teal-800/80 text-teal-800 dark:text-teal-300 hover:border-teal-500/50 dark:hover:border-teal-400/50 hover:shadow-xs transition-all group"
             >
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[#0F6E8C] text-white flex items-center justify-center shadow-xs">
+                <div className="w-8 h-8 rounded-lg bg-teal-600 text-white flex items-center justify-center shadow-xs">
                   <LayoutDashboard size={16} />
                 </div>
                 <div>
-                  <p className="text-xs font-extrabold text-slate-900 dark:text-white leading-tight flex items-center gap-1">
+                  <p className="text-xs font-extrabold text-slate-900 dark:text-white leading-tight flex items-center gap-1 font-heading">
                     <span>Admin Dashboard</span>
                     <Sparkles size={12} className="text-amber-500" />
                   </p>
@@ -128,7 +128,7 @@ function UserProfileMenu() {
               </div>
               <ChevronRight
                 size={16}
-                className="text-slate-400 group-hover:text-[#0F6E8C] dark:group-hover:text-teal-300 group-hover:translate-x-0.5 transition-all"
+                className="text-slate-400 group-hover:text-teal-600 dark:group-hover:text-teal-300 group-hover:translate-x-0.5 transition-all"
               />
             </Link>
           </div>
@@ -142,7 +142,7 @@ function UserProfileMenu() {
                 className={`w-7 h-7 rounded-lg flex items-center justify-center transition-colors ${
                   isDark
                     ? "bg-amber-400/15 text-amber-300"
-                    : "bg-amber-100 text-amber-600 shadow-3xs"
+                    : "bg-amber-100 text-amber-600"
                 }`}
               >
                 {isDark ? <Moon size={15} /> : <Sun size={15} />}
@@ -160,7 +160,7 @@ function UserProfileMenu() {
               type="button"
               onClick={toggleTheme}
               className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-hidden ${
-                isDark ? "bg-[#0F6E8C]" : "bg-slate-300"
+                isDark ? "bg-teal-600" : "bg-slate-300"
               }`}
               role="switch"
               aria-checked={isDark}
@@ -180,10 +180,10 @@ function UserProfileMenu() {
           <Link
             to="/profile"
             onClick={() => setOpen(false)}
-            className="flex items-center justify-between p-2.5 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-teal-50/70 dark:hover:bg-slate-800 hover:text-[#0F6E8C] dark:hover:text-[#38BDF8] transition-colors group"
+            className="flex items-center justify-between p-2.5 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-teal-50/70 dark:hover:bg-slate-800 hover:text-teal-600 dark:hover:text-teal-400 transition-colors group"
           >
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-teal-50 dark:bg-slate-800 flex items-center justify-center text-[#0F6E8C] dark:text-[#38BDF8] border border-teal-100 dark:border-slate-700">
+              <div className="w-8 h-8 rounded-lg bg-teal-50 dark:bg-slate-800 flex items-center justify-center text-teal-600 dark:text-teal-400 border border-teal-100 dark:border-slate-700">
                 <User size={15} />
               </div>
               <div>
@@ -193,7 +193,7 @@ function UserProfileMenu() {
                 </p>
               </div>
             </div>
-            <ChevronRight size={15} className="text-slate-300 dark:text-slate-600 group-hover:text-[#0F6E8C] dark:group-hover:text-[#38BDF8] transition-colors" />
+            <ChevronRight size={15} className="text-slate-300 dark:text-slate-600 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors" />
           </Link>
         </div>
 

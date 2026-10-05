@@ -79,8 +79,8 @@ function Dashboard() {
       meta: `${statsData?.stats?.pending ?? 0} pending review`,
       icon: GraduationCap,
       to: "/admin/applies",
-      color: "text-[#0F6E8C] dark:text-teal-300",
-      bg: "bg-[#0F6E8C]/10 dark:bg-[#0F6E8C]/20",
+      color: "text-[#0D9488] dark:text-teal-300",
+      bg: "bg-[#0D9488]/10 dark:bg-[#0D9488]/20",
     },
     {
       label: "Approved Students",
@@ -123,12 +123,12 @@ function Dashboard() {
         <div className="h-10 bg-slate-200/80 dark:bg-slate-800/80 rounded-lg w-1/3" />
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 rounded-xl p-4 h-24" />
+            <div key={i} className="bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800 rounded-xl p-4 h-24" />
           ))}
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          <div className="lg:col-span-8 bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 rounded-xl h-64" />
-          <div className="lg:col-span-4 bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 rounded-xl h-64" />
+          <div className="lg:col-span-8 bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800 rounded-xl h-64" />
+          <div className="lg:col-span-4 bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800 rounded-xl h-64" />
         </div>
       </div>
     );
@@ -151,13 +151,13 @@ function Dashboard() {
             type="button"
             onClick={handleRefreshAll}
             disabled={isRefreshing}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-[#0c1827] hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all cursor-pointer shadow-2xs disabled:opacity-50"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-[#0f172a] hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs font-semibold transition-all cursor-pointer shadow-2xs disabled:opacity-50"
             title="Refresh All Metrics"
           >
-            <RefreshCw size={12} className={`text-[#0F6E8C] dark:text-teal-400 ${isRefreshing ? "animate-spin" : ""}`} />
+            <RefreshCw size={12} className={`text-[#0D9488] dark:text-teal-400 ${isRefreshing ? "animate-spin" : ""}`} />
             <span>{isRefreshing ? "Refreshing..." : "Refresh"}</span>
           </button>
-          <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 font-mono bg-white dark:bg-[#0c1827] px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 shadow-2xs">
+          <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 font-mono bg-white dark:bg-[#0f172a] px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 shadow-2xs">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>Al-Mukhtar Console</span>
           </div>
@@ -170,7 +170,7 @@ function Dashboard() {
           <Link
             key={i}
             to={stat.to}
-            className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800/90 rounded-xl p-3.5 hover:border-slate-300 dark:hover:border-teal-500/50 hover:shadow-xs transition-all group relative overflow-hidden"
+            className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800/90 rounded-xl p-3.5 hover:border-slate-300 dark:hover:border-teal-500/50 hover:shadow-xs transition-all group relative overflow-hidden"
           >
             <div className="flex items-start justify-between">
               <div>
@@ -189,41 +189,48 @@ function Dashboard() {
       </div>
 
       {/* Quick Action Chips */}
-      <div className="flex flex-wrap items-center gap-2 bg-white dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 rounded-xl p-2.5">
+      <div className="flex flex-wrap items-center gap-2 bg-white dark:bg-[#0f172a] border border-slate-200/80 dark:border-slate-800 rounded-xl p-2.5">
         <span className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider font-mono px-2">
           Quick Actions:
         </span>
         <Link
           to="/admin/course-post"
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#0F6E8C]/10 dark:hover:bg-[#0F6E8C]/25 text-slate-700 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-teal-300 text-xs font-medium transition-colors"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#0D9488]/10 dark:hover:bg-[#0D9488]/25 text-slate-700 dark:text-slate-300 hover:text-[#0D9488] dark:hover:text-teal-300 text-xs font-medium transition-colors"
         >
           <Plus size={13} />
           <span>New Course</span>
         </Link>
         <Link
           to="/admin/blog-post"
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#0F6E8C]/10 dark:hover:bg-[#0F6E8C]/25 text-slate-700 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-teal-300 text-xs font-medium transition-colors"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#0D9488]/10 dark:hover:bg-[#0D9488]/25 text-slate-700 dark:text-slate-300 hover:text-[#0D9488] dark:hover:text-teal-300 text-xs font-medium transition-colors"
         >
           <Plus size={13} />
           <span>New Article</span>
         </Link>
         <Link
+          to="/admin/videos"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#0D9488]/10 dark:hover:bg-[#0D9488]/25 text-slate-700 dark:text-slate-300 hover:text-[#0D9488] dark:hover:text-teal-300 text-xs font-medium transition-colors"
+        >
+          <Plus size={13} />
+          <span>New Video</span>
+        </Link>
+        <Link
           to="/admin/applies"
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#0F6E8C]/10 dark:hover:bg-[#0F6E8C]/25 text-slate-700 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-teal-300 text-xs font-medium transition-colors"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#0D9488]/10 dark:hover:bg-[#0D9488]/25 text-slate-700 dark:text-slate-300 hover:text-[#0D9488] dark:hover:text-teal-300 text-xs font-medium transition-colors"
         >
           <GraduationCap size={13} />
           <span>Applications</span>
         </Link>
         <Link
           to="/admin/notifications"
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#0F6E8C]/10 dark:hover:bg-[#0F6E8C]/25 text-slate-700 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-teal-300 text-xs font-medium transition-colors"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#0D9488]/10 dark:hover:bg-[#0D9488]/25 text-slate-700 dark:text-slate-300 hover:text-[#0D9488] dark:hover:text-teal-300 text-xs font-medium transition-colors"
         >
           <Bell size={13} />
           <span>Website Popups</span>
         </Link>
         <Link
           to="/admin/users"
-          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#0F6E8C]/10 dark:hover:bg-[#0F6E8C]/25 text-slate-700 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-teal-300 text-xs font-medium transition-colors"
+          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-[#0D9488]/10 dark:hover:bg-[#0D9488]/25 text-slate-700 dark:text-slate-300 hover:text-[#0D9488] dark:hover:text-teal-300 text-xs font-medium transition-colors"
         >
           <Users size={13} />
           <span>User Directory</span>
@@ -233,15 +240,15 @@ function Dashboard() {
       {/* Main Grid: Trend Chart & Recent Applications */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         {/* Trend Chart (8 cols) */}
-        <div className="lg:col-span-8 bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800/90 rounded-xl p-4 sm:p-5 shadow-2xs">
+        <div className="lg:col-span-8 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800/90 rounded-xl p-4 sm:p-5 shadow-2xs">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <TrendingUp size={16} className="text-[#0F6E8C] dark:text-teal-400" />
+              <TrendingUp size={16} className="text-[#0D9488] dark:text-teal-400" />
               <h2 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider font-mono">
                 Weekly Applications Activity (Last 7 Days)
               </h2>
             </div>
-            <span className="text-[10px] text-[#0F6E8C] dark:text-teal-300 font-mono bg-teal-50 dark:bg-teal-950/40 border border-teal-200/80 dark:border-teal-800/60 px-2 py-0.5 rounded-full font-semibold">
+            <span className="text-[10px] text-[#0D9488] dark:text-teal-300 font-mono bg-teal-50 dark:bg-teal-950/40 border border-teal-200/80 dark:border-teal-800/60 px-2 py-0.5 rounded-full font-semibold">
               Weekly Overview
             </span>
           </div>
@@ -266,7 +273,7 @@ function Dashboard() {
                   contentStyle={{
                     borderRadius: 8,
                     border: "1px solid #334155",
-                    backgroundColor: "#0c1827",
+                    backgroundColor: "#0f172a",
                     color: "#f8fafc",
                     boxShadow: "0 4px 12px rgba(0,0,0,0.25)",
                     fontSize: 11,
@@ -277,9 +284,9 @@ function Dashboard() {
                 <Line
                   type="monotone"
                   dataKey="applications"
-                  stroke="#0F6E8C"
+                  stroke="#0D9488"
                   strokeWidth={2.5}
-                  dot={{ fill: "#0F6E8C", r: 3 }}
+                  dot={{ fill: "#0D9488", r: 3 }}
                   activeDot={{ r: 6, fill: "#38bdf8" }}
                 />
               </LineChart>
@@ -288,7 +295,7 @@ function Dashboard() {
         </div>
 
         {/* Recent Applications (4 cols) */}
-        <div className="lg:col-span-4 bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800/90 rounded-xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
+        <div className="lg:col-span-4 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800/90 rounded-xl p-4 sm:p-5 shadow-2xs flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-3 border-b border-slate-100 dark:border-slate-800 pb-2.5">
               <h2 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider font-mono">
@@ -296,7 +303,7 @@ function Dashboard() {
               </h2>
               <Link
                 to="/admin/applies"
-                className="text-[11px] text-[#0F6E8C] dark:text-teal-400 font-semibold hover:underline"
+                className="text-[11px] text-[#0D9488] dark:text-teal-400 font-semibold hover:underline"
               >
                 View all
               </Link>
@@ -338,7 +345,7 @@ function Dashboard() {
 
       {/* Breakdown Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800/90 rounded-xl p-4 shadow-2xs">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800/90 rounded-xl p-4 shadow-2xs">
           <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono mb-2">
             Academy Catalogue
           </p>
@@ -364,7 +371,7 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800/90 rounded-xl p-4 shadow-2xs">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800/90 rounded-xl p-4 shadow-2xs">
           <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono mb-2">
             Admissions Status
           </p>
@@ -382,7 +389,7 @@ function Dashboard() {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800/90 rounded-xl p-4 shadow-2xs flex flex-col justify-between">
+        <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800/90 rounded-xl p-4 shadow-2xs flex flex-col justify-between">
           <div>
             <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono mb-1.5">
               System Health
@@ -398,7 +405,7 @@ function Dashboard() {
           <div className="pt-2">
             <Link
               to="/admin/applies"
-              className="text-xs font-semibold text-[#0F6E8C] dark:text-teal-400 inline-flex items-center gap-1 hover:gap-1.5 transition-all"
+              className="text-xs font-semibold text-[#0D9488] dark:text-teal-400 inline-flex items-center gap-1 hover:gap-1.5 transition-all"
             >
               <span>Manage Candidates</span>
               <ArrowRight size={12} />

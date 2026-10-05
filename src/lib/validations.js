@@ -5,12 +5,11 @@ import { z } from "zod";
 // ==========================================
 export const courseCreateSchema = z.object({
   title: z.string().trim().min(2, "Course title must be at least 2 characters"),
-  level: z.enum(["Beginner", "Intermediate", "Advanced"], {
-    errorMap: () => ({ message: "Select a valid academic level" }),
-  }),
-  duration: z.string().trim().min(1, "Duration is required"),
+  level: z.enum(["Beginner", "Intermediate", "Advanced"]).optional().default("Beginner"),
+  duration: z.string().trim().optional().default(""),
   description: z.string().trim().optional().default(""),
-  image: z.string().optional().nullable(),
+  detail: z.string().trim().optional().default(""),
+  image: z.string().optional().nullable().default(""),
 });
 
 export const courseUpdateSchema = courseCreateSchema.partial();
@@ -170,6 +169,18 @@ export const resultCreateSchema = z.object({
 });
 
 export const resultUpdateSchema = resultCreateSchema.partial();
+
+// ==========================================
+// VIDEO SCHEMAS (YouTube Video Embeds)
+// ==========================================
+export const videoCreateSchema = z.object({
+  title: z.string().trim().min(2, "Video title is required"),
+  description: z.string().trim().optional().default(""),
+  iframe: z.string().trim().min(5, "YouTube iframe embed code or link is required"),
+  order: z.number().or(z.string().regex(/^\d+$/).transform(Number)).optional().default(0),
+});
+
+export const videoUpdateSchema = videoCreateSchema.partial();
 
 export const contactSchema = z.object({
   name: z.string().trim().min(2, "Name is required"),

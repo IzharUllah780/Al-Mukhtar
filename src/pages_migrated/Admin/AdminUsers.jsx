@@ -224,7 +224,7 @@ function AdminUsers() {
               setFormError("");
               setShowAddAdminModal(true);
             }}
-            className="inline-flex items-center gap-1.5 bg-[#0F6E8C] hover:bg-[#0B5C74] active:bg-[#084557] text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold shadow-2xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 bg-[#0D9488] hover:bg-[#0F766E] active:bg-[#084557] text-white px-3.5 py-1.5 rounded-lg text-xs font-semibold shadow-2xs transition-colors cursor-pointer"
           >
             <UserPlus size={14} />
             <span>Add New Admin</span>
@@ -249,7 +249,7 @@ function AdminUsers() {
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-2.5">
-        <div className="flex items-center gap-2 bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 sm:py-2 min-h-[46px] sm:min-h-[38px] flex-1 shadow-2xs focus-within:border-[#0F6E8C] dark:focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-[#0F6E8C]/15 transition-all">
+        <div className="flex items-center gap-2 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 sm:py-2 min-h-[46px] sm:min-h-[38px] flex-1 shadow-2xs focus-within:border-[#0D9488] dark:focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-[#0D9488]/15 transition-all">
           <Search size={14} className="text-slate-400 dark:text-slate-500 shrink-0" />
           <input
             type="text"
@@ -262,7 +262,7 @@ function AdminUsers() {
         <select
           value={roleFilter}
           onChange={handleRoleChange}
-          className="border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 sm:py-2 min-h-[46px] sm:min-h-[38px] text-xs sm:text-sm bg-white dark:bg-slate-800 focus:outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 text-slate-700 dark:text-slate-200 shadow-2xs sm:w-48 cursor-pointer transition-all"
+          className="border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 sm:py-2 min-h-[46px] sm:min-h-[38px] text-xs sm:text-sm bg-white dark:bg-slate-800 focus:outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 text-slate-700 dark:text-slate-200 shadow-2xs sm:w-48 cursor-pointer transition-all"
         >
           <option value="all">All Roles</option>
           <option value="superadmin">Super Administrators</option>
@@ -272,10 +272,10 @@ function AdminUsers() {
       </div>
 
       {/* Table & Mobile Card List */}
-      <div className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-2xs">
+      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-2xs">
         {isLoading ? (
           <div className="p-6 space-y-4">
-            <div className="flex items-center gap-2 text-xs font-mono text-[#0F6E8C] dark:text-teal-400">
+            <div className="flex items-center gap-2 text-xs font-mono text-[#0D9488] dark:text-teal-400">
               <Loader2 className="animate-spin" size={14} />
               <span>Loading user directory...</span>
             </div>
@@ -319,7 +319,7 @@ function AdminUsers() {
                             isUserRowSuper
                               ? "bg-purple-600"
                               : user.role === "admin"
-                              ? "bg-[#0F6E8C]"
+                              ? "bg-[#0D9488]"
                               : "bg-slate-600"
                           }`}
                         >
@@ -430,7 +430,7 @@ function AdminUsers() {
                                 isUserRowSuper
                                   ? "bg-purple-600"
                                   : user.role === "admin"
-                                  ? "bg-[#0F6E8C]"
+                                  ? "bg-[#0D9488]"
                                   : "bg-slate-600"
                               }`}
                             >
@@ -534,7 +534,7 @@ function AdminUsers() {
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={safePage === 1}
-              className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-[#0F6E8C] dark:hover:border-teal-400 hover:text-[#0F6E8C] dark:hover:text-teal-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
+              className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-[#0D9488] dark:hover:border-teal-400 hover:text-[#0D9488] dark:hover:text-teal-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
             >
               <ChevronLeft size={14} />
               Prev
@@ -545,7 +545,7 @@ function AdminUsers() {
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={safePage === totalPages}
-              className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-[#0F6E8C] dark:hover:border-teal-400 hover:text-[#0F6E8C] dark:hover:text-teal-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
+              className="flex items-center gap-1 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-[#0D9488] dark:hover:border-teal-400 hover:text-[#0D9488] dark:hover:text-teal-400 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
             >
               Next
               <ChevronRight size={14} />
@@ -557,7 +557,7 @@ function AdminUsers() {
       {/* Add New Admin Modal */}
       {showAddAdminModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-[#0c1827] rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-slate-200 dark:border-slate-800 relative animate-in zoom-in-95 duration-200 font-sans">
+          <div className="bg-white dark:bg-[#0f172a] rounded-2xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-slate-200 dark:border-slate-800 relative animate-in zoom-in-95 duration-200 font-sans">
             <button
               type="button"
               onClick={() => setShowAddAdminModal(false)}
@@ -567,7 +567,7 @@ function AdminUsers() {
             </button>
 
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-11 h-11 rounded-xl bg-teal-50 dark:bg-teal-950/50 text-[#0F6E8C] dark:text-teal-400 border border-teal-200/60 dark:border-teal-800/60 flex items-center justify-center shrink-0">
+              <div className="w-11 h-11 rounded-xl bg-teal-50 dark:bg-teal-950/50 text-[#0D9488] dark:text-teal-400 border border-teal-200/60 dark:border-teal-800/60 flex items-center justify-center shrink-0">
                 <UserPlus size={22} />
               </div>
               <div>
@@ -597,7 +597,7 @@ function AdminUsers() {
                   placeholder="e.g. admin_usman"
                   value={adminUsername}
                   onChange={(e) => setAdminUsername(e.target.value)}
-                  className="w-full px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800/90 placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 transition-all"
+                  className="w-full px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800/90 placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 transition-all"
                   required
                 />
               </div>
@@ -611,7 +611,7 @@ function AdminUsers() {
                   placeholder="e.g. usman@almukhtar.org"
                   value={adminEmail}
                   onChange={(e) => setAdminEmail(e.target.value)}
-                  className="w-full px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800/90 placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 transition-all"
+                  className="w-full px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800/90 placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 transition-all"
                   required
                 />
               </div>
@@ -624,7 +624,7 @@ function AdminUsers() {
                   <button
                     type="button"
                     onClick={generateRandomPassword}
-                    className="text-[11px] text-[#0F6E8C] dark:text-teal-400 hover:text-[#0B5C74] font-semibold flex items-center gap-1 cursor-pointer"
+                    className="text-[11px] text-[#0D9488] dark:text-teal-400 hover:text-[#0F766E] font-semibold flex items-center gap-1 cursor-pointer"
                   >
                     <Sparkles size={12} />
                     <span>Generate Strong</span>
@@ -636,7 +636,7 @@ function AdminUsers() {
                     placeholder="At least 6 characters"
                     value={adminPassword}
                     onChange={(e) => setAdminPassword(e.target.value)}
-                    className="w-full pl-4 pr-20 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800/90 font-mono placeholder:font-sans placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 transition-all"
+                    className="w-full pl-4 pr-20 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] rounded-xl border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-800/90 font-mono placeholder:font-sans placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 transition-all"
                     required
                   />
                   <div className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center gap-1">
@@ -683,7 +683,7 @@ function AdminUsers() {
                 <button
                   type="submit"
                   disabled={createAdminMutation.isPending}
-                  className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl bg-[#0F6E8C] hover:bg-[#0B5C74] text-white text-xs font-bold shadow-xs transition-all cursor-pointer active:scale-95 disabled:opacity-60"
+                  className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-bold shadow-xs transition-all cursor-pointer active:scale-95 disabled:opacity-60"
                 >
                   {createAdminMutation.isPending ? (
                     <>
@@ -706,7 +706,7 @@ function AdminUsers() {
       {/* Confirmation Modal Dialog for Account Deletion (Super Admin Only) */}
       {userToDelete && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-white dark:bg-[#0c1827] rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 relative animate-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-[#0f172a] rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 dark:border-slate-800 relative animate-in zoom-in-95 duration-200">
             <button
               onClick={() => setUserToDelete(null)}
               disabled={deleteMutation.isPending}

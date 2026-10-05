@@ -148,18 +148,18 @@ function Apply() {
   // ── Auth Guard ──────────────────────────────────────────────────────────────
   if (!loading && !user) {
     return (
-      <div className="bg-white font-sans text-slate-800 min-h-screen">
+      <div className="bg-slate-50/50 dark:bg-slate-950 font-sans text-slate-800 dark:text-slate-100 min-h-screen transition-colors">
         {/* Clean Hero */}
-        <section className="pt-10 sm:pt-16 pb-10 bg-white border-b border-slate-100">
+        <section className="pt-10 sm:pt-16 pb-10 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700/80 dark:border-slate-800">
           <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 text-center space-y-3.5">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/80 text-[10px] sm:text-[11px] font-bold text-[#0F6E8C] font-mono tracking-wider uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#0F6E8C] animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/40 border border-teal-200/80 dark:border-teal-800/60 text-[10px] sm:text-[11px] font-bold text-[rgb(13 148 136)] font-mono tracking-wider uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-[rgb(13 148 136)] animate-pulse" />
               <span>ONLINE ADMISSION PORTAL</span>
             </div>
-            <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight">
+            <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
               Apply for Admission
             </h1>
-            <p className="text-slate-600 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed font-normal">
+            <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed font-normal">
               Sign in to submit your enrollment request for upcoming academic terms at Al-Mukhtar Institute.
             </p>
           </div>
@@ -167,34 +167,34 @@ function Apply() {
 
         {/* Login Gate */}
         <section className="max-w-xl mx-auto px-4 sm:px-6 py-16 text-center">
-          <div className="bg-white border border-slate-200/90 rounded-2xl p-8 sm:p-10 shadow-xs">
-            <div className="w-14 h-14 rounded-2xl bg-teal-50 text-[#0F6E8C] flex items-center justify-center mx-auto mb-5 border border-teal-100">
+          <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/90 dark:border-slate-800 rounded-2xl p-8 sm:p-10 shadow-xs">
+            <div className="w-14 h-14 rounded-2xl bg-teal-50 dark:bg-teal-950/40 text-[rgb(13 148 136)] flex items-center justify-center mx-auto mb-5 border border-teal-100 dark:border-teal-800/40">
               <Lock size={26} />
             </div>
-            <h2 className="font-heading text-2xl font-bold text-slate-900 mb-2.5 tracking-tight">
+            <h2 className="font-heading text-2xl font-bold text-slate-900 dark:text-white mb-2.5 tracking-tight">
               Sign in to Apply
             </h2>
-            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 max-w-md mx-auto">
+            <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed mb-6 max-w-md mx-auto">
               You need to be logged in to submit a course application. Please sign in or create an account to continue.
             </p>
             <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-row sm:items-center sm:justify-center sm:gap-3">
               <Link
                 to={`/login?redirect=${encodeURIComponent(location.pathname + (location.search || ""))}`}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-[#0F6E8C] text-white font-bold px-3 sm:px-6 py-2.5 rounded-xl hover:bg-[#0B5C74] active:scale-[0.98] transition-all shadow-xs text-xs sm:text-sm text-center"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-[rgb(13 148 136)] text-white font-bold px-3 sm:px-6 py-2.5 rounded-xl hover:bg-[rgb(15 118 110)] active:scale-[0.98] transition-all shadow-xs text-xs sm:text-sm text-center"
               >
                 <LogIn size={15} />
                 <span>Sign In</span>
               </Link>
               <Link
                 to={`/signup?redirect=${encodeURIComponent(location.pathname + (location.search || ""))}`}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 border border-slate-300 text-slate-700 font-bold px-3 sm:px-6 py-2.5 rounded-xl hover:bg-slate-50 transition-all text-xs sm:text-sm text-center"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-bold px-3 sm:px-6 py-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-all text-xs sm:text-sm text-center"
               >
                 <span>Create Account</span>
               </Link>
             </div>
             <p className="mt-6 text-xs text-slate-400">
               Looking for available programs?{" "}
-              <Link to="/courses" className="text-[#0F6E8C] font-semibold hover:underline">
+              <Link to="/courses" className="text-[rgb(13 148 136)] font-semibold hover:underline">
                 Browse our courses
               </Link>
             </p>
@@ -208,36 +208,36 @@ function Apply() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="w-8 h-8 border-4 border-teal-200 border-t-[#0F6E8C] rounded-full animate-spin" />
+        <div className="w-8 h-8 border-4 border-teal-200 border-t-[rgb(13 148 136)] rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="bg-white font-sans text-slate-800 min-h-screen">
+    <div className="bg-slate-50/50 dark:bg-slate-950 font-sans text-slate-800 dark:text-slate-100 min-h-screen transition-colors">
       {/* Clean Hero Section */}
-      <section className="pt-8 sm:pt-10 pb-8 bg-white border-b border-slate-100">
+      <section className="pt-8 sm:pt-10 pb-8 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700/80 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 text-center space-y-3.5">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/80 text-[10px] sm:text-[11px] font-bold text-[#0F6E8C] font-mono tracking-wider uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#0F6E8C] animate-pulse" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/40 border border-teal-200/80 dark:border-teal-800/60 text-[10px] sm:text-[11px] font-bold text-[rgb(13 148 136)] font-mono tracking-wider uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-[rgb(13 148 136)] animate-pulse" />
             <span>ONLINE ADMISSION PORTAL</span>
           </div>
 
-          <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight tracking-tight">
+          <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
             Apply for Course Admission
           </h1>
 
-          <p className="text-slate-600 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed break-normal hyphens-none font-normal">
+          <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed break-normal hyphens-none font-normal">
             Fill out the form below to apply for admission at Al-Mukhtar Institute. Our admissions team will review your application and reach out to confirm your enrollment.
           </p>
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-10 sm:py-14">
         {submitted ? (
           <div className="max-w-2xl mx-auto animate-in fade-in zoom-in-95 duration-200">
-            <div className="bg-white border border-slate-200/90 rounded-2xl p-7 sm:p-11 text-center shadow-xs">
-              <div className="w-16 h-16 rounded-2xl bg-teal-50 text-[#0F6E8C] flex items-center justify-center mx-auto mb-5 border border-teal-100 shadow-2xs">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/90 dark:border-slate-800 rounded-2xl p-7 sm:p-11 text-center shadow-xs">
+              <div className="w-16 h-16 rounded-2xl bg-teal-50 dark:bg-teal-950/40 text-[rgb(13 148 136)] flex items-center justify-center mx-auto mb-5 border border-teal-100 dark:border-teal-800/40 shadow-2xs">
                 <CheckCircle2 size={34} />
               </div>
               
@@ -246,34 +246,34 @@ function Apply() {
                 <span>Application Received</span>
               </div>
 
-              <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">
+              <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mb-3 tracking-tight">
                 Application Submitted Successfully!
               </h2>
 
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-lg mx-auto mb-7 font-normal">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-lg mx-auto mb-7 font-normal">
                 Thank you for applying to Al-Mukhtar Institute. Our admissions department will review your application details and contact you via WhatsApp or phone within <strong>1–2 working days</strong> for verification and enrollment details.
               </p>
 
               {/* What Happens Next card */}
-              <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 sm:p-5 text-left mb-8 space-y-3">
+              <div className="bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60 rounded-xl p-4 sm:p-5 text-left mb-8 space-y-3">
                 <p className="text-xs font-bold text-slate-800 uppercase tracking-wider font-mono">
                   Next Steps
                 </p>
                 <div className="space-y-2.5">
-                  <div className="flex items-start gap-2.5 text-xs text-slate-600">
-                    <div className="w-5 h-5 rounded-full bg-[#0F6E8C] text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
+                  <div className="flex items-start gap-2.5 text-xs text-slate-600 dark:text-slate-300">
+                    <div className="w-5 h-5 rounded-full bg-[rgb(13 148 136)] text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
                       1
                     </div>
                     <span>Admissions team verifies your submitted profile and credentials.</span>
                   </div>
-                  <div className="flex items-start gap-2.5 text-xs text-slate-600">
-                    <div className="w-5 h-5 rounded-full bg-[#0F6E8C] text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
+                  <div className="flex items-start gap-2.5 text-xs text-slate-600 dark:text-slate-300">
+                    <div className="w-5 h-5 rounded-full bg-[rgb(13 148 136)] text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
                       2
                     </div>
                     <span>You'll receive a confirmation call/message with schedule and fee instructions.</span>
                   </div>
-                  <div className="flex items-start gap-2.5 text-xs text-slate-600">
-                    <div className="w-5 h-5 rounded-full bg-[#0F6E8C] text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
+                  <div className="flex items-start gap-2.5 text-xs text-slate-600 dark:text-slate-300">
+                    <div className="w-5 h-5 rounded-full bg-[rgb(13 148 136)] text-white flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">
                       3
                     </div>
                     <span>Orientation and batch commencement at the institute.</span>
@@ -288,19 +288,19 @@ function Apply() {
                     setSubmitted(false);
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-[#0F6E8C] hover:bg-[#0B5C74] text-white font-bold px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl transition-all text-xs sm:text-sm shadow-xs cursor-pointer active:scale-95 text-center"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-[rgb(13 148 136)] hover:bg-[rgb(15 118 110)] text-white font-bold px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl transition-all text-xs sm:text-sm shadow-xs cursor-pointer active:scale-95 text-center"
                 >
                   <span>Apply Again</span>
                 </button>
                 <Link
                   to="/profile"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900 font-bold px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl transition-all text-xs sm:text-sm cursor-pointer text-center"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 bg-slate-100 text-slate-700 dark:text-slate-200 hover:bg-slate-200 hover:text-slate-900 dark:text-white font-bold px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl transition-all text-xs sm:text-sm cursor-pointer text-center"
                 >
                   <span>My Profile</span>
                 </Link>
                 <Link
                   to="/courses"
-                  className="col-span-2 sm:col-span-1 w-full sm:w-auto inline-flex items-center justify-center gap-1.5 border border-slate-300 text-slate-700 hover:bg-slate-50 font-semibold px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl transition-all text-xs sm:text-sm cursor-pointer text-center"
+                  className="col-span-2 sm:col-span-1 w-full sm:w-auto inline-flex items-center justify-center gap-1.5 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 font-semibold px-3 sm:px-5 py-2.5 sm:py-3 rounded-xl transition-all text-xs sm:text-sm cursor-pointer text-center"
                 >
                   <span>Explore Courses</span>
                 </Link>
@@ -318,31 +318,31 @@ function Apply() {
               <form
                 onSubmit={handleSubmit(onSubmit)}
                 noValidate
-                className="bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-xs space-y-6"
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/90 dark:border-slate-800 rounded-2xl p-6 sm:p-8 shadow-xs space-y-6"
               >
-                <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-                  <div className="w-8 h-8 rounded-lg bg-teal-50 text-[#0F6E8C] flex items-center justify-center border border-teal-100">
+                <div className="flex items-center gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
+                  <div className="w-8 h-8 rounded-lg bg-teal-50 dark:bg-teal-950/40 text-[rgb(13 148 136)] flex items-center justify-center border border-teal-100 dark:border-teal-800/40">
                     <ClipboardList size={17} />
                   </div>
                   <div>
-                    <h2 className="font-heading text-base font-bold text-slate-900">
+                    <h2 className="font-heading text-base font-bold text-slate-900 dark:text-white">
                       Applicant Information
                     </h2>
-                    <p className="text-xs text-slate-500 font-mono">Please fill in accurate information for institutional enrollment</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">Please fill in accurate information for institutional enrollment</p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-5">
                   <div className="sm:col-span-1">
-                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-mono">
-                      <User size={13} className="text-[#0F6E8C]" />
+                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2 font-mono">
+                      <User size={13} className="text-[rgb(13 148 136)]" />
                       Full Name <span className="text-rose-500">*</span>
                     </label>
                     <input
                       type="text"
                       placeholder="e.g. Ahmed Raza"
-                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] transition-colors ${
-                        errors.name ? "border-rose-400 bg-rose-50/20" : "border-slate-200"
+                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[rgb(13 148 136)]/20 focus:border-[rgb(13 148 136)] transition-colors ${
+                        errors.name ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-700"
                       }`}
                       {...register("name", {
                         required: "Full name is required",
@@ -360,15 +360,15 @@ function Apply() {
                   </div>
 
                   <div className="sm:col-span-1">
-                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-mono">
-                      <Users size={13} className="text-[#0F6E8C]" />
+                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2 font-mono">
+                      <Users size={13} className="text-[rgb(13 148 136)]" />
                       Father's Name <span className="text-rose-500">*</span>
                     </label>
                     <input
                       type="text"
                       placeholder="e.g. Muhammad Raza"
-                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] transition-colors ${
-                        errors.fatherName ? "border-rose-400 bg-rose-50/20" : "border-slate-200"
+                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[rgb(13 148 136)]/20 focus:border-[rgb(13 148 136)] transition-colors ${
+                        errors.fatherName ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-700"
                       }`}
                       {...register("fatherName", {
                         required: "Father's name is required",
@@ -386,15 +386,15 @@ function Apply() {
                   </div>
 
                   <div className="sm:col-span-1">
-                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-mono">
-                      <MessageCircle size={13} className="text-[#0F6E8C]" />
+                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2 font-mono">
+                      <MessageCircle size={13} className="text-[rgb(13 148 136)]" />
                       WhatsApp Number <span className="text-rose-500">*</span>
                     </label>
                     <input
                       type="tel"
                       placeholder="03XXXXXXXXX"
-                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] transition-colors ${
-                        errors.whatsapp ? "border-rose-400 bg-rose-50/20" : "border-slate-200"
+                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[rgb(13 148 136)]/20 focus:border-[rgb(13 148 136)] transition-colors ${
+                        errors.whatsapp ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-700"
                       }`}
                       {...register("whatsapp", {
                         required: "WhatsApp number is required",
@@ -412,15 +412,15 @@ function Apply() {
                   </div>
 
                   <div className="sm:col-span-1">
-                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-mono">
-                      <Phone size={13} className="text-[#0F6E8C]" />
+                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2 font-mono">
+                      <Phone size={13} className="text-[rgb(13 148 136)]" />
                       Mobile Number <span className="text-rose-500">*</span>
                     </label>
                     <input
                       type="tel"
                       placeholder="03XXXXXXXXX"
-                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] transition-colors ${
-                        errors.mobile ? "border-rose-400 bg-rose-50/20" : "border-slate-200"
+                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[rgb(13 148 136)]/20 focus:border-[rgb(13 148 136)] transition-colors ${
+                        errors.mobile ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-700"
                       }`}
                       {...register("mobile", {
                         required: "Mobile number is required",
@@ -438,13 +438,13 @@ function Apply() {
                   </div>
 
                   <div className="sm:col-span-1">
-                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-mono">
-                      <BookOpen size={13} className="text-[#0F6E8C]" />
+                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2 font-mono">
+                      <BookOpen size={13} className="text-[rgb(13 148 136)]" />
                       Select Course <span className="text-rose-500">*</span>
                     </label>
                     <select
-                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] transition-colors ${
-                        errors.course ? "border-rose-400 bg-rose-50/20" : "border-slate-200"
+                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm bg-white dark:bg-slate-800 text-slate-900 dark:text-white dark:text-white focus:outline-none focus:ring-2 focus:ring-[rgb(13 148 136)]/20 focus:border-[rgb(13 148 136)] transition-colors ${
+                        errors.course ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-700"
                       }`}
                       {...register("course", {
                         required: "Please select a course",
@@ -478,14 +478,14 @@ function Apply() {
                   </div>
 
                   <div className="sm:col-span-1">
-                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-mono">
-                      <Clock size={13} className="text-[#0F6E8C]" />
+                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2 font-mono">
+                      <Clock size={13} className="text-[rgb(13 148 136)]" />
                       Preferred Shift <span className="text-rose-500">*</span>
                     </label>
                     <select
                       defaultValue=""
-                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] transition-colors ${
-                        errors.shift ? "border-rose-400 bg-rose-50/20" : "border-slate-200"
+                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm bg-white dark:bg-slate-800 text-slate-900 dark:text-white dark:text-white focus:outline-none focus:ring-2 focus:ring-[rgb(13 148 136)]/20 focus:border-[rgb(13 148 136)] transition-colors ${
+                        errors.shift ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-700"
                       }`}
                       {...register("shift", {
                         required: "Please select a shift",
@@ -505,14 +505,14 @@ function Apply() {
                   </div>
 
                   <div className="sm:col-span-1">
-                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-mono">
-                      <GraduationCap size={13} className="text-[#0F6E8C]" />
+                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2 font-mono">
+                      <GraduationCap size={13} className="text-[rgb(13 148 136)]" />
                       Qualification <span className="text-rose-500">*</span>
                     </label>
                     <select
                       defaultValue=""
-                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm bg-white text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] transition-colors ${
-                        errors.qualification ? "border-rose-400 bg-rose-50/20" : "border-slate-200"
+                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm bg-white dark:bg-slate-800 text-slate-900 dark:text-white dark:text-white focus:outline-none focus:ring-2 focus:ring-[rgb(13 148 136)]/20 focus:border-[rgb(13 148 136)] transition-colors ${
+                        errors.qualification ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-700"
                       }`}
                       {...register("qualification", {
                         required: "Please select your qualification",
@@ -535,15 +535,15 @@ function Apply() {
                   </div>
 
                   <div className="sm:col-span-1">
-                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-mono">
-                      <Calendar size={13} className="text-[#0F6E8C]" />
+                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2 font-mono">
+                      <Calendar size={13} className="text-[rgb(13 148 136)]" />
                       Age <span className="text-rose-500">*</span>
                     </label>
                     <input
                       type="number"
                       placeholder="e.g. 18"
-                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] transition-colors ${
-                        errors.age ? "border-rose-400 bg-rose-50/20" : "border-slate-200"
+                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[rgb(13 148 136)]/20 focus:border-[rgb(13 148 136)] transition-colors ${
+                        errors.age ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-700"
                       }`}
                       {...register("age", {
                         required: "Age is required",
@@ -563,15 +563,15 @@ function Apply() {
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-mono">
-                      <CreditCard size={13} className="text-[#0F6E8C]" />
+                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2 font-mono">
+                      <CreditCard size={13} className="text-[rgb(13 148 136)]" />
                       CNIC / B-Form Number <span className="text-rose-500">*</span>
                     </label>
                     <input
                       type="text"
                       placeholder="XXXXX-XXXXXXX-X"
-                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] transition-colors ${
-                        errors.cnic ? "border-rose-400 bg-rose-50/20" : "border-slate-200"
+                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-[rgb(13 148 136)]/20 focus:border-[rgb(13 148 136)] transition-colors ${
+                        errors.cnic ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-700"
                       }`}
                       {...register("cnic", {
                         required: "CNIC / B-Form number is required",
@@ -589,15 +589,15 @@ function Apply() {
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 font-mono">
-                      <MapPin size={13} className="text-[#0F6E8C]" />
+                    <label className="flex items-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wider mb-2 font-mono">
+                      <MapPin size={13} className="text-[rgb(13 148 136)]" />
                       Residential Address <span className="text-rose-500">*</span>
                     </label>
                     <textarea
                       rows={3}
                       placeholder="House #, Street, Area, City"
-                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 resize-none focus:outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] transition-colors ${
-                        errors.address ? "border-rose-400 bg-rose-50/20" : "border-slate-200"
+                      className={`w-full border rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 dark:bg-slate-800 resize-none focus:outline-none focus:ring-2 focus:ring-[rgb(13 148 136)]/20 focus:border-[rgb(13 148 136)] transition-colors ${
+                        errors.address ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-700"
                       }`}
                       {...register("address", {
                         required: "Address is required",
@@ -615,11 +615,11 @@ function Apply() {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-end">
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-end">
                   <button
                     type="submit"
                     disabled={submitMutation.isPending}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0F6E8C] text-white font-bold px-8 py-3 rounded-xl hover:bg-[#0B5C74] active:scale-[0.98] transition-all shadow-xs disabled:opacity-60 disabled:cursor-not-allowed text-xs sm:text-sm cursor-pointer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[rgb(13 148 136)] text-white font-bold px-8 py-3 rounded-xl hover:bg-[rgb(15 118 110)] active:scale-[0.98] transition-all shadow-xs disabled:opacity-60 disabled:cursor-not-allowed text-xs sm:text-sm cursor-pointer"
                   >
                     {submitMutation.isPending ? "Submitting Application..." : "Submit Application"}
                     <Send size={14} />
@@ -629,21 +629,21 @@ function Apply() {
             </div>
 
             <div className="lg:col-span-4 space-y-5">
-              <div className="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-xs">
-                <h3 className="font-heading text-sm sm:text-base font-bold text-slate-900 mb-4">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/90 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xs">
+                <h3 className="font-heading text-sm sm:text-base font-bold text-slate-900 dark:text-white mb-4">
                   Admission Process
                 </h3>
                 <div className="space-y-4">
                   {admissionSteps.map((step, i) => (
                     <div key={i} className="flex gap-3">
-                      <div className="w-6 h-6 rounded-full bg-[#0F6E8C] text-white flex items-center justify-center text-xs font-bold font-mono shrink-0 shadow-2xs">
+                      <div className="w-6 h-6 rounded-full bg-[rgb(13 148 136)] text-white flex items-center justify-center text-xs font-bold font-mono shrink-0 shadow-2xs">
                         {i + 1}
                       </div>
                       <div>
-                        <p className="text-xs sm:text-sm font-bold text-slate-900 mb-0.5">
+                        <p className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white mb-0.5">
                           {step.title}
                         </p>
-                        <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                        <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-normal">
                           {step.text}
                         </p>
                       </div>
@@ -652,21 +652,21 @@ function Apply() {
                 </div>
               </div>
 
-              <div className="bg-white border border-slate-200/90 rounded-2xl p-5 sm:p-6 shadow-xs">
-                <div className="w-8 h-8 rounded-xl bg-teal-50 text-[#0F6E8C] flex items-center justify-center mb-3 border border-teal-100">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/90 dark:border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xs">
+                <div className="w-8 h-8 rounded-xl bg-teal-50 dark:bg-teal-950/40 text-[rgb(13 148 136)] flex items-center justify-center mb-3 border border-teal-100 dark:border-teal-800/40">
                   <ShieldCheck size={16} />
                 </div>
-                <h3 className="font-heading text-xs sm:text-sm font-bold text-slate-900 mb-1">
+                <h3 className="font-heading text-xs sm:text-sm font-bold text-slate-900 dark:text-white mb-1">
                   Your information is protected
                 </h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-normal">
                   Details submitted here are used strictly for academic enrollment and verification.
                 </p>
               </div>
 
-              <div className="bg-slate-900 rounded-2xl p-5 sm:p-6 text-white border border-slate-800 shadow-xs">
+              <div className="bg-slate-900 dark:bg-slate-900/90 rounded-2xl p-5 sm:p-6 text-white border border-slate-800 shadow-xs">
                 <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center mb-3 border border-white/15">
-                  <PhoneCall size={16} className="text-[#8FB3AA]" />
+                  <PhoneCall size={16} className="text-[#5eead4]" />
                 </div>
                 <h3 className="font-heading text-xs sm:text-sm font-bold mb-1">
                   Need Help Applying?
@@ -677,7 +677,7 @@ function Apply() {
 
                 <a
                   href="tel:+923001234567"
-                  className="text-xs sm:text-sm font-bold text-[#8FB3AA] hover:text-white transition-colors font-mono"
+                  className="text-xs sm:text-sm font-bold text-[#5eead4] hover:text-white transition-colors font-mono"
                 >
                   +92 300 1234567
                 </a>

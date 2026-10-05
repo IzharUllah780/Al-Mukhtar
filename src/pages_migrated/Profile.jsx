@@ -160,13 +160,13 @@ function Profile() {
   const initials = user?.username ? user.username.slice(0, 2).toUpperCase() : "AM";
 
   return (
-    <div className="min-h-screen bg-[#F0F2F5] dark:bg-[#070d18] text-slate-800 dark:text-slate-100 font-sans pb-16 transition-colors duration-200">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617] text-slate-800 dark:text-slate-100 font-sans pb-16 transition-colors duration-200">
       
       {/* ── TOP HEADER / BANNER (Fully Responsive for Mobile & Laptop) ── */}
-      <section className="bg-white dark:bg-[#0c1827] border-b border-slate-200/80 dark:border-slate-800 pt-5 sm:pt-6 pb-4 sm:pb-5 px-3.5 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <section className="bg-white dark:bg-[#0f172a] border-b border-slate-200/80 dark:border-slate-800 pt-5 sm:pt-6 pb-4 sm:pb-5 px-3.5 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-18 lg:h-18 rounded-2xl bg-gradient-to-tr from-[#0F6E8C] to-[#0A2540] text-white flex items-center justify-center font-heading font-black text-xl sm:text-2xl lg:text-3xl shadow-md border-2 border-white dark:border-slate-800 ring-2 ring-[#0F6E8C]/30 shrink-0 select-none">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-18 lg:h-18 rounded-2xl bg-gradient-to-tr from-[#0D9488] to-[#0A2540] text-white flex items-center justify-center font-heading font-black text-xl sm:text-2xl lg:text-3xl shadow-md border-2 border-white dark:border-slate-800 ring-2 ring-[#0D9488]/30 shrink-0 select-none">
               <span>{initials}</span>
             </div>
             <div className="min-w-0 flex-1">
@@ -175,14 +175,14 @@ function Profile() {
                   {user?.username || "Student"}
                 </h1>
                 {user?.isVerified && (
-                  <CheckCircle2 size={16} className="text-[#0F6E8C] dark:text-teal-400 shrink-0" />
+                  <CheckCircle2 size={16} className="text-[#0D9488] dark:text-teal-400 shrink-0" />
                 )}
               </div>
               <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-mono truncate">
                 {user?.email}
               </p>
               <div className="pt-1 flex items-center gap-1.5 flex-wrap">
-                <span className="px-2 py-0.5 rounded-full bg-[#0F6E8C]/10 text-[#0F6E8C] dark:text-teal-300 text-[9.5px] sm:text-[10px] font-bold font-mono uppercase tracking-wider">
+                <span className="px-2 py-0.5 rounded-full bg-[#0D9488]/10 text-[#0D9488] dark:text-teal-300 text-[9.5px] sm:text-[10px] font-bold font-mono uppercase tracking-wider">
                   {user?.role || "Student"}
                 </span>
                 <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-[9.5px] sm:text-[10px] font-bold font-mono">
@@ -195,7 +195,7 @@ function Profile() {
           <div className="w-full sm:w-auto">
             <Link
               to="/apply"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-xl bg-[#0F6E8C] hover:bg-[#0B5C74] active:scale-[0.98] text-white text-xs font-bold transition-all cursor-pointer shadow-xs text-center"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] active:scale-[0.98] text-white text-xs font-bold transition-all cursor-pointer shadow-xs text-center"
             >
               <BookOpen size={14} />
               <span>Apply for Course</span>
@@ -205,21 +205,21 @@ function Profile() {
       </section>
 
       {/* ── TWO-COLUMN LAYOUT ON LAPTOP / DESKTOP (CLEAN STREAMLINED ON MOBILE) ── */}
-      <main className="max-w-6xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-8">
+      <main className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 lg:gap-6 items-start">
           
           {/* ── LEFT COLUMN: PROFILE DETAILS & SECURITY ── */}
           <div className="lg:col-span-5 space-y-4 sm:space-y-5">
             
             {/* GROUP 1: PERSONAL DETAILS (Single Edit Option + Name & Email) */}
-            <div className="bg-white dark:bg-[#0c1827] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs overflow-hidden divide-y divide-slate-100 dark:divide-slate-800/80">
+            <div className="bg-white dark:bg-[#0f172a] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs overflow-hidden divide-y divide-slate-100 dark:divide-slate-800/80">
               
               {/* Single Dedicated Edit Profile Action */}
               <div
                 onClick={() => setEditProfileModalOpen(true)}
                 className="flex items-center gap-3 p-3.5 sm:p-4 hover:bg-slate-50 dark:hover:bg-slate-800/40 active:bg-slate-100/80 dark:active:bg-slate-800/70 transition-colors cursor-pointer group"
               >
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-teal-50 dark:bg-teal-950/50 text-[#0F6E8C] dark:text-teal-400 flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-teal-50 dark:bg-teal-950/50 text-[#0D9488] dark:text-teal-400 flex items-center justify-center shrink-0">
                   <Edit2 size={16} />
                 </div>
                 <div className="flex-1 min-w-0">
@@ -272,7 +272,7 @@ function Profile() {
             </div>
 
             {/* GROUP 2: SECURITY & ACCOUNT ACTIONS */}
-            <div className="bg-white dark:bg-[#0c1827] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs overflow-hidden divide-y divide-slate-100 dark:divide-slate-800/80">
+            <div className="bg-white dark:bg-[#0f172a] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs overflow-hidden divide-y divide-slate-100 dark:divide-slate-800/80">
               
               {/* Change Password */}
               <div
@@ -319,10 +319,10 @@ function Profile() {
           {/* ── RIGHT COLUMN: COURSE APPLICATIONS & ENROLLMENTS ── */}
           <div className="lg:col-span-7 space-y-4 sm:space-y-5">
             
-            <div className="bg-white dark:bg-[#0c1827] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs overflow-hidden">
+            <div className="bg-white dark:bg-[#0f172a] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs overflow-hidden">
               <div className="p-3.5 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#0F6E8C] dark:text-teal-300 flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-teal-300 flex items-center justify-center shrink-0">
                     <BookOpen size={16} />
                   </div>
                   <div className="min-w-0">
@@ -337,7 +337,7 @@ function Profile() {
 
                 <Link
                   to="/apply"
-                  className="text-[11.5px] sm:text-xs font-bold text-[#0F6E8C] dark:text-teal-400 hover:underline inline-flex items-center gap-1 shrink-0"
+                  className="text-[11.5px] sm:text-xs font-bold text-[#0D9488] dark:text-teal-400 hover:underline inline-flex items-center gap-1 shrink-0"
                 >
                   <span>New Apply</span>
                   <ArrowRight size={12} />
@@ -371,7 +371,7 @@ function Profile() {
                   <div className="pt-1">
                     <Link
                       to="/apply"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#0F6E8C] hover:bg-[#0B5C74] text-white text-xs font-bold shadow-xs transition-colors"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-bold shadow-xs transition-colors"
                     >
                       <span>Apply for a Course</span>
                       <ArrowRight size={13} />
@@ -439,7 +439,7 @@ function Profile() {
 
             {/* Quick Admissions Helpdesk Notice */}
             <div className="p-3.5 sm:p-5 rounded-2xl bg-teal-50/70 dark:bg-teal-950/30 border border-teal-200/80 dark:border-teal-800/50 flex items-start gap-3">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-teal-100/80 dark:bg-teal-900/60 text-[#0F6E8C] dark:text-teal-300 flex items-center justify-center shrink-0 mt-0.5">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-teal-100/80 dark:bg-teal-900/60 text-[#0D9488] dark:text-teal-300 flex items-center justify-center shrink-0 mt-0.5">
                 <Info size={16} />
               </div>
               <div className="text-[11.5px] sm:text-xs space-y-0.5 sm:space-y-1">
@@ -464,7 +464,7 @@ function Profile() {
           onClick={() => setEditProfileModalOpen(false)}
         >
           <div
-            className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4"
+            className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
@@ -488,7 +488,7 @@ function Profile() {
                 <input
                   type="text"
                   placeholder="Enter your name"
-                  className={`w-full px-3.5 py-2 rounded-xl border text-sm text-slate-900 dark:text-slate-100 outline-none transition-all focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] dark:focus:border-teal-400 ${
+                  className={`w-full px-3.5 py-2 rounded-xl border text-sm text-slate-900 dark:text-slate-100 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] dark:focus:border-teal-400 ${
                     profileErrors.username
                       ? "border-rose-400 bg-rose-50/30"
                       : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/90"
@@ -522,7 +522,7 @@ function Profile() {
                 <input
                   type="email"
                   placeholder="you@example.com"
-                  className={`w-full px-3.5 py-2 rounded-xl border text-sm text-slate-900 dark:text-slate-100 outline-none transition-all focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] dark:focus:border-teal-400 ${
+                  className={`w-full px-3.5 py-2 rounded-xl border text-sm text-slate-900 dark:text-slate-100 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] dark:focus:border-teal-400 ${
                     profileErrors.email
                       ? "border-rose-400 bg-rose-50/30"
                       : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/90"
@@ -554,7 +554,7 @@ function Profile() {
                 <button
                   type="submit"
                   disabled={updateProfileMutation.isPending}
-                  className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#0F6E8C] text-white text-xs font-bold hover:bg-[#0B5C74] transition-all disabled:opacity-60 cursor-pointer shadow-xs"
+                  className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition-all disabled:opacity-60 cursor-pointer shadow-xs"
                 >
                   <Save size={13} />
                   <span>{updateProfileMutation.isPending ? "Saving..." : "Save"}</span>
@@ -572,7 +572,7 @@ function Profile() {
           onClick={() => setPasswordModalOpen(false)}
         >
           <div
-            className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4"
+            className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
@@ -598,7 +598,7 @@ function Profile() {
                   <input
                     type={showCurrentPassword ? "text" : "password"}
                     placeholder="Enter current password"
-                    className="w-full px-3.5 py-2 pr-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C]"
+                    className="w-full px-3.5 py-2 pr-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488]"
                     {...registerPassword("currentPassword", {
                       required: "Current password is required",
                     })}
@@ -625,7 +625,7 @@ function Profile() {
                   <input
                     type={showNewPassword ? "text" : "password"}
                     placeholder="Enter new password"
-                    className="w-full px-3.5 py-2 pr-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C]"
+                    className="w-full px-3.5 py-2 pr-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488]"
                     {...registerPassword("newPassword", {
                       required: "New password is required",
                       minLength: {
@@ -656,7 +656,7 @@ function Profile() {
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="Confirm new password"
-                    className="w-full px-3.5 py-2 pr-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C]"
+                    className="w-full px-3.5 py-2 pr-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488]"
                     {...registerPassword("confirmPassword", {
                       required: "Please confirm your password",
                       validate: (val) =>
@@ -688,7 +688,7 @@ function Profile() {
                 <button
                   type="submit"
                   disabled={changePasswordMutation.isPending}
-                  className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#0F6E8C] text-white text-xs font-bold hover:bg-[#0B5C74] transition-all disabled:opacity-60 cursor-pointer shadow-xs"
+                  className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition-all disabled:opacity-60 cursor-pointer shadow-xs"
                 >
                   <KeyRound size={13} />
                   <span>{changePasswordMutation.isPending ? "Updating..." : "Update"}</span>
@@ -706,13 +706,13 @@ function Profile() {
           onClick={() => setSelectedApplication(null)}
         >
           <div
-            className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden"
+            className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Fixed Sticky Header for Mobile & Laptop */}
-            <div className="sticky top-0 z-20 bg-white/95 dark:bg-[#0c1827]/95 backdrop-blur-md px-5 sm:px-7 py-3.5 sm:py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between shrink-0">
+            <div className="sticky top-0 z-20 bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-md px-5 sm:px-7 py-3.5 sm:py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between shrink-0">
               <div className="flex items-center gap-2.5 min-w-0 pr-3">
-                <div className="w-8 h-8 rounded-lg bg-teal-50 dark:bg-teal-950/60 text-[#0F6E8C] dark:text-teal-300 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-teal-300 flex items-center justify-center shrink-0">
                   <GraduationCap size={17} />
                 </div>
                 <div className="min-w-0">
@@ -795,7 +795,7 @@ function Profile() {
             </div>
 
             {/* Fixed Sticky Footer with 2 Paired Buttons */}
-            <div className="sticky bottom-0 z-20 bg-white/95 dark:bg-[#0c1827]/95 backdrop-blur-md px-5 sm:px-7 py-3.5 border-t border-slate-100 dark:border-slate-800 shrink-0">
+            <div className="sticky bottom-0 z-20 bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-md px-5 sm:px-7 py-3.5 border-t border-slate-100 dark:border-slate-800 shrink-0">
               <div className="grid grid-cols-2 gap-3">
                 <button
                   type="button"
@@ -806,7 +806,7 @@ function Profile() {
                 </button>
                 <Link
                   to="/courses"
-                  className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#0F6E8C] hover:bg-[#0B5C74] text-white text-xs font-bold transition-all text-center shadow-xs"
+                  className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-bold transition-all text-center shadow-xs"
                 >
                   <span>Explore Courses</span>
                   <ArrowRight size={13} />

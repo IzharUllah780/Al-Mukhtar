@@ -200,9 +200,9 @@ function AppliedCandidates() {
                       exportToPDF(filtered, exportTitle);
                       setExportMenuOpen(false);
                     }}
-                    className="w-full text-left flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-teal-50 dark:hover:bg-teal-950/40 hover:text-[#0F6E8C] dark:hover:text-teal-300 transition-colors cursor-pointer font-medium border-t border-slate-100 dark:border-slate-800"
+                    className="w-full text-left flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-teal-50 dark:hover:bg-teal-950/40 hover:text-[#0D9488] dark:hover:text-teal-300 transition-colors cursor-pointer font-medium border-t border-slate-100 dark:border-slate-800"
                   >
-                    <FileText size={14} className="text-[#0F6E8C] dark:text-teal-400 shrink-0" />
+                    <FileText size={14} className="text-[#0D9488] dark:text-teal-400 shrink-0" />
                     <div>
                       <p className="font-bold text-xs text-slate-900 dark:text-white">PDF Document (.pdf)</p>
                       <p className="text-[10px] text-slate-400 dark:text-slate-500">
@@ -215,7 +215,7 @@ function AppliedCandidates() {
             )}
           </div>
 
-          <div className="flex items-center gap-1.5 bg-[#0F6E8C]/10 dark:bg-[#0F6E8C]/20 text-[#0F6E8C] dark:text-teal-300 px-3 py-1.5 rounded-lg text-xs font-semibold">
+          <div className="flex items-center gap-1.5 bg-[#0D9488]/10 dark:bg-[#0D9488]/20 text-[#0D9488] dark:text-teal-300 px-3 py-1.5 rounded-lg text-xs font-semibold">
             <GraduationCap size={14} />
             <span>{applications.length} Total</span>
           </div>
@@ -224,7 +224,7 @@ function AppliedCandidates() {
 
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-2.5">
-        <div className="flex items-center gap-2 bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 sm:py-2 min-h-[46px] sm:min-h-[38px] flex-1 shadow-2xs focus-within:border-[#0F6E8C] dark:focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-[#0F6E8C]/15 transition-all">
+        <div className="flex items-center gap-2 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl px-3.5 py-2.5 sm:py-2 min-h-[46px] sm:min-h-[38px] flex-1 shadow-2xs focus-within:border-[#0D9488] dark:focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-[#0D9488]/15 transition-all">
           <Search size={14} className="text-slate-400 dark:text-slate-500 shrink-0" />
           <input
             type="text"
@@ -237,7 +237,7 @@ function AppliedCandidates() {
         <select
           value={courseFilter}
           onChange={(e) => setCourseFilter(e.target.value)}
-          className="border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 sm:py-2 min-h-[46px] sm:min-h-[38px] text-xs sm:text-sm bg-white dark:bg-slate-800 focus:outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 text-slate-700 dark:text-slate-200 shadow-2xs sm:w-52 cursor-pointer transition-all"
+          className="border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 sm:py-2 min-h-[46px] sm:min-h-[38px] text-xs sm:text-sm bg-white dark:bg-slate-800 focus:outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 text-slate-700 dark:text-slate-200 shadow-2xs sm:w-52 cursor-pointer transition-all"
         >
           {courses.map((c) => (
             <option key={c} value={c}>
@@ -248,7 +248,7 @@ function AppliedCandidates() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 sm:py-2 min-h-[46px] sm:min-h-[38px] text-xs sm:text-sm bg-white dark:bg-slate-800 focus:outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 text-slate-700 dark:text-slate-200 shadow-2xs sm:w-40 cursor-pointer transition-all"
+          className="border border-slate-200 dark:border-slate-700 rounded-xl px-3.5 py-2.5 sm:py-2 min-h-[46px] sm:min-h-[38px] text-xs sm:text-sm bg-white dark:bg-slate-800 focus:outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 text-slate-700 dark:text-slate-200 shadow-2xs sm:w-40 cursor-pointer transition-all"
         >
           <option value="all">All Status</option>
           <option value="pending">Pending</option>
@@ -258,10 +258,10 @@ function AppliedCandidates() {
       </div>
 
       {/* Table & Mobile Cards */}
-      <div className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-2xs">
+      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-2xs">
         {isLoading ? (
           <div className="p-5 space-y-3 animate-pulse">
-            <div className="flex items-center gap-2 text-xs font-mono text-[#0F6E8C] dark:text-teal-400">
+            <div className="flex items-center gap-2 text-xs font-mono text-[#0D9488] dark:text-teal-400">
               <Loader2 className="animate-spin" size={13} />
               <span>Loading applications...</span>
             </div>
@@ -312,7 +312,7 @@ function AppliedCandidates() {
 
                       <button
                         onClick={() => setSelected(c)}
-                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#0F6E8C] dark:text-teal-300 bg-[#0F6E8C]/10 dark:bg-[#0F6E8C]/25 px-2.5 py-0.5 rounded hover:bg-[#0F6E8C]/20 dark:hover:bg-[#0F6E8C]/40 transition-colors cursor-pointer"
+                        className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#0D9488] dark:text-teal-300 bg-[#0D9488]/10 dark:bg-[#0D9488]/25 px-2.5 py-0.5 rounded hover:bg-[#0D9488]/20 dark:hover:bg-[#0D9488]/40 transition-colors cursor-pointer"
                       >
                         <Eye size={11} />
                         View File
@@ -366,7 +366,7 @@ function AppliedCandidates() {
                         <td className="py-2.5 px-3 text-right whitespace-nowrap">
                           <button
                             onClick={() => setSelected(c)}
-                            className="inline-flex items-center gap-1 text-xs font-semibold text-[#0F6E8C] dark:text-teal-400 hover:underline cursor-pointer"
+                            className="inline-flex items-center gap-1 text-xs font-semibold text-[#0D9488] dark:text-teal-400 hover:underline cursor-pointer"
                           >
                             <Eye size={12} />
                             <span>Dossier</span>
@@ -397,7 +397,7 @@ function AppliedCandidates() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="bg-white dark:bg-[#0c1827] rounded-xl w-full max-w-md p-5 relative max-h-[90vh] overflow-y-auto shadow-xl border border-slate-200 dark:border-slate-800 animate-in zoom-in-95 duration-200"
+            className="bg-white dark:bg-[#0f172a] rounded-xl w-full max-w-md p-5 relative max-h-[90vh] overflow-y-auto shadow-xl border border-slate-200 dark:border-slate-800 animate-in zoom-in-95 duration-200"
           >
             <button
               onClick={() => setSelected(null)}
@@ -405,7 +405,7 @@ function AppliedCandidates() {
             >
               <X size={16} />
             </button>
-            <div className="flex items-center gap-1.5 text-[#0F6E8C] dark:text-teal-400 text-[10px] font-bold uppercase tracking-wider mb-1 font-mono">
+            <div className="flex items-center gap-1.5 text-[#0D9488] dark:text-teal-400 text-[10px] font-bold uppercase tracking-wider mb-1 font-mono">
               <GraduationCap size={13} />
               <span>Candidate Dossier</span>
             </div>
@@ -440,7 +440,7 @@ function AppliedCandidates() {
               <div className="col-span-2">
                 <p className="text-[10px] text-slate-400 dark:text-slate-400 uppercase font-mono font-semibold">Address</p>
                 <p className="text-slate-900 dark:text-slate-100 font-medium flex items-start gap-1 text-xs">
-                  <MapPin size={12} className="text-[#0F6E8C] dark:text-teal-400 mt-0.5 shrink-0" />
+                  <MapPin size={12} className="text-[#0D9488] dark:text-teal-400 mt-0.5 shrink-0" />
                   {selected.address || "—"}
                 </p>
               </div>
@@ -458,7 +458,7 @@ function AppliedCandidates() {
                     className={`text-xs font-semibold px-2.5 py-1 rounded border transition-all capitalize disabled:opacity-50 cursor-pointer ${
                       selected.status === s
                         ? STATUS_COLORS[s] + " cursor-default shadow-xs"
-                        : "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#0F6E8C] dark:hover:border-teal-400 hover:text-[#0F6E8C] dark:hover:text-teal-300"
+                        : "border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-[#0D9488] dark:hover:border-teal-400 hover:text-[#0D9488] dark:hover:text-teal-300"
                     }`}
                   >
                     {s === "approved" && <CheckCircle2 size={11} className="inline mr-1" />}
@@ -505,7 +505,7 @@ function AppliedCandidates() {
       {candidateToDelete && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-150">
           <div
-            className="bg-white dark:bg-[#0c1827] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 max-w-md w-full p-6 space-y-5 animate-in zoom-in-95 duration-200"
+            className="bg-white dark:bg-[#0f172a] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 max-w-md w-full p-6 space-y-5 animate-in zoom-in-95 duration-200"
             role="dialog"
             aria-modal="true"
           >

@@ -14,6 +14,7 @@ import {
   UserCheck,
   Award,
   FileSpreadsheet,
+  Video,
 } from "lucide-react";
 import { useAuth } from "../AuthContext.jsx";
 
@@ -21,6 +22,7 @@ const navItems = [
   { label: "Dashboard", to: "/admin", icon: LayoutDashboard, end: true },
   { label: "Results & Marks", to: "/admin/results", icon: FileSpreadsheet },
   { label: "Courses", to: "/admin/course-post", icon: BookOpen },
+  { label: "YouTube Videos", to: "/admin/videos", icon: Video },
   { label: "Teachers", to: "/admin/teachers", icon: UserCheck },
   { label: "Students", to: "/admin/students", icon: Award },
   { label: "Blog & News", to: "/admin/blog-post", icon: Newspaper },
@@ -50,21 +52,21 @@ function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-60 bg-[#0B1E2D] text-slate-300 flex flex-col h-screen border-r border-slate-800/80 transition-transform duration-200 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-40 w-60 bg-[#09131F] text-slate-300 flex flex-col h-screen border-r border-slate-800/80 transition-transform duration-200 ease-in-out ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
         {/* Brand Header */}
-        <div className="flex items-center justify-between px-5 h-14 border-b border-slate-800/80 shrink-0 bg-[#081724]">
+        <div className="flex items-center justify-between px-5 h-14 border-b border-slate-800/80 shrink-0 bg-[#050D17]">
           <Link to="/admin" className="flex items-center gap-2.5 group">
-            <div className="w-7 h-7 rounded-lg bg-[#0F6E8C] flex items-center justify-center shrink-0 shadow-sm text-white">
+            <div className="w-7 h-7 rounded-lg bg-[#0D9488] flex items-center justify-center shrink-0 shadow-sm text-white">
               <GraduationCap size={15} />
             </div>
             <div className="min-w-0">
               <span className="font-heading font-bold text-sm tracking-tight text-white block leading-tight">
                 Al-Mukhtar
               </span>
-              <span className="text-[9px] text-[#8FB3AA] font-mono uppercase tracking-wider font-semibold block">
+              <span className="text-[9px] text-[#5EEAD4] font-mono uppercase tracking-wider font-semibold block">
                 Admin Console
               </span>
             </div>
@@ -91,7 +93,7 @@ function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
               className={({ isActive }) =>
                 `flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
                   isActive
-                    ? "bg-[#0F6E8C] text-white font-semibold shadow-xs"
+                    ? "bg-[#0D9488] text-white font-semibold shadow-xs"
                     : "text-slate-300 hover:bg-white/[0.06] hover:text-white"
                 }`
               }
@@ -103,7 +105,7 @@ function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
         </nav>
 
         {/* Footer info & Logout */}
-        <div className="p-3 border-t border-slate-800/80 shrink-0 bg-[#081724]">
+        <div className="p-3 border-t border-slate-800/80 shrink-0 bg-[#050D17]">
           <button
             onClick={handleLogout}
             className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:bg-rose-500/10 hover:text-rose-400 transition-colors"

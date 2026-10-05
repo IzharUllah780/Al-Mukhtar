@@ -3,33 +3,56 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Font imports */
+/* ── Typography & Premier Academic Font Families ── */
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/plus-jakarta-sans/800.css";
+
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
 @import "@fontsource/inter/700.css";
-@import "@fontsource/inter/800.css";
-@import "@fontsource/inter/900.css";
-@import "@fontsource/dm-serif-display/400.css";
+
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource/playfair-display/700.css";
+
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+@import "@fontsource/jetbrains-mono/600.css";
 
 @theme {
-  --font-serif: "DM Serif Display", Georgia, serif;
-  --font-heading: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Inter", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Brand color palette - radiology-hazel design system */
-  --color-brand: #0F6E8C;
-  --color-brand-dark: #0B5C74;
-  --color-brand-light: #8FB3AA;
-  --color-slate-navy: #0A2540;
-  --color-slate-deep: #081E2E;
-  --color-mint: #8FB3AA;
-  --color-mint-light: #C0DAD1;
+  /* Brand color palette - Modern Prestigious Academic System */
+  --color-brand: #0D9488;
+  --color-brand-dark: #0F766E;
+  --color-brand-light: #14B8A6;
+  --color-navy: #0F172A;
+  --color-navy-dark: #020617;
+  --color-navy-light: #1E293B;
+  --color-slate-navy: #0F172A;
+  --color-slate-deep: #020617;
+  --color-mint: #0D9488;
+  --color-mint-light: #CCFBF1;
+  --color-accent: #0D9488;
+  --color-accent-hover: #059669;
 }
 
 body {
   font-family: var(--font-sans);
-  transition: background-color 0.25s ease, color 0.25s ease;
+  background-color: #FFFFFF;
+  color: #334155;
+  font-size: 16px;
+  line-height: 1.65;
+  letter-spacing: -0.011em;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 html.dark {
@@ -44,10 +67,13 @@ html.dark body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .font-heading {
+  font-family: var(--font-heading);
   font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 /* ── Public Website: Extra Bold & Heavy Headings ── */
@@ -100,19 +126,20 @@ button {
   background: transparent;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(15, 110, 140, 0.4);
+  background: rgba(13, 148, 136, 0.4);
   border-radius: 9999px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #0F6E8C;
+  background: #0D9488;
 }
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: rgba(15, 110, 140, 0.4) transparent;
+  scrollbar-color: rgba(13, 148, 136, 0.4) transparent;
 }
 
-/* Dark mode overrides for blog content */
-html.dark .blog-content {
+/* Dark mode overrides for blog & course rich text content */
+html.dark .blog-content,
+html.dark .course-content {
   color: #cbd5e1;
 }
 
@@ -121,46 +148,64 @@ html.dark .blog-content h2,
 html.dark .blog-content h3,
 html.dark .blog-content h4,
 html.dark .blog-content h5,
-html.dark .blog-content h6 {
+html.dark .blog-content h6,
+html.dark .course-content h1,
+html.dark .course-content h2,
+html.dark .course-content h3,
+html.dark .course-content h4,
+html.dark .course-content h5,
+html.dark .course-content h6 {
   color: #f8fafc;
 }
 
 html.dark .blog-content p,
 html.dark .blog-content li,
-html.dark .blog-content span {
+html.dark .blog-content span,
+html.dark .course-content p,
+html.dark .course-content li,
+html.dark .course-content span {
   color: #cbd5e1;
 }
 
 html.dark .blog-content strong,
-html.dark .blog-content b {
+html.dark .blog-content b,
+html.dark .course-content strong,
+html.dark .course-content b {
   color: #ffffff;
 }
 
-html.dark .blog-content a {
-  color: #38bdf8;
+html.dark .blog-content a,
+html.dark .course-content a {
+  color: #14b8a6;
 }
 
-html.dark .blog-content a:hover {
-  color: #7dd3fc;
+html.dark .blog-content a:hover,
+html.dark .course-content a:hover {
+  color: #5eead4;
 }
 
-html.dark .blog-content blockquote {
+html.dark .blog-content blockquote,
+html.dark .course-content blockquote {
   background-color: #0f172a;
   color: #cbd5e1;
-  border-left-color: #0F6E8C;
+  border-left-color: #0D9488;
 }
 
-html.dark .blog-content code {
+html.dark .blog-content code,
+html.dark .course-content code {
   background-color: #1e293b;
   color: #5eead4;
 }
 
-html.dark .blog-content table {
+html.dark .blog-content table,
+html.dark .course-content table {
   border-color: #334155;
 }
 
 html.dark .blog-content th,
-html.dark .blog-content td {
+html.dark .blog-content td,
+html.dark .course-content th,
+html.dark .course-content td {
   border-color: #334155;
   color: #cbd5e1;
 }
@@ -259,17 +304,20 @@ html.dark .hover\:text-slate-700:hover {
   color: #ffffff !important;
 }
 
-html.dark .hover\:text-\[\#0F6E8C\]:hover {
-  color: #38bdf8 !important;
+html.dark .hover\:text-\[\#0F6E8C\]:hover,
+html.dark .hover\:text-teal-600:hover,
+html.dark .hover\:text-teal-500:hover {
+  color: #14b8a6 !important;
 }
 
 html.dark .hover\:text-\[\#0B5C74\]:hover {
-  color: #7dd3fc !important;
+  color: #2dd4bf !important;
 }
 
 /* Group-Hover States in Dark Mode */
-html.dark .group:hover .group-hover\:text-\[\#0F6E8C\] {
-  color: #38bdf8 !important;
+html.dark .group:hover .group-hover\:text-\[\#0F6E8C\],
+html.dark .group:hover .group-hover\:text-teal-600 {
+  color: #14b8a6 !important;
 }
 
 html.dark .group:hover .group-hover\:text-slate-900,
@@ -289,12 +337,14 @@ html.dark .hover\:border-teal-300:hover {
 }
 
 html.dark .hover\:border-\[\#0F6E8C\]:hover,
-html.dark .hover\:border-\[\#0F6E8C\]\/50:hover {
-  border-color: #38bdf8 !important;
+html.dark .hover\:border-\[\#0F6E8C\]\/50:hover,
+html.dark .hover\:border-teal-500:hover {
+  border-color: #14b8a6 !important;
 }
 
-html.dark .group:hover .group-hover\:border-\[\#0F6E8C\]\/50 {
-  border-color: rgba(56, 189, 248, 0.5) !important;
+html.dark .group:hover .group-hover\:border-\[\#0F6E8C\]\/50,
+html.dark .group:hover .group-hover\:border-teal-500\/50 {
+  border-color: rgba(20, 184, 166, 0.5) !important;
 }
 
 /* ── ReactQuill Dark Mode Styling ── */

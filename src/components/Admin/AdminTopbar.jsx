@@ -19,7 +19,7 @@ function AdminTopbar({ setSidebarOpen }) {
     : "AD";
 
   return (
-    <header className="h-14 bg-white dark:bg-[#0c1827] border-b border-slate-200 dark:border-slate-800/90 flex items-center justify-between px-3 sm:px-5 md:px-6 sticky top-0 z-40 font-sans shadow-2xs transition-colors duration-200">
+    <header className="h-14 bg-white dark:bg-[#0f172a] border-b border-slate-200 dark:border-slate-800/90 flex items-center justify-between px-3 sm:px-5 md:px-6 sticky top-0 z-40 font-sans shadow-2xs transition-colors duration-200">
       {/* Left side: Mobile Menu toggle + Quick Action Links */}
       <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
         <button
@@ -34,7 +34,7 @@ function AdminTopbar({ setSidebarOpen }) {
         {/* Add Admin Button */}
         <Link
           to="/admin/users?action=add-admin"
-          className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#0F6E8C] text-white text-xs font-semibold shadow-2xs hover:bg-[#0B5C74] transition-colors shrink-0 cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-semibold shadow-2xs hover:bg-[#0F766E] transition-colors shrink-0 cursor-pointer"
         >
           <UserPlus size={13} />
           <span className="hidden xs:inline sm:inline">Add Admin</span>
@@ -45,7 +45,7 @@ function AdminTopbar({ setSidebarOpen }) {
         <Link
           to="/"
           target="_blank"
-          className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 text-xs font-medium hover:border-[#0F6E8C] hover:text-[#0F6E8C] dark:hover:border-teal-400 dark:hover:text-teal-400 transition-colors shadow-2xs shrink-0"
+          className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-slate-700 dark:text-slate-300 text-xs font-medium hover:border-[#0D9488] hover:text-[#0D9488] dark:hover:border-teal-400 dark:hover:text-teal-400 transition-colors shadow-2xs shrink-0"
         >
           <ExternalLink size={12} />
           <span className="hidden sm:inline">Live Site</span>
@@ -63,7 +63,7 @@ function AdminTopbar({ setSidebarOpen }) {
         {/* Admin Avatar & Meta */}
         <div className="flex items-center gap-2 sm:gap-2.5">
           <div
-            className="w-8 h-8 rounded-lg bg-[#0F6E8C] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-2xs select-none"
+            className="w-8 h-8 rounded-lg bg-[#0D9488] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-2xs select-none"
             title={user?.username || "Admin"}
           >
             {initials}

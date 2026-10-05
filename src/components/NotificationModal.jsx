@@ -275,14 +275,14 @@ export default function NotificationModal({
           </button>
 
           {/* ── TOP NOTIFICATION HEADER ── */}
-          <div className="px-5 sm:px-6 pt-4 pb-3 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-3 shrink-0 pr-12">
+          <div className="px-5 sm:px-6 pt-4 pb-3 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-3 shrink-0 pr-12 font-sans">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#0F6E8C]/15 dark:bg-[#0F6E8C]/25 text-[#0F6E8C] dark:text-[#8FB3AA] flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0">
                 <Bell size={16} />
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#0F6E8C] dark:text-[#8FB3AA] font-mono">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 font-mono">
                     Website Notification
                   </span>
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -302,8 +302,8 @@ export default function NotificationModal({
             </div>
           </div>
 
-          {/* ── MAIN CONTENT AREA (Scroll-safe, Centered) ── */}
-          <div className="px-5 sm:px-6 py-4 flex-1 flex flex-col justify-center overflow-y-auto no-scrollbar">
+          {/* ── MAIN CONTENT AREA ── */}
+          <div className="px-5 sm:px-6 py-4 flex-1 flex flex-col justify-center overflow-y-auto no-scrollbar font-sans">
             <div className={`grid grid-cols-1 ${hasImage ? "md:grid-cols-12 gap-5 md:gap-6 items-center" : "gap-3"} w-full`}>
               {/* Image Preview */}
               {hasImage && (
@@ -314,7 +314,7 @@ export default function NotificationModal({
                     tabIndex={0}
                     onKeyDown={(e) => e.key === "Enter" && setIsFullscreenImage(true)}
                     title="Click to view image in full screen"
-                    className="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-100 dark:bg-slate-900 shadow-xs w-full h-44 sm:h-52 md:h-56 focus:outline-none focus:ring-2 focus:ring-[#0F6E8C]"
+                    className="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-100 dark:bg-slate-900 shadow-xs w-full h-44 sm:h-52 md:h-56 focus:outline-none focus:ring-2 focus:ring-teal-500"
                   >
                     <img
                       src={notificationImage}
@@ -329,7 +329,7 @@ export default function NotificationModal({
 
                     {/* Hover Fullscreen Badge */}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/80 text-white text-[11px] font-semibold border border-white/20 shadow-md">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/80 text-white text-[11px] font-semibold border border-white/20 shadow-md">
                         <ZoomIn size={13} />
                         <span>View Full Screen</span>
                       </span>
@@ -349,8 +349,8 @@ export default function NotificationModal({
                   <div className="flex items-center gap-2.5">
                     {!hasImage && (
                       <span className="relative flex h-3 w-3 shrink-0">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0F6E8C] opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-[#0F6E8C]"></span>
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-600"></span>
                       </span>
                     )}
                     <h2
@@ -364,13 +364,13 @@ export default function NotificationModal({
 
                 {/* Announcement Message Box */}
                 {hasDesc && (
-                  <div className={`p-3.5 rounded-xl border-l-4 border-[#0F6E8C] bg-slate-50 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed whitespace-pre-line font-sans max-h-36 sm:max-h-44 overflow-y-auto custom-scrollbar shadow-2xs ${
+                  <div className={`p-3.5 rounded-xl border-l-4 border-teal-600 bg-slate-50 dark:bg-slate-850 text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed whitespace-pre-line font-sans max-h-36 sm:max-h-44 overflow-y-auto custom-scrollbar shadow-2xs ${
                     !hasImage && !hasTitle ? "flex items-start gap-2.5" : ""
                   }`}>
                     {!hasImage && !hasTitle && (
                       <span className="relative flex h-2.5 w-2.5 shrink-0 mt-1">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0F6E8C] opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#0F6E8C]"></span>
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-600"></span>
                       </span>
                     )}
                     <div className="flex-1">
@@ -379,13 +379,13 @@ export default function NotificationModal({
                   </div>
                 )}
 
-                {/* In-Content Action / View Course / Blog Button */}
+                {/* In-Content Action */}
                 {hasAction && (
                   <div className="pt-1">
                     <button
                       type="button"
                       onClick={handleActionClick}
-                      className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-[#0F6E8C] hover:bg-[#0B5C74] text-white text-xs sm:text-sm font-semibold shadow-xs transition-all group cursor-pointer"
+                      className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-semibold shadow-xs transition-all group cursor-pointer"
                     >
                       <span>{buttonText}</span>
                       {buttonUrl.startsWith("http") ? (
@@ -400,13 +400,13 @@ export default function NotificationModal({
             </div>
           </div>
 
-          {/* ── BOTTOM ACTION BAR (Next fixed at bottom-right if multiple notices) ── */}
+          {/* ── BOTTOM ACTION BAR ── */}
           {hasMultiple && (
             <div className="px-5 sm:px-6 py-2.5 border-t border-slate-100 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-900/30 flex items-center justify-end shrink-0">
               <button
                 type="button"
                 onClick={handleNext}
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#0F6E8C] hover:bg-[#0B5C74] text-white text-xs sm:text-sm font-semibold shadow-xs w-auto transition-colors cursor-pointer shrink-0"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-semibold shadow-xs w-auto transition-colors cursor-pointer shrink-0"
               >
                 <span>Next</span>
                 <ChevronRight size={15} />

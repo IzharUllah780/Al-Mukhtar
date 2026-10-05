@@ -189,18 +189,18 @@ export default function SplashScreen({ onComplete }) {
 
   return (
     <div
-      className={`fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#09111e] text-slate-100 select-none transition-opacity duration-350 ease-out ${
+      className={`fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#020617] text-slate-100 select-none transition-opacity duration-350 ease-out ${
         isFading ? "opacity-0 pointer-events-none" : "opacity-100"
       }`}
       aria-hidden="true"
     >
       <div className="relative z-10 flex flex-col items-center max-w-sm px-6 text-center space-y-6 animate-in fade-in duration-300">
         {/* Simple, Clean, Professional Logo Card (No Gradients) */}
-        <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl p-3 bg-[#0f1d30] border border-slate-700/60 shadow-xl flex items-center justify-center">
+        <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-none p-3 bg-[#0f172a] border border-slate-700/60 shadow-xl flex items-center justify-center">
           <img
             src={LogoImg}
             alt="Al-Mukhtar Logo"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain rounded-none"
             loading="eager"
           />
         </div>
@@ -219,7 +219,7 @@ export default function SplashScreen({ onComplete }) {
         <div className="w-56 sm:w-64 space-y-2.5 pt-2">
           <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
             <div
-              className="h-full bg-[#0F6E8C] rounded-full transition-all duration-100 ease-out"
+              className="h-full bg-[#0D9488] rounded-full transition-all duration-100 ease-out"
               style={{ width: `${roundedProgress}%` }}
             />
           </div>

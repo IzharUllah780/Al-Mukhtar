@@ -265,7 +265,7 @@ function AdminBlog() {
             type="button"
             onClick={handleRefresh}
             title="Refresh database"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0F6E8C] hover:text-[#0F6E8C] dark:hover:border-teal-400 dark:hover:text-teal-400 text-xs font-medium shadow-2xs transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0D9488] hover:text-[#0D9488] dark:hover:border-teal-400 dark:hover:text-teal-400 text-xs font-medium shadow-2xs transition-colors"
           >
             <RefreshCw size={13} className={isRefreshing ? "animate-spin" : ""} />
             <span className="hidden sm:inline">Refresh</span>
@@ -277,7 +277,7 @@ function AdminBlog() {
               if (showForm) resetForm();
               else setShowForm(true);
             }}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0F6E8C] text-white text-xs font-semibold shadow-xs hover:bg-[#0B5C74] transition-colors"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-semibold shadow-xs hover:bg-[#0F766E] transition-colors"
           >
             {showForm ? <X size={13} /> : <Plus size={13} />}
             <span>{showForm ? "Cancel" : "New Article"}</span>
@@ -289,7 +289,7 @@ function AdminBlog() {
       {showForm && (
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-transparent sm:bg-white sm:dark:bg-[#0c1827] border-0 sm:border border-slate-200 dark:border-slate-800 rounded-none sm:rounded-xl p-0 sm:p-5 shadow-none sm:shadow-sm space-y-4"
+          className="bg-transparent sm:bg-white sm:dark:bg-[#0f172a] border-0 sm:border border-slate-200 dark:border-slate-800 rounded-none sm:rounded-xl p-0 sm:p-5 shadow-none sm:shadow-sm space-y-4"
         >
           <div className="flex items-center justify-between pb-3 sm:pb-2.5 border-b border-slate-200/80 dark:border-slate-800">
             <h2 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider font-mono">
@@ -313,7 +313,7 @@ function AdminBlog() {
               <input
                 type="text"
                 placeholder="e.g. Understanding the Rules of Tajweed in Quranic Recitation..."
-                className={`w-full border rounded-xl px-4 py-3 sm:py-2.5 min-h-[48px] sm:min-h-[44px] text-sm sm:text-base font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-slate-50/50 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-800 focus:bg-white dark:focus:bg-slate-800 transition-all ${
+                className={`w-full border rounded-xl px-4 py-3 sm:py-2.5 min-h-[48px] sm:min-h-[44px] text-sm sm:text-base font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-slate-50/50 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-800 focus:bg-white dark:focus:bg-slate-800 transition-all ${
                   errors.title ? "border-rose-400" : "border-slate-200 dark:border-slate-700"
                 }`}
                 {...register("title", { required: "Title is required" })}
@@ -333,7 +333,7 @@ function AdminBlog() {
                   <button
                     type="button"
                     onClick={() => setCustomSubject(!customSubject)}
-                    className="text-xs text-[#0F6E8C] dark:text-teal-400 font-semibold hover:underline cursor-pointer"
+                    className="text-xs text-[#0D9488] dark:text-teal-400 font-semibold hover:underline cursor-pointer"
                   >
                     {customSubject ? "Choose from presets" : "+ Custom category"}
                   </button>
@@ -343,12 +343,12 @@ function AdminBlog() {
                   <input
                     type="text"
                     placeholder="Enter custom category name..."
-                    className="w-full border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] text-sm bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15"
+                    className="w-full border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] text-sm bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15"
                     {...register("subject", { required: "Subject is required" })}
                   />
                 ) : (
                   <select
-                    className="w-full border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] text-sm bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 cursor-pointer"
+                    className="w-full border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] text-sm bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 cursor-pointer"
                     {...register("subject", { required: "Subject is required" })}
                   >
                     {PRESET_CATEGORIES.map((cat) => (
@@ -369,7 +369,7 @@ function AdminBlog() {
                   Publication Status
                 </label>
                 <select
-                  className="w-full border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] text-sm bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 cursor-pointer"
+                  className="w-full border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] text-sm bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 cursor-pointer"
                   {...register("status")}
                 >
                   <option value="published">Published (Public)</option>
@@ -388,7 +388,7 @@ function AdminBlog() {
               <textarea
                 rows={4}
                 placeholder="Brief multi-sentence overview summarizing key takeaways, target audience, and executive thesis of this research or educational article..."
-                className="w-full border border-slate-200 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm min-h-[120px] sm:min-h-[140px] text-slate-800 dark:text-slate-100 bg-slate-50/50 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-800 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 leading-relaxed transition-all resize-y"
+                className="w-full border border-slate-200 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm min-h-[120px] sm:min-h-[140px] text-slate-800 dark:text-slate-100 bg-slate-50/50 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-800 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 leading-relaxed transition-all resize-y"
                 {...register("description")}
               />
             </div>
@@ -397,7 +397,7 @@ function AdminBlog() {
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider font-mono flex items-center gap-1.5">
-                  <ImageIcon className="w-3.5 h-3.5 text-[#0F6E8C] dark:text-teal-400" />
+                  <ImageIcon className="w-3.5 h-3.5 text-[#0D9488] dark:text-teal-400" />
                   <span>Cover Image &amp; Gallery (Max 3)</span>
                 </label>
                 <span className="text-xs text-slate-400 dark:text-slate-500 font-mono">
@@ -431,7 +431,7 @@ function AdminBlog() {
                 ))}
 
                 {selectedImages.length < 3 && (
-                  <label className="flex flex-col items-center justify-center border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-[#0F6E8C] dark:hover:border-teal-400 bg-slate-50/50 dark:bg-slate-800/40 hover:bg-teal-50/30 dark:hover:bg-teal-950/30 rounded-2xl aspect-video cursor-pointer transition-all">
+                  <label className="flex flex-col items-center justify-center border-2 border-dashed border-slate-300 dark:border-slate-700 hover:border-[#0D9488] dark:hover:border-teal-400 bg-slate-50/50 dark:bg-slate-800/40 hover:bg-teal-50/30 dark:hover:bg-teal-950/30 rounded-2xl aspect-video cursor-pointer transition-all">
                     <Upload size={24} className="text-slate-400 dark:text-slate-500 mb-1.5" />
                     <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Upload Media</span>
                     <span className="text-[10px] text-slate-400 dark:text-slate-500">PNG, JPG, WEBP (Max 5MB)</span>
@@ -454,8 +454,8 @@ function AdminBlog() {
                   Article Body Content <span className="text-rose-500">*</span>
                 </label>
                 <div className="flex items-center gap-2">
-                  <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-[#0F6E8C] dark:text-teal-300 border border-teal-200/70 dark:border-teal-800/60 shadow-2xs">
-                    <Clock className="w-3 h-3 text-[#0F6E8C] dark:text-teal-400" />
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-teal-300 border border-teal-200/70 dark:border-teal-800/60 shadow-2xs">
+                    <Clock className="w-3 h-3 text-[#0D9488] dark:text-teal-400" />
                     <span>{liveReadingStats.text}</span>
                     <span className="text-slate-400 dark:text-slate-500 font-normal">({liveReadingStats.words} words)</span>
                   </span>
@@ -500,7 +500,7 @@ function AdminBlog() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="inline-flex items-center gap-2 bg-[#0F6E8C] hover:bg-[#0B5C74] text-white font-extrabold px-6 py-2.5 rounded-xl transition-all text-xs sm:text-sm shadow-md disabled:opacity-60 cursor-pointer"
+                className="inline-flex items-center gap-2 bg-[#0D9488] hover:bg-[#0F766E] text-white font-extrabold px-6 py-2.5 rounded-xl transition-all text-xs sm:text-sm shadow-md disabled:opacity-60 cursor-pointer"
               >
                 {isPending ? (
                   <>
@@ -519,10 +519,10 @@ function AdminBlog() {
       )}
 
       {/* Publications Table */}
-      <div className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-2xs">
+      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-2xs">
         {isLoading ? (
           <div className="p-5 space-y-3 animate-pulse">
-            <div className="flex items-center gap-2 text-xs font-mono text-[#0F6E8C] dark:text-teal-400">
+            <div className="flex items-center gap-2 text-xs font-mono text-[#0D9488] dark:text-teal-400">
               <Loader2 className="animate-spin" size={13} />
               <span>Loading publications...</span>
             </div>
@@ -600,7 +600,7 @@ function AdminBlog() {
 
                     <td className="py-2.5 px-3 whitespace-nowrap">
                       <span className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
-                        <Tag className="w-2.5 h-2.5 text-[#0F6E8C] dark:text-teal-400" />
+                        <Tag className="w-2.5 h-2.5 text-[#0D9488] dark:text-teal-400" />
                         {blog.subject || "General"}
                       </span>
                     </td>
@@ -634,7 +634,7 @@ function AdminBlog() {
                           to={`/blog/${blog.slug || blog._id}`}
                           target="_blank"
                           rel="noreferrer"
-                          className="p-1 rounded-md text-slate-400 hover:text-[#0F6E8C] dark:hover:text-teal-300 hover:bg-teal-50 dark:hover:bg-teal-950/50 transition-colors"
+                          className="p-1 rounded-md text-slate-400 hover:text-[#0D9488] dark:hover:text-teal-300 hover:bg-teal-50 dark:hover:bg-teal-950/50 transition-colors"
                           title="View Live Article"
                         >
                           <ExternalLink size={13} />
@@ -642,7 +642,7 @@ function AdminBlog() {
                         <button
                           type="button"
                           onClick={() => openEdit(blog)}
-                          className="p-1 rounded-md text-slate-400 hover:text-[#0F6E8C] dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                          className="p-1 rounded-md text-slate-400 hover:text-[#0D9488] dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                           title="Edit Article"
                         >
                           <Edit3 size={13} />
@@ -669,7 +669,7 @@ function AdminBlog() {
       {blogToDelete && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-150">
           <div
-            className="bg-white dark:bg-[#0c1827] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 max-w-md w-full p-6 space-y-5 animate-in zoom-in-95 duration-200"
+            className="bg-white dark:bg-[#0f172a] rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 max-w-md w-full p-6 space-y-5 animate-in zoom-in-95 duration-200"
             role="dialog"
             aria-modal="true"
           >

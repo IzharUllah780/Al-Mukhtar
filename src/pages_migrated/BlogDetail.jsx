@@ -491,7 +491,7 @@ function BlogDetail() {
   if (isLoading) {
     return (
       <div className="py-10 bg-slate-50 min-h-screen font-sans">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-6">
           <div className="w-48 h-4 bg-slate-200 rounded-md animate-pulse"></div>
           <div className="space-y-3 max-w-4xl">
             <div className="w-28 h-6 bg-slate-200 rounded-full animate-pulse"></div>
@@ -551,7 +551,7 @@ function BlogDetail() {
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               to="/blog"
-              className="w-fit inline-flex items-center justify-center rounded-xl bg-[#C0DAD1] text-slate-900 hover:bg-[#a6cbbe] font-extrabold text-xs sm:text-sm px-6 py-3.5 gap-2 transition-all shadow-sm"
+              className="w-fit inline-flex items-center justify-center rounded-full bg-teal-600 text-white hover:bg-teal-700 font-bold text-xs sm:text-sm px-6 py-3.5 gap-2 transition-all shadow-sm"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Return to Blog Index</span>
@@ -575,7 +575,7 @@ function BlogDetail() {
 
   return (
     <article className="py-6 sm:py-10 bg-white dark:bg-slate-950 min-h-screen font-sans text-slate-900 dark:text-slate-100 overflow-x-clip w-full transition-colors duration-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 space-y-6">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-6">
         {/* Header Breadcrumbs & Title */}
         <header className="w-full space-y-4 pb-4 border-b border-slate-200/80 dark:border-slate-800">
           {/* Breadcrumb row */}
@@ -586,7 +586,7 @@ function BlogDetail() {
             <span>/</span>
             <Link
               to={`/blog?category=${encodeURIComponent(blog.subject || "Blog")}`}
-              className="text-[#0F6E8C] dark:text-teal-400 font-bold hover:underline"
+              className="text-teal-600 dark:text-teal-400 font-bold hover:underline"
             >
               {blog.subject || "Blog"}
             </Link>
@@ -619,7 +619,7 @@ function BlogDetail() {
                   <span className="font-bold text-slate-900 dark:text-white text-sm">Al-Mukhtar Institute</span>
                   <Link
                     to="/about"
-                    className="text-xs font-semibold text-[#0F6E8C] dark:text-teal-400 hover:underline"
+                    className="text-xs font-semibold text-[#0D9488] dark:text-teal-400 hover:underline"
                   >
                     About Us
                   </Link>
@@ -651,10 +651,10 @@ function BlogDetail() {
             <button
               type="button"
               onClick={() => responsesRef.current?.scrollIntoView({ behavior: "smooth" })}
-              className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-[#0F6E8C] dark:hover:text-teal-400 transition-colors cursor-pointer"
+              className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-[#0D9488] dark:hover:text-teal-400 transition-colors cursor-pointer"
               title="Jump to responses"
             >
-              <MessageCircle className="w-4 h-4 text-[#0F6E8C] dark:text-teal-400" />
+              <MessageCircle className="w-4 h-4 text-[#0D9488] dark:text-teal-400" />
               <span>Responses &amp; Discussions ({commentsList.length})</span>
             </button>
           </div>
@@ -752,13 +752,13 @@ function BlogDetail() {
               className="w-full flex items-center justify-between text-left cursor-pointer group"
             >
               <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-[#0F6E8C] dark:text-teal-400 shadow-2xs">
+                <div className="w-7 h-7 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-[#0D9488] dark:text-teal-400 shadow-2xs">
                   <ListFilter className="w-4 h-4" />
                 </div>
                 <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white font-heading">
                   Table of Contents
                 </span>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0F6E8C] dark:text-teal-400 font-mono">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0D9488] dark:text-teal-400 font-mono">
                   {headings.length} Sections
                 </span>
               </div>
@@ -780,9 +780,9 @@ function BlogDetail() {
                     key={h.id}
                     type="button"
                     onClick={() => scrollToHeading(h.id)}
-                    className={`block w-full text-left py-2 px-2.5 rounded-xl text-xs cursor-pointer transition-all hover:underline underline-offset-3 hover:text-blue-600 dark:hover:text-blue-400 ${h.level === 3 ? "pl-5 text-[11px]" : "font-semibold"
+                    className={`block w-full text-left py-2 px-2.5 rounded-xl text-xs cursor-pointer transition-all hover:underline underline-offset-3 hover:text-teal-600 dark:hover:text-blue-400 ${h.level === 3 ? "pl-5 text-[11px]" : "font-semibold"
                       } ${activeHeadingId === h.id
-                        ? "bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 font-bold underline border border-blue-200/60 dark:border-blue-800/60"
+                        ? "bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 font-bold underline border border-teal-200/60 dark:border-teal-800/60"
                         : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
                       }`}
                   >
@@ -799,7 +799,7 @@ function BlogDetail() {
           {/* Main Article Content (Expanded to lg:col-span-9) */}
           <div className="lg:col-span-9 min-w-0 w-full space-y-8">
             {/* Rendered Prose Content with Natural Word Wrapping */}
-            <div className="prose prose-slate dark:prose-invert max-w-full min-w-0 w-full break-normal hyphens-none [word-break:normal] [overflow-wrap:break-word] text-sm sm:text-[15px] md:text-[16px] lg:text-[16px] leading-relaxed prose-headings:font-heading prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-slate-900 dark:prose-headings:text-white prose-p:text-slate-700 dark:prose-p:text-slate-200 prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-img:rounded-2xl prose-img:shadow-sm [&_img]:max-w-full [&_img]:h-auto prose-blockquote:border-l-4 prose-blockquote:border-l-[#0F6E8C] prose-blockquote:bg-slate-50 dark:prose-blockquote:bg-slate-900 prose-blockquote:py-2.5 prose-blockquote:px-4 prose-blockquote:rounded-r-xl prose-blockquote:text-slate-700 dark:prose-blockquote:text-slate-300 prose-blockquote:not-italic prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:bg-slate-100 dark:prose-code:bg-slate-800 prose-code:text-[#0F6E8C] dark:prose-code:text-teal-300 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:max-w-full prose-pre:overflow-x-auto [&_table]:max-w-full [&_table]:overflow-x-auto [&_table]:block [&_iframe]:max-w-full">
+            <div className="prose prose-slate dark:prose-invert max-w-full min-w-0 w-full break-normal hyphens-none [word-break:normal] [overflow-wrap:break-word] text-sm sm:text-[15px] md:text-[16px] lg:text-[16px] leading-relaxed prose-headings:font-heading prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-slate-900 dark:prose-headings:text-white prose-p:text-slate-700 dark:prose-p:text-slate-200 prose-a:text-teal-600 dark:prose-a:text-blue-400 prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-img:rounded-2xl prose-img:shadow-sm [&_img]:max-w-full [&_img]:h-auto prose-blockquote:border-l-4 prose-blockquote:border-l-[#0D9488] prose-blockquote:bg-slate-50 dark:prose-blockquote:bg-slate-900 prose-blockquote:py-2.5 prose-blockquote:px-4 prose-blockquote:rounded-r-xl prose-blockquote:text-slate-700 dark:prose-blockquote:text-slate-300 prose-blockquote:not-italic prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:bg-slate-100 dark:prose-code:bg-slate-800 prose-code:text-[#0D9488] dark:prose-code:text-teal-300 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:max-w-full prose-pre:overflow-x-auto [&_table]:max-w-full [&_table]:overflow-x-auto [&_table]:block [&_iframe]:max-w-full">
               <div
                 className="blog-content max-w-full min-w-0 break-normal hyphens-none text-slate-800 dark:text-slate-200"
                 dangerouslySetInnerHTML={{ __html: processedContent }}
@@ -814,13 +814,13 @@ function BlogDetail() {
               <div className="flex flex-wrap gap-2">
                 <Link
                   to={`/blog?category=${encodeURIComponent(blog.subject || "Blog")}`}
-                  className="px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-teal-50 dark:hover:bg-slate-700 hover:text-[#0F6E8C] dark:hover:text-teal-300 text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors"
+                  className="px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-teal-50 dark:hover:bg-slate-700 hover:text-[#0D9488] dark:hover:text-teal-300 text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors"
                 >
                   #{blog.subject || "Blog"}
                 </Link>
                 <Link
                   to={`/blog?search=${encodeURIComponent(blog.title.split(" ")[0])}`}
-                  className="px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-teal-50 dark:hover:bg-slate-700 hover:text-[#0F6E8C] dark:hover:text-teal-300 text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors"
+                  className="px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-teal-50 dark:hover:bg-slate-700 hover:text-[#0D9488] dark:hover:text-teal-300 text-slate-700 dark:text-slate-200 text-xs font-medium transition-colors"
                 >
                   #{blog.title.split(" ")[0]}
                 </Link>
@@ -835,7 +835,7 @@ function BlogDetail() {
               <div className="w-full flex flex-col font-sans max-h-[calc(100vh-140px)]">
                 <div className="shrink-0 flex items-center justify-between pb-3 border-b border-slate-200/80 dark:border-slate-800">
                   <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold text-xs uppercase tracking-wider font-mono">
-                    <BookOpen className="w-3.5 h-3.5 text-[#0F6E8C] dark:text-teal-400" />
+                    <BookOpen className="w-3.5 h-3.5 text-[#0D9488] dark:text-teal-400" />
                     <span>Table of Contents</span>
                   </div>
                   <span className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">
@@ -851,9 +851,9 @@ function BlogDetail() {
                         key={h.id}
                         type="button"
                         onClick={() => scrollToHeading(h.id)}
-                        className={`block w-full text-left transition-all py-1 leading-snug cursor-pointer break-normal hover:underline underline-offset-3 hover:text-blue-600 dark:hover:text-blue-400 ${h.level === 3 ? "pl-2.5 text-[11px]" : "font-semibold"
+                        className={`block w-full text-left transition-all py-1 leading-snug cursor-pointer break-normal hover:underline underline-offset-3 hover:text-teal-600 dark:hover:text-blue-400 ${h.level === 3 ? "pl-2.5 text-[11px]" : "font-semibold"
                           } ${isActive
-                            ? "text-blue-600 dark:text-blue-400 font-bold underline translate-x-1"
+                            ? "text-teal-600 dark:text-teal-400 font-bold underline translate-x-1"
                             : "text-slate-600 dark:text-slate-300 hover:translate-x-0.5"
                           }`}
                       >
@@ -888,7 +888,7 @@ function BlogDetail() {
                   <div className="pt-1">
                     <Link
                       to="/about"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F6E8C] dark:text-teal-400 hover:underline"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0D9488] dark:text-teal-400 hover:underline"
                     >
                       <span>Learn more about us</span>
                       <ArrowRight className="w-3 h-3" />
@@ -906,7 +906,7 @@ function BlogDetail() {
               <button
                 type="button"
                 onClick={handleShare}
-                className="w-full py-2 px-3 rounded-xl bg-white dark:bg-slate-800 hover:bg-teal-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-500 text-xs font-bold text-[#0F6E8C] dark:text-teal-300 flex items-center justify-center gap-2 transition-all shadow-2xs cursor-pointer"
+                className="w-full py-2 px-3 rounded-xl bg-white dark:bg-slate-800 hover:bg-teal-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-500 text-xs font-bold text-[#0D9488] dark:text-teal-300 flex items-center justify-center gap-2 transition-all shadow-2xs cursor-pointer"
               >
                 {copied ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Share2 className="w-4 h-4" />}
                 <span>{copied ? "Link Copied to Clipboard!" : "Copy Article Link"}</span>
@@ -938,7 +938,7 @@ function BlogDetail() {
             {/* Comment Input Box (Authenticated Gate) */}
             {!user ? (
               <div className="p-6 rounded-2xl bg-gradient-to-br from-teal-500/10 via-slate-50 to-slate-100/60 dark:from-slate-850 dark:via-slate-900 dark:to-slate-900 border border-teal-500/20 dark:border-slate-800 text-center space-y-3.5 shadow-2xs">
-                <div className="w-11 h-11 mx-auto rounded-2xl bg-[#0F6E8C]/10 dark:bg-teal-500/20 text-[#0F6E8C] dark:text-teal-300 flex items-center justify-center">
+                <div className="w-11 h-11 mx-auto rounded-2xl bg-[#0D9488]/10 dark:bg-teal-500/20 text-[#0D9488] dark:text-teal-300 flex items-center justify-center">
                   <MessageSquare className="w-5 h-5" />
                 </div>
                 <div className="space-y-1 max-w-md mx-auto">
@@ -952,14 +952,14 @@ function BlogDetail() {
                 <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap items-center justify-center sm:gap-3 pt-1 max-w-sm sm:max-w-none mx-auto">
                   <Link
                     to={`/login?redirect=${encodeURIComponent(location.pathname)}`}
-                    className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-5 py-2.5 rounded-xl bg-[#0F6E8C] hover:bg-[#0B5C74] text-white font-bold text-xs shadow-2xs text-center"
+                    className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-5 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold text-xs shadow-2xs text-center"
                   >
                     <LogIn size={14} />
                     <span>Sign In</span>
                   </Link>
                   <Link
                     to={`/signup?redirect=${encodeURIComponent(location.pathname)}`}
-                    className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-[#0F6E8C] text-slate-700 dark:text-slate-200 hover:text-[#0F6E8C] dark:hover:text-[#38BDF8] text-xs font-bold transition-all bg-white dark:bg-slate-800 shadow-3xs text-center"
+                    className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-[#0D9488] text-slate-700 dark:text-slate-200 hover:text-[#0D9488] dark:hover:text-[#38BDF8] text-xs font-bold transition-all bg-white dark:bg-slate-800 shadow-3xs text-center"
                   >
                     <span>Sign Up</span>
                   </Link>
@@ -972,18 +972,18 @@ function BlogDetail() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0F6E8C] to-[#0A2540] text-white flex items-center justify-center text-xs font-bold shadow-3xs shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0D9488] to-[#0A2540] text-white flex items-center justify-center text-xs font-bold shadow-3xs shrink-0">
                       {user.username?.slice(0, 2).toUpperCase() || "U"}
                     </div>
                     <div>
                       <p className="text-xs font-bold text-slate-900 dark:text-white leading-tight">
-                        Posting as <span className="text-[#0F6E8C] dark:text-teal-300">@{user.username}</span>
+                        Posting as <span className="text-[#0D9488] dark:text-teal-300">@{user.username}</span>
                       </p>
                       <p className="text-[10px] text-slate-400 font-mono">{user.email}</p>
                     </div>
                   </div>
                   {isAdmin && (
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-[#0F6E8C] dark:text-teal-300 border border-teal-200 dark:border-teal-800">
+                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-teal-300 border border-teal-200 dark:border-teal-800">
                       Admin
                     </span>
                   )}
@@ -994,14 +994,14 @@ function BlogDetail() {
                   value={newCommentText}
                   onChange={(e) => setNewCommentText(e.target.value)}
                   placeholder="Share your thoughts, ask scholarly questions, or contribute a reflection..."
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 resize-none transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-[#0D9488] dark:focus:border-teal-400 resize-none transition-colors"
                 />
 
                 <div className="flex justify-end items-center gap-2">
                   <button
                     type="submit"
                     disabled={addCommentMutation.isPending || !newCommentText.trim()}
-                    className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#0F6E8C] hover:bg-[#0B5C74] text-white font-bold text-xs transition-all shadow-2xs cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02]"
+                    className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold text-xs transition-all shadow-2xs cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02]"
                   >
                     {addCommentMutation.isPending ? (
                       <>
@@ -1041,7 +1041,7 @@ function BlogDetail() {
                         {/* Comment Top Header */}
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2.5 min-w-0">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0F6E8C] to-[#0A2540] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-3xs">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0D9488] to-[#0A2540] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-3xs">
                               {authorName.slice(0, 2).toUpperCase() || "U"}
                             </div>
                             <div className="min-w-0">
@@ -1065,7 +1065,7 @@ function BlogDetail() {
                               <button
                                 type="button"
                                 onClick={() => handleStartEditComment(c)}
-                                className="p-1.5 rounded-lg text-slate-400 hover:text-[#0F6E8C] dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                                className="p-1.5 rounded-lg text-slate-400 hover:text-[#0D9488] dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                                 title="Edit Reflection"
                               >
                                 <Edit3 size={14} />
@@ -1090,7 +1090,7 @@ function BlogDetail() {
                               rows={3}
                               value={editCommentText}
                               onChange={(e) => setEditCommentText(e.target.value)}
-                              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 resize-none"
+                              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white outline-none focus:border-[#0D9488] dark:focus:border-teal-400 resize-none"
                             />
                             <div className="flex items-center justify-end gap-2">
                               <button
@@ -1104,7 +1104,7 @@ function BlogDetail() {
                                 type="button"
                                 onClick={() => handleSaveEditComment(c._id)}
                                 disabled={updateCommentMutation.isPending || !editCommentText.trim()}
-                                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#0F6E8C] hover:bg-[#0B5C74] text-white text-xs font-bold transition-all shadow-3xs cursor-pointer disabled:opacity-50"
+                                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-bold transition-all shadow-3xs cursor-pointer disabled:opacity-50"
                               >
                                 {updateCommentMutation.isPending ? (
                                   <Loader2 className="w-3 h-3 animate-spin" />
@@ -1126,7 +1126,7 @@ function BlogDetail() {
                           <button
                             type="button"
                             onClick={() => handleStartReply(c._id)}
-                            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0F6E8C] dark:text-teal-400 hover:text-[#0B5C74] dark:hover:text-teal-300 hover:underline cursor-pointer transition-colors"
+                            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0D9488] dark:text-teal-400 hover:text-[#0F766E] dark:hover:text-teal-300 hover:underline cursor-pointer transition-colors"
                           >
                             <CornerDownRight size={13} />
                             <span>Reply</span>
@@ -1143,7 +1143,7 @@ function BlogDetail() {
                           <div className="mt-2 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2.5">
                             <div className="flex items-center justify-between text-xs">
                               <span className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">
-                                Replying as <span className="text-[#0F6E8C] dark:text-teal-300">@{user?.username}</span>
+                                Replying as <span className="text-[#0D9488] dark:text-teal-300">@{user?.username}</span>
                               </span>
                               <button
                                 type="button"
@@ -1158,7 +1158,7 @@ function BlogDetail() {
                               value={replyText}
                               onChange={(e) => setReplyText(e.target.value)}
                               placeholder={`Reply to @${authorName}...`}
-                              className="w-full px-3 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 resize-none"
+                              className="w-full px-3 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white outline-none focus:border-[#0D9488] dark:focus:border-teal-400 resize-none"
                             />
                             <div className="flex justify-end gap-2">
                               <button
@@ -1172,7 +1172,7 @@ function BlogDetail() {
                                 type="button"
                                 onClick={() => handleSaveReply(c._id)}
                                 disabled={addReplyMutation.isPending || !replyText.trim()}
-                                className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-md bg-[#0F6E8C] hover:bg-[#0B5C74] text-white text-xs font-bold transition-all shadow-3xs cursor-pointer disabled:opacity-50"
+                                className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-md bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-bold transition-all shadow-3xs cursor-pointer disabled:opacity-50"
                               >
                                 {addReplyMutation.isPending ? (
                                   <Loader2 className="w-3 h-3 animate-spin" />
@@ -1227,7 +1227,7 @@ function BlogDetail() {
                                         <button
                                           type="button"
                                           onClick={() => handleStartEditReply(c._id, r)}
-                                          className="p-1 rounded text-slate-400 hover:text-[#0F6E8C] dark:hover:text-teal-300 hover:bg-slate-200/60 dark:hover:bg-slate-700 transition-colors cursor-pointer"
+                                          className="p-1 rounded text-slate-400 hover:text-[#0D9488] dark:hover:text-teal-300 hover:bg-slate-200/60 dark:hover:bg-slate-700 transition-colors cursor-pointer"
                                           title="Edit Reply"
                                         >
                                           <Edit3 size={12} />
@@ -1251,7 +1251,7 @@ function BlogDetail() {
                                         rows={2}
                                         value={editReplyText}
                                         onChange={(e) => setEditReplyText(e.target.value)}
-                                        className="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white outline-none focus:border-[#0F6E8C] resize-none"
+                                        className="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white outline-none focus:border-[#0D9488] resize-none"
                                       />
                                       <div className="flex justify-end gap-2">
                                         <button
@@ -1265,7 +1265,7 @@ function BlogDetail() {
                                           type="button"
                                           onClick={() => handleSaveEditReply(c._id, r._id)}
                                           disabled={updateReplyMutation.isPending || !editReplyText.trim()}
-                                          className="inline-flex items-center gap-1 px-3 py-1 rounded bg-[#0F6E8C] text-white text-[11px] font-bold"
+                                          className="inline-flex items-center gap-1 px-3 py-1 rounded bg-[#0D9488] text-white text-[11px] font-bold"
                                         >
                                           <Check size={12} />
                                           <span>Save</span>
@@ -1292,7 +1292,7 @@ function BlogDetail() {
                       <button
                         type="button"
                         onClick={() => setVisibleCommentsCount((prev) => prev + 10)}
-                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs hover:border-[#0F6E8C] dark:hover:border-teal-400 hover:text-[#0F6E8C] dark:hover:text-teal-300 shadow-3xs transition-all hover:scale-[1.01] cursor-pointer"
+                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs hover:border-[#0D9488] dark:hover:border-teal-400 hover:text-[#0D9488] dark:hover:text-teal-300 shadow-3xs transition-all hover:scale-[1.01] cursor-pointer"
                       >
                         <span>Show More Reflections ({commentsList.length - visibleCommentsCount} more)</span>
                         <ChevronDown className="w-3.5 h-3.5" />
@@ -1317,7 +1317,7 @@ function BlogDetail() {
                 </h3>
                 <Link
                   to="/blog"
-                  className="text-xs font-bold text-[#0F6E8C] dark:text-teal-400 hover:underline flex items-center gap-1"
+                  className="text-xs font-bold text-[#0D9488] dark:text-teal-400 hover:underline flex items-center gap-1"
                 >
                   <span>View all</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -1350,16 +1350,16 @@ function BlogDetail() {
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                           />
                         ) : (
-                          <div className="w-full h-full bg-gradient-to-tr from-[#0B5C74] to-[#0A2540] flex items-center justify-center text-white">
+                          <div className="w-full h-full bg-gradient-to-tr from-[#0F766E] to-[#0A2540] flex items-center justify-center text-white">
                             <BookOpen className="w-6 h-6 text-teal-200" />
                           </div>
                         )}
                       </div>
                       <div className="space-y-1 flex-1 flex flex-col justify-between">
-                        <span className="text-[10px] font-bold text-[#0F6E8C] dark:text-teal-400 uppercase font-mono">
+                        <span className="text-[10px] font-bold text-[#0D9488] dark:text-teal-400 uppercase font-mono">
                           {rel.subject || "Blog"}
                         </span>
-                        <h4 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-[#0F6E8C] dark:group-hover:text-teal-300 transition-colors line-clamp-2 leading-snug break-normal">
+                        <h4 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-[#0D9488] dark:group-hover:text-teal-300 transition-colors line-clamp-2 leading-snug break-normal">
                           {rel.title}
                         </h4>
                       </div>

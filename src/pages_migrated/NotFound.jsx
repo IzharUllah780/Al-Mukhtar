@@ -8,9 +8,9 @@ function NotFound() {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen bg-white flex items-center justify-center px-6 sm:px-10 lg:px-16 font-sans">
       <div className="max-w-md mx-auto text-center flex flex-col items-center py-16">
-        <span className="text-[#0F6E8C] font-mono text-xs font-bold uppercase tracking-widest mb-3 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/80">
+        <span className="text-[#0D9488] font-mono text-xs font-bold uppercase tracking-widest mb-3 px-3 py-1 rounded-full bg-teal-50 border border-teal-200/80">
           Error 404
         </span>
 
@@ -37,7 +37,7 @@ function NotFound() {
 
           <Link
             to="/"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-[#0F6E8C] rounded-xl hover:bg-[#0B5C74] transition-all shadow-2xs"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold text-white bg-[#0D9488] rounded-xl hover:bg-[#0F766E] transition-all shadow-2xs"
           >
             <Home size={14} />
             Back to Home

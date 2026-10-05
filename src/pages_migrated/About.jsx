@@ -27,28 +27,28 @@ import { CampusImage, bg, FounderImage } from "../assets/assets.js";
 
 function About() {
   return (
-    <div className="bg-white dark:bg-[#070d18] font-sans text-slate-800 dark:text-slate-100 transition-colors duration-200">
-      {/* ── 1. INSTITUTIONAL HERO SECTION (CLEAR BG & NORMAL EDUCATIONAL TYPOGRAPHY) ── */}
-      <section className="relative overflow-hidden bg-slate-950 text-white py-10 sm:py-14 border-b border-slate-800/80">
-        {/* Background Image — Clearly Visible */}
+    <div className="bg-white dark:bg-slate-950 font-sans text-slate-800 dark:text-slate-100 transition-colors duration-200">
+      {/* ── 1. INSTITUTIONAL HERO SECTION ── */}
+      <section className="relative overflow-hidden bg-slate-950 text-white py-12 sm:py-16 border-b border-slate-800/80">
+        {/* Background Image */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img
             src={bg}
             alt="Islamic Academic Heritage"
-            className="w-full h-full object-cover object-center opacity-80 sm:opacity-85"
+            className="w-full h-full object-cover object-center opacity-70 sm:opacity-75"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/75 to-slate-950/50" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-slate-950/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-slate-950/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-slate-950/30" />
         </div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl space-y-3 text-left">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/15 backdrop-blur-md text-teal-300 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider font-mono border border-white/20">
-              <Sparkles size={11} className="text-teal-300" />
+        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+          <div className="max-w-2xl space-y-4 text-left">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 backdrop-blur-md text-teal-300 text-[11px] font-bold uppercase tracking-wider font-mono border border-teal-500/20">
+              <Sparkles size={12} className="text-teal-400" />
               <span>Institutional Profile</span>
             </div>
 
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white font-heading tracking-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-heading tracking-tight">
               About Al-Mukhtar
             </h1>
 
@@ -57,47 +57,47 @@ function About() {
             </p>
 
             {/* Quick Metrics */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-3 border-t border-white/15">
-              <div className="p-2.5 rounded-lg bg-slate-950/60 border border-white/10 backdrop-blur-md">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-white/15">
+              <div className="p-3 rounded-xl bg-slate-900/80 border border-white/10 backdrop-blur-md">
                 <span className="text-base sm:text-lg font-bold text-white font-heading block">3 Years</span>
-                <span className="text-[9.5px] text-teal-300 font-mono uppercase">Tradition</span>
+                <span className="text-[10px] text-teal-300 font-mono uppercase font-semibold">Tradition</span>
               </div>
-              <div className="p-2.5 rounded-lg bg-slate-950/60 border border-white/10 backdrop-blur-md">
+              <div className="p-3 rounded-xl bg-slate-900/80 border border-white/10 backdrop-blur-md">
                 <span className="text-base sm:text-lg font-bold text-teal-300 font-heading block">100+</span>
-                <span className="text-[9.5px] text-slate-300 font-mono uppercase">Alumni</span>
+                <span className="text-[10px] text-slate-300 font-mono uppercase font-semibold">Alumni</span>
               </div>
-              <div className="p-2.5 rounded-lg bg-slate-950/60 border border-white/10 backdrop-blur-md">
+              <div className="p-3 rounded-xl bg-slate-900/80 border border-white/10 backdrop-blur-md">
                 <span className="text-base sm:text-lg font-bold text-white font-heading block">100%</span>
-                <span className="text-[9.5px] text-teal-300 font-mono uppercase">Verified Sanad</span>
+                <span className="text-[10px] text-teal-300 font-mono uppercase font-semibold">Verified Sanad</span>
               </div>
-              <div className="p-2.5 rounded-lg bg-slate-950/60 border border-white/10 backdrop-blur-md">
+              <div className="p-3 rounded-xl bg-slate-900/80 border border-white/10 backdrop-blur-md">
                 <span className="text-base sm:text-lg font-bold text-teal-300 font-heading block">Global</span>
-                <span className="text-[9.5px] text-slate-300 font-mono uppercase">Curricula</span>
+                <span className="text-[10px] text-slate-300 font-mono uppercase font-semibold">Curricula</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 2. MAIN ACADEMIC CONTENT (STARTS FROM THE LEFT) ── */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+      {/* ── 2. MAIN ACADEMIC CONTENT ── */}
+      <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
           {/* Left Main Content Column (8 Cols) */}
-          <div className="lg:col-span-8 space-y-10 text-left">
+          <div className="lg:col-span-8 space-y-12 text-left">
 
             {/* SECTION 1: GENESIS & MADRASA IDENTITY */}
             <article className="space-y-4">
               <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
-                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#0F6E8C] dark:text-teal-400">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200/60 dark:border-teal-800/60 mb-2">
                   Madrasa Profile &amp; Mission
                 </span>
-                <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white font-heading tracking-tight mt-0.5">
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white font-heading tracking-tight mt-1">
                   Authentic Islamic Education &amp; Dars-e-Nizami
                 </h2>
               </div>
 
-              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                 <strong className="font-semibold text-slate-900 dark:text-white">Al-Mukhtar</strong> is a dedicated Islamic Madrasa exclusively focused on teaching sacred Islamic courses and classical <strong className="font-semibold text-slate-900 dark:text-white">Dars-e-Nizami</strong>. Our institution stands committed to reviving traditional scholarly knowledge in an authentic, structured learning environment.
               </p>
 
@@ -106,18 +106,18 @@ function About() {
               </p>
 
               {/* Campus Visual */}
-              <div className="my-5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm bg-slate-100 dark:bg-slate-900">
-                <div className="relative h-56 sm:h-72 w-full">
+              <div className="my-6 rounded-none overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm bg-slate-100 dark:bg-slate-900 group">
+                <div className="relative h-60 sm:h-80 w-full overflow-hidden rounded-none">
                   <img
                     src={CampusImage}
                     alt="Al-Mukhtar Madrasa Campus"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 rounded-none"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent flex items-end p-4">
-                    <div className="text-white space-y-0.5">
-                      <p className="text-xs font-bold font-heading">Al-Mukhtar Campus</p>
-                      <p className="text-[10.5px] text-slate-300 font-mono flex items-center gap-1">
-                        <MapPin size={12} className="text-teal-300 shrink-0" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent flex items-end p-5">
+                    <div className="text-white space-y-1">
+                      <p className="text-sm font-bold font-heading">Al-Mukhtar Campus</p>
+                      <p className="text-xs text-slate-300 font-mono flex items-center gap-1.5">
+                        <MapPin size={14} className="text-teal-400 shrink-0" />
                         <span>Ghaz Masjid, Tanga Adda, Landi Arbab, Peshawar — On-Campus Study</span>
                       </p>
                     </div>
@@ -126,9 +126,9 @@ function About() {
               </div>
 
               {/* Inclusivity & Target Audience Highlight */}
-              <div className="p-4 sm:p-5 rounded-xl bg-teal-50/60 dark:bg-[#08202c] border border-teal-200/80 dark:border-teal-900/50 space-y-2">
-                <h3 className="text-xs sm:text-sm font-bold text-[#0F6E8C] dark:text-teal-300 font-heading flex items-center gap-2">
-                  <GraduationCap size={16} />
+              <div className="p-5 sm:p-6 rounded-2xl bg-teal-50/60 dark:bg-teal-950/30 border border-teal-200/80 dark:border-teal-900/50 space-y-2.5">
+                <h3 className="text-sm sm:text-base font-bold text-teal-800 dark:text-teal-300 font-heading flex items-center gap-2">
+                  <GraduationCap size={18} className="text-teal-600 dark:text-teal-400" />
                   <span>Tailored for University Students, Professionals &amp; All Age Groups</span>
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
@@ -137,12 +137,12 @@ function About() {
               </div>
 
               {/* Pull-Quote */}
-              <div className="my-5 p-4 sm:p-5 rounded-xl bg-slate-50 dark:bg-[#0c1827] border-l-3 border-[#0F6E8C] dark:border-teal-400 border border-slate-200/80 dark:border-slate-800">
-                <blockquote className="space-y-1.5">
+              <div className="my-6 p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border-l-4 border-teal-600 dark:border-teal-400 border border-slate-200/80 dark:border-slate-800 shadow-sm">
+                <blockquote className="space-y-2">
                   <p className="text-xs sm:text-sm font-serif italic text-slate-800 dark:text-slate-200 leading-relaxed">
                     "Seeking sacred knowledge is an obligation upon every Muslim. At Al-Mukhtar, we open the doors of traditional Islamic learning to professionals, students, and elders alike under the tutelage of certified scholars."
                   </p>
-                  <footer className="text-[10.5px] font-mono font-semibold uppercase tracking-wider text-[#0F6E8C] dark:text-teal-400">
+                  <footer className="text-[11px] font-mono font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400">
                     — Al-Mukhtar Institutional Mission
                   </footer>
                 </blockquote>
@@ -152,19 +152,19 @@ function About() {
             {/* SECTION 2: CORE DISCIPLINES */}
             <article className="space-y-4">
               <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
-                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#0F6E8C] dark:text-teal-400">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200/60 dark:border-teal-800/60 mb-2">
                   Curriculum &amp; Specializations
                 </span>
-                <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white font-heading tracking-tight mt-0.5">
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white font-heading tracking-tight mt-1">
                   Core Disciplines Taught at Al-Mukhtar
                 </h2>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                 {/* Tajweed */}
-                <div className="p-4 rounded-xl bg-slate-50/70 dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 space-y-1.5">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <BookOpen size={16} />
+                <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 hover:border-teal-500/40 shadow-sm transition-all space-y-2">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-sm font-heading">
+                    <BookOpen size={18} />
                     <span>1. Tajweed (تجويد)</span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -173,9 +173,9 @@ function About() {
                 </div>
 
                 {/* Arabic */}
-                <div className="p-4 rounded-xl bg-slate-50/70 dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 space-y-1.5">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <Layers size={16} />
+                <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 hover:border-teal-500/40 shadow-sm transition-all space-y-2">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-sm font-heading">
+                    <Layers size={18} />
                     <span>2. Arabic Language (اللغة العربية)</span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -184,9 +184,9 @@ function About() {
                 </div>
 
                 {/* Fiqh */}
-                <div className="p-4 rounded-xl bg-slate-50/70 dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 space-y-1.5">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <ShieldCheck size={16} />
+                <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 hover:border-teal-500/40 shadow-sm transition-all space-y-2">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-sm font-heading">
+                    <ShieldCheck size={18} />
                     <span>3. Fiqh (الفقه الإسلامي)</span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -195,9 +195,9 @@ function About() {
                 </div>
 
                 {/* Hadith */}
-                <div className="p-4 rounded-xl bg-slate-50/70 dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 space-y-1.5">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <HeartHandshake size={16} />
+                <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 hover:border-teal-500/40 shadow-sm transition-all space-y-2">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-sm font-heading">
+                    <HeartHandshake size={18} />
                     <span>4. Hadith (الحديث النبوي)</span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -206,9 +206,9 @@ function About() {
                 </div>
 
                 {/* Tafseer */}
-                <div className="p-4 rounded-xl bg-slate-50/70 dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 space-y-1.5 sm:col-span-2">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <Globe size={16} />
+                <div className="p-5 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200/80 dark:border-slate-800 hover:border-teal-500/40 shadow-sm transition-all space-y-2 sm:col-span-2">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-sm font-heading">
+                    <Globe size={18} />
                     <span>5. Tafseer (تفسير القرآن الكريم)</span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -221,18 +221,18 @@ function About() {
             {/* SECTION 3: KEY PILLARS */}
             <article className="space-y-4">
               <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
-                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#0F6E8C] dark:text-teal-400">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200/60 dark:border-teal-800/60 mb-2">
                   Academic Framework
                 </span>
-                <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white font-heading tracking-tight mt-0.5">
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white font-heading tracking-tight mt-1">
                   Why Study at Al-Mukhtar
                 </h2>
               </div>
 
               <div className="space-y-3 pt-1">
-                <div className="p-4 rounded-xl bg-slate-50/70 dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 space-y-1.5">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <CheckCircle2 size={16} />
+                <div className="p-5 rounded-2xl bg-slate-50/70 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 space-y-1.5 shadow-sm">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
+                    <CheckCircle2 size={18} />
                     <span>Certified Scholars &amp; Alims</span>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
@@ -240,9 +240,9 @@ function About() {
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-50/70 dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 space-y-1.5">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <Award size={16} />
+                <div className="p-5 rounded-2xl bg-slate-50/70 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 space-y-1.5 shadow-sm">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
+                    <Award size={18} />
                     <span>Verified Course Certification</span>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
@@ -250,9 +250,9 @@ function About() {
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-50/70 dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 space-y-1.5">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <Users size={16} />
+                <div className="p-5 rounded-2xl bg-slate-50/70 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 space-y-1.5 shadow-sm">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
+                    <Users size={18} />
                     <span>Zero Age Restrictions — Open for Young &amp; Old</span>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
@@ -260,9 +260,9 @@ function About() {
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-50/70 dark:bg-[#0c1827] border border-slate-200/80 dark:border-slate-800 space-y-1.5">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <MapPin size={16} />
+                <div className="p-5 rounded-2xl bg-slate-50/70 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 space-y-1.5 shadow-sm">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
+                    <MapPin size={18} />
                     <span>On-Campus Interactive Learning</span>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed pl-6">
@@ -275,18 +275,18 @@ function About() {
             {/* SECTION 4: CAMPUS & FACILITIES */}
             <article className="space-y-4">
               <div className="border-b border-slate-200 dark:border-slate-800 pb-3">
-                <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#0F6E8C] dark:text-teal-400">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-mono font-bold uppercase tracking-wider bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200/60 dark:border-teal-800/60 mb-2">
                   Campus Facilities
                 </span>
-                <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white font-heading tracking-tight mt-0.5">
+                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white font-heading tracking-tight mt-1">
                   Our On-Campus Learning Environment
                 </h2>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 space-y-1">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <Library size={15} />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-1.5">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
+                    <Library size={16} />
                     <span>Islamic Reference Library</span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -294,9 +294,9 @@ function About() {
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 space-y-1">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <Building2 size={15} />
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-1.5">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
+                    <Building2 size={16} />
                     <span>Tajweed &amp; Recitation Rooms</span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -304,9 +304,9 @@ function About() {
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 space-y-1">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <Users size={15} />
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-1.5">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
+                    <Users size={16} />
                     <span>Dars-e-Nizami Lecture Halls</span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -314,9 +314,9 @@ function About() {
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 space-y-1">
-                  <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
-                    <MapPin size={15} />
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-1.5">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs sm:text-sm font-heading">
+                    <MapPin size={16} />
                     <span>Peshawar Campus</span>
                   </div>
                   <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -329,16 +329,16 @@ function About() {
           </div>
 
           {/* Right Sidebar Column (4 Cols — Sticky Quick Info & Portals) */}
-          <div className="lg:col-span-4 space-y-5 lg:sticky lg:top-20">
+          <div className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
 
             {/* Quick Fact Sheet Card */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-[#0c1827] border border-slate-200/90 dark:border-slate-800 space-y-3.5 shadow-2xs">
-              <div className="flex items-center gap-2 text-[#0F6E8C] dark:text-teal-400 font-mono text-xs font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-800 pb-2">
-                <FileCheck size={14} />
+            <div className="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/90 dark:border-slate-800 space-y-4 shadow-sm">
+              <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-mono text-xs font-bold uppercase tracking-wider border-b border-slate-200 dark:border-slate-800 pb-3">
+                <FileCheck size={16} />
                 <span>Institutional Factsheet</span>
               </div>
 
-              <div className="space-y-2.5 text-xs">
+              <div className="space-y-3 text-xs">
                 <div className="flex items-start justify-between gap-2">
                   <span className="text-slate-500 dark:text-slate-400">Location:</span>
                   <span className="font-semibold text-slate-900 dark:text-white text-right">Ghaz Masjid, Tanga Adda, Landi Arbab, Peshawar</span>
@@ -353,7 +353,7 @@ function About() {
                 </div>
                 <div className="flex items-start justify-between gap-2">
                   <span className="text-slate-500 dark:text-slate-400">Certification:</span>
-                  <span className="font-semibold text-teal-600 dark:text-teal-400 text-right">Awarded Upon Completion</span>
+                  <span className="font-bold text-teal-600 dark:text-teal-400 text-right">Awarded Upon Completion</span>
                 </div>
                 <div className="flex items-start justify-between gap-2">
                   <span className="text-slate-500 dark:text-slate-400">Core Disciplines:</span>
@@ -361,7 +361,7 @@ function About() {
                 </div>
                 <div className="flex items-start justify-between gap-2">
                   <span className="text-slate-500 dark:text-slate-400">Eligibility / Age:</span>
-                  <span className="font-semibold text-teal-600 dark:text-teal-400 text-right">No Age Limit (Young &amp; Old)</span>
+                  <span className="font-bold text-teal-600 dark:text-teal-400 text-right">No Age Limit (Young &amp; Old)</span>
                 </div>
                 <div className="flex items-start justify-between gap-2">
                   <span className="text-slate-500 dark:text-slate-400">Target Audience:</span>
@@ -371,72 +371,72 @@ function About() {
             </div>
 
             {/* Quick Portal Navigation Links */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-[#0c1827] border border-slate-200/90 dark:border-slate-800 space-y-3 shadow-2xs">
+            <div className="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/90 dark:border-slate-800 space-y-3.5 shadow-sm">
               <h3 className="text-xs font-bold text-slate-900 dark:text-white font-heading uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Explore Portals
               </h3>
 
-              <div className="space-y-2">
+              <div className="space-y-2.5">
                 <Link
                   to="/teachers"
-                  className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-[#0F6E8C] dark:hover:border-teal-400 transition-all text-xs font-bold text-slate-800 dark:text-slate-200 group"
+                  className="flex items-center justify-between p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-teal-500/50 hover:shadow-sm transition-all text-xs font-bold text-slate-800 dark:text-slate-200 group"
                 >
-                  <span className="flex items-center gap-2">
-                    <Users size={14} className="text-[#0F6E8C] dark:text-teal-400" />
+                  <span className="flex items-center gap-2.5">
+                    <Users size={15} className="text-teal-600 dark:text-teal-400" />
                     <span>Faculty Directory (Scholars)</span>
                   </span>
-                  <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={13} className="text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
                 </Link>
 
                 <Link
                   to="/courses"
-                  className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-[#0F6E8C] dark:hover:border-teal-400 transition-all text-xs font-bold text-slate-800 dark:text-slate-200 group"
+                  className="flex items-center justify-between p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-teal-500/50 hover:shadow-sm transition-all text-xs font-bold text-slate-800 dark:text-slate-200 group"
                 >
-                  <span className="flex items-center gap-2">
-                    <BookOpen size={14} className="text-[#0F6E8C] dark:text-teal-400" />
+                  <span className="flex items-center gap-2.5">
+                    <BookOpen size={15} className="text-teal-600 dark:text-teal-400" />
                     <span>Islamic Courses &amp; Dars-e-Nizami</span>
                   </span>
-                  <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={13} className="text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
                 </Link>
 
                 <Link
                   to="/students"
-                  className="flex items-center justify-between p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-[#0F6E8C] dark:hover:border-teal-400 transition-all text-xs font-bold text-slate-800 dark:text-slate-200 group"
+                  className="flex items-center justify-between p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 hover:border-teal-500/50 hover:shadow-sm transition-all text-xs font-bold text-slate-800 dark:text-slate-200 group"
                 >
-                  <span className="flex items-center gap-2">
-                    <GraduationCap size={14} className="text-[#0F6E8C] dark:text-teal-400" />
+                  <span className="flex items-center gap-2.5">
+                    <GraduationCap size={15} className="text-teal-600 dark:text-teal-400" />
                     <span>Alumni &amp; Graduates</span>
                   </span>
-                  <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                  <ArrowRight size={13} className="text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
                 </Link>
               </div>
             </div>
 
             {/* Admission Box */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-slate-900 text-white space-y-3 border border-slate-800 shadow-md">
-              <div className="space-y-1">
-                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-teal-300">
+            <div className="p-6 rounded-2xl bg-slate-900 text-white space-y-4 border border-slate-800 shadow-md">
+              <div className="space-y-1.5">
+                <span className="inline-block text-[10px] font-mono font-bold uppercase tracking-wider text-teal-300 bg-teal-500/10 border border-teal-500/20 px-2.5 py-0.5 rounded-full">
                   On-Campus Admissions
                 </span>
-                <h4 className="text-sm font-bold font-heading">
+                <h4 className="text-base font-bold font-heading">
                   Join Al-Mukhtar Madrasa
                 </h4>
-                <p className="text-[11px] text-slate-300 leading-relaxed">
+                <p className="text-xs text-slate-300 leading-relaxed">
                   Admissions are open for university students, professionals, and all age groups at Ghaz Masjid, Tanga Adda, Landi Arbab, Peshawar.
                 </p>
               </div>
 
-              <div className="pt-1 flex flex-col gap-2">
+              <div className="pt-2 flex flex-col gap-2.5">
                 <Link
                   to="/apply"
-                  className="inline-flex items-center justify-center gap-1.5 bg-[#0F6E8C] hover:bg-[#0B5C74] text-white text-xs font-bold py-2 px-4 rounded-xl transition-all text-center"
+                  className="inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold py-2.5 px-4 rounded-full transition-all text-center shadow-sm"
                 >
                   <span>Apply for Admission</span>
-                  <ArrowRight size={12} />
+                  <ArrowRight size={13} />
                 </Link>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-1.5 bg-white/10 hover:bg-white/15 text-white text-xs font-semibold py-2 px-4 rounded-xl border border-white/10 transition-all text-center"
+                  className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white text-xs font-semibold py-2.5 px-4 rounded-full border border-white/10 transition-all text-center"
                 >
                   <span>Contact Campus Office</span>
                 </Link>

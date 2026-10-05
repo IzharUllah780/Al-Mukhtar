@@ -15,7 +15,9 @@ import {
   Building2,
   UserCheck,
   GraduationCap,
+  Mail,
   Sparkles,
+  Phone,
 } from "lucide-react";
 import { Logo } from "../../assets/assets.js";
 import { useAuth } from "../AuthContext.jsx";
@@ -29,30 +31,25 @@ const aboutDropdownItems = [
     path: "/about",
     description: "History, mission, campus & methodology",
     icon: Building2,
-    badge: "Overview",
   },
   {
     name: "Faculty & Scholars",
     path: "/teachers",
-    description: "Meet our resident scholars & founder",
+    description: "Resident scholars, leadership & founder",
     icon: UserCheck,
-    badge: "Faculty",
   },
   {
     name: "Alumni & Graduates",
     path: "/students",
-    description: "Where our graduates stand worldwide",
+    description: "Student network & academic achievements",
     icon: GraduationCap,
-    badge: "Network",
   },
-];
-
-const primaryNavLinks = [
-  { name: "Home", path: "/" },
-  { name: "Courses", path: "/courses" },
-  { name: "Blog", path: "/blog" },
-  { name: "Contact", path: "/contact" },
-  { name: "Results", path: "/result" },
+  {
+    name: "Contact & Inquiries",
+    path: "/contact",
+    description: "Campus location, phone & admissions desk",
+    icon: Mail,
+  },
 ];
 
 function Navbar() {
@@ -110,41 +107,71 @@ function Navbar() {
     location.pathname === "/about" ||
     location.pathname === "/teachers" ||
     location.pathname === "/students" ||
+    location.pathname === "/contact" ||
     location.pathname === "/alumni";
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full transition-all duration-200 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-100 dark:border-slate-800/80 py-3 sm:py-3.5 font-sans">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
+      {/* University Institutional Top Bar */}
+      <div className="bg-slate-950 text-slate-300 text-[11px] font-mono border-b border-slate-800/80 hidden sm:block py-2 transition-colors">
+        <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <span className="flex items-center gap-2 text-teal-400 font-medium">
+              <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+              <span>Admissions Open • Academic Session 2025</span>
+            </span>
+            <span className="text-slate-700">|</span>
+            <span className="text-slate-400">Peshawar Campus, KPK, Pakistan</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <Link
+              to="/result"
+              className="text-teal-400 hover:text-teal-300 transition-colors font-medium flex items-center gap-1.5"
+            >
+              <span>Examination Results</span>
+              <span className="px-1.5 py-0.2 text-[9px] font-mono rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">
+                Gazettes
+              </span>
+            </Link>
+            <span className="text-slate-700">|</span>
+            <Link to="/contact" className="text-slate-300 hover:text-teal-400 transition-colors font-medium">
+              Helpdesk &amp; Inquiries
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <header className="sticky top-0 z-40 w-full transition-all duration-200 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 py-3.5 font-sans">
+        <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           <div className="flex items-center justify-between gap-6">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2.5 group min-w-0">
-              <div className="w-9 h-9 rounded-xl overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700 bg-teal-50 dark:bg-slate-800 shadow-xs group-hover:scale-105 transition-transform duration-200 flex items-center justify-center">
+            <Link to="/" className="flex items-center gap-3 group min-w-0">
+              <div className="w-10 h-10 overflow-hidden shrink-0 border border-slate-200/80 dark:border-slate-700 bg-teal-50 dark:bg-slate-800/80 shadow-xs group-hover:scale-105 transition-transform duration-200 flex items-center justify-center rounded-none">
                 <img
                   src={Logo}
                   alt="Al-Mukhtar Logo"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-none"
                 />
               </div>
               <div className="flex flex-col min-w-0">
-                <span className="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white font-heading tracking-tight leading-tight group-hover:text-[#0F6E8C] dark:group-hover:text-[#38BDF8] transition-colors truncate">
+                <span className="text-base font-extrabold text-slate-900 dark:text-white font-heading tracking-tight leading-tight group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors truncate">
                   Al-Mukhtar
                 </span>
-                <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider truncate font-mono">
-                  Where the Choosen Rise
+                <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider truncate font-mono">
+                  Academic &amp; Islamic Institute
                 </span>
               </div>
             </Link>
 
             {/* Desktop Nav Links */}
-            <nav className="hidden md:flex items-center gap-7 lg:gap-8">
+            <nav className="hidden md:flex items-center gap-8 lg:gap-10">
               <NavLink
                 to="/"
                 className={({ isActive }) =>
-                  `relative py-1 text-sm font-medium transition-colors ${
+                  `relative py-1 text-sm font-semibold transition-colors ${
                     isActive
-                      ? "text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
-                      : "text-slate-600 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-[#38BDF8]"
+                      ? "text-teal-600 dark:text-teal-400 font-bold"
+                      : "text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400"
                   }`
                 }
               >
@@ -152,7 +179,7 @@ function Navbar() {
                   <>
                     <span>Home</span>
                     {isActive && (
-                      <span className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-[#0F6E8C] dark:bg-[#38BDF8] rounded-full" />
+                      <span className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-teal-600 dark:bg-teal-400 rounded-full" />
                     )}
                   </>
                 )}
@@ -161,10 +188,10 @@ function Navbar() {
               <NavLink
                 to="/courses"
                 className={({ isActive }) =>
-                  `relative py-1 text-sm font-medium transition-colors ${
+                  `relative py-1 text-sm font-semibold transition-colors ${
                     isActive
-                      ? "text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
-                      : "text-slate-600 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-[#38BDF8]"
+                      ? "text-teal-600 dark:text-teal-400 font-bold"
+                      : "text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400"
                   }`
                 }
               >
@@ -172,21 +199,39 @@ function Navbar() {
                   <>
                     <span>Courses</span>
                     {isActive && (
-                      <span className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-[#0F6E8C] dark:bg-[#38BDF8] rounded-full" />
+                      <span className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-teal-600 dark:bg-teal-400 rounded-full" />
                     )}
                   </>
                 )}
               </NavLink>
 
-
+              <NavLink
+                to="/videos"
+                className={({ isActive }) =>
+                  `relative py-1 text-sm font-semibold transition-colors ${
+                    isActive
+                      ? "text-teal-600 dark:text-teal-400 font-bold"
+                      : "text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400"
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    <span>Videos</span>
+                    {isActive && (
+                      <span className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-teal-600 dark:bg-teal-400 rounded-full" />
+                    )}
+                  </>
+                )}
+              </NavLink>
 
               <NavLink
                 to="/blog"
                 className={({ isActive }) =>
-                  `relative py-1 text-sm font-medium transition-colors ${
+                  `relative py-1 text-sm font-semibold transition-colors ${
                     isActive
-                      ? "text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
-                      : "text-slate-600 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-[#38BDF8]"
+                      ? "text-teal-600 dark:text-teal-400 font-bold"
+                      : "text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400"
                   }`
                 }
               >
@@ -194,13 +239,13 @@ function Navbar() {
                   <>
                     <span>Blog</span>
                     {isActive && (
-                      <span className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-[#0F6E8C] dark:bg-[#38BDF8] rounded-full" />
+                      <span className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-teal-600 dark:bg-teal-400 rounded-full" />
                     )}
                   </>
                 )}
               </NavLink>
 
-              {/* ── About Hover Dropdown Menu ── */}
+              {/* ── Sleek, Clean & High-Aesthetic About Dropdown Menu ── */}
               <div
                 className="relative"
                 onMouseEnter={handleMouseEnterAbout}
@@ -209,28 +254,28 @@ function Navbar() {
                 <button
                   type="button"
                   onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
-                  className={`relative py-1 text-sm font-medium flex items-center gap-1 transition-colors cursor-pointer ${
+                  className={`relative py-1 text-sm font-semibold flex items-center gap-1.5 transition-colors cursor-pointer ${
                     isAboutActive
-                      ? "text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
-                      : "text-slate-600 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-[#38BDF8]"
+                      ? "text-teal-600 dark:text-teal-400 font-bold"
+                      : "text-slate-600 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400"
                   }`}
                 >
                   <span>About</span>
                   <ChevronDown
                     size={14}
                     className={`transition-transform duration-200 ${
-                      aboutDropdownOpen ? "rotate-180 text-[#0F6E8C] dark:text-[#38BDF8]" : ""
+                      aboutDropdownOpen ? "rotate-180 text-teal-600 dark:text-teal-400" : ""
                     }`}
                   />
                   {isAboutActive && (
-                    <span className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-[#0F6E8C] dark:bg-[#38BDF8] rounded-full" />
+                    <span className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-teal-600 dark:bg-teal-400 rounded-full" />
                   )}
                 </button>
 
-                {/* Dropdown Container with hover bridge padding */}
+                {/* Sleek Floating Dropdown */}
                 {aboutDropdownOpen && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 w-80 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                    <div className="bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-xl border border-slate-200/90 dark:border-slate-800 p-2 space-y-1">
+                    <div className="bg-white/98 dark:bg-slate-900/98 backdrop-blur-xl rounded-2xl shadow-xl border border-slate-200/90 dark:border-slate-800 p-2 space-y-1">
                       {aboutDropdownItems.map((item) => {
                         const Icon = item.icon;
                         const isCurrentActive = location.pathname === item.path;
@@ -242,29 +287,24 @@ function Navbar() {
                             onClick={() => setAboutDropdownOpen(false)}
                             className={`flex items-start gap-3 p-2.5 rounded-xl transition-all group ${
                               isCurrentActive
-                                ? "bg-[#0F6E8C]/10 dark:bg-[#0F6E8C]/20 text-[#0F6E8C] dark:text-teal-300"
-                                : "hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
+                                ? "bg-teal-50 dark:bg-teal-950/50 text-teal-700 dark:text-teal-300"
+                                : "hover:bg-slate-50 dark:hover:bg-slate-800/70 text-slate-700 dark:text-slate-300"
                             }`}
                           >
                             <div
                               className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-colors ${
                                 isCurrentActive
-                                  ? "bg-[#0F6E8C] text-white"
-                                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 group-hover:bg-[#0F6E8C] group-hover:text-white"
+                                  ? "bg-teal-600 text-white shadow-xs"
+                                  : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 group-hover:bg-teal-600 group-hover:text-white"
                               }`}
                             >
                               <Icon size={16} />
                             </div>
                             <div className="min-w-0 flex-1">
-                              <div className="flex items-center justify-between gap-1">
-                                <span className="text-xs font-bold font-heading truncate">
-                                  {item.name}
-                                </span>
-                                <span className="text-[9px] px-1.5 py-0.2 rounded font-mono font-semibold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
-                                  {item.badge}
-                                </span>
-                              </div>
-                              <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight line-clamp-1 mt-0.5">
+                              <span className="text-xs font-bold font-heading group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors block">
+                                {item.name}
+                              </span>
+                              <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-tight line-clamp-1 mt-0.5 font-normal">
                                 {item.description}
                               </p>
                             </div>
@@ -275,50 +315,10 @@ function Navbar() {
                   </div>
                 )}
               </div>
-
-              <NavLink
-                to="/contact"
-                className={({ isActive }) =>
-                  `relative py-1 text-sm font-medium transition-colors ${
-                    isActive
-                      ? "text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
-                      : "text-slate-600 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-[#38BDF8]"
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    <span>Contact</span>
-                    {isActive && (
-                      <span className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-[#0F6E8C] dark:bg-[#38BDF8] rounded-full" />
-                    )}
-                  </>
-                )}
-              </NavLink>
-
-              <NavLink
-                to="/result"
-                className={({ isActive }) =>
-                  `relative py-1 text-sm font-medium transition-colors ${
-                    isActive
-                      ? "text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
-                      : "text-slate-600 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-[#38BDF8]"
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    <span>Results</span>
-                    {isActive && (
-                      <span className="absolute bottom-[-4px] left-0 w-full h-[2px] bg-[#0F6E8C] dark:bg-[#38BDF8] rounded-full" />
-                    )}
-                  </>
-                )}
-              </NavLink>
             </nav>
 
             {/* Desktop Right Action Section */}
-            <div className="hidden md:flex items-center gap-2.5">
+            <div className="hidden md:flex items-center gap-3.5">
               {loading ? (
                 <div className="w-24 h-9 bg-slate-100 dark:bg-slate-800 rounded-full animate-pulse" />
               ) : user ? (
@@ -326,16 +326,14 @@ function Navbar() {
                   {!isAdmin && (
                     <Link
                       to="/apply"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0F6E8C] hover:bg-[#0B5C74] text-white font-bold text-xs sm:text-sm shadow-2xs transition-all hover:scale-105"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm shadow-xs transition-all hover:shadow-md hover:scale-[1.02]"
                     >
                       <span>Apply Now</span>
                       <ArrowRight size={14} />
                     </Link>
                   )}
 
-                  {/* Notification Bell */}
                   <NotificationBell />
-
                   <UserProfileMenu />
                 </>
               ) : (
@@ -343,13 +341,13 @@ function Navbar() {
                   <NotificationBell />
                   <Link
                     to="/login"
-                    className="text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-[#0F6E8C] dark:hover:text-[#38BDF8] px-3.5 py-2 rounded-full transition-colors"
+                    className="text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-teal-600 dark:hover:text-teal-400 px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 bg-white dark:bg-slate-800/80 transition-all shadow-xs"
                   >
                     Log in
                   </Link>
                   <Link
                     to="/apply"
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#0F6E8C] hover:bg-[#0B5C74] text-white font-bold text-xs sm:text-sm shadow-2xs transition-all hover:scale-105"
+                    className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm shadow-xs transition-all hover:shadow-md hover:scale-[1.02]"
                   >
                     <span>Apply Now</span>
                     <ArrowRight size={13} />
@@ -364,7 +362,7 @@ function Navbar() {
               <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 rounded-xl text-slate-700 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-[#38BDF8] hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                className="p-2 rounded-xl text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 aria-label="Toggle navigation menu"
               >
                 {isOpen ? <X size={21} /> : <Menu size={21} />}
@@ -394,14 +392,14 @@ function Navbar() {
         {/* Drawer Header */}
         <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3 bg-slate-50/80 dark:bg-slate-900/80 shrink-0">
           <Link to="/" onClick={closeMenu} className="flex items-center gap-2.5 min-w-0">
-            <div className="w-8 h-8 rounded-xl overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700 bg-teal-50 dark:bg-slate-800">
-              <img src={Logo} alt="Al-Mukhtar" className="w-full h-full object-cover" />
+            <div className="w-8 h-8 overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700 bg-teal-50 dark:bg-slate-800 rounded-none">
+              <img src={Logo} alt="Al-Mukhtar" className="w-full h-full object-cover rounded-none" />
             </div>
             <div className="flex flex-col min-w-0">
               <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white font-heading tracking-tight truncate">
                 Al-Mukhtar
               </span>
-              <span className="text-[10px] font-semibold text-[#0F6E8C] dark:text-[#38BDF8] uppercase tracking-wider truncate font-mono">
+              <span className="text-[10px] font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider truncate font-mono">
                 Academic Institute
               </span>
             </div>
@@ -430,7 +428,7 @@ function Navbar() {
                 className={({ isActive }) =>
                   `flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all ${
                     isActive
-                      ? "bg-teal-50 dark:bg-slate-800 text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
+                      ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-bold"
                       : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60"
                   }`
                 }
@@ -445,7 +443,7 @@ function Navbar() {
                 className={({ isActive }) =>
                   `flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all ${
                     isActive
-                      ? "bg-teal-50 dark:bg-slate-800 text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
+                      ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-bold"
                       : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60"
                   }`
                 }
@@ -454,7 +452,20 @@ function Navbar() {
                 <ChevronRight size={16} className="text-slate-400" />
               </NavLink>
 
-
+              <NavLink
+                to="/videos"
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  `flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all ${
+                    isActive
+                      ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-bold"
+                      : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60"
+                  }`
+                }
+              >
+                <span>Videos</span>
+                <ChevronRight size={16} className="text-slate-400" />
+              </NavLink>
 
               <NavLink
                 to="/blog"
@@ -462,7 +473,7 @@ function Navbar() {
                 className={({ isActive }) =>
                   `flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all ${
                     isActive
-                      ? "bg-teal-50 dark:bg-slate-800 text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
+                      ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-bold"
                       : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60"
                   }`
                 }
@@ -472,13 +483,13 @@ function Navbar() {
               </NavLink>
 
               {/* Mobile About Accordion */}
-              <div className="rounded-xl overflow-hidden border border-slate-100 dark:border-slate-800/80">
+              <div className="rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80">
                 <button
                   type="button"
                   onClick={() => setMobileAboutExpanded(!mobileAboutExpanded)}
                   className={`w-full flex items-center justify-between p-3 text-sm font-semibold transition-colors cursor-pointer ${
                     isAboutActive
-                      ? "bg-teal-50/70 dark:bg-slate-800/70 text-[#0F6E8C] dark:text-[#38BDF8]"
+                      ? "bg-teal-50/70 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300"
                       : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60"
                   }`}
                 >
@@ -486,7 +497,7 @@ function Navbar() {
                   <ChevronDown
                     size={16}
                     className={`text-slate-400 transition-transform duration-200 ${
-                      mobileAboutExpanded ? "rotate-180 text-[#0F6E8C]" : ""
+                      mobileAboutExpanded ? "rotate-180 text-teal-600" : ""
                     }`}
                   />
                 </button>
@@ -499,7 +510,7 @@ function Navbar() {
                       className={({ isActive }) =>
                         `flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
                           isActive
-                            ? "bg-[#0F6E8C] text-white font-bold"
+                            ? "bg-teal-600 text-white font-bold"
                             : "text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-800"
                         }`
                       }
@@ -514,7 +525,7 @@ function Navbar() {
                       className={({ isActive }) =>
                         `flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
                           isActive
-                            ? "bg-[#0F6E8C] text-white font-bold"
+                            ? "bg-teal-600 text-white font-bold"
                             : "text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-800"
                         }`
                       }
@@ -529,7 +540,7 @@ function Navbar() {
                       className={({ isActive }) =>
                         `flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
                           isActive
-                            ? "bg-[#0F6E8C] text-white font-bold"
+                            ? "bg-teal-600 text-white font-bold"
                             : "text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-800"
                         }`
                       }
@@ -537,24 +548,24 @@ function Navbar() {
                       <GraduationCap size={14} />
                       <span>Alumni &amp; Graduates</span>
                     </NavLink>
+
+                    <NavLink
+                      to="/contact"
+                      onClick={closeMenu}
+                      className={({ isActive }) =>
+                        `flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+                          isActive
+                            ? "bg-teal-600 text-white font-bold"
+                            : "text-slate-600 dark:text-slate-400 hover:bg-slate-200/60 dark:hover:bg-slate-800"
+                        }`
+                      }
+                    >
+                      <Mail size={14} />
+                      <span>Contact &amp; Inquiries</span>
+                    </NavLink>
                   </div>
                 )}
               </div>
-
-              <NavLink
-                to="/contact"
-                onClick={closeMenu}
-                className={({ isActive }) =>
-                  `flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all ${
-                    isActive
-                      ? "bg-teal-50 dark:bg-slate-800 text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
-                      : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60"
-                  }`
-                }
-              >
-                <span>Contact</span>
-                <ChevronRight size={16} className="text-slate-400" />
-              </NavLink>
 
               <NavLink
                 to="/result"
@@ -562,7 +573,7 @@ function Navbar() {
                 className={({ isActive }) =>
                   `flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all ${
                     isActive
-                      ? "bg-teal-50 dark:bg-slate-800 text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
+                      ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-bold"
                       : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60"
                   }`
                 }
@@ -579,7 +590,7 @@ function Navbar() {
                   className={({ isActive }) =>
                     `flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all ${
                       isActive
-                        ? "bg-teal-50 dark:bg-slate-800 text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
+                        ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-bold"
                         : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60"
                     }`
                   }
@@ -597,7 +608,7 @@ function Navbar() {
                   className={({ isActive }) =>
                     `flex items-center justify-between p-3 rounded-xl text-sm font-semibold transition-all ${
                       isActive
-                        ? "bg-teal-50 dark:bg-slate-800 text-[#0F6E8C] dark:text-[#38BDF8] font-bold"
+                        ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-bold"
                         : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800/60"
                     }`
                   }
@@ -652,7 +663,7 @@ function Navbar() {
               <Link
                 to="/apply"
                 onClick={closeMenu}
-                className="w-full text-center py-2.5 px-3 rounded-xl bg-[#0F6E8C] text-white text-xs font-bold hover:bg-[#0B5C74] transition-all shadow-2xs"
+                className="w-full text-center py-2.5 px-3 rounded-xl bg-teal-600 text-white text-xs font-bold hover:bg-teal-700 transition-all shadow-xs"
               >
                 Apply Now
               </Link>

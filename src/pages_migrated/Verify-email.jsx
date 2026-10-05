@@ -100,21 +100,21 @@ function VerifyEmail() {
   return (
     <div className="min-h-screen min-h-[100dvh] w-full flex bg-slate-50 font-sans">
 
-      <div className="hidden lg:flex lg:w-[42%] relative bg-gradient-to-br from-[#0A2540] via-[#081E2E] to-[#0F6E8C] overflow-hidden">
+      <div className="hidden lg:flex lg:w-[42%] relative bg-gradient-to-br from-[#0A2540] via-[#081E2E] to-[#0D9488] overflow-hidden">
         <img
           src={moon_light}
           alt=""
           className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-25 pointer-events-none"
         />
-        <div className="absolute top-0 right-0 w-80 h-80 bg-[#8FB3AA]/15 rounded-full blur-[100px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#0F6E8C]/20 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#5EEAD4]/15 rounded-full blur-[100px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#0D9488]/20 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 pointer-events-none" />
 
         <div className="relative z-10 flex flex-col justify-between p-12 xl:p-14 w-full">
           <div className="flex items-center gap-3">
             <img
               src={Logo}
               alt="Madrasa Logo"
-              className="w-11 h-11 rounded-xl object-cover ring-2 ring-[#8FB3AA]/40 shadow-sm"
+              className="w-11 h-11 rounded-xl object-cover ring-2 ring-[#5EEAD4]/40 shadow-sm"
             />
             <span className="text-white font-heading font-extrabold text-lg tracking-tight">
               Al-Mukhtar Institute
@@ -122,7 +122,7 @@ function VerifyEmail() {
           </div>
 
           <div className="py-8">
-            <span className="inline-block text-[#8FB3AA] text-[11px] font-bold tracking-widest uppercase mb-3 font-mono">
+            <span className="inline-block text-[#5EEAD4] text-[11px] font-bold tracking-widest uppercase mb-3 font-mono">
               Almost There
             </span>
             <h1 className="font-heading text-3xl xl:text-4xl font-black text-white leading-tight mb-4 tracking-tight">
@@ -142,7 +142,7 @@ function VerifyEmail() {
           <div className="mb-4 sm:mb-6 self-start">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#0F6E8C] bg-white hover:bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200/80 transition-all group shadow-2xs"
+              className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#0D9488] bg-white hover:bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200/80 transition-all group shadow-2xs"
             >
               <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
               <span>Back to Home</span>
@@ -162,7 +162,7 @@ function VerifyEmail() {
           </div>
 
           {/* Icon */}
-          <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0F6E8C] flex items-center justify-center mb-6 border border-teal-100">
+          <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center mb-6 border border-teal-100">
             <Mail size={22} />
           </div>
 
@@ -201,7 +201,7 @@ function VerifyEmail() {
                   onChange={(e) => handleChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
                   onPaste={index === 0 ? handlePaste : undefined}
-                  className={`w-11 h-13 sm:w-14 sm:h-15 text-center text-xl font-bold rounded-xl border text-slate-900 outline-none transition-all focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] bg-white ${errors[`otp${index}`] ? "border-rose-400 bg-rose-50/30" : "border-slate-200"
+                  className={`w-11 h-13 sm:w-14 sm:h-15 text-center text-xl font-bold rounded-xl border text-slate-900 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] bg-white ${errors[`otp${index}`] ? "border-rose-400 bg-rose-50/30" : "border-slate-200"
                     }`}
                 />
               ))}
@@ -216,7 +216,7 @@ function VerifyEmail() {
             <button
               type="submit"
               disabled={verifyMutation.isPending}
-              className="w-full bg-[#0F6E8C] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0B5C74] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-6 text-center"
+              className="w-full bg-[#0D9488] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0F766E] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-6 text-center"
             >
               {verifyMutation.isPending ? "Verifying..." : "Verify Email"}
             </button>
@@ -229,7 +229,7 @@ function VerifyEmail() {
               type="button"
               onClick={() => resendMutation.mutate()}
               disabled={resendCooldown > 0 || resendMutation.isPending}
-              className="text-[#0F6E8C] font-bold hover:underline disabled:text-slate-400 disabled:no-underline disabled:cursor-not-allowed"
+              className="text-[#0D9488] font-bold hover:underline disabled:text-slate-400 disabled:no-underline disabled:cursor-not-allowed"
             >
               {resendCooldown > 0
                 ? `Resend in ${resendCooldown}s`

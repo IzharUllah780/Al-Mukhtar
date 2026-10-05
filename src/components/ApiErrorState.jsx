@@ -60,7 +60,7 @@ export default function ApiErrorState({
             type="button"
             onClick={handleTriggerRetry}
             disabled={isSpinning}
-            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white dark:bg-slate-800 text-[#0F6E8C] dark:text-teal-400 font-bold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-[11px] shrink-0 cursor-pointer shadow-2xs disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white dark:bg-slate-800 text-[#0D9488] dark:text-teal-400 font-bold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all text-[11px] shrink-0 cursor-pointer shadow-2xs disabled:opacity-50"
           >
             <RefreshCw size={11} className={isSpinning ? "animate-spin" : ""} />
             <span>{isSpinning ? "Retrying..." : "Refresh"}</span>
@@ -95,7 +95,7 @@ export default function ApiErrorState({
             type="button"
             onClick={handleTriggerRetry}
             disabled={isSpinning}
-            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#0F6E8C] hover:bg-[#0B5C74] dark:bg-teal-600 dark:hover:bg-teal-700 text-white font-bold text-xs shadow-2xs transition-all cursor-pointer disabled:opacity-60 shrink-0 self-start sm:self-auto"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] dark:bg-teal-600 dark:hover:bg-teal-700 text-white font-bold text-xs shadow-2xs transition-all cursor-pointer disabled:opacity-60 shrink-0 self-start sm:self-auto"
           >
             <RefreshCw size={13} className={isSpinning ? "animate-spin" : ""} />
             <span>{isSpinning ? "Refreshing..." : "Refresh Connection"}</span>
@@ -112,7 +112,7 @@ export default function ApiErrorState({
         className={`min-h-[60vh] flex flex-col items-center justify-center text-center px-4 py-16 font-sans ${className}`}
         role="alert"
       >
-        <div className="max-w-md w-full bg-white dark:bg-[#0c1827] rounded-3xl border border-slate-200/90 dark:border-slate-800 p-8 sm:p-10 shadow-lg shadow-slate-900/5 dark:shadow-slate-950/40 space-y-5">
+        <div className="max-w-md w-full bg-white dark:bg-[#0f172a] rounded-3xl border border-slate-200/90 dark:border-slate-800 p-8 sm:p-10 shadow-lg shadow-slate-900/5 dark:shadow-slate-950/40 space-y-5">
           <div className="w-16 h-16 rounded-2xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200/80 dark:border-rose-900/60 text-rose-600 dark:text-rose-400 flex items-center justify-center mx-auto shadow-2xs">
             <WifiOff size={28} />
           </div>
@@ -130,7 +130,7 @@ export default function ApiErrorState({
                 type="button"
                 onClick={handleTriggerRetry}
                 disabled={isSpinning}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0F6E8C] hover:bg-[#0B5C74] dark:bg-teal-600 dark:hover:bg-teal-700 text-white font-bold px-6 py-3 rounded-xl transition-all text-xs sm:text-sm shadow-sm cursor-pointer disabled:opacity-60 active:scale-98"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0D9488] hover:bg-[#0F766E] dark:bg-teal-600 dark:hover:bg-teal-700 text-white font-bold px-6 py-3 rounded-xl transition-all text-xs sm:text-sm shadow-sm cursor-pointer disabled:opacity-60 active:scale-98"
               >
                 <RefreshCw size={15} className={isSpinning ? "animate-spin" : ""} />
                 <span>{isSpinning ? "Retrying Connection..." : "Refresh Page"}</span>
@@ -165,7 +165,7 @@ export default function ApiErrorState({
             type="button"
             onClick={handleTriggerRetry}
             disabled={isSpinning}
-            className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-[#0F6E8C] hover:bg-[#0B5C74] dark:bg-teal-600 dark:hover:bg-teal-700 text-white font-bold text-xs shadow-2xs transition-all cursor-pointer disabled:opacity-60 active:scale-95"
+            className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] dark:bg-teal-600 dark:hover:bg-teal-700 text-white font-bold text-xs shadow-2xs transition-all cursor-pointer disabled:opacity-60 active:scale-95"
           >
             <RefreshCw size={13} className={isSpinning ? "animate-spin" : ""} />
             <span>{isSpinning ? "Retrying..." : "Refresh"}</span>

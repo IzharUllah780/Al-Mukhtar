@@ -22,7 +22,7 @@ export function ThemeToggle({ className = "", showLabel = false, size = "md" }) 
       className={`relative inline-flex items-center justify-center p-2 rounded-xl transition-all duration-300 cursor-pointer border ${
         isDark
           ? "bg-slate-800/90 text-amber-300 border-slate-700 hover:bg-slate-700/80 hover:text-amber-200 shadow-xs"
-          : "bg-slate-100/90 text-slate-600 border-slate-200 hover:bg-slate-200/80 hover:text-[#0F6E8C] shadow-2xs"
+          : "bg-slate-100/90 text-slate-600 border-slate-200 hover:bg-slate-200/80 hover:text-teal-600 shadow-xs"
       } ${className}`}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       title={isDark ? "Switch to light mode" : "Switch to dark mode"}

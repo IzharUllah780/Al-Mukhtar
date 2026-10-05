@@ -6,7 +6,7 @@ import { Link } from "@/lib/navigation-adapter";
 import { Clock, Eye } from "lucide-react";
 import { LogoImg, getImageUrl } from "../assets/assets.js";
 
-export function getSnippet(html, maxLength = 130) {
+export function getSnippet(html, maxLength = 320) {
   if (!html) return "";
   const text = html
     .replace(/<wbr\s*\/?>/gi, "")
@@ -141,7 +141,7 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
 
   if (layout === "list") {
     return (
-      <article className="group bg-transparent sm:bg-white sm:dark:bg-[#0c1827] rounded-none sm:rounded-2xl border-0 sm:border border-slate-200/90 dark:border-slate-800/80 hover:border-transparent sm:hover:border-[#0F6E8C]/60 sm:dark:hover:border-teal-400/50 shadow-none sm:shadow-2xs sm:hover:shadow-md transition-all duration-300 overflow-visible sm:overflow-hidden h-full flex flex-col justify-between">
+      <article className="group bg-transparent sm:bg-white sm:dark:bg-slate-900 rounded-none border-0 hover:border-transparent shadow-none sm:shadow-xs sm:hover:shadow-md transition-all duration-300 overflow-visible sm:overflow-hidden h-full flex flex-col justify-between font-sans">
         <div className="flex flex-row items-center sm:items-start justify-between p-0 sm:p-4 gap-3 sm:gap-4.5 h-full">
           {/* List Content (Left Side) */}
           <div className="flex-1 min-w-0 flex flex-col justify-between h-full space-y-2">
@@ -157,32 +157,32 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
                       onCategoryClick(category);
                     }
                   }}
-                  className="text-[10px] min-[400px]:text-[11px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-teal-50 dark:bg-teal-950/60 text-[#0F6E8C] dark:text-teal-300 border border-teal-200/70 dark:border-teal-800/60 hover:bg-[#0F6E8C] hover:text-white dark:hover:bg-teal-600 dark:hover:text-white transition-colors cursor-pointer"
+                  className="text-[10px] min-[400px]:text-[11px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-none bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200/70 dark:border-teal-800/60 hover:bg-teal-600 hover:text-white dark:hover:bg-teal-600 dark:hover:text-white transition-colors cursor-pointer"
                 >
                   {category}
                 </button>
               </div>
 
-              {/* Title (Extra bold on mobile screen) */}
-              <h2 className="text-[18px] min-[400px]:text-[20px] sm:text-base lg:text-[18px] font-black sm:font-bold font-heading text-slate-900 dark:text-white leading-[1.3] tracking-tight group-hover:text-[#0F6E8C] dark:group-hover:text-teal-300 transition-colors line-clamp-2">
+              {/* Title */}
+              <h2 className="text-[18px] min-[400px]:text-[20px] sm:text-base lg:text-[18px] font-bold font-heading text-slate-900 dark:text-white leading-[1.3] tracking-tight group-hover:text-teal-600 dark:group-hover:text-teal-300 transition-colors line-clamp-2">
                 <Link to={blogUrl}>{blog.title}</Link>
               </h2>
 
               {/* Excerpt */}
               {snippet && (
-                <p className="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-2 font-normal">
+                <p className="text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-4 font-normal">
                   {snippet}
                 </p>
               )}
             </div>
 
-            {/* List Footer (Date, Read Time, and Views in the bottom) */}
+            {/* List Footer */}
             <div className="pt-2 flex items-center justify-between gap-2 text-xs border-t border-slate-100 dark:border-slate-800/80 mt-1">
               <div className="flex items-center flex-wrap gap-1.5 min-[400px]:gap-2 text-[10px] min-[400px]:text-[11px] text-slate-400 dark:text-slate-500 font-mono">
                 <span>{formattedDate}</span>
                 <span className="text-slate-300 dark:text-slate-600 select-none">•</span>
                 <span className="inline-flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-slate-400 dark:text-slate-500 shrink-0" />
+                  <Clock className="w-3 h-3 text-teal-600 dark:text-teal-400 shrink-0" />
                   <span>{readTime}</span>
                 </span>
                 <span className="text-slate-300 dark:text-slate-600 select-none">•</span>
@@ -193,7 +193,7 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
               </div>
               <Link
                 to={blogUrl}
-                className="inline-flex items-center gap-1 font-bold text-xs text-[#0F6E8C] dark:text-teal-400 group-hover:gap-1.5 transition-all ml-auto shrink-0"
+                className="inline-flex items-center gap-1 font-bold text-xs text-teal-600 dark:text-teal-400 group-hover:gap-1.5 transition-all ml-auto shrink-0"
               >
                 <span>Read</span>
                 <span aria-hidden="true">&rarr;</span>
@@ -204,14 +204,14 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
           {/* List Small Thumbnail (Right Side) */}
           <Link
             to={blogUrl}
-            className="relative w-20 h-20 min-[400px]:w-24 min-[400px]:h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 block group/img border border-slate-200/60 dark:border-slate-800 shadow-3xs"
+            className="relative w-20 h-20 min-[400px]:w-24 min-[400px]:h-24 sm:w-28 sm:h-28 rounded-none overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0 block group/img border border-slate-200/80 dark:border-slate-800 shadow-xs"
           >
             <Image
               src={thumbnailSrc}
               alt={blog.title || "Blog article"}
               fill
               sizes="(max-width: 640px) 96px, 120px"
-              className={`transition-transform duration-300 ease-out group-hover:scale-105 ${
+              className={`transition-transform duration-300 ease-out group-hover:scale-105 rounded-none ${
                 isFallbackLogo
                   ? "object-contain p-3 opacity-75"
                   : "object-cover object-center"
@@ -225,21 +225,21 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
     );
   }
 
-  // Default Grid Layout (Card style with bigger title font size & weight on mobile)
+  // Default Grid Layout
   return (
-    <article className="w-full bg-transparent border-0 shadow-none">
+    <article className="w-full bg-transparent border-0 shadow-none font-sans">
       <Link
         to={blogUrl}
         className="group block w-full text-left cursor-pointer select-none"
       >
-        {/* 1. Medium Thumbnail Image (Aspect 16:10, Rounded 2xl, overflow-hidden) */}
-        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200/60 dark:border-slate-800">
+        {/* Thumbnail Image */}
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-none bg-slate-100 dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-800 shadow-xs group-hover:shadow-md transition-all">
           <Image
             src={thumbnailSrc}
             alt={blog.title || "Blog article"}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-            className={`transition-transform duration-300 ease-out group-hover:scale-104 ${
+            className={`transition-transform duration-300 ease-out group-hover:scale-105 rounded-none ${
               isFallbackLogo
                 ? "object-contain p-6 opacity-75"
                 : "object-cover object-center"
@@ -249,24 +249,24 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
           />
         </div>
 
-        {/* 2. Medium Category Label */}
+        {/* Category Label */}
         <div className="mt-3.5">
-          <span className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-[#0F6E8C] dark:text-teal-400 block">
+          <span className="text-[11px] sm:text-xs font-mono font-semibold uppercase tracking-wider text-teal-600 dark:text-teal-400 block">
             {category}
           </span>
         </div>
 
-        {/* 3. Medium Bold Title — Extra bold & big font size on mobile screen only */}
-        <h2 className="mt-1.5 text-[20px] min-[400px]:text-[22px] sm:text-base lg:text-[18px] font-black sm:font-bold font-heading text-slate-800 dark:text-slate-100 leading-[1.3] tracking-tight line-clamp-2 group-hover:text-[#0F6E8C] dark:group-hover:text-teal-300 transition-colors">
+        {/* Title */}
+        <h2 className="mt-1.5 text-[20px] min-[400px]:text-[22px] sm:text-base lg:text-[18px] font-bold font-heading text-slate-900 dark:text-slate-100 leading-[1.3] tracking-tight line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-300 transition-colors">
           {blog.title}
         </h2>
 
-        {/* 4. Medium Meta Row (Date, Read Time, and Views) */}
+        {/* Meta Row */}
         <div className="mt-2 flex items-center flex-wrap gap-2 text-[11px] sm:text-xs text-slate-400 dark:text-slate-400 font-normal font-mono">
           <span>{formattedDate}</span>
           <span className="text-slate-300 dark:text-slate-600 select-none">•</span>
           <span className="inline-flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5 text-slate-400 dark:text-slate-400 shrink-0" />
+            <Clock className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400 shrink-0" />
             <span>{readTime}</span>
           </span>
           <span className="text-slate-300 dark:text-slate-600 select-none">•</span>
@@ -276,9 +276,9 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
           </span>
         </div>
 
-        {/* 5. Medium Excerpt */}
+        {/* Excerpt */}
         {snippet && (
-          <p className="mt-2 text-xs sm:text-[13px] text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-2 font-normal">
+          <p className="mt-2 text-xs sm:text-[13px] text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-4 font-normal">
             {snippet}
           </p>
         )}

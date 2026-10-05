@@ -320,10 +320,10 @@ export default function AdminNotifications() {
             <button
               type="button"
               onClick={() => setPreviewNotifsList(activeNotifications)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0F6E8C] hover:text-[#0F6E8C] text-xs font-medium shadow-2xs transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0D9488] hover:text-[#0D9488] text-xs font-medium shadow-2xs transition-colors cursor-pointer"
               title="Preview all active notifications on website"
             >
-              <Eye size={13} className="text-[#0F6E8C]" />
+              <Eye size={13} className="text-[#0D9488]" />
               <span>Preview Live ({activeNotifications.length})</span>
             </button>
           )}
@@ -331,9 +331,9 @@ export default function AdminNotifications() {
           <button
             onClick={handleRefresh}
             title="Refresh list"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0F6E8C] hover:text-[#0F6E8C] text-xs font-medium shadow-2xs transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0D9488] hover:text-[#0D9488] text-xs font-medium shadow-2xs transition-colors cursor-pointer"
           >
-            <RefreshCw size={13} className={isRefreshing ? "animate-spin text-[#0F6E8C]" : ""} />
+            <RefreshCw size={13} className={isRefreshing ? "animate-spin text-[#0D9488]" : ""} />
             <span className="hidden sm:inline">Refresh</span>
           </button>
 
@@ -347,7 +347,7 @@ export default function AdminNotifications() {
                 setShowForm(true);
               }
             }}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0F6E8C] text-white text-xs font-semibold shadow-xs hover:bg-[#0B5C74] transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-semibold shadow-xs hover:bg-[#0F766E] transition-colors cursor-pointer"
           >
             {showForm ? <X size={13} /> : <Plus size={13} />}
             <span>{showForm ? "Cancel" : "Add Notification"}</span>
@@ -375,10 +375,10 @@ export default function AdminNotifications() {
 
       {/* ── INLINE CREATE / EDIT FORM PANEL — On Screen directly for Mobile, Card for Desktop/Laptop ── */}
       {showForm && (
-        <div className="bg-transparent sm:bg-white sm:dark:bg-[#0c1827] border-0 sm:border border-slate-200 dark:border-slate-800 rounded-none sm:rounded-xl p-0 sm:p-5 shadow-none sm:shadow-xs space-y-4">
+        <div className="bg-transparent sm:bg-white sm:dark:bg-[#0f172a] border-0 sm:border border-slate-200 dark:border-slate-800 rounded-none sm:rounded-xl p-0 sm:p-5 shadow-none sm:shadow-xs space-y-4">
           <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-3 sm:pb-2.5">
             <h2 className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider font-mono flex items-center gap-2">
-              <Sparkles size={13} className="text-[#0F6E8C]" />
+              <Sparkles size={13} className="text-[#0D9488]" />
               <span>{editingNotif ? "Edit Notification Details" : "Create New Notification"}</span>
             </h2>
             <button
@@ -400,7 +400,7 @@ export default function AdminNotifications() {
                 <input
                   type="text"
                   placeholder="e.g. New Tajweed & Qira'at Certification Course Announced!"
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
                   {...register("title")}
                 />
               </div>
@@ -413,7 +413,7 @@ export default function AdminNotifications() {
                 <input
                   type="text"
                   placeholder="e.g. Announcement"
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 transition-all"
                   {...register("badge")}
                 />
                 <div className="flex flex-wrap gap-1.5 mt-2">
@@ -424,8 +424,8 @@ export default function AdminNotifications() {
                       onClick={() => setValue("badge", b)}
                       className={`text-[10px] px-2 py-1 rounded-md border transition-all cursor-pointer ${
                         watchedBadge === b
-                          ? "bg-[#0F6E8C] text-white border-[#0F6E8C]"
-                          : "bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:border-[#0F6E8C]"
+                          ? "bg-[#0D9488] text-white border-[#0D9488]"
+                          : "bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:border-[#0D9488]"
                       }`}
                     >
                       {b}
@@ -447,7 +447,7 @@ export default function AdminNotifications() {
                 <textarea
                   rows={5}
                   placeholder="Enter full announcement details, schedule notes, instructions, admission highlights, or eligibility guidelines..."
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm min-h-[140px] sm:min-h-[170px] outline-none focus:border-[#0F6E8C] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0F6E8C]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 leading-relaxed transition-all resize-y"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm min-h-[140px] sm:min-h-[170px] outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 bg-white dark:bg-slate-800/90 text-slate-900 dark:text-slate-100 leading-relaxed transition-all resize-y"
                   {...register("description")}
                 />
               </div>
@@ -455,14 +455,14 @@ export default function AdminNotifications() {
               {/* Course Quick Auto-fill */}
               <div className="sm:col-span-12 p-3.5 sm:p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 space-y-3">
                 <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">
-                  <BookOpen size={14} className="text-[#0F6E8C]" />
+                  <BookOpen size={14} className="text-[#0D9488]" />
                   <span>Link to a Course (Auto-fill Button Text & Route)</span>
                 </div>
 
                 <select
                   onChange={handleCourseSelect}
                   defaultValue=""
-                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none focus:border-[#0F6E8C] cursor-pointer"
+                  className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-3 sm:py-2.5 text-sm sm:text-xs min-h-[46px] sm:min-h-[42px] bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none focus:border-[#0D9488] cursor-pointer"
                 >
                   <option value="">-- Optional: Select course to auto-fill redirect details --</option>
                   {courses.map((course) => (
@@ -480,7 +480,7 @@ export default function AdminNotifications() {
                     <input
                       type="text"
                       placeholder="e.g. View Course"
-                      className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm sm:text-xs min-h-[44px] sm:min-h-[40px] bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none focus:border-[#0F6E8C]"
+                      className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm sm:text-xs min-h-[44px] sm:min-h-[40px] bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none focus:border-[#0D9488]"
                       {...register("buttonText")}
                     />
                   </div>
@@ -491,7 +491,7 @@ export default function AdminNotifications() {
                     <input
                       type="text"
                       placeholder="e.g. /courses/quran-tajweed-course"
-                      className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm sm:text-xs min-h-[44px] sm:min-h-[40px] bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none focus:border-[#0F6E8C]"
+                      className="w-full border border-slate-300 dark:border-slate-700 rounded-xl px-3.5 py-2.5 text-sm sm:text-xs min-h-[44px] sm:min-h-[40px] bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 outline-none focus:border-[#0D9488]"
                       {...register("buttonUrl")}
                     />
                   </div>
@@ -516,7 +516,7 @@ export default function AdminNotifications() {
                       </button>
                     </div>
                   ) : null}
-                  <label className="flex items-center gap-2 px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] border border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-xs sm:text-sm text-slate-600 dark:text-slate-300 hover:border-[#0F6E8C] cursor-pointer bg-slate-50 dark:bg-slate-800/60 transition-all">
+                  <label className="flex items-center gap-2 px-4 py-3 sm:py-2.5 min-h-[46px] sm:min-h-[42px] border border-dashed border-slate-300 dark:border-slate-700 rounded-xl text-xs sm:text-sm text-slate-600 dark:text-slate-300 hover:border-[#0D9488] cursor-pointer bg-slate-50 dark:bg-slate-800/60 transition-all">
                     <Upload size={14} className="text-slate-400 dark:text-slate-500" />
                     <span>{imagePreview ? "Change Image" : "Upload Banner (PNG/JPG)"}</span>
                     <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
@@ -529,7 +529,7 @@ export default function AdminNotifications() {
                 <label className="flex items-center gap-2.5 cursor-pointer">
                   <input
                     type="checkbox"
-                    className="w-4 h-4 rounded text-[#0F6E8C] border-slate-300 dark:border-slate-700 focus:ring-[#0F6E8C]"
+                    className="w-4 h-4 rounded text-[#0D9488] border-slate-300 dark:border-slate-700 focus:ring-[#0D9488]"
                     {...register("isActive")}
                   />
                   <span className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">
@@ -551,7 +551,7 @@ export default function AdminNotifications() {
               <button
                 type="submit"
                 disabled={isPending}
-                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#0F6E8C] text-white text-xs font-semibold shadow-xs hover:bg-[#0B5C74] transition-colors cursor-pointer disabled:opacity-50"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#0D9488] text-white text-xs font-semibold shadow-xs hover:bg-[#0F766E] transition-colors cursor-pointer disabled:opacity-50"
               >
                 {isPending && <Loader2 size={13} className="animate-spin" />}
                 <span>{editingNotif ? "Save Changes" : "Publish Notification"}</span>
@@ -569,7 +569,7 @@ export default function AdminNotifications() {
             placeholder="Search notifications by title, badge or description..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full border border-slate-300 dark:border-slate-700 rounded-lg pl-8 pr-3 py-1.5 text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 outline-none focus:border-[#0F6E8C]"
+            className="w-full border border-slate-300 dark:border-slate-700 rounded-lg pl-8 pr-3 py-1.5 text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder-slate-400 outline-none focus:border-[#0D9488]"
           />
           <Search size={13} className="absolute left-2.5 top-2.5 text-slate-400" />
         </div>
@@ -580,10 +580,10 @@ export default function AdminNotifications() {
       </div>
 
       {/* ── NOTIFICATIONS TABLE (Responsive, Compact Text, Invisible Scrollbar on Mobile) ── */}
-      <div className="bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-2xs">
+      <div className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-2xs">
         {adminNotificationsLoading ? (
           <div className="p-8 text-center text-slate-500">
-            <Loader2 size={24} className="animate-spin text-[#0F6E8C] mx-auto mb-2" />
+            <Loader2 size={24} className="animate-spin text-[#0D9488] mx-auto mb-2" />
             <p className="text-xs font-medium">Loading notifications...</p>
           </div>
         ) : filteredNotifications.length === 0 ? (
@@ -611,7 +611,7 @@ export default function AdminNotifications() {
                   <tr
                     key={notif._id}
                     className={`hover:bg-slate-50/60 dark:hover:bg-slate-800/40 transition-colors ${
-                      notif.isActive ? "bg-[#0F6E8C]/5 dark:bg-[#0F6E8C]/10" : ""
+                      notif.isActive ? "bg-[#0D9488]/5 dark:bg-[#0D9488]/10" : ""
                     }`}
                   >
                     {/* Notification info */}
@@ -664,7 +664,7 @@ export default function AdminNotifications() {
                     {/* Target Action */}
                     <td className="py-2.5 px-2.5 whitespace-nowrap hidden sm:table-cell">
                       {notif.buttonText && notif.buttonUrl ? (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-mono text-[#0F6E8C] dark:text-teal-400 truncate max-w-[140px]">
+                        <span className="inline-flex items-center gap-1 text-[11px] font-mono text-[#0D9488] dark:text-teal-400 truncate max-w-[140px]">
                           <LinkIcon size={10} className="shrink-0" />
                           <span className="truncate">{notif.buttonText}</span>
                         </span>
@@ -706,7 +706,7 @@ export default function AdminNotifications() {
                           type="button"
                           onClick={() => setPreviewNotif(notif)}
                           title="Preview modal popup"
-                          className="p-1.5 rounded-md text-slate-500 dark:text-slate-400 hover:text-[#0F6E8C] dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                          className="p-1.5 rounded-md text-slate-500 dark:text-slate-400 hover:text-[#0D9488] dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                         >
                           <Eye size={13} />
                         </button>
@@ -739,7 +739,7 @@ export default function AdminNotifications() {
       {/* ── DELETE CONFIRMATION MODAL ── */}
       {notifToDelete && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/70 backdrop-blur-xs">
-          <div className="w-full max-w-sm bg-white dark:bg-[#0c1827] rounded-xl border border-slate-200 dark:border-slate-800 p-5 shadow-xl space-y-3">
+          <div className="w-full max-w-sm bg-white dark:bg-[#0f172a] rounded-xl border border-slate-200 dark:border-slate-800 p-5 shadow-xl space-y-3">
             <div className="w-9 h-9 rounded-lg bg-rose-100 dark:bg-rose-950/50 text-rose-600 flex items-center justify-center">
               <AlertTriangle size={18} />
             </div>

@@ -187,24 +187,24 @@ function Blog() {
   const latestBlogImage = latestBlog ? getBlogImage(latestBlog) : null;
 
   return (
-    <div className="bg-white dark:bg-[#070d18] min-h-screen font-sans text-slate-800 dark:text-slate-100 transition-colors duration-200">
+    <div className="bg-white dark:bg-slate-950 min-h-screen font-sans text-slate-800 dark:text-slate-100 transition-colors duration-200">
       {/* Modern Redesigned Hero Section */}
-      <section className="relative bg-gradient-to-b from-[#F0F7F5] via-[#F8FBFA] to-white dark:from-[#081524] dark:via-[#0a1727] dark:to-[#070d18] border-b border-slate-200/80 dark:border-slate-800/80 pt-8 sm:pt-12 pb-10 sm:pb-12 overflow-hidden">
+      <section className="relative bg-gradient-to-b from-teal-50/40 via-slate-50/50 to-white dark:from-slate-900/80 dark:via-slate-900/50 dark:to-slate-950 border-b border-slate-200/80 dark:border-slate-800/80 pt-10 sm:pt-14 pb-12 sm:pb-16 overflow-hidden">
         {/* Subtle decorative background glow */}
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#0F6E8C]/5 dark:bg-[#0F6E8C]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-24 -left-24 w-96 h-96 bg-teal-500/5 dark:bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute top-1/2 -right-24 w-80 h-80 bg-teal-200/20 dark:bg-teal-500/10 rounded-full blur-2xl pointer-events-none" />
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Column: Heading, Subtitle & Interactive Search */}
             <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200/80 dark:border-teal-800/60 text-[10.5px] font-bold text-[#0F6E8C] dark:text-teal-300 font-mono tracking-wider uppercase shadow-2xs">
-                <span className="w-2 h-2 rounded-full bg-[#0F6E8C] dark:bg-teal-400 animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200/80 dark:border-teal-800/60 text-[11px] font-bold text-teal-700 dark:text-teal-300 font-mono tracking-wider uppercase shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-teal-500 animate-pulse" />
                 <span>Al-Mukhtar Journal &amp; Academic Archive</span>
               </div>
 
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white font-heading leading-[1.2]">
-                Scholarly Insights &amp; <span className="text-[#0F6E8C] dark:text-[#38BDF8]">Islamic Reflections</span>
+                Scholarly Insights &amp; <span className="text-teal-600 dark:text-teal-400">Islamic Reflections</span>
               </h1>
 
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal max-w-xl">
@@ -213,8 +213,8 @@ function Blog() {
 
               {/* Integrated Hero Search Bar */}
               <div className="pt-2 max-w-lg">
-                <div className="relative flex items-center bg-white dark:bg-[#0c1827] border border-slate-200 dark:border-slate-700/80 focus-within:border-[#0F6E8C] dark:focus-within:border-[#38BDF8] focus-within:ring-2 focus-within:ring-[#0F6E8C]/15 dark:focus-within:ring-[#38BDF8]/20 rounded-xl shadow-xs transition-all p-1">
-                  <Search className="ml-3 w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0" />
+                <div className="relative flex items-center bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus-within:border-teal-600 dark:focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-teal-500/20 rounded-full shadow-sm transition-all p-1">
+                  <Search className="ml-3.5 w-4 h-4 text-slate-400 dark:text-slate-500 shrink-0" />
                   <input
                     type="text"
                     value={searchQuery}
@@ -232,7 +232,7 @@ function Blog() {
                         setSearchQuery("");
                         setCurrentPage(1);
                       }}
-                      className="p-1.5 mr-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+                      className="p-1.5 mr-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors cursor-pointer rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
                       title="Clear search"
                     >
                       <X className="w-4 h-4" />
@@ -242,14 +242,14 @@ function Blog() {
 
                 {/* Quick Topic Chips below Search */}
                 {activeTags.length > 0 && (
-                  <div className="flex items-center gap-1.5 flex-wrap pt-2.5 text-[11px] text-slate-500 dark:text-slate-400">
-                    <span className="font-mono text-[10px] text-slate-400 dark:text-slate-500 uppercase font-semibold">Popular:</span>
+                  <div className="flex items-center gap-1.5 flex-wrap pt-3 text-[11px] text-slate-500 dark:text-slate-400">
+                    <span className="font-mono text-[10.5px] text-slate-400 dark:text-slate-500 uppercase font-semibold">Popular:</span>
                     {activeTags.slice(0, 4).map((tag) => (
                       <button
                         key={tag}
                         type="button"
                         onClick={() => handleCategorySelect(tag)}
-                        className="px-2 py-0.5 rounded-md bg-white/80 dark:bg-slate-800/80 hover:bg-teal-50 dark:hover:bg-slate-700 border border-slate-200/80 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-[#0F6E8C] dark:hover:text-[#38BDF8] text-[11px] font-medium transition-colors cursor-pointer shadow-2xs"
+                        className="px-2.5 py-0.5 rounded-full bg-white/80 dark:bg-slate-900 hover:bg-teal-50 dark:hover:bg-teal-950/60 border border-slate-200/80 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-teal-700 dark:hover:text-teal-300 text-xs font-medium transition-colors cursor-pointer shadow-sm"
                       >
                         #{tag}
                       </button>
@@ -259,17 +259,17 @@ function Blog() {
               </div>
 
               {/* Credibility Trust Strip */}
-              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-2 text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 text-xs text-slate-500 dark:text-slate-400 font-mono">
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 size={13} className="text-[#0F6E8C] dark:text-teal-400" />
+                  <CheckCircle2 size={14} className="text-teal-600 dark:text-teal-400" />
                   Verified Scholarship
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 size={13} className="text-[#0F6E8C] dark:text-teal-400" />
+                  <CheckCircle2 size={14} className="text-teal-600 dark:text-teal-400" />
                   Peer-Reviewed
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle2 size={13} className="text-[#0F6E8C] dark:text-teal-400" />
+                  <CheckCircle2 size={14} className="text-teal-600 dark:text-teal-400" />
                   Open Academic Archive
                 </span>
               </div>
@@ -278,14 +278,14 @@ function Blog() {
             {/* Right Column: Latest Publication Spotlight Card */}
             <div className="lg:col-span-5">
               {latestBlog ? (
-                <div className="relative group bg-white dark:bg-[#0c1827] rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-xs hover:border-[#0F6E8C]/60 dark:hover:border-teal-500/50 hover:shadow-md transition-all duration-300 overflow-hidden p-3.5">
+                <div className="relative group bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm hover:border-teal-500/50 dark:hover:border-teal-500/50 hover:shadow-md transition-all duration-300 overflow-hidden p-4">
                   {/* Spotlight Top Badge: Latest Publication */}
-                  <div className="flex items-center justify-between pb-2.5">
-                    <div className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-[#0F6E8C] dark:text-teal-300 border border-teal-200/80 dark:border-teal-800/60 text-[10px] font-bold font-mono uppercase tracking-wider">
-                      <Sparkles className="w-3 h-3 text-[#0F6E8C] dark:text-teal-300" />
+                  <div className="flex items-center justify-between pb-3">
+                    <div className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200/80 dark:border-teal-800/60 text-[10px] font-bold font-mono uppercase tracking-wider">
+                      <Sparkles className="w-3 h-3 text-teal-600 dark:text-teal-400" />
                       <span>Latest Publication</span>
                     </div>
-                    <div className="flex items-center gap-2 text-[10px] text-slate-400 dark:text-slate-500 font-mono">
+                    <div className="flex items-center gap-2 text-[10.5px] text-slate-400 dark:text-slate-500 font-mono">
                       <span className="flex items-center gap-1">
                         <Clock className="w-3 h-3 text-slate-400 dark:text-slate-500" />
                         {getReadingTime(latestBlog)}
@@ -298,10 +298,10 @@ function Blog() {
                     </div>
                   </div>
 
-                  {/* Thumbnail Banner with properly framed fallback */}
+                  {/* Thumbnail Banner */}
                   <Link
                     to={`/blog/${latestBlog.slug || latestBlog._id}`}
-                    className="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 block group/img"
+                    className="relative w-full h-44 sm:h-48 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 block group/img"
                   >
                     {latestBlogImage ? (
                       <img
@@ -309,34 +309,34 @@ function Blog() {
                         onError={(e) => {
                           e.currentTarget.onerror = null;
                           e.currentTarget.src = LogoImg;
-                          e.currentTarget.className = "max-h-24 max-w-[75%] object-contain m-auto drop-shadow-2xs";
+                          e.currentTarget.className = "max-h-24 max-w-[75%] object-contain m-auto drop-shadow-sm";
                         }}
                         alt={latestBlog.title}
-                        className="w-full h-full object-cover group-hover/img:scale-104 transition-transform duration-300"
+                        className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500"
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-tr from-slate-100 dark:from-slate-800 via-teal-50/40 dark:via-slate-800/60 to-slate-50 dark:to-slate-900 flex items-center justify-center p-4">
                         <img
                           src={LogoImg}
                           alt="Al-Mukhtar Institute"
-                          className="max-h-24 max-w-[75%] object-contain drop-shadow-2xs group-hover/img:scale-105 transition-transform duration-300"
+                          className="max-h-24 max-w-[75%] object-contain drop-shadow-sm group-hover/img:scale-105 transition-transform duration-300"
                         />
                       </div>
                     )}
-                    <div className="absolute top-2.5 left-2.5">
-                      <span className="inline-flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-slate-900/80 dark:bg-black/80 text-white backdrop-blur-xs shadow-2xs font-mono">
-                        <Tag className="w-2.5 h-2.5 text-teal-300" />
+                    <div className="absolute top-3 left-3">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-slate-900/85 text-white backdrop-blur-sm shadow-sm font-mono">
+                        <Tag className="w-2.5 h-2.5 text-teal-400" />
                         {latestBlog.subject || "General"}
                       </span>
                     </div>
                   </Link>
 
                   {/* Content snippet */}
-                  <div className="pt-3 space-y-1.5">
-                    <div className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">
+                  <div className="pt-3.5 space-y-1.5">
+                    <div className="text-[10.5px] text-slate-400 dark:text-slate-500 font-mono">
                       <span>Al-Mukhtar Institute</span> · <span>{formatDate(latestBlog.createdAt)}</span>
                     </div>
-                    <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-[#0F6E8C] dark:group-hover:text-teal-400 transition-colors line-clamp-2 font-heading leading-snug">
+                    <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors line-clamp-2 font-heading leading-snug">
                       <Link to={`/blog/${latestBlog.slug || latestBlog._id}`}>
                         {latestBlog.title}
                       </Link>
@@ -345,11 +345,11 @@ function Blog() {
                       {latestBlog.description || getSnippet(latestBlog.content, 120)}
                     </p>
 
-                    <div className="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 text-xs">
+                    <div className="pt-2.5 flex items-center justify-between border-t border-slate-100 dark:border-slate-800 text-xs">
                       <span className="text-[11px] font-mono text-slate-400 dark:text-slate-500">New Release</span>
                       <Link
                         to={`/blog/${latestBlog.slug || latestBlog._id}`}
-                        className="inline-flex items-center gap-1 font-bold text-[#0F6E8C] dark:text-teal-400 group-hover:gap-1.5 transition-all"
+                        className="inline-flex items-center gap-1 font-bold text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 group-hover:gap-1.5 transition-all"
                       >
                         <span>Read Publication</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -358,13 +358,13 @@ function Blog() {
                   </div>
                 </div>
               ) : (
-                <div className="bg-white dark:bg-[#0c1827] rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-xs p-5 space-y-4">
+                <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-sm p-6 space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 shrink-0">
+                    <div className="w-12 h-12 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 shrink-0">
                       <img src={LogoImg} alt="Al-Mukhtar Logo" className="w-full h-full object-cover" />
                     </div>
                     <div>
-                      <h4 className="font-heading text-sm font-bold text-slate-900 dark:text-white">Al-Mukhtar Institute</h4>
+                      <h4 className="font-heading text-base font-bold text-slate-900 dark:text-white">Al-Mukhtar Institute</h4>
                       <p className="text-xs text-slate-500 dark:text-slate-400">Center for Quranic &amp; Islamic Studies</p>
                     </div>
                   </div>
@@ -379,12 +379,12 @@ function Blog() {
       </section>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+      <main className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-8 sm:py-12">
         <div className="space-y-6">
           {/* Category Pills & Toolbar Row */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-3">
-            {/* Category Pills (Horizontal Scroll) - Capped to at most 5 buttons */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none flex-nowrap whitespace-nowrap">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+            {/* Category Pills (Horizontal Scroll) */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none flex-nowrap whitespace-nowrap">
               {Object.entries(displayedCategories).map(([cat, count]) => {
                 const isActive = selectedCategory.toLowerCase() === cat.toLowerCase();
                 return (
@@ -392,15 +392,15 @@ function Blog() {
                     key={cat}
                     type="button"
                     onClick={() => handleCategorySelect(cat)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all shrink-0 cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
+                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all shrink-0 cursor-pointer whitespace-nowrap flex items-center gap-2 ${
                       isActive
-                        ? "bg-[#0F6E8C] dark:bg-teal-600 text-white shadow-2xs font-bold"
+                        ? "bg-teal-600 dark:bg-teal-600 text-white shadow-sm font-bold"
                         : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700"
                     }`}
                   >
                     <span>{cat}</span>
                     <span
-                      className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${
                         isActive
                           ? "bg-white/20 text-white"
                           : "bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400"
@@ -416,14 +416,14 @@ function Blog() {
             {/* Sort & View Options */}
             <div className="flex items-center justify-between lg:justify-end gap-3 shrink-0 text-xs text-slate-500 dark:text-slate-400">
               <div className="flex items-center gap-1.5">
-                <span className="text-slate-400 dark:text-slate-500 text-[11px] hidden sm:inline">Sort:</span>
+                <span className="text-slate-400 dark:text-slate-500 text-xs hidden sm:inline font-mono">Sort:</span>
                 <select
                   value={sortBy}
                   onChange={(e) => {
                     setSortBy(e.target.value);
                     setCurrentPage(1);
                   }}
-                  className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 px-3 py-1.5 rounded-xl text-xs font-semibold outline-none cursor-pointer transition-colors border border-transparent dark:border-slate-700 focus:border-[#0F6E8C] dark:focus:border-teal-400"
+                  className="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 px-3.5 py-2 rounded-xl text-xs font-semibold outline-none cursor-pointer transition-colors border border-transparent dark:border-slate-700 focus:border-teal-600 dark:focus:border-teal-400"
                 >
                   <option value="newest">Newest First</option>
                   <option value="oldest">Oldest First</option>
@@ -433,30 +433,30 @@ function Blog() {
               </div>
 
               {/* View Switcher Toggle */}
-              <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-0.5 rounded-xl border border-slate-200/80 dark:border-slate-700">
+              <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl border border-slate-200/80 dark:border-slate-700">
                 <button
                   type="button"
                   onClick={() => setViewMode("grid")}
                   className={`p-1.5 rounded-lg transition-all cursor-pointer ${
                     viewMode === "grid"
-                      ? "bg-white dark:bg-slate-700 text-[#0F6E8C] dark:text-teal-300 shadow-2xs font-bold"
+                      ? "bg-white dark:bg-slate-700 text-teal-600 dark:text-teal-300 shadow-sm font-bold"
                       : "text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200"
                   }`}
-                  title="Grid View (3-4 cards per row)"
+                  title="Grid View"
                 >
-                  <LayoutGrid className="w-3.5 h-3.5" />
+                  <LayoutGrid className="w-4 h-4" />
                 </button>
                 <button
                   type="button"
                   onClick={() => setViewMode("list")}
                   className={`p-1.5 rounded-lg transition-all cursor-pointer ${
                     viewMode === "list"
-                      ? "bg-white dark:bg-slate-700 text-[#0F6E8C] dark:text-teal-300 shadow-2xs font-bold"
+                      ? "bg-white dark:bg-slate-700 text-teal-600 dark:text-teal-300 shadow-sm font-bold"
                       : "text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200"
                   }`}
-                  title="List View (2 per row)"
+                  title="List View"
                 >
-                  <ListIcon className="w-3.5 h-3.5" />
+                  <ListIcon className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -468,29 +468,29 @@ function Blog() {
               <div
                 className={
                   viewMode === "list"
-                    ? "grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"
-                    : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6"
+                    ? "grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
+                    : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"
                 }
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((n) =>
                   viewMode === "list" ? (
                     <div
                       key={n}
-                      className="p-0 sm:p-4 rounded-none sm:rounded-2xl bg-transparent sm:bg-slate-50/70 sm:dark:bg-slate-800/40 border-0 sm:border border-slate-200/80 dark:border-slate-800 animate-pulse flex flex-row items-center justify-between gap-3 sm:gap-4"
+                      className="p-4 rounded-2xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 animate-pulse flex flex-row items-center justify-between gap-4"
                     >
-                      <div className="flex-1 space-y-2 py-1 min-w-0">
+                      <div className="flex-1 space-y-2.5 py-1 min-w-0">
                         <div className="w-20 h-3 bg-slate-200 dark:bg-slate-700 rounded" />
                         <div className="w-4/5 h-4 bg-slate-200 dark:bg-slate-700 rounded" />
                         <div className="w-full h-3 bg-slate-200 dark:bg-slate-700 rounded" />
                       </div>
-                      <div className="w-20 h-20 min-[400px]:w-24 min-[400px]:h-24 sm:w-28 sm:h-28 bg-slate-200 dark:bg-slate-700 rounded-xl shrink-0" />
+                      <div className="w-24 h-24 sm:w-28 sm:h-28 bg-slate-200 dark:bg-slate-700 rounded-2xl shrink-0" />
                     </div>
                   ) : (
                     <div
                       key={n}
-                      className="p-4 rounded-2xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 animate-pulse space-y-3"
+                      className="p-4 rounded-3xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800 animate-pulse space-y-3"
                     >
-                      <div className="w-full aspect-[16/10] bg-slate-200 dark:bg-slate-700 rounded-xl" />
+                      <div className="w-full aspect-[16/10] bg-slate-200 dark:bg-slate-700 rounded-2xl" />
                       <div className="w-24 h-3.5 bg-slate-200 dark:bg-slate-700 rounded-md" />
                       <div className="w-4/5 h-5 bg-slate-200 dark:bg-slate-700 rounded-md" />
                       <div className="w-full h-4 bg-slate-200 dark:bg-slate-700 rounded-md" />
@@ -509,8 +509,8 @@ function Blog() {
             )}
 
             {!isLoading && !isError && filteredBlogs.length === 0 && (
-              <div className="py-16 text-center space-y-3 bg-slate-50/60 dark:bg-[#0c1827] rounded-3xl border border-slate-200/80 dark:border-slate-800 p-8 max-w-xl mx-auto">
-                <div className="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-teal-950/60 text-[#0F6E8C] dark:text-teal-300 flex items-center justify-center mx-auto">
+              <div className="py-16 text-center space-y-3 bg-slate-50/60 dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 p-8 max-w-xl mx-auto">
+                <div className="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-300 flex items-center justify-center mx-auto">
                   <BookOpen className="w-6 h-6" />
                 </div>
                 <h3 className="text-base font-bold text-slate-900 dark:text-white font-heading">
@@ -528,7 +528,7 @@ function Blog() {
                       setSearchQuery("");
                       handleCategorySelect("All");
                     }}
-                    className="mt-2 px-4 py-2 rounded-full bg-[#0F6E8C] dark:bg-teal-600 text-white text-xs font-bold hover:bg-[#0B5C74] dark:hover:bg-teal-700 transition-all cursor-pointer shadow-2xs inline-block"
+                    className="mt-2 px-5 py-2.5 rounded-full bg-teal-600 text-white text-xs font-bold hover:bg-teal-700 transition-all cursor-pointer shadow-sm inline-block"
                   >
                     Clear Filters
                   </button>
@@ -536,14 +536,14 @@ function Blog() {
               </div>
             )}
 
-            {/* Render Blogs: Grid (3-4 per row) vs List (2 per row) layout */}
+            {/* Render Blogs: Grid vs List layout */}
             {!isLoading && !isError && filteredBlogs.length > 0 && (
               <>
                 <div
                   className={
                     viewMode === "list"
-                      ? "grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"
-                      : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6"
+                      ? "grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
+                      : "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6"
                   }
                 >
                   {paginatedBlogs.map((blog) => (
@@ -569,7 +569,7 @@ function Blog() {
                         type="button"
                         onClick={() => handlePageChange(safeCurrentPage - 1)}
                         disabled={safeCurrentPage === 1}
-                        className="inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0F6E8C] dark:hover:border-teal-400 hover:text-[#0F6E8C] dark:hover:text-teal-300 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-3xs cursor-pointer"
+                        className="inline-flex items-center gap-1 px-3.5 py-2 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-teal-600 dark:hover:border-teal-400 hover:text-teal-600 dark:hover:text-teal-300 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm cursor-pointer"
                         aria-label="Previous page"
                       >
                         <ChevronLeft className="w-4 h-4" />
@@ -595,10 +595,10 @@ function Blog() {
                             key={`page-${item}`}
                             type="button"
                             onClick={() => handlePageChange(item)}
-                            className={`w-9 h-9 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
+                            className={`w-9 h-9 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
                               isPageActive
-                                ? "bg-[#0F6E8C] dark:bg-teal-600 text-white shadow-2xs scale-105"
-                                : "border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-[#0F6E8C] dark:hover:border-teal-400 hover:text-[#0F6E8C] dark:hover:text-teal-300 shadow-3xs"
+                                ? "bg-teal-600 text-white shadow-sm scale-105"
+                                : "border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-teal-600 dark:hover:border-teal-400 hover:text-teal-600 dark:hover:text-teal-300 shadow-sm"
                             }`}
                           >
                             {item}
@@ -611,7 +611,7 @@ function Blog() {
                         type="button"
                         onClick={() => handlePageChange(safeCurrentPage + 1)}
                         disabled={safeCurrentPage === totalPages}
-                        className="inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-[#0F6E8C] dark:hover:border-teal-400 hover:text-[#0F6E8C] dark:hover:text-teal-300 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-3xs cursor-pointer"
+                        className="inline-flex items-center gap-1 px-3.5 py-2 rounded-full text-xs font-bold border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:border-teal-600 dark:hover:border-teal-400 hover:text-teal-600 dark:hover:text-teal-300 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm cursor-pointer"
                         aria-label="Next page"
                       >
                         <span className="hidden sm:inline">Next</span>

@@ -43,14 +43,14 @@ function Signup() {
   return (
     <div className="min-h-screen min-h-[100dvh] w-full flex bg-slate-50 font-sans">
       {/* Left Panel - Branding */}
-      <div className="hidden lg:flex lg:w-[42%] relative bg-gradient-to-br from-[#0A2540] via-[#081E2E] to-[#0F6E8C] overflow-hidden">
+      <div className="hidden lg:flex lg:w-[42%] relative bg-gradient-to-br from-[#0A2540] via-[#081E2E] to-[#0D9488] overflow-hidden">
         <img
           src={moon_light}
           alt=""
           className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-25 pointer-events-none"
         />
-        <div className="absolute top-0 right-0 w-80 h-80 bg-[#8FB3AA]/15 rounded-full blur-[100px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#0F6E8C]/20 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#5EEAD4]/15 rounded-full blur-[100px] -translate-y-1/3 translate-x-1/3 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#0D9488]/20 rounded-full blur-[100px] translate-y-1/4 -translate-x-1/4 pointer-events-none" />
 
         <div className="relative z-10 flex flex-col justify-between p-12 xl:p-14 w-full">
           {/* Logo + Name */}
@@ -58,7 +58,7 @@ function Signup() {
             <img
               src={Logo}
               alt="Madrasa Logo"
-              className="w-11 h-11 rounded-xl object-cover ring-2 ring-[#8FB3AA]/40 shadow-sm"
+              className="w-11 h-11 rounded-xl object-cover ring-2 ring-[#5EEAD4]/40 shadow-sm"
             />
             <span className="text-white font-heading font-extrabold text-lg tracking-tight">
               Al-Mukhtar Institute
@@ -67,7 +67,7 @@ function Signup() {
 
           {/* Main message */}
           <div className="py-8">
-            <span className="inline-block text-[#8FB3AA] text-[11px] font-bold tracking-widest uppercase mb-3 font-mono">
+            <span className="inline-block text-[#5EEAD4] text-[11px] font-bold tracking-widest uppercase mb-3 font-mono">
               Admissions Open
             </span>
             <h1 className="font-heading text-3xl xl:text-4xl font-black text-white leading-tight mb-4 tracking-tight">
@@ -82,7 +82,7 @@ function Signup() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center shrink-0">
-                <BookOpen size={16} className="text-[#8FB3AA]" />
+                <BookOpen size={16} className="text-[#5EEAD4]" />
               </div>
               <span className="text-xs text-slate-200 font-medium">
                 Structured authentic curriculum
@@ -90,7 +90,7 @@ function Signup() {
             </div>
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center shrink-0">
-                <Users size={16} className="text-[#8FB3AA]" />
+                <Users size={16} className="text-[#5EEAD4]" />
               </div>
               <span className="text-xs text-slate-200 font-medium">
                 Experienced, qualified scholars
@@ -98,7 +98,7 @@ function Signup() {
             </div>
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center shrink-0">
-                <Award size={16} className="text-[#8FB3AA]" />
+                <Award size={16} className="text-[#5EEAD4]" />
               </div>
               <span className="text-xs text-slate-200 font-medium">
                 Recognized course certification
@@ -115,7 +115,7 @@ function Signup() {
           <div className="mb-4 sm:mb-6 self-start">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#0F6E8C] bg-white hover:bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200/80 transition-all group shadow-2xs"
+              className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#0D9488] bg-white hover:bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200/80 transition-all group shadow-2xs"
             >
               <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
               <span>Back to Home</span>
@@ -159,7 +159,7 @@ function Signup() {
               <input
                 type="text"
                 placeholder="e.g. Ahmed Khan"
-                className={`w-full px-4 py-2.5 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] ${errors.name ? "border-rose-400 bg-rose-50/30" : "border-slate-200 bg-white"
+                className={`w-full px-4 py-2.5 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] ${errors.name ? "border-rose-400 bg-rose-50/30" : "border-slate-200 bg-white"
                   }`}
                 {...register("name", {
                   required: "Name is required",
@@ -184,7 +184,7 @@ function Signup() {
               <input
                 type="text"
                 placeholder="you@example.com"
-                className={`w-full px-4 py-2.5 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] ${errors.email ? "border-rose-400 bg-rose-50/30" : "border-slate-200 bg-white"
+                className={`w-full px-4 py-2.5 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] ${errors.email ? "border-rose-400 bg-rose-50/30" : "border-slate-200 bg-white"
                   }`}
                 {...register("email", {
                   required: "Email is required",
@@ -210,7 +210,7 @@ function Signup() {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Create a strong password"
-                  className={`w-full px-4 py-2.5 pr-11 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0F6E8C]/20 focus:border-[#0F6E8C] ${errors.password ? "border-rose-400 bg-rose-50/30" : "border-slate-200 bg-white"
+                  className={`w-full px-4 py-2.5 pr-11 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] ${errors.password ? "border-rose-400 bg-rose-50/30" : "border-slate-200 bg-white"
                     }`}
                   {...register("password", {
                     required: "Password is required",
@@ -242,7 +242,7 @@ function Signup() {
             <button
               type="submit"
               disabled={signupMutation.isPending}
-              className="w-full bg-[#0F6E8C] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0B5C74] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-2 text-center"
+              className="w-full bg-[#0D9488] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0F766E] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-2 text-center"
             >
               {signupMutation.isPending
                 ? "Creating Account..."
@@ -260,7 +260,7 @@ function Signup() {
             Already have an account?{" "}
             <Link
               to={redirectUrl ? `/login?redirect=${encodeURIComponent(redirectUrl)}` : "/login"}
-              className="text-[#0F6E8C] font-bold hover:underline"
+              className="text-[#0D9488] font-bold hover:underline"
             >
               Sign In
             </Link>

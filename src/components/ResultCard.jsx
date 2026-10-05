@@ -88,13 +88,13 @@ export default function ResultCard({ result, onBack }) {
   ).toFixed(1);
 
   return (
-    <div className="w-full max-w-4xl mx-auto my-4 sm:my-6 space-y-4 sm:space-y-5">
+    <div className="w-full max-w-4xl mx-auto my-4 sm:my-6 space-y-4 sm:space-y-5 font-sans">
       {/* Top Action Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-3 no-print">
         {onBack && (
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-xs cursor-pointer active:scale-95"
+            className="inline-flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-xs cursor-pointer active:scale-95"
           >
             ← Search Another Result
           </button>
@@ -104,7 +104,7 @@ export default function ResultCard({ result, onBack }) {
           <div className="flex items-center gap-2.5 ml-auto">
             <button
               onClick={handlePrint}
-              className="inline-flex items-center gap-2 px-5 py-2 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#0F6E8C] to-[#0B5C74] rounded-2xl shadow-md hover:shadow-lg hover:brightness-105 transition active:scale-95 cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-2 text-xs sm:text-sm font-bold text-white bg-teal-600 hover:bg-teal-700 rounded-full shadow-xs hover:shadow-md transition active:scale-95 cursor-pointer"
             >
               <Printer size={15} />
               Print / Save Result Card
@@ -115,7 +115,7 @@ export default function ResultCard({ result, onBack }) {
 
       {/* On Hold Banner if Result is Withheld */}
       {result.isReleased === false && (
-        <div className="p-6 rounded-3xl bg-amber-500/10 border-2 border-amber-500/30 text-amber-900 dark:text-amber-200 space-y-2">
+        <div className="p-6 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 space-y-2">
           <div className="flex items-center gap-2.5 font-bold text-base text-amber-700 dark:text-amber-300">
             <Lock size={20} className="shrink-0" />
             <span>Examination Result On Hold</span>
@@ -130,23 +130,23 @@ export default function ResultCard({ result, onBack }) {
       {/* Main Printable DMC Certificate */}
       <div
         ref={printRef}
-        className="print-container bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-3xl shadow-xl overflow-hidden relative"
+        className="print-container bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl shadow-[0_4px_20px_-2px_rgba(15,23,42,0.06)] overflow-hidden relative"
       >
         {/* Accent Bar */}
-        <div className="h-3.5 bg-gradient-to-r from-[#0B1E2D] via-[#0F6E8C] to-[#8FB3AA]" />
+        <div className="h-2.5 bg-teal-600" />
 
         <div className="p-6 sm:p-10 space-y-6">
           {/* Certificate Header */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-b border-slate-100 dark:border-slate-800 pb-6 text-center sm:text-left">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#0F6E8C] to-[#0B1E2D] flex items-center justify-center text-white shadow-lg border border-[#8FB3AA]/30 shrink-0">
-                <BookOpen size={30} />
+              <div className="w-14 h-14 rounded-xl bg-teal-600 flex items-center justify-center text-white shadow-xs shrink-0">
+                <BookOpen size={26} />
               </div>
               <div>
-                <span className="text-[10px] font-bold uppercase font-mono tracking-widest text-[#0F6E8C] dark:text-[#8FB3AA] block">
+                <span className="text-[10px] font-bold uppercase font-mono tracking-widest text-teal-600 dark:text-teal-400 block">
                   Official Detailed Marks Certificate
                 </span>
-                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+                <h2 className="font-heading text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
                   Al-Mukhtar Institute
                 </h2>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -158,7 +158,7 @@ export default function ResultCard({ result, onBack }) {
             <div className="flex flex-col items-center sm:items-end gap-1.5">
               {getStatusBadge(result.status, result.isReleased)}
               {result.position && result.isReleased !== false && (
-                <div className="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded-md border border-amber-500/20">
+                <div className="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20">
                   ★ {result.position}
                 </div>
               )}
@@ -176,17 +176,17 @@ export default function ResultCard({ result, onBack }) {
           </div>
 
           {/* Session & Exam Type Bar */}
-          <div className="px-4 py-3 bg-slate-50 dark:bg-slate-800/60 rounded-2xl border border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs font-medium">
+          <div className="px-4 py-3 bg-slate-50 dark:bg-slate-800/60 rounded-xl border border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs font-medium">
             <span className="text-slate-600 dark:text-slate-300">
               Exam: <strong className="text-slate-900 dark:text-white">{result.examType || "Annual"} Assessment</strong> • Session: <strong className="text-slate-900 dark:text-white">{result.examSession}</strong>
             </span>
             <span className="text-slate-500 dark:text-slate-400 font-mono">
-              Class: <strong className="text-[#0F6E8C] dark:text-[#8FB3AA]">{result.className || "General"}</strong>
+              Class: <strong className="text-teal-600 dark:text-teal-400">{result.className || "General"}</strong>
             </span>
           </div>
 
           {/* Student Profile Info */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100/60 dark:from-slate-800/40 dark:to-slate-800/20 border border-slate-200/80 dark:border-slate-800">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 rounded-xl bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200/80 dark:border-slate-800">
             <div>
               <span className="text-[10px] font-bold uppercase font-mono text-slate-400 block mb-0.5">
                 Student Name
@@ -218,7 +218,7 @@ export default function ResultCard({ result, onBack }) {
               <span className="text-[10px] font-bold uppercase font-mono text-slate-400 block mb-0.5">
                 Roll Number
               </span>
-              <p className="text-sm font-extrabold text-[#0F6E8C] dark:text-[#8FB3AA] font-mono">
+              <p className="text-sm font-extrabold text-teal-600 dark:text-teal-400 font-mono">
                 {result.rollNumber || "AM-" + result.studentName.slice(0, 3).toUpperCase()}
               </p>
             </div>
@@ -229,14 +229,14 @@ export default function ResultCard({ result, onBack }) {
             <div>
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-2">
-                  <FileCheck2 size={16} className="text-[#0F6E8C]" />
+                  <FileCheck2 size={16} className="text-teal-600" />
                   Subject-wise Evaluation & Marks
                 </h3>
               </div>
 
-              <div className="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+              <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
                 <table className="w-full text-left text-sm">
-                  <thead className="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs uppercase font-mono tracking-wider">
+                  <thead className="bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-xs uppercase font-mono tracking-wider">
                     <tr>
                       <th className="py-3 px-4">#</th>
                       <th className="py-3 px-4">Subject / Module</th>
@@ -266,7 +266,7 @@ export default function ResultCard({ result, onBack }) {
                               {subPct}%
                             </td>
                             <td className="py-3 px-4 text-center">
-                              <span className={`inline-block px-2.5 py-0.5 rounded text-xs font-bold border ${getGradeColor(sub.grade || "A")}`}>
+                              <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold border ${getGradeColor(sub.grade || "A")}`}>
                                 {sub.grade || (subPct >= 80 ? "A" : subPct >= 60 ? "B" : "Pass")}
                               </span>
                             </td>
@@ -289,7 +289,7 @@ export default function ResultCard({ result, onBack }) {
                           {percentage}%
                         </td>
                         <td className="py-3.5 px-4 text-center">
-                          <span className={`inline-block px-2.5 py-0.5 rounded text-xs font-bold border ${getGradeColor(result.grade)}`}>
+                          <span className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-bold border ${getGradeColor(result.grade)}`}>
                             {result.grade || "Pass"}
                           </span>
                         </td>
@@ -297,9 +297,9 @@ export default function ResultCard({ result, onBack }) {
                     )}
                   </tbody>
                   {/* Total Summary Footer */}
-                  <tfoot className="bg-slate-50/90 dark:bg-slate-800/80 font-bold text-slate-900 dark:text-white border-t border-slate-200 dark:border-slate-700">
+                  <tfoot className="bg-slate-50 dark:bg-slate-800/80 font-bold text-slate-900 dark:text-white border-t border-slate-200 dark:border-slate-700">
                     <tr>
-                      <td colSpan={2} className="py-3.5 px-4 text-right uppercase tracking-wider text-xs">
+                      <td colSpan={2} className="py-3.5 px-4 text-right uppercase tracking-wider text-xs font-mono">
                         Grand Total:
                       </td>
                       <td className="py-3.5 px-4 text-center font-mono text-slate-700 dark:text-slate-300">
@@ -308,11 +308,11 @@ export default function ResultCard({ result, onBack }) {
                       <td className="py-3.5 px-4 text-center font-mono text-emerald-600 dark:text-emerald-400 text-base">
                         {result.obtainedMarks || 0}
                       </td>
-                      <td className="py-3.5 px-4 text-center font-mono text-[#0F6E8C] dark:text-[#8FB3AA]">
+                      <td className="py-3.5 px-4 text-center font-mono text-teal-600 dark:text-teal-400">
                         {percentage}%
                       </td>
                       <td className="py-3.5 px-4 text-center">
-                        <span className={`inline-block px-3 py-1 rounded-md text-xs font-black border ${getGradeColor(result.grade)}`}>
+                        <span className={`inline-block px-3 py-1 rounded-full text-xs font-black border ${getGradeColor(result.grade)}`}>
                           Grade: {result.grade || "Pass"}
                         </span>
                       </td>
@@ -323,18 +323,18 @@ export default function ResultCard({ result, onBack }) {
             </div>
           )}
 
-          {/* Dynamic Custom Fields Section (if any were added by admin) */}
+          {/* Dynamic Custom Fields Section */}
           {result.customFields && result.customFields.length > 0 && result.isReleased !== false && (
             <div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2.5 flex items-center gap-1.5">
-                <Tag size={14} className="text-[#0F6E8C]" />
+                <Tag size={14} className="text-teal-600" />
                 Additional Assessments & Observations
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {result.customFields.map((cf, idx) => (
                   <div
                     key={idx}
-                    className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800"
+                    className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800"
                   >
                     <span className="text-[10px] font-bold uppercase font-mono text-slate-400 block mb-0.5">
                       {cf.fieldName}
@@ -350,7 +350,7 @@ export default function ResultCard({ result, onBack }) {
 
           {/* Remarks */}
           {result.isReleased !== false && (
-            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
               <span className="text-[10px] font-bold uppercase font-mono text-slate-400 block mb-1">
                 Examiner Assessment & Performance Remarks
               </span>
@@ -372,7 +372,7 @@ export default function ResultCard({ result, onBack }) {
               </div>
 
               <div className="flex flex-col items-center">
-                <div className="w-14 h-14 rounded-full border-2 border-dashed border-[#0F6E8C]/40 flex flex-col items-center justify-center text-[#0F6E8C] dark:text-[#8FB3AA] mb-0.5">
+                <div className="w-14 h-14 rounded-full border-2 border-dashed border-teal-600/40 flex flex-col items-center justify-center text-teal-600 dark:text-teal-400 mb-0.5">
                   <ShieldCheck size={18} />
                   <span className="text-[7px] font-bold tracking-widest uppercase">Certified</span>
                 </div>

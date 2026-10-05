@@ -148,13 +148,14 @@ export async function PUT(req, { params }) {
       );
     }
 
-    const { title, description, level, duration, image } = await req.json();
+    const { title, description, detail, level, duration, image } = await req.json();
 
     if (title && title !== course.title) {
       course.title = title;
       course.slug = await generateUniqueSlug(Course, title, course._id);
     }
     if (description !== undefined) course.description = description;
+    if (detail !== undefined) course.detail = detail;
     if (level !== undefined) course.level = level;
     if (duration !== undefined) course.duration = duration;
     if (image !== undefined) course.image = image;

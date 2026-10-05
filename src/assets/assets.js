@@ -1,9 +1,11 @@
 import LogoImport from "./Logo.jpeg";
+import backgroundImport from "./background.avif";
 import bgImport from "./bg.webp";
 import greenDecorationFlowerImport from "./green decoration flower type.jpg";
 import heroImport from "./hero.png";
 import heroAcademicBgImport from "./hero_academic_bg.jpg";
 import image2Import from "./image2.jpg";
+import masjidImport from "./masjid.jpeg";
 import moon_lightImport from "./moon_light.jpg";
 import muftiImport from "./mufti.jpeg";
 import teacherImport from "./teacher.avif";
@@ -30,6 +32,8 @@ export function getSrc(img, fallback = "") {
 
 export const Logo = getSrc(LogoImport);
 export const LogoImg = Logo;
+export const background = getSrc(backgroundImport);
+export const BackgroundImage = background;
 export const bg = getSrc(bgImport);
 export const greenDecorationFlower = getSrc(greenDecorationFlowerImport);
 export const GreenDecorationBg = greenDecorationFlower;
@@ -40,6 +44,8 @@ export const image2 = getSrc(image2Import);
 export const AboutImage = image2;
 export const CampusImage = image2;
 export const moon_light = getSrc(moon_lightImport);
+export const masjid = getSrc(masjidImport);
+export const MasjidImage = masjid;
 export const mufti = getSrc(muftiImport);
 export const FounderImage = mufti;
 export const teacher = getSrc(teacherImport);
@@ -61,6 +67,8 @@ export function getImageUrl(dbImage, fallback = Logo) {
 export const assets = {
   Logo,
   LogoImg,
+  background,
+  BackgroundImage,
   bg,
   greenDecorationFlower,
   GreenDecorationBg,
@@ -70,6 +78,8 @@ export const assets = {
   image2,
   AboutImage,
   CampusImage,
+  masjid,
+  MasjidImage,
   moon_light,
   mufti,
   FounderImage,
