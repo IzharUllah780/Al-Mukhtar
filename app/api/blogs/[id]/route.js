@@ -32,23 +32,19 @@ export async function GET(req, { params }) {
     }
 
     const isObjectId = mongoose.Types.ObjectId.isValid(decodedId) || mongoose.Types.ObjectId.isValid(rawId);
-    const filter = isObjectId
-      ? {
-          $or: [
-            { _id: decodedId },
-            { _id: rawId },
-            { slug: decodedId },
-            { slug: rawId },
-            { slug: decodedId.toLowerCase() },
-          ],
-        }
-      : {
-          $or: [
-            { slug: decodedId },
-            { slug: rawId },
-            { slug: decodedId.toLowerCase() },
-          ],
-        };
+    const titleFromSlug = decodedId.replace(/-/g, " ");
+
+    const filter = {
+      $or: [
+        ...(isObjectId ? [{ _id: decodedId }, { _id: rawId }] : []),
+        { slug: decodedId },
+        { slug: rawId },
+        { slug: decodedId.toLowerCase() },
+        { slug: { $regex: new RegExp(`^${decodedId}$`, "i") } },
+        { title: { $regex: new RegExp(`^${decodedId}$`, "i") } },
+        { title: { $regex: new RegExp(`^${titleFromSlug}$`, "i") } },
+      ],
+    };
 
     const blog = await Blog.findOneAndUpdate(
       filter,

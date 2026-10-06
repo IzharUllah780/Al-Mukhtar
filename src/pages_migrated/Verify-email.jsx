@@ -42,9 +42,6 @@ function VerifyEmail() {
       const redirectQuery = redirectUrl ? `?redirect=${encodeURIComponent(redirectUrl)}` : "";
       navigate(`/login${redirectQuery}`);
     },
-    onError: (error) => {
-      console.error("Verification failed:", error?.response?.data?.message);
-    },
   });
 
   // Resend OTP mutation
@@ -136,7 +133,7 @@ function VerifyEmail() {
       </div>
 
       {/* Right Panel - Form (Starts from top on mobile with full screen height, centered on desktop) */}
-      <div className="w-full lg:w-[58%] flex flex-col justify-start lg:justify-center items-center px-5 pt-6 pb-10 sm:px-14 sm:py-12 min-h-[100dvh] lg:min-h-screen overflow-y-auto">
+      <div className="w-full lg:w-[58%] flex flex-col justify-start lg:justify-center items-center px-3 pt-6 pb-10 sm:px-14 sm:py-12 min-h-[100dvh] lg:min-h-screen overflow-y-auto">
         <div className="w-full max-w-[420px] flex flex-col justify-start">
           {/* Back to Home Button on top left */}
           <div className="mb-4 sm:mb-6 self-start">
@@ -179,8 +176,21 @@ function VerifyEmail() {
 
           {verifyMutation.isError && (
             <div className="mb-6 text-xs sm:text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 font-medium">
-              {verifyMutation.error?.response?.data?.message ||
-                "Invalid or expired code. Please try again."}
+              {(() => {
+                const msg = verifyMutation.error?.response?.data?.message;
+                if (
+                  msg &&
+                  typeof msg === "string" &&
+                  !msg.toLowerCase().includes("mongo") &&
+                  !msg.toLowerCase().includes("topology") &&
+                  !msg.toLowerCase().includes("econn") &&
+                  !msg.toLowerCase().includes("error") &&
+                  msg.length < 80
+                ) {
+                  return msg;
+                }
+                return "Invalid or expired code. Please try again.";
+              })()}
             </div>
           )}
 

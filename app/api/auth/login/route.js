@@ -26,7 +26,7 @@ export async function POST(req) {
 
     if (!user) {
       return NextResponse.json(
-        { success: false, message: "Invalid email or password" },
+        { success: false, message: "Invalid credentials" },
         { status: 401 }
       );
     }
@@ -44,7 +44,7 @@ export async function POST(req) {
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
       return NextResponse.json(
-        { success: false, message: "Invalid password" },
+        { success: false, message: "Invalid credentials" },
         { status: 401 }
       );
     }
@@ -80,10 +80,9 @@ export async function POST(req) {
     });
 
     return response;
-  } catch (error) {
-    console.error("Login error:", error);
+  } catch {
     return NextResponse.json(
-      { success: false, message: "Something went wrong" },
+      { success: false, message: "Something went wrong. Please try again." },
       { status: 500 }
     );
   }

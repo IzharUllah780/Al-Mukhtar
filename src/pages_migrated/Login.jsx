@@ -30,10 +30,31 @@ function Login() {
       login(response.data.user);
       navigate(redirectUrl, { replace: true });
     },
-    onError: (error) => {
-      console.error("Login failed:", error?.response?.data?.message);
-    },
   });
+
+  const getLoginErrorMessage = () => {
+    const status = loginMutation.error?.response?.status;
+    const msg = loginMutation.error?.response?.data?.message;
+
+    if (status === 401) {
+      return "Invalid credentials. Please check your email and password.";
+    }
+    if (status === 403) {
+      return "Please verify your account before logging in.";
+    }
+    if (
+      msg &&
+      typeof msg === "string" &&
+      !msg.toLowerCase().includes("mongo") &&
+      !msg.toLowerCase().includes("topology") &&
+      !msg.toLowerCase().includes("econn") &&
+      !msg.toLowerCase().includes("error") &&
+      msg.length < 80
+    ) {
+      return msg;
+    }
+    return "Something went wrong. Please try again.";
+  };
 
   const onSubmit = (data) => {
     loginMutation.mutate({
@@ -111,7 +132,7 @@ function Login() {
       </div>
 
       {/* Right Panel - Form (Starts from top on mobile with full screen height, centered on desktop) */}
-      <div className="w-full lg:w-[58%] flex flex-col justify-start lg:justify-center items-center px-5 pt-6 pb-10 sm:px-14 sm:py-12 min-h-[100dvh] lg:min-h-screen overflow-y-auto">
+      <div className="w-full lg:w-[58%] flex flex-col justify-start lg:justify-center items-center px-3 pt-6 pb-10 sm:px-14 sm:py-12 min-h-[100dvh] lg:min-h-screen overflow-y-auto">
         <div className="w-full max-w-[420px] flex flex-col justify-start">
           {/* Back to Home Button on top left */}
           <div className="mb-4 sm:mb-6 self-start">
@@ -147,10 +168,7 @@ function Login() {
 
           {loginMutation.isError && (
             <div className="mb-6 text-xs sm:text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 font-medium space-y-1.5">
-              <p>
-                {loginMutation.error?.response?.data?.message ||
-                  "Invalid email or password. Please try again."}
-              </p>
+              <p>{getLoginErrorMessage()}</p>
               {loginMutation.error?.response?.status === 403 && (
                 <div className="pt-1">
                   <Link

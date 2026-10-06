@@ -92,8 +92,8 @@ export default function BlogListCard({ post }) {
           </div>
         </div>
 
-        {/* Right side: rounded-2xl thumbnail */}
-        <div className="relative w-24 h-20 sm:w-28 sm:h-24 md:w-32 md:h-24 shrink-0 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800 shadow-xs group-hover:shadow-md transition-all">
+        {/* Right side: rounded-2xl thumbnail (Hidden on mobile) */}
+        <div className="hidden sm:block relative w-24 h-20 sm:w-28 sm:h-24 md:w-32 md:h-24 shrink-0 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-800 shadow-xs group-hover:shadow-md transition-all">
           <Image
             src={imageSrc}
             alt={title || "Blog thumbnail"}

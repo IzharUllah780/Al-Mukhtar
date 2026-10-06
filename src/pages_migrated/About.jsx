@@ -41,7 +41,7 @@ function About() {
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-slate-950/30" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+        <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-10 lg:px-16">
           <div className="max-w-2xl space-y-4 text-left">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 backdrop-blur-md text-teal-300 text-[11px] font-bold uppercase tracking-wider font-mono border border-teal-500/20">
               <Sparkles size={12} className="text-teal-400" />
@@ -80,7 +80,7 @@ function About() {
       </section>
 
       {/* ── 2. MAIN ACADEMIC CONTENT ── */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-16">
+      <section className="max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 py-12 sm:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
           {/* Left Main Content Column (8 Cols) */}

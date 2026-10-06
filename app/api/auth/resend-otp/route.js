@@ -62,7 +62,7 @@ export async function POST(req) {
     await user.save();
 
     try {
-      await sendOtpEmail(email, code, "verify");
+      await sendOtpEmail(email, code, "verify", user.username);
     } catch (emailErr) {
       console.error("Failed to resend OTP email:", emailErr.message);
     }
@@ -71,10 +71,9 @@ export async function POST(req) {
       success: true,
       message: "OTP sent successfully",
     });
-  } catch (error) {
-    console.error("ResendOtp error:", error);
+  } catch {
     return NextResponse.json(
-      { success: false, message: "Something went wrong" },
+      { success: false, message: "Something went wrong. Please try again." },
       { status: 500 }
     );
   }

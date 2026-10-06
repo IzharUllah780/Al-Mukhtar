@@ -128,7 +128,7 @@ function VideoCard({ video, compact = false }) {
         </div>
 
         {/* Action Toolbar */}
-        <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2 text-xs">
+        <div className="pt-2 flex items-center justify-between gap-2 text-xs">
           <button
             type="button"
             onClick={handleShare}

@@ -34,8 +34,7 @@ export async function POST(req) {
     });
 
     return response;
-  } catch (error) {
-    console.error("Token rotation error:", error);
+  } catch {
     return NextResponse.json(
       { success: false, message: "Failed to rotate token" },
       { status: 500 }

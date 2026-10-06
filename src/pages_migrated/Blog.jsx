@@ -182,16 +182,16 @@ function Blog() {
     <div className="bg-white dark:bg-slate-950 min-h-screen font-sans text-slate-800 dark:text-slate-100 transition-colors duration-200">
       {/* Professional Editorial Hero Section - Solid Clean Background */}
       <section className="relative bg-white dark:bg-slate-950 pt-6 sm:pt-8 pb-3 sm:pb-4">
-        <div className="max-w-3xl px-4 sm:px-6 lg:px-17 text-start space-y-2.5 sm:space-y-3">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white font-heading leading-tight">
-            Articles &amp; <span className="text-teal-600 dark:text-teal-400">Publications</span>
+        <div className="max-w-3xl px-3 sm:px-6 lg:px-17 text-start space-y-2.5 sm:space-y-3">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-black dark:text-white font-heading leading-tight">
+            Articles &amp; Publications
           </h1>
 
         </div>
       </section>
 
       {/* Main Content Area */}
-      <main className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 pt-3 sm:pt-4 pb-12 sm:pb-16">
+      <main className="max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 pt-3 sm:pt-4 pb-12 sm:pb-16">
         <div className="space-y-6">
           {/* Category Pills & Toolbar Row */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-2">
@@ -280,7 +280,7 @@ function Blog() {
               <div
                 className={
                   viewMode === "list"
-                    ? "grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8"
+                    ? "grid grid-cols-1 gap-6 sm:gap-8 w-full"
                     : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
                 }
               >
@@ -288,7 +288,7 @@ function Blog() {
                   viewMode === "list" ? (
                     <div
                       key={n}
-                      className="p-2 sm:p-3 bg-transparent animate-pulse flex flex-row items-start justify-between gap-4 sm:gap-6"
+                      className="p-2 sm:p-3 bg-transparent animate-pulse flex flex-row items-start justify-between gap-4 sm:gap-6 w-full"
                     >
                       <div className="flex-1 space-y-2.5 py-1 min-w-0">
                         <div className="w-20 h-3 bg-slate-200 dark:bg-slate-700 rounded" />
@@ -296,7 +296,7 @@ function Blog() {
                         <div className="w-full h-3.5 bg-slate-200 dark:bg-slate-700 rounded" />
                         <div className="w-3/4 h-3.5 bg-slate-200 dark:bg-slate-700 rounded" />
                       </div>
-                      <div className="w-28 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 bg-slate-200 dark:bg-slate-700 rounded-2xl shrink-0" />
+                      <div className="hidden sm:block w-28 h-24 sm:w-36 sm:h-28 md:w-44 md:h-28 bg-slate-200 dark:bg-slate-700 rounded-2xl shrink-0" />
                     </div>
                   ) : (
                     <div
@@ -355,7 +355,7 @@ function Blog() {
                 <div
                   className={
                     viewMode === "list"
-                      ? "grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8"
+                      ? "grid grid-cols-1 gap-6 sm:gap-8 w-full"
                       : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
                   }
                 >

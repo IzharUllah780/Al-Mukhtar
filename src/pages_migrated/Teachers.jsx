@@ -47,7 +47,7 @@ function Teachers() {
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-slate-950/30" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 text-left space-y-3">
+        <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 text-left space-y-3">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 backdrop-blur-md text-teal-300 text-[11px] font-bold uppercase tracking-wider font-mono border border-teal-500/20">
             <Users size={12} className="text-teal-400" />
             <span>Faculty &amp; Scholarly Leadership</span>
@@ -64,7 +64,7 @@ function Teachers() {
       </section>
 
       {/* ── 2. FOUNDER & LEADERSHIP PROFILE ── */}
-      <section className="py-10 sm:py-16 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-10">
+      <section className="py-10 sm:py-16 max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 space-y-10">
 
         {/* Section Header */}
         <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 text-left">
@@ -403,7 +403,7 @@ function Teachers() {
       </section>
 
       {/* ── 4. FACULTY ROSTER ── */}
-      <section className="py-10 sm:py-16 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-8">
+      <section className="py-10 sm:py-16 max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 space-y-8">
 
         {/* Section Heading */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200/80 dark:border-slate-800 pb-4">
@@ -515,7 +515,7 @@ function Teachers() {
 
       {/* ── 5. CTA SECTION ── */}
       <section className="bg-slate-900 text-white py-12 border-t border-slate-800">
-        <div className="max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 text-center space-y-4">
+        <div className="max-w-4xl mx-auto px-3 sm:px-10 lg:px-16 text-center space-y-4">
           <h2 className="text-xl sm:text-3xl font-extrabold font-heading tracking-tight">
             Begin Your Scholarly Journey at Al-Mukhtar
           </h2>

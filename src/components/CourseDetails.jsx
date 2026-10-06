@@ -210,7 +210,7 @@ function CourseDetails() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-10 sm:pb-14">
+        <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-10 sm:pb-14">
           {/* Breadcrumb / Back Link */}
           <div className="mb-4 sm:mb-6">
             <Link
@@ -326,7 +326,7 @@ function CourseDetails() {
       </section>
 
       {/* ── 2. Course Details & Syllabus Section (Clean, Unboxed, Professional Design - No Cards UI) ── */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14">
+      <section className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-8 sm:py-14">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
           {/* Main Content Area (8 Cols) - Open Editorial Prose, No Boxed Cards */}

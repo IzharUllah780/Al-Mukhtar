@@ -76,7 +76,7 @@ export async function POST(req) {
       await existingUser.save();
 
       try {
-        await sendOtpEmail(normalizedEmail, otp, "verify");
+        await sendOtpEmail(normalizedEmail, otp, "verify", normalizedUsername);
       } catch (emailErr) {
         console.error("Failed to send verification email on account update:", emailErr.message);
       }
@@ -120,7 +120,7 @@ export async function POST(req) {
     await newUser.save();
 
     try {
-      await sendOtpEmail(normalizedEmail, otp, "verify");
+      await sendOtpEmail(normalizedEmail, otp, "verify", normalizedUsername);
     } catch (emailErr) {
       console.error("Failed to send verification email:", emailErr.message);
     }
@@ -132,10 +132,9 @@ export async function POST(req) {
       },
       { status: 201 }
     );
-  } catch (error) {
-    console.error("Signup error:", error);
+  } catch {
     return NextResponse.json(
-      { success: false, message: error.message || "Signup failed" },
+      { success: false, message: "Something went wrong. Please try again." },
       { status: 500 }
     );
   }

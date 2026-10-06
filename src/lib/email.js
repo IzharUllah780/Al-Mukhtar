@@ -3,130 +3,292 @@ import { Resend } from "resend";
 const resendApiKey = process.env.RESEND_API_KEY || "dummy_resend_key";
 const resend = new Resend(resendApiKey);
 const FROM = process.env.RESEND_FROM || "onboarding@resend.dev";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.BASE_URL || "https://almukhtar.edu.pk";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "izhar5ullah@gmail.com";
 
 /**
- * Send OTP email for signup verification or password reset.
- * @param {string} to - recipient email
- * @param {string} otp - 6-digit OTP code
- * @param {"verify"|"reset"} type - purpose of the OTP
+ * Base email layout with clean, open, modern editorial typography.
+ * No heavy boxed borders or clunky outdated email designs.
  */
-export async function sendOtpEmail(to, otp, type = "verify") {
+function renderBaseTemplate({ title, preheader = "", contentHtml }) {
+  const currentYear = new Date().getFullYear();
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>${title}</title>
+  <!--[if mso]>
+  <style type="text/css">
+    body, table, td {font-family: Arial, Helvetica, sans-serif !important;}
+  </style>
+  <![endif]-->
+  <style>
+    @media only screen and (max-width: 600px) {
+      .email-container { width: 100% !important; padding: 24px 16px !important; }
+      .content-cell { padding: 24px 16px !important; }
+      .otp-code { font-size: 32px !important; letter-spacing: 8px !important; }
+    }
+  </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #fafbfb; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1e293b; line-height: 1.6;">
+  ${preheader ? `<div style="display: none; font-size: 1px; color: #fafbfb; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">${preheader}</div>` : ""}
+  
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #fafbfb; width: 100%; margin: 0; padding: 32px 12px;">
+    <tr>
+      <td align="center">
+        <!-- Main Email Wrapper (Open & Clean) -->
+        <table role="presentation" class="email-container" width="560" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 560px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05);">
+          
+          <!-- Top Header / Brand Mark -->
+          <tr>
+            <td style="padding: 32px 36px 24px 36px; border-bottom: 1px solid #f1f5f9; background: #ffffff;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td>
+                    <div style="display: inline-block;">
+                      <span style="font-size: 15px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #0f172a;">AL-MUKHTAR</span>
+                      <span style="display: inline-block; width: 6px; height: 6px; background-color: #0d9488; border-radius: 50%; margin-left: 4px; vertical-align: middle;"></span>
+                    </div>
+                    <p style="margin: 2px 0 0 0; font-size: 11px; font-weight: 600; color: #64748b; letter-spacing: 0.5px; text-transform: uppercase;">Institute of Islamic Sciences & Education</p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Dynamic Body Content -->
+          <tr>
+            <td class="content-cell" style="padding: 36px 36px 32px 36px; background-color: #ffffff;">
+              ${contentHtml}
+            </td>
+          </tr>
+
+          <!-- Sleek Minimalist Footer -->
+          <tr>
+            <td style="padding: 24px 36px 32px 36px; background-color: #f8fafc; border-top: 1px solid #f1f5f9;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td style="text-align: left; font-size: 12px; color: #94a3b8; line-height: 1.5;">
+                    <p style="margin: 0 0 6px 0; color: #64748b; font-weight: 500;">
+                      Al-Mukhtar Institute &bull; Academic Portal
+                    </p>
+                    <p style="margin: 0;">
+                      Need help? Reply directly to this email or contact support at <a href="mailto:${ADMIN_EMAIL}" style="color: #0d9488; text-decoration: none; font-weight: 600;">${ADMIN_EMAIL}</a>
+                    </p>
+                    <p style="margin: 12px 0 0 0; font-size: 11px; color: #94a3b8;">
+                      &copy; ${currentYear} Al-Mukhtar Institute. All rights reserved.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
+/**
+ * Send OTP verification or password reset email.
+ * @param {string} to - Recipient email
+ * @param {string} otp - 6-digit OTP code
+ * @param {"verify"|"reset"} type - Purpose of the OTP
+ * @param {string} [username] - Optional recipient name/username
+ */
+export async function sendOtpEmail(to, otp, type = "verify", username = "") {
   if (!process.env.RESEND_API_KEY) {
-    console.warn("RESEND_API_KEY not configured. Mocking email sending for OTP:", otp);
-    return;
+    console.warn("[Email Mock] RESEND_API_KEY not configured. Mocking OTP email to:", to, "OTP:", otp);
+    return { success: true, mocked: true };
   }
 
   const isReset = type === "reset";
   const subject = isReset
-    ? "Al-Mukhtar Academy — Password Reset OTP"
-    : "Al-Mukhtar Academy — Verify Your Email";
+    ? "Reset Your Al-Mukhtar Account Password"
+    : "Verify Your Al-Mukhtar Account Email";
 
-  const heading = isReset ? "Reset Your Password" : "Verify Your Email";
-  const intro = isReset
-    ? "You requested a password reset. Use the OTP below to reset your password. This code is valid for <strong>10 minutes</strong>."
-    : "Thank you for registering. Use the OTP below to verify your email address. This code is valid for <strong>10 minutes</strong>.";
+  const title = isReset ? "Password Reset Code" : "Email Verification Code";
+  const preheader = isReset
+    ? `Your password reset code is ${otp}. Valid for 10 minutes.`
+    : `Your verification code is ${otp}. Complete your registration.`;
 
-  const html = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>${subject}</title>
-    </head>
-    <body style="margin:0;padding:0;background:#f4f6f4;font-family:'Segoe UI',Arial,sans-serif;">
-      <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f4;padding:40px 20px;">
-        <tr>
-          <td align="center">
-            <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
-              <!-- Header -->
-              <tr>
-                <td style="background:#0F6E8C;padding:32px 40px;">
-                  <p style="margin:0;color:#C0DAD1;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;">Al-Mukhtar Institute</p>
-                  <h1 style="margin:8px 0 0;color:#ffffff;font-size:22px;font-weight:700;">${heading}</h1>
-                </td>
-              </tr>
-              <!-- Body -->
-              <tr>
-                <td style="padding:36px 40px;">
-                  <p style="margin:0 0 24px;color:#4b5563;font-size:15px;line-height:1.6;">${intro}</p>
-                  <!-- OTP Box -->
-                  <div style="background:#f9fafb;border:2px dashed #0F6E8C;border-radius:10px;padding:28px;text-align:center;margin:0 0 28px;">
-                    <p style="margin:0 0 6px;color:#6b7280;font-size:12px;text-transform:uppercase;letter-spacing:2px;">Your OTP Code</p>
-                    <span style="font-size:40px;font-weight:800;letter-spacing:10px;color:#0F6E8C;">${otp}</span>
-                  </div>
-                  <p style="margin:0;color:#9ca3af;font-size:13px;line-height:1.5;">
-                    If you did not request this, please ignore this email. Do not share this code with anyone.
-                  </p>
-                </td>
-              </tr>
-              <!-- Footer -->
-              <tr>
-                <td style="background:#f9fafb;padding:20px 40px;border-top:1px solid #e5e7eb;">
-                  <p style="margin:0;color:#9ca3af;font-size:12px;">© ${new Date().getFullYear()} Al-Mukhtar Institute. All rights reserved.</p>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-    </body>
-    </html>
+  const headingText = isReset ? "Reset Your Password" : "Verify Your Email Address";
+  const leadText = isReset
+    ? `Hello${username ? ` ${username}` : ""}, we received a request to reset your password for your Al-Mukhtar account. Enter the verification code below to proceed:`
+    : `Hello${username ? ` ${username}` : ""}, thank you for registering with Al-Mukhtar Institute. Please use the verification code below to verify your email address:`;
+
+  const contentHtml = `
+    <h1 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #0f172a; letter-spacing: -0.5px; line-height: 1.3;">
+      ${headingText}
+    </h1>
+    
+    <p style="margin: 0 0 28px 0; font-size: 15px; color: #475569; line-height: 1.6;">
+      ${leadText}
+    </p>
+
+    <!-- Clean, Open OTP Display (No heavy boxes) -->
+    <div style="margin: 0 0 28px 0; padding: 24px 20px; background-color: #f0fdfa; border-radius: 12px; border: 1px solid #ccfbf1; text-align: center;">
+      <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #0d9488; margin-bottom: 8px;">
+        One-Time Verification Code
+      </div>
+      <div class="otp-code" style="font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 38px; font-weight: 800; letter-spacing: 10px; color: #0f766e; line-height: 1.2; padding-left: 10px;">
+        ${otp}
+      </div>
+      <div style="font-size: 12px; color: #64748b; margin-top: 10px; font-weight: 500;">
+        ⏱ Expires in <strong>10 minutes</strong>
+      </div>
+    </div>
+
+    <p style="margin: 0 0 12px 0; font-size: 13px; color: #64748b; line-height: 1.5;">
+      <strong>Security notice:</strong> Never share this code with anyone. Al-Mukhtar staff will never ask you for your OTP.
+    </p>
+    
+    <p style="margin: 0; font-size: 13px; color: #94a3b8; line-height: 1.5;">
+      If you did not initiate this request, you can safely ignore this email. Your account remains secure.
+    </p>
   `;
 
-  await resend.emails.send({ from: FROM, to, subject, html });
+  const html = renderBaseTemplate({ title, preheader, contentHtml });
+
+  try {
+    const result = await resend.emails.send({
+      from: FROM,
+      to,
+      subject,
+      html,
+    });
+
+    if (result?.error) {
+      console.error("[Resend API Error]:", result.error);
+    }
+    return result;
+  } catch (error) {
+    console.error("[Email Exception] Failed to send OTP email:", error);
+    throw error;
+  }
 }
 
 /**
- * Send a broadcast email to multiple users (admin feature).
- * @param {string[]} emails - list of recipient emails
- * @param {string} subject - email subject
- * @param {string} message - plain-text message body
+ * Send Course Application Confirmation email to the student/applicant.
  */
-export async function sendBulkEmail(emails, subject, message) {
-  if (!process.env.RESEND_API_KEY) return;
-  const CHUNK = 50;
-  const promises = [];
+export async function sendApplicationConfirmationEmail({
+  to,
+  applicantName,
+  courseName,
+  shift,
+  qualification,
+  whatsapp,
+  applicationId,
+}) {
+  if (!to) return;
 
-  const html = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/></head>
-    <body style="margin:0;padding:0;background:#f4f6f4;font-family:'Segoe UI',Arial,sans-serif;">
-      <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f4;padding:40px 20px;">
-        <tr>
-          <td align="center">
-            <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
-              <tr>
-                <td style="background:#0F6E8C;padding:32px 40px;">
-                  <p style="margin:0;color:#C0DAD1;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;">Al-Mukhtar Institute</p>
-                  <h1 style="margin:8px 0 0;color:#ffffff;font-size:22px;font-weight:700;">${subject}</h1>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding:36px 40px;">
-                  <p style="margin:0;color:#374151;font-size:15px;line-height:1.7;white-space:pre-wrap;">${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</p>
-                </td>
-              </tr>
-              <tr>
-                <td style="background:#f9fafb;padding:20px 40px;border-top:1px solid #e5e7eb;">
-                  <p style="margin:0;color:#9ca3af;font-size:12px;">© ${new Date().getFullYear()} Al-Mukhtar Institute. All rights reserved.</p>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-    </body>
-    </html>
-  `;
-
-  for (let i = 0; i < emails.length; i += CHUNK) {
-    const chunk = emails.slice(i, i + CHUNK);
-    promises.push(resend.emails.send({ from: FROM, to: chunk, subject, html }));
+  if (!process.env.RESEND_API_KEY) {
+    console.warn("[Email Mock] RESEND_API_KEY not configured. Mocking application confirmation email to:", to);
+    return { success: true, mocked: true };
   }
 
-  await Promise.all(promises);
+  const subject = `Admission Application Received — ${courseName} | Al-Mukhtar`;
+  const preheader = `We received your application for ${courseName}. Our admissions team will review it shortly.`;
+  const formattedShift = shift ? shift.charAt(0).toUpperCase() + shift.slice(1) : "Morning";
+
+  const contentHtml = `
+    <div style="display: inline-block; padding: 4px 12px; background-color: #ecfdf5; border-radius: 9999px; border: 1px solid #a7f3d0; margin-bottom: 16px;">
+      <span style="font-size: 12px; font-weight: 700; color: #047857;">Application Received</span>
+    </div>
+
+    <h1 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #0f172a; letter-spacing: -0.5px; line-height: 1.3;">
+      Dear ${applicantName || "Applicant"},
+    </h1>
+
+    <p style="margin: 0 0 24px 0; font-size: 15px; color: #475569; line-height: 1.6;">
+      Thank you for your interest in <strong>Al-Mukhtar Institute</strong>. We have successfully received your admission application for <strong>${courseName}</strong>.
+    </p>
+
+    <!-- Application Summary Details -->
+    <div style="margin: 0 0 28px 0; padding: 20px 24px; background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0;">
+      <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 14px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">
+        Application Overview
+      </div>
+      
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; line-height: 1.8;">
+        <tr>
+          <td style="color: #64748b; width: 38%; padding: 4px 0;">Selected Course:</td>
+          <td style="color: #0f172a; font-weight: 700; padding: 4px 0;">${courseName}</td>
+        </tr>
+        <tr>
+          <td style="color: #64748b; padding: 4px 0;">Shift Preference:</td>
+          <td style="color: #0f172a; font-weight: 600; padding: 4px 0;">${formattedShift}</td>
+        </tr>
+        ${qualification ? `
+        <tr>
+          <td style="color: #64748b; padding: 4px 0;">Qualification:</td>
+          <td style="color: #0f172a; padding: 4px 0;">${qualification}</td>
+        </tr>` : ""}
+        ${whatsapp ? `
+        <tr>
+          <td style="color: #64748b; padding: 4px 0;">Contact WhatsApp:</td>
+          <td style="color: #0f172a; padding: 4px 0;">${whatsapp}</td>
+        </tr>` : ""}
+        ${applicationId ? `
+        <tr>
+          <td style="color: #64748b; padding: 4px 0;">Reference ID:</td>
+          <td style="font-family: monospace; color: #0d9488; font-weight: 600; padding: 4px 0;">#${applicationId.slice(-8).toUpperCase()}</td>
+        </tr>` : ""}
+      </table>
+    </div>
+
+    <!-- Next Steps Timeline / Guidance -->
+    <h2 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 700; color: #0f172a;">
+      What Happens Next?
+    </h2>
+    <ol style="margin: 0 0 28px 0; padding-left: 20px; font-size: 14px; color: #475569; line-height: 1.7;">
+      <li style="margin-bottom: 8px;">
+        <strong>Application Review:</strong> Our academic committee is reviewing your submitted details and prerequisites.
+      </li>
+      <li style="margin-bottom: 8px;">
+        <strong>Verification & Interview:</strong> An admissions coordinator will contact you via WhatsApp or phone call within <strong>1–2 business days</strong>.
+      </li>
+      <li>
+        <strong>Enrollment & Class Schedule:</strong> Upon verification, you will receive your student enrollment package and timetable.
+      </li>
+    </ol>
+
+    <div style="padding-top: 16px; border-top: 1px solid #f1f5f9;">
+      <p style="margin: 0; font-size: 14px; color: #475569;">
+        Warm regards,<br />
+        <strong>Office of Admissions</strong><br />
+        <span style="font-size: 13px; color: #64748b;">Al-Mukhtar Institute of Islamic Sciences</span>
+      </p>
+    </div>
+  `;
+
+  const html = renderBaseTemplate({
+    title: `Admission Application — ${courseName}`,
+    preheader,
+    contentHtml,
+  });
+
+  try {
+    const result = await resend.emails.send({
+      from: FROM,
+      to,
+      subject,
+      html,
+    });
+
+    if (result?.error) {
+      console.error("[Resend API Error]:", result.error);
+    }
+    return result;
+  } catch (error) {
+    console.error("[Email Exception] Failed to send application confirmation email:", error);
+    throw error;
+  }
 }
 
 /**
@@ -134,73 +296,102 @@ export async function sendBulkEmail(emails, subject, message) {
  */
 export async function sendContactFormEmail({ name, email, phone, subject, message }) {
   const adminEmail = process.env.ADMIN_EMAIL || "izhar5ullah@gmail.com";
+  const emailSubject = `[Inquiry] ${subject || "New Message from Website"}`;
 
-  const emailSubject = `[Al-Mukhtar Contact Form] ${subject}`;
+  const contentHtml = `
+    <div style="display: inline-block; padding: 4px 12px; background-color: #f1f5f9; border-radius: 9999px; margin-bottom: 16px;">
+      <span style="font-size: 12px; font-weight: 700; color: #475569;">Website Contact Form</span>
+    </div>
 
-  const html = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>${emailSubject}</title>
-    </head>
-    <body style="margin:0;padding:0;background:#f4f6f8;font-family:'Segoe UI',Arial,sans-serif;">
-      <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f8;padding:40px 20px;">
+    <h1 style="margin: 0 0 16px 0; font-size: 20px; font-weight: 700; color: #0f172a; line-height: 1.3;">
+      New Inquiry from ${name}
+    </h1>
+
+    <div style="margin: 0 0 24px 0; padding: 18px 20px; background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; font-size: 14px; line-height: 1.8;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
-          <td align="center">
-            <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,0.06);border:1px solid #e5e7eb;">
-              <tr>
-                <td style="background:#0F6E8C;padding:32px 40px;">
-                  <p style="margin:0;color:#C0DAD1;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;">Al-Mukhtar Institute</p>
-                  <h1 style="margin:8px 0 0;color:#ffffff;font-size:22px;font-weight:700;">New Contact Message</h1>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding:36px 40px;">
-                  <p style="margin:0 0 20px;color:#4b5563;font-size:15px;line-height:1.6;">
-                    You received a new inquiry from the website contact form:
-                  </p>
-                  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f9fafb;border-radius:10px;padding:20px;margin-bottom:24px;border:1px solid #e5e7eb;">
-                    <tr>
-                      <td style="padding:6px 0;color:#6b7280;font-size:13px;font-weight:600;width:120px;">Sender Name:</td>
-                      <td style="padding:6px 0;color:#111827;font-size:14px;font-weight:700;">${name}</td>
-                    </tr>
-                    <tr>
-                      <td style="padding:6px 0;color:#6b7280;font-size:13px;font-weight:600;">Email Address:</td>
-                      <td style="padding:6px 0;color:#0F6E8C;font-size:14px;font-weight:600;"><a href="mailto:${email}" style="color:#0F6E8C;text-decoration:none;">${email}</a></td>
-                    </tr>
-                    <tr>
-                      <td style="padding:6px 0;color:#6b7280;font-size:13px;font-weight:600;">Phone Number:</td>
-                      <td style="padding:6px 0;color:#111827;font-size:14px;">${phone || "N/A"}</td>
-                    </tr>
-                    <tr>
-                      <td style="padding:6px 0;color:#6b7280;font-size:13px;font-weight:600;">Subject:</td>
-                      <td style="padding:6px 0;color:#111827;font-size:14px;font-weight:600;">${subject}</td>
-                    </tr>
-                  </table>
-                  <p style="margin:0 0 8px;color:#374151;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Message:</p>
-                  <div style="background:#ffffff;border:1px solid #d1d5db;border-radius:8px;padding:18px;color:#1f2937;font-size:14px;line-height:1.7;white-space:pre-wrap;">${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</div>
-                </td>
-              </tr>
-              <tr>
-                <td style="background:#f9fafb;padding:20px 40px;border-top:1px solid #e5e7eb;text-align:center;">
-                  <p style="margin:0;color:#9ca3af;font-size:12px;">© ${new Date().getFullYear()} Al-Mukhtar Institute. All rights reserved.</p>
-                </td>
-              </tr>
-            </table>
-          </td>
+          <td style="color: #64748b; width: 30%; padding: 4px 0;">Sender:</td>
+          <td style="color: #0f172a; font-weight: 600; padding: 4px 0;">${name}</td>
+        </tr>
+        <tr>
+          <td style="color: #64748b; padding: 4px 0;">Email:</td>
+          <td style="color: #0d9488; font-weight: 600; padding: 4px 0;"><a href="mailto:${email}" style="color: #0d9488; text-decoration: none;">${email}</a></td>
+        </tr>
+        <tr>
+          <td style="color: #64748b; padding: 4px 0;">Phone:</td>
+          <td style="color: #0f172a; padding: 4px 0;">${phone || "Not provided"}</td>
+        </tr>
+        <tr>
+          <td style="color: #64748b; padding: 4px 0;">Subject:</td>
+          <td style="color: #0f172a; font-weight: 600; padding: 4px 0;">${subject}</td>
         </tr>
       </table>
-    </body>
-    </html>
+    </div>
+
+    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 8px;">
+      Message Content:
+    </div>
+    
+    <div style="padding: 16px 20px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; color: #1e293b; line-height: 1.7; white-space: pre-wrap;">
+      ${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
+    </div>
   `;
 
-  await resend.emails.send({
-    from: FROM,
-    to: adminEmail,
-    subject: emailSubject,
-    replyTo: email,
-    html,
+  const html = renderBaseTemplate({
+    title: emailSubject,
+    preheader: `New message from ${name}: ${subject}`,
+    contentHtml,
   });
+
+  try {
+    return await resend.emails.send({
+      from: FROM,
+      to: adminEmail,
+      subject: emailSubject,
+      replyTo: email,
+      html,
+    });
+  } catch (error) {
+    console.error("[Email Error] Failed to send contact form email:", error);
+    throw error;
+  }
+}
+
+/**
+ * Send a broadcast email to multiple users (admin feature).
+ */
+export async function sendBulkEmail(emails, subject, message) {
+  if (!process.env.RESEND_API_KEY || !Array.isArray(emails) || emails.length === 0) return;
+  const CHUNK = 50;
+
+  const contentHtml = `
+    <h1 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #0f172a; letter-spacing: -0.5px; line-height: 1.3;">
+      ${subject}
+    </h1>
+    
+    <div style="font-size: 15px; color: #334155; line-height: 1.7; white-space: pre-wrap;">
+      ${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
+    </div>
+  `;
+
+  const html = renderBaseTemplate({
+    title: subject,
+    preheader: subject,
+    contentHtml,
+  });
+
+  const promises = [];
+  for (let i = 0; i < emails.length; i += CHUNK) {
+    const chunk = emails.slice(i, i + CHUNK);
+    promises.push(
+      resend.emails.send({
+        from: FROM,
+        to: chunk,
+        subject,
+        html,
+      })
+    );
+  }
+
+  await Promise.all(promises);
 }

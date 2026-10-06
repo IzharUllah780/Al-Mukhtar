@@ -100,7 +100,7 @@ export default function Navbar() {
     <>
       {/* University Institutional Top Bar */}
       <div className="bg-slate-950 text-slate-300 text-[11px] font-mono border-b border-slate-800/80 hidden sm:block py-2 transition-colors">
-        <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between">
+        <div className="w-full max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-2 text-teal-400 font-medium">
               <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
@@ -126,7 +126,7 @@ export default function Navbar() {
 
       {/* Main Navbar Header */}
       <header className="sticky top-0 z-40 w-full transition-all duration-200 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 py-3.5 font-sans">
-        <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between gap-6">
+        <div className="w-full max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 flex items-center justify-between gap-6">
           {/* Brand Logo */}
           <Link to="/" className="flex items-center gap-3 group min-w-0">
             <div className="w-10 h-10 overflow-hidden shrink-0 border border-slate-200/80 dark:border-slate-700 bg-teal-50 dark:bg-slate-800/80 shadow-xs group-hover:scale-105 transition-transform duration-200 flex items-center justify-center rounded-none">

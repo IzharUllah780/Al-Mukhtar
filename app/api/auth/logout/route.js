@@ -33,8 +33,7 @@ export async function POST(req) {
     });
 
     return response;
-  } catch (error) {
-    console.error("Logout error:", error);
+  } catch {
     return NextResponse.json(
       { success: false, message: "Something went wrong" },
       { status: 500 }

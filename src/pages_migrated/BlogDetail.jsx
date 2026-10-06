@@ -38,6 +38,17 @@ import AdSenseBanner from "../components/AdSenseBanner.jsx";
 import { toast } from "react-toastify";
 import { formatDate, getReadingTime, getSnippet } from "../components/BlogCard.jsx";
 
+export function renderFormattedDescription(text) {
+  if (!text) return null;
+  const parts = String(text).split(/(?:<br\s*\/?>|\r?\n)/gi);
+  return parts.map((part, index) => (
+    <React.Fragment key={index}>
+      {part}
+      {index < parts.length - 1 && <br />}
+    </React.Fragment>
+  ));
+}
+
 // Smart parser: cleans artifacts, extracts headings (H1-H6, bold headers, or paragraphs), and injects IDs
 function processArticleContent(rawHtml) {
   if (!rawHtml) return { html: "", headings: [] };
@@ -492,7 +503,7 @@ function BlogDetail() {
   if (isLoading) {
     return (
       <div className="py-10 bg-slate-50 min-h-screen font-sans">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-6">
+        <div className="max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 space-y-6">
           <div className="w-48 h-4 bg-slate-200 rounded-md animate-pulse"></div>
           <div className="space-y-3 max-w-4xl">
             <div className="w-28 h-6 bg-slate-200 rounded-full animate-pulse"></div>
@@ -518,14 +529,15 @@ function BlogDetail() {
 
   if (isError) {
     return (
-      <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center p-4">
+      <div className="min-h-screen bg-white dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 flex items-center justify-center px-4 py-16">
         <ApiErrorState
           variant="page"
           title="Unable to load research article"
           message="We couldn't retrieve this publication from the server. Check your connection and click refresh."
           onRetry={refetch}
           isRetrying={isFetching}
-          className="bg-slate-800/90 border-slate-700 text-white"
+          backUrl="/blog"
+          backLabel="Return to Blog Index"
         />
       </div>
     );
@@ -533,26 +545,23 @@ function BlogDetail() {
 
   if (!blog) {
     return (
-      <div className="min-h-screen bg-slate-900 text-white flex items-center justify-center p-4">
-        <div className="max-w-lg w-full text-center space-y-6 bg-slate-800/80 border border-slate-700/80 backdrop-blur-md p-8 sm:p-12 rounded-3xl shadow-2xl">
-          <div className="w-16 h-16 rounded-2xl bg-teal-500/20 border border-teal-500/40 text-teal-300 flex items-center justify-center mx-auto">
-            <BookOpen className="w-8 h-8 animate-pulse" />
+      <div className="min-h-screen bg-white dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 flex items-center justify-center px-4 py-16">
+        <div className="max-w-md w-full text-center space-y-5 py-8">
+          <div className="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center mx-auto">
+            <BookOpen size={24} className="stroke-[1.75]" />
           </div>
           <div className="space-y-2">
-            <span className="inline-flex items-center font-medium select-none whitespace-nowrap bg-teal-500/20 text-teal-300 border border-teal-500/40 text-xs px-2.5 py-0.5 rounded-full font-mono">
-              404 • Article Anomaly
-            </span>
-            <h1 className="text-3xl sm:text-4xl font-bold font-heading text-white">
+            <h1 className="text-xl sm:text-2xl font-extrabold font-heading text-black dark:text-white tracking-tight">
               Article Not Found
             </h1>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-sm mx-auto font-normal">
               The publication or research article you requested has either been archived or does not exist in our academic archive.
             </p>
           </div>
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
             <Link
               to="/blog"
-              className="w-fit inline-flex items-center justify-center rounded-full bg-teal-600 text-white hover:bg-teal-700 font-bold text-xs sm:text-sm px-6 py-3.5 gap-2 transition-all shadow-sm"
+              className="inline-flex items-center justify-center rounded-full bg-teal-600 text-white hover:bg-teal-700 font-bold text-xs sm:text-sm px-6 py-2.5 gap-2 transition-all shadow-xs"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Return to Blog Index</span>
@@ -575,16 +584,16 @@ function BlogDetail() {
   const commentsList = Array.isArray(blog.comments) ? blog.comments : [];
 
   return (
-    <article className="py-6 sm:py-10 bg-white dark:bg-slate-950 min-h-screen font-sans text-slate-900 dark:text-slate-100 overflow-x-clip w-full transition-colors duration-200">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-6">
+    <article className="py-4 sm:py-8 md:py-10 bg-white dark:bg-slate-950 min-h-screen font-sans text-slate-900 dark:text-slate-100 overflow-x-clip w-full transition-colors duration-200">
+      <div className="max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 space-y-4 sm:space-y-6">
         {/* Header Breadcrumbs & Title */}
-        <header className="w-full space-y-4 pb-4 border-b border-slate-200/80 dark:border-slate-800">
+        <header className="w-full space-y-2.5 sm:space-y-4 pb-1">
           {/* Breadcrumb row */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold text-slate-500 dark:text-slate-400 flex-wrap">
             <Link to="/blog" className="hover:text-slate-900 dark:hover:text-white transition-colors">
               Academic Insights
             </Link>
-            <span>/</span>
+            <span className="text-slate-400">/</span>
             <Link
               to={`/blog?category=${encodeURIComponent(blog.subject || "Blog")}`}
               className="text-teal-600 dark:text-teal-400 font-bold hover:underline"
@@ -593,123 +602,43 @@ function BlogDetail() {
             </Link>
           </div>
 
-          {/* Article Title: Intact full words that wrap naturally */}
-          <h1 className="text-2xl sm:text-3xl md:text-[32px] lg:text-[34px] font-extrabold tracking-tight text-slate-900 dark:text-white font-heading leading-tight w-full break-normal hyphens-none">
+          {/* Article Title: Crisp mobile typography */}
+          <h1 className="text-2xl sm:text-3xl md:text-[38px] lg:text-[42px] font-extrabold tracking-tight text-black dark:text-white font-heading leading-[1.22] sm:leading-[1.2] w-full break-normal hyphens-none">
             {blog.title}
           </h1>
 
           {/* Lead Paragraph Excerpt */}
           {snippet && (
-            <p className="text-xs sm:text-sm md:text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed font-normal w-full break-normal hyphens-none">
-              {snippet}
+            <p className="text-[14px] sm:text-base md:text-[17px] text-black dark:text-slate-100 leading-relaxed font-normal w-full break-normal hyphens-none pt-0.5">
+              {renderFormattedDescription(snippet)}
             </p>
           )}
-
-          {/* Author Meta Row */}
-          <div className="flex items-center justify-between gap-4 pt-1 flex-wrap">
-            <div className="flex items-center gap-3.5 min-w-0">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 shadow-2xs">
-                <img
-                  src={LogoImg}
-                  alt="Al-Mukhtar Institute"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="min-w-0 space-y-0.5">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-slate-900 dark:text-white text-sm">Al-Mukhtar Institute</span>
-                  <Link
-                    to="/about"
-                    className="text-xs font-semibold text-[#0D9488] dark:text-teal-400 hover:underline"
-                  >
-                    About Us
-                  </Link>
-                </div>
-                <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium">
-                  <span>{readTime}</span>
-                  <span>·</span>
-                  <span>{formatDate(blog.createdAt)}</span>
-                  <span>·</span>
-                  <span className="flex items-center gap-1">
-                    <Eye className="w-3.5 h-3.5 text-slate-400" />
-                    <span>{blog.views || 1} views</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Verified Badge */}
-            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/60 text-[11px] font-bold text-emerald-800 dark:text-emerald-300 shrink-0 font-mono">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-              <span>Academically Verified Publication</span>
-            </div>
-          </div>
         </header>
 
-        {/* Action Toolbar */}
-        <div className="flex items-center justify-between py-3 border-y border-slate-200/80 dark:border-slate-800 text-slate-600 dark:text-slate-300 font-sans my-4 select-none">
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={() => responsesRef.current?.scrollIntoView({ behavior: "smooth" })}
-              className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-[#0D9488] dark:hover:text-teal-400 transition-colors cursor-pointer"
-              title="Jump to responses"
-            >
-              <MessageCircle className="w-4 h-4 text-[#0D9488] dark:text-teal-400" />
-              <span>Responses &amp; Discussions ({commentsList.length})</span>
-            </button>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={handleShare}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer"
-              title="Share article with domain link"
-            >
-              {copied ? (
-                <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
-              ) : (
-                <Share2 className="w-3.5 h-3.5" />
-              )}
-              <span>{copied ? "Link Copied!" : "Share"}</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={handlePrint}
-              className="p-1.5 rounded-full text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer hidden sm:inline-flex"
-              title="Print article"
-            >
-              <Printer className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-
-        {/* Uniform Images Row - All images have equal size in a single row */}
+        {/* Featured Image / Gallery Presentation */}
         {blogImages.length > 0 && (
-          <div className="space-y-2.5">
+          <div className="w-full">
             <div
-              className={`grid gap-3 sm:gap-4 items-stretch ${
+              className={`grid gap-2.5 sm:gap-4 items-stretch ${
                 blogImages.length === 1
-                  ? "grid-cols-1 max-w-2xl mx-auto"
+                  ? "grid-cols-1"
                   : blogImages.length === 2
                   ? "grid-cols-1 sm:grid-cols-2"
                   : blogImages.length === 3
                   ? "grid-cols-1 sm:grid-cols-3"
-                  : "grid-cols-1 sm:grid-cols-2 md:grid-cols-4"
+                  : "grid-cols-2 sm:grid-cols-2 md:grid-cols-4"
               }`}
             >
               {blogImages.map((img, idx) => (
                 <div
                   key={idx}
                   onClick={() => setActiveImageModal(img)}
-                  className={`group relative rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:shadow-md transition-all duration-300 cursor-pointer ${
+                  className={`group relative rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-900 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer ${
                     blogImages.length === 1
-                      ? "h-64 sm:h-80 md:h-96"
+                      ? "h-56 sm:h-80 md:h-[400px] lg:h-[440px] w-full"
                       : blogImages.length === 2
-                      ? "h-56 sm:h-64 md:h-72"
-                      : "h-48 sm:h-56 md:h-64"
+                      ? "h-48 sm:h-64 md:h-76"
+                      : "h-40 sm:h-52 md:h-64"
                   }`}
                   title="Click to view full image"
                 >
@@ -718,29 +647,26 @@ function BlogDetail() {
                     onError={(e) => {
                       e.currentTarget.onerror = null;
                       e.currentTarget.src = LogoImg;
-                      e.currentTarget.className = "max-h-24 max-w-[65%] object-contain m-auto drop-shadow-2xs";
+                      e.currentTarget.className = "max-h-24 max-w-[65%] object-contain m-auto drop-shadow-sm";
                     }}
                     alt={`${blog.title} - Image ${idx + 1}`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500 ease-out"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-slate-950/0 group-hover:bg-slate-950/20 transition-colors flex items-center justify-center">
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900/80 backdrop-blur-xs text-white text-[11px] font-mono px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-between p-4">
+                    <span className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md text-slate-800 dark:text-slate-100 text-[11px] font-medium px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-sm">
                       <ZoomIn size={13} />
-                      <span>View Full</span>
+                      <span>View Full Image</span>
                     </span>
+                    {blogImages.length > 1 && (
+                      <span className="bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md text-[10px] font-mono text-white">
+                        {idx + 1} / {blogImages.length}
+                      </span>
+                    )}
                   </div>
-                  {blogImages.length > 1 && (
-                    <div className="absolute bottom-2.5 right-2.5 bg-slate-950/70 backdrop-blur-xs px-2 py-0.5 rounded-md text-[10px] font-mono text-white/90">
-                      {idx + 1} of {blogImages.length}
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
-            <p className="text-center text-[10px] text-slate-400 dark:text-slate-500 font-mono">
-              Al-Mukhtar Academic Publication • Authentic Knowledge &amp; Educational Research
-            </p>
           </div>
         )}
 
@@ -775,7 +701,7 @@ function BlogDetail() {
             </button>
 
             {mobileTocOpen && (
-              <nav className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-800 space-y-1 max-h-64 overflow-y-auto">
+              <nav className="mt-3 pt-2 space-y-1 max-h-64 overflow-y-auto">
                 {headings.map((h) => (
                   <button
                     key={h.id}
@@ -808,7 +734,7 @@ function BlogDetail() {
             </div>
 
             {/* Related Topics & Category Tags */}
-            <div className="mt-8 pt-6 border-t border-slate-200/80 dark:border-slate-800 space-y-2.5">
+            <div className="mt-8 pt-2 space-y-2.5">
               <span className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider font-mono block">
                 Related Topics
               </span>
@@ -830,14 +756,93 @@ function BlogDetail() {
 
             {/* AdSense Unit at Blog Article Ending */}
             <AdSenseBanner className="mt-8 mb-2" />
+
+            {/* Author & Editorial Metadata / Action Bar (End of Blog Article) */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 pt-6 pb-2">
+              {/* Author / Institute Profile */}
+              <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+                <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden shrink-0 ring-2 ring-slate-200 dark:ring-slate-700 bg-white dark:bg-slate-900 shadow-xs">
+                  <img
+                    src={LogoImg}
+                    alt="Al-Mukhtar Institute"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="min-w-0 space-y-0.5">
+                  <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                    <span className="font-bold text-black dark:text-white text-xs sm:text-sm">
+                      Al-Mukhtar Institute
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-semibold text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-950/60 border border-teal-200/60 dark:border-teal-800/60 px-2 py-0.5 rounded-full font-mono">
+                      <ShieldCheck className="w-3 h-3 text-teal-600 dark:text-teal-400" />
+                      Verified
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 flex-wrap">
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 dark:text-slate-500" />
+                      <span>{readTime}</span>
+                    </span>
+                    <span className="text-slate-300 dark:text-slate-600">•</span>
+                    <span>{formatDate(blog.createdAt)}</span>
+                    <span className="text-slate-300 dark:text-slate-600">•</span>
+                    <span className="flex items-center gap-1">
+                      <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 dark:text-slate-500" />
+                      <span>{blog.views || 1} views</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Integrated Action Controls */}
+              <div className="flex items-center gap-2 shrink-0 self-start sm:self-center">
+                <button
+                  type="button"
+                  onClick={() => responsesRef.current?.scrollIntoView({ behavior: "smooth" })}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-slate-800 dark:text-slate-100 bg-slate-100 dark:bg-slate-800 hover:bg-teal-50 dark:hover:bg-teal-950/60 hover:text-teal-700 dark:hover:text-teal-300 transition-colors cursor-pointer border border-slate-200/80 dark:border-slate-700"
+                  title="Jump to responses"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
+                  <span>{commentsList.length}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleShare}
+                  className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-semibold text-slate-800 dark:text-slate-100 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer border border-slate-200/80 dark:border-slate-700"
+                  title="Share article"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                      <span className="text-emerald-600 dark:text-emerald-400">Copied</span>
+                    </>
+                  ) : (
+                    <>
+                      <Share2 className="w-3.5 h-3.5 text-slate-600 dark:text-slate-300" />
+                      <span>Share</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handlePrint}
+                  className="p-1.5 rounded-full text-slate-600 dark:text-slate-300 hover:text-black dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors cursor-pointer hidden sm:inline-flex border border-slate-200/80 dark:border-slate-700"
+                  title="Print article"
+                >
+                  <Printer className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* Sticky Table of Contents & Sidebar on the RIGHT Side (Compact lg:col-span-3) */}
-          <aside className="hidden lg:block lg:col-span-3 sticky top-24 self-start border-l border-slate-200/80 dark:border-slate-800 pl-5 space-y-6 font-sans shrink-0 min-w-0 w-full z-10">
+          <aside className="hidden lg:block lg:col-span-3 sticky top-24 self-start pl-2 lg:pl-4 space-y-6 font-sans shrink-0 min-w-0 w-full z-10">
             {/* Table of Contents Header & Items */}
             {headings.length > 0 && (
               <div className="w-full flex flex-col font-sans max-h-[calc(100vh-140px)]">
-                <div className="shrink-0 flex items-center justify-between pb-3 border-b border-slate-200/80 dark:border-slate-800">
+                <div className="shrink-0 flex items-center justify-between pb-2">
                   <div className="flex items-center gap-2 text-slate-900 dark:text-white font-bold text-xs uppercase tracking-wider font-mono">
                     <BookOpen className="w-3.5 h-3.5 text-[#0D9488] dark:text-teal-400" />
                     <span>Table of Contents</span>
@@ -868,144 +873,58 @@ function BlogDetail() {
                 </nav>
               </div>
             )}
-
-            {/* Author / Academy Info */}
-            <div className="space-y-3.5 pt-6 border-t border-slate-200/80 dark:border-slate-800">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white font-mono">
-                About the Academy
-              </h3>
-              <div className="flex items-start gap-3">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 shadow-2xs">
-                  <img
-                    src={LogoImg}
-                    alt="Al-Mukhtar Institute"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="min-w-0 flex-1 space-y-1">
-                  <h4 className="text-sm font-bold text-slate-900 dark:text-white leading-tight font-heading">
-                    Al-Mukhtar Institute
-                  </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3 break-normal">
-                    Dedicated to excellence in Quranic studies, Tajweed, Islamic jurisprudence, and Arabic literature.
-                  </p>
-                  <div className="pt-1">
-                    <Link
-                      to="/about"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0D9488] dark:text-teal-400 hover:underline"
-                    >
-                      <span>Learn more about us</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Quick Share Widget */}
-            <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 font-mono block">
-                Share this Publication
-              </span>
-              <button
-                type="button"
-                onClick={handleShare}
-                className="w-full py-2 px-3 rounded-xl bg-white dark:bg-slate-800 hover:bg-teal-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 hover:border-teal-300 dark:hover:border-teal-500 text-xs font-bold text-[#0D9488] dark:text-teal-300 flex items-center justify-center gap-2 transition-all shadow-2xs cursor-pointer"
-              >
-                {copied ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Share2 className="w-4 h-4" />}
-                <span>{copied ? "Link Copied to Clipboard!" : "Copy Article Link"}</span>
-              </button>
-            </div>
           </aside>
         </div>
 
         {/* Below Article Section (TOC has stopped scrolling above) */}
-        <div className="pt-10 border-t border-slate-200/80 dark:border-slate-800 space-y-12 w-full max-w-4xl">
+        <div className="pt-6 sm:pt-8 space-y-8 sm:space-y-10 w-full max-w-4xl">
           {/* Interactive Responses & Realtime Discussions */}
           <div
             id="responses-section"
             ref={responsesRef}
-            className="space-y-6"
+            className="space-y-3 sm:space-y-4 pt-2"
           >
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white font-heading">
-                Responses &amp; Academic Reflections
-              </h3>
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
-                {commentsList.reduce((acc, c) => acc + 1 + (Array.isArray(c.replies) ? c.replies.length : 0), 0)}{" "}
-                {commentsList.reduce((acc, c) => acc + 1 + (Array.isArray(c.replies) ? c.replies.length : 0), 0) === 1
-                  ? "Thought"
-                  : "Thoughts"}
-              </span>
-            </div>
-
-            {/* Comment Input Box (Authenticated Gate) */}
+            {/* Comment Input (Simple, Unboxed, Compact) */}
             {!user ? (
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-teal-500/10 via-slate-50 to-slate-100/60 dark:from-slate-850 dark:via-slate-900 dark:to-slate-900 border border-teal-500/20 dark:border-slate-800 text-center space-y-3.5 shadow-2xs">
-                <div className="w-11 h-11 mx-auto rounded-2xl bg-[#0D9488]/10 dark:bg-teal-500/20 text-[#0D9488] dark:text-teal-300 flex items-center justify-center">
-                  <MessageSquare className="w-5 h-5" />
-                </div>
-                <div className="space-y-1 max-w-md mx-auto">
-                  <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white font-heading">
-                    Join the Discussion
-                  </h4>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
-                    Sign in with your account to share your academic reflections or reply to others.
-                  </p>
-                </div>
-                <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap items-center justify-center sm:gap-3 pt-1 max-w-sm sm:max-w-none mx-auto">
+              <div className="py-2 flex items-center justify-between gap-3 text-xs text-slate-600 dark:text-slate-300 flex-wrap">
+                <span>Sign in with your account to participate in discussion.</span>
+                <div className="flex items-center gap-2 font-medium">
                   <Link
                     to={`/login?redirect=${encodeURIComponent(location.pathname)}`}
-                    className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-5 py-2.5 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold text-xs shadow-2xs text-center"
+                    className="font-bold text-teal-600 dark:text-teal-400 hover:underline"
                   >
-                    <LogIn size={14} />
-                    <span>Sign In</span>
+                    Sign In
                   </Link>
+                  <span className="text-slate-400">•</span>
                   <Link
                     to={`/signup?redirect=${encodeURIComponent(location.pathname)}`}
-                    className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-[#0D9488] text-slate-700 dark:text-slate-200 hover:text-[#0D9488] dark:hover:text-[#38BDF8] text-xs font-bold transition-all bg-white dark:bg-slate-800 shadow-3xs text-center"
+                    className="hover:text-slate-900 dark:hover:text-white transition-colors"
                   >
-                    <span>Sign Up</span>
+                    Sign Up
                   </Link>
                 </div>
               </div>
             ) : (
-              <form
-                onSubmit={handleCommentSubmit}
-                className="p-4 sm:p-5 rounded-2xl bg-slate-50/90 dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 space-y-3.5 shadow-2xs"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0D9488] to-[#0A2540] text-white flex items-center justify-center text-xs font-bold shadow-3xs shrink-0">
-                      {user.username?.slice(0, 2).toUpperCase() || "U"}
-                    </div>
-                    <div>
-                      <p className="text-xs font-bold text-slate-900 dark:text-white leading-tight">
-                        Posting as <span className="text-[#0D9488] dark:text-teal-300">@{user.username}</span>
-                      </p>
-                      <p className="text-[10px] text-slate-400 font-mono">{user.email}</p>
-                    </div>
-                  </div>
-                  {isAdmin && (
-                    <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-teal-300 border border-teal-200 dark:border-teal-800">
-                      Admin
-                    </span>
-                  )}
+              <form onSubmit={handleCommentSubmit} className="space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-mono text-xs font-semibold text-teal-700 dark:text-teal-300">
+                    @{user.username}
+                  </span>
                 </div>
 
                 <textarea
-                  rows={3}
+                  rows={2}
                   value={newCommentText}
                   onChange={(e) => setNewCommentText(e.target.value)}
                   placeholder="Share your thoughts, ask scholarly questions, or contribute a reflection..."
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-[#0D9488] dark:focus:border-teal-400 resize-none transition-colors"
+                  className="w-full px-3 py-2 rounded-xl bg-slate-50/80 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 outline-none focus:border-teal-600 dark:focus:border-teal-400 resize-none transition-colors"
                 />
 
-                <div className="flex justify-end items-center gap-2">
+                <div className="flex justify-end">
                   <button
                     type="submit"
                     disabled={addCommentMutation.isPending || !newCommentText.trim()}
-                    className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold text-xs transition-all shadow-2xs cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:scale-[1.02]"
+                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs transition-all shadow-xs cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {addCommentMutation.isPending ? (
                       <>
@@ -1014,7 +933,7 @@ function BlogDetail() {
                       </>
                     ) : (
                       <>
-                        <span>Post Response</span>
+                        <span>Post Comment</span>
                         <Send className="w-3 h-3" />
                       </>
                     )}
@@ -1023,8 +942,8 @@ function BlogDetail() {
               </form>
             )}
 
-            {/* Live Comments List from MongoDB */}
-            <div className="space-y-4">
+            {/* Live Comments List (Unboxed, Compact) */}
+            <div className="space-y-3 pt-2">
               {commentsList.length > 0 ? (
                 <>
                   {commentsList.slice(0, visibleCommentsCount).map((c, index) => {
@@ -1040,27 +959,22 @@ function BlogDetail() {
                     return (
                       <div
                         key={c._id || index}
-                        className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 space-y-3 shadow-2xs transition-all"
+                        className="py-1.5 space-y-1 text-left"
                       >
-                        {/* Comment Top Header */}
+                        {/* Comment Header */}
                         <div className="flex items-center justify-between gap-2">
-                          <div className="flex items-center gap-2.5 min-w-0">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0D9488] to-[#0A2540] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-3xs">
-                              {authorName.slice(0, 2).toUpperCase() || "U"}
-                            </div>
-                            <div className="min-w-0">
-                              <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white truncate block">
-                                {authorName}
-                              </span>
-                              <span className="text-slate-400 dark:text-slate-500 text-[10px] font-mono block">
-                                {formatDate(c.createdAt)}
-                                {c.updatedAt && (
-                                  <span className="ml-1.5 text-teal-600 dark:text-teal-400 italic">
-                                    (edited)
-                                  </span>
-                                )}
-                              </span>
-                            </div>
+                          <div className="flex items-center gap-2 min-w-0 flex-wrap">
+                            <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+                              {authorName}
+                            </span>
+                            <span className="text-slate-400 dark:text-slate-500 text-[10px] font-mono">
+                              {formatDate(c.createdAt)}
+                              {c.updatedAt && (
+                                <span className="ml-1 text-teal-600 dark:text-teal-400 italic">
+                                  (edited)
+                                </span>
+                              )}
+                            </span>
                           </div>
 
                           {/* Action buttons if owner or admin */}
@@ -1069,19 +983,19 @@ function BlogDetail() {
                               <button
                                 type="button"
                                 onClick={() => handleStartEditComment(c)}
-                                className="p-1.5 rounded-lg text-slate-400 hover:text-[#0D9488] dark:hover:text-teal-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-                                title="Edit Reflection"
+                                className="p-1 rounded text-slate-400 hover:text-teal-600 dark:hover:text-teal-300 transition-colors cursor-pointer"
+                                title="Edit"
                               >
-                                <Edit3 size={14} />
+                                <Edit3 size={12} />
                               </button>
                               <button
                                 type="button"
                                 onClick={() => handleDeleteComment(c._id)}
                                 disabled={deleteCommentMutation.isPending}
-                                className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer"
-                                title="Delete Reflection"
+                                className="p-1 rounded text-slate-400 hover:text-rose-600 transition-colors cursor-pointer"
+                                title="Delete"
                               >
-                                <Trash2 size={14} />
+                                <Trash2 size={12} />
                               </button>
                             </div>
                           )}
@@ -1089,18 +1003,18 @@ function BlogDetail() {
 
                         {/* Comment Body or Inline Edit Form */}
                         {isEditing ? (
-                          <div className="space-y-2 pt-1">
+                          <div className="space-y-1.5 pt-1">
                             <textarea
-                              rows={3}
+                              rows={2}
                               value={editCommentText}
                               onChange={(e) => setEditCommentText(e.target.value)}
-                              className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white outline-none focus:border-[#0D9488] dark:focus:border-teal-400 resize-none"
+                              className="w-full px-3 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-900 dark:text-white outline-none focus:border-teal-600 resize-none"
                             />
                             <div className="flex items-center justify-end gap-2">
                               <button
                                 type="button"
                                 onClick={() => setEditingCommentId(null)}
-                                className="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                                className="px-2.5 py-1 rounded text-xs text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 cursor-pointer"
                               >
                                 Cancel
                               </button>
@@ -1108,31 +1022,31 @@ function BlogDetail() {
                                 type="button"
                                 onClick={() => handleSaveEditComment(c._id)}
                                 disabled={updateCommentMutation.isPending || !editCommentText.trim()}
-                                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-bold transition-all shadow-3xs cursor-pointer disabled:opacity-50"
+                                className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold transition-all shadow-xs cursor-pointer disabled:opacity-50"
                               >
                                 {updateCommentMutation.isPending ? (
                                   <Loader2 className="w-3 h-3 animate-spin" />
                                 ) : (
                                   <Check className="w-3 h-3" />
                                 )}
-                                <span>Save Changes</span>
+                                <span>Save</span>
                               </button>
                             </div>
                           </div>
                         ) : (
-                          <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal whitespace-pre-wrap break-words">
+                          <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-snug whitespace-pre-wrap break-words">
                             {c.comment}
                           </p>
                         )}
 
-                        {/* Action Row: Reply Toggle */}
-                        <div className="pt-1 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/60 text-xs">
+                        {/* Reply Trigger */}
+                        <div className="flex items-center gap-2 pt-0.5 text-xs">
                           <button
                             type="button"
                             onClick={() => handleStartReply(c._id)}
-                            className="inline-flex items-center gap-1.5 text-xs font-bold text-[#0D9488] dark:text-teal-400 hover:text-[#0F766E] dark:hover:text-teal-300 hover:underline cursor-pointer transition-colors"
+                            className="inline-flex items-center gap-1 text-[11px] font-semibold text-teal-600 dark:text-teal-400 hover:underline cursor-pointer"
                           >
-                            <CornerDownRight size={13} />
+                            <CornerDownRight size={11} />
                             <span>Reply</span>
                             {replies.length > 0 && (
                               <span className="text-[10px] font-mono text-slate-400">
@@ -1144,17 +1058,17 @@ function BlogDetail() {
 
                         {/* Inline Reply Form */}
                         {isReplying && (
-                          <div className="mt-2 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2.5">
+                          <div className="mt-1.5 p-2.5 rounded-xl bg-slate-50/90 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2">
                             <div className="flex items-center justify-between text-xs">
-                              <span className="font-bold text-slate-800 dark:text-slate-200 text-[11px]">
-                                Replying as <span className="text-[#0D9488] dark:text-teal-300">@{user?.username}</span>
+                              <span className="font-mono text-[11px] text-teal-700 dark:text-teal-300">
+                                @{user?.username}
                               </span>
                               <button
                                 type="button"
                                 onClick={() => setReplyingToCommentId(null)}
                                 className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
                               >
-                                <X size={14} />
+                                <X size={13} />
                               </button>
                             </div>
                             <textarea
@@ -1162,13 +1076,13 @@ function BlogDetail() {
                               value={replyText}
                               onChange={(e) => setReplyText(e.target.value)}
                               placeholder={`Reply to @${authorName}...`}
-                              className="w-full px-3 py-2 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white outline-none focus:border-[#0D9488] dark:focus:border-teal-400 resize-none"
+                              className="w-full px-2.5 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white outline-none focus:border-teal-600 resize-none"
                             />
-                            <div className="flex justify-end gap-2">
+                            <div className="flex justify-end gap-1.5">
                               <button
                                 type="button"
                                 onClick={() => setReplyingToCommentId(null)}
-                                className="px-3 py-1 rounded-md text-xs font-semibold text-slate-500 hover:bg-slate-200/60 dark:hover:bg-slate-700"
+                                className="px-2.5 py-1 text-xs text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
                               >
                                 Cancel
                               </button>
@@ -1176,22 +1090,22 @@ function BlogDetail() {
                                 type="button"
                                 onClick={() => handleSaveReply(c._id)}
                                 disabled={addReplyMutation.isPending || !replyText.trim()}
-                                className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-md bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-bold transition-all shadow-3xs cursor-pointer disabled:opacity-50"
+                                className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold transition-all shadow-xs cursor-pointer disabled:opacity-50"
                               >
                                 {addReplyMutation.isPending ? (
                                   <Loader2 className="w-3 h-3 animate-spin" />
                                 ) : (
                                   <Send className="w-3 h-3" />
                                 )}
-                                <span>Post Reply</span>
+                                <span>Reply</span>
                               </button>
                             </div>
                           </div>
                         )}
 
-                        {/* Nested Replies List */}
+                        {/* Nested Replies */}
                         {replies.length > 0 && (
-                          <div className="border-l-2 border-teal-500/40 dark:border-teal-400/40 ml-3 sm:ml-6 pl-3 sm:pl-4 space-y-3 mt-3 pt-1">
+                          <div className="border-l-2 border-slate-200 dark:border-slate-800 ml-1 sm:ml-2 pl-2.5 sm:pl-3.5 space-y-2 mt-1.5">
                             {replies.map((r, rIdx) => {
                               const replyAuthorName =
                                 (typeof r.user === "object" && r.user?.username) ||
@@ -1204,26 +1118,21 @@ function BlogDetail() {
                               return (
                                 <div
                                   key={r._id || rIdx}
-                                  className="p-3 rounded-xl bg-slate-50/70 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 space-y-2"
+                                  className="space-y-0.5 text-left"
                                 >
                                   <div className="flex items-center justify-between gap-2">
-                                    <div className="flex items-center gap-2 min-w-0">
-                                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-teal-600 to-[#0A2540] text-white flex items-center justify-center text-[10px] font-bold shrink-0">
-                                        {replyAuthorName.slice(0, 2).toUpperCase() || "U"}
-                                      </div>
-                                      <div className="min-w-0">
-                                        <span className="font-bold text-xs text-slate-900 dark:text-white truncate block">
-                                          {replyAuthorName}
-                                        </span>
-                                        <span className="text-slate-400 dark:text-slate-500 text-[9px] font-mono block">
-                                          {formatDate(r.createdAt)}
-                                          {r.updatedAt && (
-                                            <span className="ml-1 text-teal-600 dark:text-teal-400 italic">
-                                              (edited)
-                                            </span>
-                                          )}
-                                        </span>
-                                      </div>
+                                    <div className="flex items-center gap-2">
+                                      <span className="font-bold text-xs text-slate-900 dark:text-white">
+                                        {replyAuthorName}
+                                      </span>
+                                      <span className="text-slate-400 dark:text-slate-500 text-[9px] font-mono">
+                                        {formatDate(r.createdAt)}
+                                        {r.updatedAt && (
+                                          <span className="ml-1 text-teal-600 dark:text-teal-400 italic">
+                                            (edited)
+                                          </span>
+                                        )}
+                                      </span>
                                     </div>
 
                                     {canManageReply && !isEditingReply && (
@@ -1231,37 +1140,37 @@ function BlogDetail() {
                                         <button
                                           type="button"
                                           onClick={() => handleStartEditReply(c._id, r)}
-                                          className="p-1 rounded text-slate-400 hover:text-[#0D9488] dark:hover:text-teal-300 hover:bg-slate-200/60 dark:hover:bg-slate-700 transition-colors cursor-pointer"
-                                          title="Edit Reply"
+                                          className="p-1 text-slate-400 hover:text-teal-600 cursor-pointer"
+                                          title="Edit"
                                         >
-                                          <Edit3 size={12} />
+                                          <Edit3 size={11} />
                                         </button>
                                         <button
                                           type="button"
                                           onClick={() => handleDeleteReply(c._id, r._id)}
                                           disabled={deleteReplyMutation.isPending}
-                                          className="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors cursor-pointer"
-                                          title="Delete Reply"
+                                          className="p-1 text-slate-400 hover:text-rose-600 cursor-pointer"
+                                          title="Delete"
                                         >
-                                          <Trash2 size={12} />
+                                          <Trash2 size={11} />
                                         </button>
                                       </div>
                                     )}
                                   </div>
 
                                   {isEditingReply ? (
-                                    <div className="space-y-2 pt-1">
+                                    <div className="space-y-1 pt-1">
                                       <textarea
                                         rows={2}
                                         value={editReplyText}
                                         onChange={(e) => setEditReplyText(e.target.value)}
-                                        className="w-full px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white outline-none focus:border-[#0D9488] resize-none"
+                                        className="w-full px-2.5 py-1 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white outline-none focus:border-teal-600 resize-none"
                                       />
-                                      <div className="flex justify-end gap-2">
+                                      <div className="flex justify-end gap-1.5">
                                         <button
                                           type="button"
                                           onClick={() => setEditingReplyKey(null)}
-                                          className="px-2.5 py-1 rounded text-[11px] font-semibold text-slate-500 hover:bg-slate-200/60"
+                                          className="px-2 py-0.5 text-[11px] text-slate-500"
                                         >
                                           Cancel
                                         </button>
@@ -1269,15 +1178,14 @@ function BlogDetail() {
                                           type="button"
                                           onClick={() => handleSaveEditReply(c._id, r._id)}
                                           disabled={updateReplyMutation.isPending || !editReplyText.trim()}
-                                          className="inline-flex items-center gap-1 px-3 py-1 rounded bg-[#0D9488] text-white text-[11px] font-bold"
+                                          className="px-2.5 py-0.5 rounded-lg bg-teal-600 text-white text-[11px] font-bold"
                                         >
-                                          <Check size={12} />
-                                          <span>Save</span>
+                                          Save
                                         </button>
                                       </div>
                                     </div>
                                   ) : (
-                                    <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap break-words">
+                                    <p className="text-xs text-slate-700 dark:text-slate-300 leading-snug whitespace-pre-wrap break-words">
                                       {r.comment}
                                     </p>
                                   )}
@@ -1296,17 +1204,17 @@ function BlogDetail() {
                       <button
                         type="button"
                         onClick={() => setVisibleCommentsCount((prev) => prev + 10)}
-                        className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs hover:border-[#0D9488] dark:hover:border-teal-400 hover:text-[#0D9488] dark:hover:text-teal-300 shadow-3xs transition-all hover:scale-[1.01] cursor-pointer"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-600 dark:text-teal-400 hover:underline cursor-pointer"
                       >
-                        <span>Show More Reflections ({commentsList.length - visibleCommentsCount} more)</span>
+                        <span>Show more comments ({commentsList.length - visibleCommentsCount} more)</span>
                         <ChevronDown className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   )}
                 </>
               ) : (
-                <p className="text-xs text-slate-400 dark:text-slate-500 py-4 text-center">
-                  No reflections posted yet. Be the first to share your thoughts!
+                <p className="text-xs text-slate-400 dark:text-slate-500 py-2 text-left">
+                  No comments yet. Be the first to share your thoughts!
                 </p>
               )}
             </div>
@@ -1314,9 +1222,9 @@ function BlogDetail() {
 
           {/* "More from Al-Mukhtar Institute" Related Articles */}
           {relatedBlogs.length > 0 && (
-            <div className="pt-8 border-t border-slate-200/80 dark:border-slate-800 space-y-6">
+            <div className="pt-6 space-y-4 sm:space-y-6">
               <div className="flex items-center justify-between">
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white font-heading">
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-slate-900 dark:text-white font-heading">
                   More from Academic Insights
                 </h3>
                 <Link
@@ -1328,7 +1236,7 @@ function BlogDetail() {
                 </Link>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
                 {relatedBlogs.map((rel) => {
                   const relImg = getImageUrl(
                     (Array.isArray(rel.images) && rel.images.length > 0)
@@ -1339,7 +1247,7 @@ function BlogDetail() {
                     <Link
                       key={rel._id || rel.slug}
                       to={`/blog/${rel.slug || rel._id}`}
-                      className="group p-3 rounded-2xl bg-slate-50/70 dark:bg-slate-900 hover:bg-slate-100/90 dark:hover:bg-slate-800/80 border border-slate-200/80 dark:border-slate-800 transition-all flex flex-col space-y-2.5"
+                      className="group p-2.5 sm:p-3 rounded-2xl bg-slate-50/70 dark:bg-slate-900 hover:bg-slate-100/90 dark:hover:bg-slate-800/80 border border-slate-200/80 dark:border-slate-800 transition-all flex flex-col space-y-2 sm:space-y-2.5"
                     >
                       <div className="aspect-[16/10] rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-800 flex items-center justify-center">
                         {relImg ? (

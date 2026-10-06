@@ -364,7 +364,7 @@ export default function NotificationModal({
 
                 {/* Announcement Message Box */}
                 {hasDesc && (
-                  <div className={`p-3.5 rounded-xl border-l-4 border-teal-600 bg-slate-50 dark:bg-slate-850 text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed whitespace-pre-line font-sans max-h-36 sm:max-h-44 overflow-y-auto custom-scrollbar shadow-2xs ${
+                  <div className={`p-3.5 rounded-xl border-l-4 border-teal-600 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed whitespace-pre-line font-sans max-h-36 sm:max-h-44 overflow-y-auto custom-scrollbar shadow-2xs ${
                     !hasImage && !hasTitle ? "flex items-start gap-2.5" : ""
                   }`}>
                     {!hasImage && !hasTitle && (

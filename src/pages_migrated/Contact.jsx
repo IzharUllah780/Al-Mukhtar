@@ -110,13 +110,13 @@ function Contact() {
       
       {/* 1. Welcoming Hero Header */}
       <section className="bg-slate-50/70 dark:bg-slate-900/40 border-b border-slate-200/80 dark:border-slate-800 pt-8 pb-10 sm:pt-14 sm:pb-16 transition-colors">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-3 sm:space-y-4">
+        <div className="max-w-4xl mx-auto px-3 sm:px-6 text-center space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 text-[11px] font-bold font-mono uppercase tracking-wider border border-teal-200/70 dark:border-teal-800/60 max-w-full">
             <Sparkles size={13} className="shrink-0 text-teal-500" />
             <span className="truncate">Al-Mukhtar Student Guidance &amp; Admissions</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white font-heading tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-black dark:text-white font-heading tracking-tight">
             How can we help you today?
           </h1>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-xl mx-auto leading-relaxed font-normal">
@@ -166,7 +166,7 @@ function Contact() {
 
       {/* 2. Main Content Layout */}
       <section className="py-8 sm:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="max-w-4xl mx-auto px-3 sm:px-6">
           <div className="space-y-8 sm:space-y-12">
 
             {/* Form Header */}
@@ -516,7 +516,7 @@ function Contact() {
 
       {/* 3. Simple Frequently Asked Questions */}
       <section className="border-t border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 py-10 sm:py-16 transition-colors">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 space-y-6 sm:space-y-8">
+        <div className="max-w-3xl mx-auto px-3 sm:px-6 space-y-6 sm:space-y-8">
           
           <div className="text-center space-y-2">
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white font-heading">

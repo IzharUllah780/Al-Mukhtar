@@ -56,7 +56,7 @@ export async function POST(req) {
       user.otp.attempts += 1;
       await user.save();
       return NextResponse.json(
-        { success: false, message: "Invalid OTP" },
+        { success: false, message: "Invalid or expired OTP code." },
         { status: 400 }
       );
     }
@@ -69,10 +69,9 @@ export async function POST(req) {
       success: true,
       message: "Email verified successfully",
     });
-  } catch (error) {
-    console.error("VerifyEmail error:", error);
+  } catch {
     return NextResponse.json(
-      { success: false, message: "Something went wrong" },
+      { success: false, message: "Something went wrong. Please try again." },
       { status: 500 }
     );
   }

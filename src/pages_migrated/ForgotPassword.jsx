@@ -20,6 +20,22 @@ import {
 import { Logo, moon_light } from "../assets/assets.js";
 
 
+function getSanitizedError(error, defaultMsg = "Something went wrong. Please try again.") {
+  const msg = error?.response?.data?.message;
+  if (
+    msg &&
+    typeof msg === "string" &&
+    !msg.toLowerCase().includes("mongo") &&
+    !msg.toLowerCase().includes("topology") &&
+    !msg.toLowerCase().includes("econn") &&
+    !msg.toLowerCase().includes("error") &&
+    msg.length < 90
+  ) {
+    return msg;
+  }
+  return defaultMsg;
+}
+
 /* ──────────────────────────────────────────────────────────
    Step 1 — Enter Email
 ────────────────────────────────────────────────────────── */
@@ -51,7 +67,7 @@ function StepEmail({ onNext }) {
 
       {mutation.isError && (
         <div className="mb-5 text-xs sm:text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 font-medium">
-          {mutation.error?.response?.data?.message || "Something went wrong. Please try again."}
+          {getSanitizedError(mutation.error, "Something went wrong. Please try again.")}
         </div>
       )}
 
@@ -126,7 +142,7 @@ function StepOtp({ email, onNext }) {
 
       {mutation.isError && (
         <div className="mb-5 text-xs sm:text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 font-medium">
-          {mutation.error?.response?.data?.message || "Invalid OTP. Please try again."}
+          {getSanitizedError(mutation.error, "Invalid or expired OTP. Please try again.")}
         </div>
       )}
       {resendMutation.isSuccess && (
@@ -212,7 +228,7 @@ function StepNewPassword({ resetToken, onDone }) {
 
       {mutation.isError && (
         <div className="mb-5 text-xs sm:text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 font-medium">
-          {mutation.error?.response?.data?.message || "Something went wrong. Please try again."}
+          {getSanitizedError(mutation.error, "Something went wrong. Please try again.")}
         </div>
       )}
 
@@ -375,7 +391,7 @@ function ForgotPassword() {
       </div>
 
       {/* Right Panel (Starts from top on mobile with full screen height, centered on desktop) */}
-      <div className="w-full lg:w-[58%] flex flex-col justify-start lg:justify-center items-center px-5 pt-6 pb-10 sm:px-14 sm:py-12 min-h-[100dvh] lg:min-h-screen overflow-y-auto">
+      <div className="w-full lg:w-[58%] flex flex-col justify-start lg:justify-center items-center px-3 pt-6 pb-10 sm:px-14 sm:py-12 min-h-[100dvh] lg:min-h-screen overflow-y-auto">
         <div className="w-full max-w-[420px] flex flex-col justify-start">
           {/* Back to Home Button on top left */}
           <div className="mb-4 sm:mb-6 self-start">

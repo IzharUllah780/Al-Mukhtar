@@ -161,10 +161,20 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
   if (!blog) return null;
 
   const rawImage = getBlogImage(blog);
-  const snippet =
-    blog.description && blog.description.length > 150
-      ? blog.description
-      : getSnippet(blog.content || blog.description, layout === "list" ? 500 : 420);
+  const thumbnailSrc = !imgError && rawImage ? rawImage : LogoImg;
+  const isFallbackLogo = imgError || !rawImage;
+
+  const fullTextSource =
+    blog.content && blog.description
+      ? (blog.description.length < 300
+          ? `${blog.description} ${blog.content}`
+          : (blog.content.length > blog.description.length ? blog.content : blog.description))
+      : (blog.content || blog.description || "");
+
+  const snippet = getSnippet(
+    fullTextSource || blog.description || blog.content,
+    layout === "list" ? 900 : 420
+  );
   const readTime = getReadingTime(blog);
   const formattedDate = formatDate(blog.createdAt || blog.publishedAt);
   const blogUrl = `/blog/${blog.slug || blog._id}`;
@@ -172,29 +182,25 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
   const viewsCount = typeof blog.views === "number" ? blog.views : 0;
   const { name: authorName, initials: authorInitials } = getAuthorInfo(blog);
 
-  const thumbnailSrc = !imgError && rawImage ? rawImage : LogoImg;
-  const isFallbackLogo = imgError || !rawImage;
-
   /* ─────────────────────────────────────────────────────────────
-     LIST VIEW (Matches 2-in-a-row list card style)
-     - Image floats right (float-right) with compact height
-     - Excerpt is standard block text (NO line-clamp) so it wraps directly underneath the image
-     - No border, no shadow (clean solid flat look)
+     LIST VIEW (Single row, full width)
+     - Image floats right on sm+ (hidden on mobile)
+     - Description clamped to up to 4 lines
      ───────────────────────────────────────────────────────────── */
   if (layout === "list") {
     return (
       <article className="group w-full p-0.5 sm:p-1 bg-transparent font-sans transition-all">
-        <div className="flow-root">
-          {/* Float-Right Thumbnail Image */}
+        <div className="flow-root w-full">
+          {/* Float-Right Thumbnail Image (Hidden on mobile, visible on sm and up) */}
           <Link
             to={blogUrl}
-            className="float-right ml-3 sm:ml-4 mb-2 relative w-28 h-20 sm:w-36 sm:h-24 md:w-44 md:h-28 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 block group/img shadow-2xs hover:shadow-xs transition-all"
+            className="hidden sm:block float-right ml-4 sm:ml-6 mb-2 relative w-32 h-22 sm:w-40 sm:h-28 md:w-48 md:h-32 rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-800 group/img shadow-2xs hover:shadow-xs transition-all shrink-0"
           >
             <Image
               src={thumbnailSrc}
               alt={blog.title || "Blog article"}
               fill
-              sizes="(max-width: 640px) 112px, (max-width: 1024px) 144px, 176px"
+              sizes="(max-width: 640px) 112px, (max-width: 1024px) 160px, 192px"
               className={`transition-transform duration-500 ease-out group-hover:scale-105 rounded-2xl ${
                 isFallbackLogo
                   ? "object-contain p-3 opacity-75"
@@ -205,26 +211,21 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
             />
           </Link>
 
-          {/* 1. Date */}
-          <div className="text-xs text-slate-500 dark:text-slate-400">
-            <span>{formattedDate}</span>
-          </div>
-
-          {/* 2. Title */}
-          <h2 className="mt-1 text-base sm:text-lg lg:text-[19px] font-bold font-heading text-slate-900 dark:text-white leading-snug tracking-tight group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+          {/* 1. Title */}
+          <h2 className="text-base sm:text-lg lg:text-[19px] font-bold font-heading text-slate-900 dark:text-white leading-snug tracking-tight group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
             <Link to={blogUrl} className="hover:underline">
               {blog.title}
             </Link>
           </h2>
 
-          {/* 3. Excerpt (Standard flow: wraps around and underneath the floated image) */}
+          {/* 2. Excerpt (Rich 3 to 4 lines on desktop & mobile) */}
           {snippet && (
-            <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+            <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal line-clamp-4">
               {snippet}
             </p>
           )}
 
-          {/* 4. Bottom Badges / Metadata */}
+          {/* 3. Bottom Badges / Metadata */}
           <div className="mt-3 flex items-center flex-wrap gap-2 text-xs text-slate-500 dark:text-slate-400">
             <button
               type="button"
@@ -240,16 +241,20 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
               {category}
             </button>
 
-            <span className="inline-flex items-center gap-1 text-[11px]">
-              <Clock className="w-3 h-3 text-slate-400 dark:text-slate-500 shrink-0" />
-              <span>{readTime}</span>
-            </span>
+            <span className="text-[11px]">{formattedDate}</span>
 
             <span className="text-slate-400 dark:text-slate-600 select-none">·</span>
 
             <span className="inline-flex items-center gap-1 text-[11px]">
               <Eye className="w-3 h-3 text-slate-400 dark:text-slate-500 shrink-0" />
               <span>{viewsCount} views</span>
+            </span>
+
+            <span className="text-slate-400 dark:text-slate-600 select-none">·</span>
+
+            <span className="inline-flex items-center gap-1 text-[11px]">
+              <Clock className="w-3 h-3 text-slate-400 dark:text-slate-500 shrink-0" />
+              <span>{readTime}</span>
             </span>
           </div>
         </div>

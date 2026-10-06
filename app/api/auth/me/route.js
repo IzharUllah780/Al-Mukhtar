@@ -21,8 +21,7 @@ export async function GET(req) {
         isVerified: auth.user.isVerified,
       },
     });
-  } catch (error) {
-    console.error("GetMe error:", error);
+  } catch {
     return NextResponse.json(
       { success: false, message: "Something went wrong" },
       { status: 500 }

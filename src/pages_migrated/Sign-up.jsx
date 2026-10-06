@@ -27,10 +27,28 @@ function Signup() {
       const redirectQuery = redirectUrl ? `&redirect=${encodeURIComponent(redirectUrl)}` : "";
       navigate(`/verify-email?email=${encodeURIComponent(variables.email)}${redirectQuery}`);
     },
-    onError: (error) => {
-      console.error("Signup failed:", error?.response?.data?.message);
-    },
   });
+
+  const getSignupErrorMessage = () => {
+    const status = signupMutation.error?.response?.status;
+    const msg = signupMutation.error?.response?.data?.message;
+
+    if (status === 409) {
+      return "An account with this email already exists. Please log in.";
+    }
+    if (
+      msg &&
+      typeof msg === "string" &&
+      !msg.toLowerCase().includes("mongo") &&
+      !msg.toLowerCase().includes("topology") &&
+      !msg.toLowerCase().includes("econn") &&
+      !msg.toLowerCase().includes("error") &&
+      msg.length < 90
+    ) {
+      return msg;
+    }
+    return "Something went wrong. Please try again.";
+  };
 
   const onSubmit = (data) => {
     signupMutation.mutate({
@@ -109,7 +127,7 @@ function Signup() {
       </div>
 
       {/* Right Panel - Form (Starts from top on mobile with full screen height, centered on desktop) */}
-      <div className="w-full lg:w-[58%] flex flex-col justify-start lg:justify-center items-center px-5 pt-6 pb-10 sm:px-14 sm:py-12 min-h-[100dvh] lg:min-h-screen overflow-y-auto">
+      <div className="w-full lg:w-[58%] flex flex-col justify-start lg:justify-center items-center px-3 pt-6 pb-10 sm:px-14 sm:py-12 min-h-[100dvh] lg:min-h-screen overflow-y-auto">
         <div className="w-full max-w-[420px] flex flex-col justify-start">
           {/* Back to Home Button on top left */}
           <div className="mb-4 sm:mb-6 self-start">
@@ -145,8 +163,7 @@ function Signup() {
 
           {signupMutation.isError && (
             <div className="mb-6 text-xs sm:text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 font-medium">
-              {signupMutation.error?.response?.data?.message ||
-                "Something went wrong. Please try again."}
+              {getSignupErrorMessage()}
             </div>
           )}
 

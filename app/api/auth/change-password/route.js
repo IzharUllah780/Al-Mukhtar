@@ -52,10 +52,9 @@ export async function PUT(req) {
       success: true,
       message: "Password updated successfully.",
     });
-  } catch (error) {
-    console.error("ChangePassword error:", error);
+  } catch {
     return NextResponse.json(
-      { success: false, message: error.message || "Failed to change password." },
+      { success: false, message: "Something went wrong. Please try again." },
       { status: 500 }
     );
   }

@@ -151,12 +151,12 @@ function Apply() {
       <div className="bg-slate-50/50 dark:bg-slate-950 font-sans text-slate-800 dark:text-slate-100 min-h-screen transition-colors">
         {/* Clean Hero */}
         <section className="pt-10 sm:pt-16 pb-10 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700/80 dark:border-slate-800">
-          <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 text-center space-y-3.5">
+          <div className="max-w-7xl mx-auto px-3 sm:px-8 lg:px-10 text-center space-y-3.5">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/40 border border-teal-200/80 dark:border-teal-800/60 text-[10px] sm:text-[11px] font-bold text-[rgb(13 148 136)] font-mono tracking-wider uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-[rgb(13 148 136)] animate-pulse" />
               <span>ONLINE ADMISSION PORTAL</span>
             </div>
-            <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
+            <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-black dark:text-white leading-tight tracking-tight">
               Apply for Admission
             </h1>
             <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed font-normal">
@@ -171,7 +171,7 @@ function Apply() {
             <div className="w-14 h-14 rounded-2xl bg-teal-50 dark:bg-teal-950/40 text-[rgb(13 148 136)] flex items-center justify-center mx-auto mb-5 border border-teal-100 dark:border-teal-800/40">
               <Lock size={26} />
             </div>
-            <h2 className="font-heading text-2xl font-bold text-slate-900 dark:text-white mb-2.5 tracking-tight">
+            <h2 className="font-heading text-2xl font-bold text-black dark:text-white mb-2.5 tracking-tight">
               Sign in to Apply
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed mb-6 max-w-md mx-auto">
@@ -217,13 +217,13 @@ function Apply() {
     <div className="bg-slate-50/50 dark:bg-slate-950 font-sans text-slate-800 dark:text-slate-100 min-h-screen transition-colors">
       {/* Clean Hero Section */}
       <section className="pt-8 sm:pt-10 pb-8 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700/80 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 text-center space-y-3.5">
+        <div className="max-w-7xl mx-auto px-3 sm:px-8 lg:px-10 text-center space-y-3.5">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/40 border border-teal-200/80 dark:border-teal-800/60 text-[10px] sm:text-[11px] font-bold text-[rgb(13 148 136)] font-mono tracking-wider uppercase">
             <span className="w-1.5 h-1.5 rounded-full bg-[rgb(13 148 136)] animate-pulse" />
             <span>ONLINE ADMISSION PORTAL</span>
           </div>
 
-          <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
+          <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-black dark:text-white leading-tight tracking-tight">
             Apply for Course Admission
           </h1>
 
@@ -233,7 +233,7 @@ function Apply() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-10 sm:py-14">
+      <section className="max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 py-10 sm:py-14">
         {submitted ? (
           <div className="max-w-2xl mx-auto animate-in fade-in zoom-in-95 duration-200">
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/90 dark:border-slate-800 rounded-2xl p-7 sm:p-11 text-center shadow-xs">

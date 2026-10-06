@@ -108,7 +108,7 @@ function Notifications() {
   return (
     <div className="min-h-screen bg-slate-50/50 dark:bg-slate-950 font-sans text-slate-800 dark:text-slate-100 transition-colors duration-200 pt-8 sm:pt-10 pb-20">
       {/* ── Single Heading ──────────────────── */}
-      <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 mb-6 sm:mb-8">
+      <div className="w-full max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 mb-6 sm:mb-8">
         <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
           <h1 className="text-xl sm:text-2xl font-bold font-heading text-slate-900 dark:text-white tracking-tight">
             Notifications
@@ -126,7 +126,7 @@ function Notifications() {
       </div>
 
       {/* ── Main Notifications 2-Column Compact Grid ────────────────────────── */}
-      <main className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+      <main className="w-full max-w-7xl mx-auto px-3 sm:px-10 lg:px-16">
         {allNotificationsLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
             {[1, 2, 3, 4].map((idx) => (

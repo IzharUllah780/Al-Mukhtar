@@ -30,7 +30,7 @@ export default function StudentShowcase({ limit, showHeaderAction = false }) {
 
   return (
     <section className="py-12 sm:py-16 transition-colors font-sans">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 space-y-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 space-y-8">
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 text-left">
           <div className="space-y-1">

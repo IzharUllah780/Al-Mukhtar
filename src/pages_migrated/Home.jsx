@@ -107,7 +107,7 @@ function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/60 to-slate-950/25 dark:from-slate-950/90 dark:via-slate-950/65 dark:to-slate-950/30" />
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+        <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16">
           <div className="max-w-4xl space-y-4 sm:space-y-5 text-left">
             {/* Dignified Academic Headline (Refined, Compact Proportion) */}
             <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight tracking-tight">
@@ -178,7 +178,7 @@ function Home() {
 
       {/* ── UNIVERSITY QUICK PORTALS STRIP (COMPACT, SEAMLESS FLOW) ── */}
       <div className="py-4 transition-colors font-sans border-b border-slate-100 dark:border-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 items-center justify-between text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-semibold font-sans">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 items-center justify-between text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-semibold font-sans">
           <div className="flex items-center gap-2 py-0.5">
             <GraduationCap size={16} className="text-teal-600 dark:text-teal-400 shrink-0" />
             <span className="truncate">Certified Curriculum</span>
@@ -200,7 +200,7 @@ function Home() {
 
       {/* ── DEDICATED FOUNDER MESSAGE SECTION (CLEAN, SEAMLESS) ── */}
       <section className="relative py-10 sm:py-16 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center">
             {/* Free Standing Straight Portrait */}
             <div className="lg:col-span-4 flex flex-col items-center justify-center">
@@ -231,7 +231,7 @@ function Home() {
 
             {/* Founder's Message & Read More Link */}
             <div className="lg:col-span-8 space-y-3.5 text-left">
-              <h2 className="font-heading text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+              <h2 className="font-heading text-lg sm:text-xl font-bold text-black dark:text-white tracking-tight">
                 Message from Founder
               </h2>
 
@@ -273,7 +273,7 @@ function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/70 to-slate-950/35 dark:from-slate-950/92 dark:via-slate-950/80 dark:to-slate-950/60" />
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16">
           <div className="max-w-3xl space-y-4 sm:space-y-5 text-left">
             <h2 className="font-heading text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight leading-snug">
               A trusted center of learning, guidance, and character
@@ -322,11 +322,11 @@ function Home() {
 
       {/* ── METHODOLOGY / APPROACH ── */}
       <section className="py-10 sm:py-16 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start text-left">
             {/* Left Institutional Column */}
             <div className="lg:col-span-5 space-y-4">
-              <h2 className="font-heading text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
+              <h2 className="font-heading text-lg sm:text-xl font-bold text-black dark:text-white tracking-tight leading-snug">
                 A Tri-fold Approach to Education
               </h2>
 
@@ -401,10 +401,10 @@ function Home() {
 
       {/* ── FEATURED COURSES ── */}
       {(coursesLoading || isCoursesError || featuredCourses.length > 0) && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-16">
+        <section className="max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-16">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 sm:mb-8 text-left">
             <div className="space-y-1">
-              <h2 className="font-heading text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+              <h2 className="font-heading text-lg sm:text-xl font-bold text-black dark:text-white tracking-tight">
                 Featured Courses
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
@@ -467,10 +467,10 @@ function Home() {
       {/* ── FACULTY / TEACHERS ── */}
       {activeTeachers.length > 0 && (
         <section className="py-10 sm:py-16 transition-colors">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 space-y-6 text-left">
+          <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16 space-y-6 text-left">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
               <div className="space-y-1">
-                <h2 className="font-heading text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+                <h2 className="font-heading text-lg sm:text-xl font-bold text-black dark:text-white tracking-tight">
                   Learn Under Experienced Scholars
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
@@ -493,10 +493,10 @@ function Home() {
 
       {/* ── NEWS & ANNOUNCEMENTS ── */}
       {(blogsLoading || isBlogsError || recentBlogs.length > 0) && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-16">
+        <section className="max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-16">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 sm:mb-8 text-left">
             <div className="space-y-1">
-              <h2 className="font-heading text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+              <h2 className="font-heading text-lg sm:text-xl font-bold text-black dark:text-white tracking-tight">
                 Latest Blogs from the Institute
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
@@ -561,14 +561,14 @@ function Home() {
 
       {/* ── FEATURED YOUTUBE VIDEO LECTURES SECTION ── */}
       {(videosLoading || featuredVideos.length > 0) && (
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-16 border-t border-slate-200/80 dark:border-slate-800">
+        <section className="max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-16 border-t border-slate-200/80 dark:border-slate-800">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 sm:mb-8">
             <div className="space-y-1">
               <span className="text-[10.5px] font-bold text-red-600 dark:text-red-400 font-mono tracking-wider uppercase flex items-center gap-1.5">
                 <FaYoutube size={14} className="text-red-600 dark:text-red-400" />
                 <span>Video Lectures &amp; Media</span>
               </span>
-              <h2 className="font-heading text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
+              <h2 className="font-heading text-xl sm:text-2xl font-bold text-black dark:text-white tracking-tight">
                 Scholarly Lectures &amp; Video Discourses
               </h2>
               <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm max-w-xl font-normal leading-relaxed">
@@ -623,9 +623,9 @@ function Home() {
       )}
 
       {/* ── FAQS ── */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-16">
+      <section className="max-w-4xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-16">
         <div className="text-center max-w-xl mx-auto mb-6 sm:mb-8 space-y-1">
-          <h2 className="font-heading text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="font-heading text-lg sm:text-xl font-bold text-black dark:text-white tracking-tight">
             Frequently Asked Questions
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -669,9 +669,9 @@ function Home() {
 
       {/* ── UNBOXED ADMISSIONS ACTION SECTION ── */}
       <section className="py-12 sm:py-16 md:py-20 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 text-center">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 md:px-10 lg:px-16 text-center">
           <div className="max-w-3xl mx-auto space-y-4">
-            <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+            <h2 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-black dark:text-white tracking-tight">
               Ready to begin your educational journey?
             </h2>
             <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm sm:text-base leading-relaxed font-normal max-w-xl mx-auto">

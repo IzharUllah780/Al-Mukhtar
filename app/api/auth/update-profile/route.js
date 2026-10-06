@@ -66,10 +66,9 @@ export async function PUT(req) {
         isVerified: user.isVerified,
       },
     });
-  } catch (error) {
-    console.error("UpdateProfile error:", error);
+  } catch {
     return NextResponse.json(
-      { success: false, message: error.message || "Failed to update profile." },
+      { success: false, message: "Something went wrong. Please try again." },
       { status: 500 }
     );
   }

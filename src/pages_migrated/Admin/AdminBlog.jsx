@@ -380,17 +380,42 @@ function AdminBlog() {
 
             {/* Short Description / Lead Excerpt (Very Big Height) */}
             <div>
-              <div className="flex items-center justify-between mb-1.5">
+              <div className="flex items-center justify-between mb-1.5 flex-wrap gap-2">
                 <label className="text-xs font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider font-mono block">
-                  Lead Excerpt &amp; Article Summary <span className="text-slate-400 dark:text-slate-500 font-normal font-sans">(Displayed at top of article & in cards)</span>
+                  Lead Excerpt &amp; Article Summary <span className="text-slate-400 dark:text-slate-500 font-normal font-sans">(Displayed at top of article &amp; in cards)</span>
                 </label>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const el = document.getElementById("admin-blog-desc");
+                    if (el) {
+                      const start = el.selectionStart || el.value.length;
+                      const end = el.selectionEnd || el.value.length;
+                      const val = el.value || "";
+                      const newVal = val.substring(0, start) + "<br>\n" + val.substring(end);
+                      setValue("description", newVal, { shouldDirty: true });
+                      setTimeout(() => {
+                        el.focus();
+                        el.setSelectionRange(start + 5, start + 5);
+                      }, 0);
+                    }
+                  }}
+                  className="text-[11px] font-bold text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 bg-teal-50 dark:bg-teal-950/60 hover:bg-teal-100 dark:hover:bg-teal-900/60 px-2.5 py-1 rounded-lg transition-colors cursor-pointer border border-teal-200/60 dark:border-teal-800/60 shadow-2xs inline-flex items-center gap-1 font-mono"
+                  title="Insert a <br> line break"
+                >
+                  <span>+ Insert &lt;br&gt;</span>
+                </button>
               </div>
               <textarea
+                id="admin-blog-desc"
                 rows={4}
-                placeholder="Brief multi-sentence overview summarizing key takeaways, target audience, and executive thesis of this research or educational article..."
+                placeholder="Brief multi-sentence overview summarizing key takeaways... (Use <br> or Enter to add line breaks)"
                 className="w-full border border-slate-200 dark:border-slate-700 rounded-xl p-3.5 sm:p-4 text-xs sm:text-sm min-h-[120px] sm:min-h-[140px] text-slate-800 dark:text-slate-100 bg-slate-50/50 dark:bg-slate-800/80 hover:bg-white dark:hover:bg-slate-800 focus:bg-white dark:focus:bg-slate-800 focus:outline-none focus:border-[#0D9488] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#0D9488]/15 leading-relaxed transition-all resize-y"
                 {...register("description")}
               />
+              <p className="mt-1.5 text-[11px] text-slate-500 dark:text-slate-400">
+                Tip: Type <code className="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded font-mono text-teal-600 dark:text-teal-400">&lt;br&gt;</code> or press Enter to add line breaks to the description on the public article page.
+              </p>
             </div>
 
             {/* Images Upload */}

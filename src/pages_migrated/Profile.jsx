@@ -163,7 +163,7 @@ function Profile() {
     <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617] text-slate-800 dark:text-slate-100 font-sans pb-16 transition-colors duration-200">
       
       {/* ── TOP HEADER / BANNER (Fully Responsive for Mobile & Laptop) ── */}
-      <section className="bg-white dark:bg-[#0f172a] border-b border-slate-200/80 dark:border-slate-800 pt-5 sm:pt-6 pb-4 sm:pb-5 px-3.5 sm:px-6 lg:px-8">
+      <section className="bg-white dark:bg-[#0f172a] border-b border-slate-200/80 dark:border-slate-800 pt-5 sm:pt-6 pb-4 sm:pb-5 px-3 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
             <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-18 lg:h-18 rounded-2xl bg-gradient-to-tr from-[#0D9488] to-[#0A2540] text-white flex items-center justify-center font-heading font-black text-xl sm:text-2xl lg:text-3xl shadow-md border-2 border-white dark:border-slate-800 ring-2 ring-[#0D9488]/30 shrink-0 select-none">
@@ -205,7 +205,7 @@ function Profile() {
       </section>
 
       {/* ── TWO-COLUMN LAYOUT ON LAPTOP / DESKTOP (CLEAN STREAMLINED ON MOBILE) ── */}
-      <main className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-8">
+      <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 lg:gap-6 items-start">
           
           {/* ── LEFT COLUMN: PROFILE DETAILS & SECURITY ── */}

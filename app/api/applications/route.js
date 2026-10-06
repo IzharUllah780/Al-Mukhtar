@@ -3,6 +3,7 @@ import dbConnect from "@/lib/db";
 import Application from "@/lib/models/application.model";
 import { getAuthUser } from "@/lib/auth";
 import { applicationCreateSchema, validatePayload } from "@/lib/validations";
+import { sendApplicationConfirmationEmail } from "@/lib/email";
 
 export async function GET(req) {
   try {
@@ -43,6 +44,24 @@ export async function POST(req) {
       ...validation.data,
       user: auth?.id || null,
     });
+
+    // Send course application confirmation email
+    const recipientEmail = auth?.user?.email || body.email;
+    if (recipientEmail) {
+      try {
+        await sendApplicationConfirmationEmail({
+          to: recipientEmail,
+          applicantName: application.name,
+          courseName: application.course,
+          shift: application.shift,
+          qualification: application.qualification,
+          whatsapp: application.whatsapp,
+          applicationId: application._id.toString(),
+        });
+      } catch (emailErr) {
+        console.error("Failed to send application confirmation email:", emailErr.message);
+      }
+    }
 
     return NextResponse.json(
       {

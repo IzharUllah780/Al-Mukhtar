@@ -17,25 +17,20 @@ function Courses() {
   return (
     <div className="bg-white dark:bg-[#070d18] font-sans text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-200">
       {/* Clean Hero Section */}
-      <section className="pt-8 sm:pt-12 pb-8 bg-slate-50/50 dark:bg-slate-900/40 border-b border-slate-200/80 dark:border-slate-800 transition-colors">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200/80 dark:border-teal-800/60 text-[11px] font-bold text-teal-700 dark:text-teal-300 font-mono tracking-wider uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
-            <span>Academic Curriculum &amp; Enrollment</span>
-          </div>
-
-          <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
+      <section className="pt-8 sm:pt-12 pb-4">
+        <div className="max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 text-left space-y-3">
+          <h1 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-black dark:text-white leading-tight tracking-tight">
             Academic Programs &amp; Courses
           </h1>
 
-          <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed font-normal">
+          <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm max-w-2xl leading-relaxed font-normal">
             Structured Islamic scholarship, Quranic disciplines, and Arabic linguistics taught by certified faculty — designed for every stage of your educational pursuit.
           </p>
         </div>
       </section>
 
       {/* Courses Grid Section */}
-      <section className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-10 sm:py-14">
+      <section className="max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 pt-4 pb-10 sm:pb-14">
         {isLoading && courses.length === 0 && (
           <div className="space-y-6">
             <div className="flex items-center justify-center gap-2 text-xs font-mono text-teal-600 dark:text-teal-400">

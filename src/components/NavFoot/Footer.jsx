@@ -58,7 +58,7 @@ const socialLinks = [
 function Footer() {
   return (
     <footer className="bg-[#0F172A] text-white relative overflow-hidden border-t border-slate-800 font-sans">
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-14 sm:py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 py-14 sm:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           <div className="lg:col-span-4">
             <div className="flex items-center gap-2.5 mb-5">
@@ -179,7 +179,7 @@ function Footer() {
       </div>
 
       <div className="relative z-10 border-t border-slate-800/80 bg-[#020617]">
-        <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+        <div className="max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
           <p className="text-center sm:text-left">
             © {new Date().getFullYear()} Al-Mukhtar Institute. All rights reserved.
           </p>
