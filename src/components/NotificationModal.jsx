@@ -42,8 +42,13 @@ export default function NotificationModal({
   const activeList = React.useMemo(() => {
     if (previewMode) return allNotifications;
     return allNotifications.filter((n) => {
-      const storageKey = `dismissed_notif_${n._id}_${n.updatedAt || ""}`;
-      return !sessionStorage.getItem(storageKey) && !dismissedIds.has(n._id);
+      if (typeof window === "undefined") return true;
+      try {
+        const storageKey = `dismissed_notif_${n._id}_${n.updatedAt || ""}`;
+        return !sessionStorage.getItem(storageKey) && !dismissedIds.has(n._id);
+      } catch (e) {
+        return !dismissedIds.has(n._id);
+      }
     });
   }, [allNotifications, previewMode, dismissedIds]);
 
