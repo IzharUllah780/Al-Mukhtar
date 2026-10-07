@@ -2,13 +2,14 @@ import { Resend } from "resend";
 
 const resendApiKey = process.env.RESEND_API_KEY || "dummy_resend_key";
 const resend = new Resend(resendApiKey);
-const FROM = process.env.RESEND_FROM || "onboarding@resend.dev";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.BASE_URL || "https://almukhtar.edu.pk";
+const FROM = process.env.RESEND_FROM || "Al-Mukhtar Institute <info@almukhtar.org.pk>";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || process.env.BASE_URL || "https://almukhtar.org.pk";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "izhar5ullah@gmail.com";
 
 /**
- * Base email layout with clean, open, modern editorial typography.
- * No heavy boxed borders or clunky outdated email designs.
+ * Base email layout — Simple, clean, standard corporate/academic email format.
+ * No floating cards, no heavy borders, no nested box containers.
+ * Renders naturally and cleanly across Gmail, Outlook, Apple Mail, and mobile clients.
  */
 function renderBaseTemplate({ title, preheader = "", contentHtml }) {
   const currentYear = new Date().getFullYear();
@@ -17,89 +18,47 @@ function renderBaseTemplate({ title, preheader = "", contentHtml }) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>${title}</title>
-  <!--[if mso]>
-  <style type="text/css">
-    body, table, td {font-family: Arial, Helvetica, sans-serif !important;}
-  </style>
-  <![endif]-->
-  <style>
-    @media only screen and (max-width: 600px) {
-      .email-container { width: 100% !important; padding: 24px 16px !important; }
-      .content-cell { padding: 24px 16px !important; }
-      .otp-code { font-size: 32px !important; letter-spacing: 8px !important; }
-    }
-  </style>
 </head>
-<body style="margin: 0; padding: 0; background-color: #fafbfb; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; color: #1e293b; line-height: 1.6;">
-  ${preheader ? `<div style="display: none; font-size: 1px; color: #fafbfb; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">${preheader}</div>` : ""}
+<body style="margin: 0; padding: 24px 16px; background-color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #1e293b;">
+  ${preheader ? `<div style="display: none; font-size: 1px; color: #ffffff; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">${preheader}</div>` : ""}
   
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #fafbfb; width: 100%; margin: 0; padding: 32px 12px;">
-    <tr>
-      <td align="center">
-        <!-- Main Email Wrapper (Open & Clean) -->
-        <table role="presentation" class="email-container" width="560" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 560px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05);">
-          
-          <!-- Top Header / Brand Mark -->
-          <tr>
-            <td style="padding: 32px 36px 24px 36px; border-bottom: 1px solid #f1f5f9; background: #ffffff;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                  <td>
-                    <div style="display: inline-block;">
-                      <span style="font-size: 15px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: #0f172a;">AL-MUKHTAR</span>
-                      <span style="display: inline-block; width: 6px; height: 6px; background-color: #0d9488; border-radius: 50%; margin-left: 4px; vertical-align: middle;"></span>
-                    </div>
-                    <p style="margin: 2px 0 0 0; font-size: 11px; font-weight: 600; color: #64748b; letter-spacing: 0.5px; text-transform: uppercase;">Institute of Islamic Sciences & Education</p>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+  <div style="max-width: 580px; margin: 0 auto;">
+    <!-- Simple Institutional Header -->
+    <div style="padding-bottom: 14px; border-bottom: 2px solid #0d9488; margin-bottom: 24px;">
+      <div style="font-size: 17px; font-weight: 700; color: #0f172a; letter-spacing: -0.2px;">
+        Al-Mukhtar Institute
+      </div>
+      <div style="font-size: 12px; color: #64748b; margin-top: 2px;">
+        Institute of Islamic Sciences & Education
+      </div>
+    </div>
 
-          <!-- Dynamic Body Content -->
-          <tr>
-            <td class="content-cell" style="padding: 36px 36px 32px 36px; background-color: #ffffff;">
-              ${contentHtml}
-            </td>
-          </tr>
+    <!-- Email Content Body -->
+    <div style="color: #1e293b; font-size: 15px; line-height: 1.65;">
+      ${contentHtml}
+    </div>
 
-          <!-- Sleek Minimalist Footer -->
-          <tr>
-            <td style="padding: 24px 36px 32px 36px; background-color: #f8fafc; border-top: 1px solid #f1f5f9;">
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-                <tr>
-                  <td style="text-align: left; font-size: 12px; color: #94a3b8; line-height: 1.5;">
-                    <p style="margin: 0 0 6px 0; color: #64748b; font-weight: 500;">
-                      Al-Mukhtar Institute &bull; Academic Portal
-                    </p>
-                    <p style="margin: 0;">
-                      Need help? Reply directly to this email or contact support at <a href="mailto:${ADMIN_EMAIL}" style="color: #0d9488; text-decoration: none; font-weight: 600;">${ADMIN_EMAIL}</a>
-                    </p>
-                    <p style="margin: 12px 0 0 0; font-size: 11px; color: #94a3b8;">
-                      &copy; ${currentYear} Al-Mukhtar Institute. All rights reserved.
-                    </p>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-
-        </table>
-      </td>
-    </tr>
-  </table>
+    <!-- Simple Standard Footer -->
+    <div style="border-top: 1px solid #e2e8f0; margin-top: 36px; padding-top: 16px; font-size: 12px; color: #64748b; line-height: 1.5;">
+      <p style="margin: 0 0 6px 0;">
+        Al-Mukhtar Institute &bull; Peshawar, KPK, Pakistan
+      </p>
+      <p style="margin: 0 0 6px 0;">
+        Need assistance? Contact us at <a href="mailto:${ADMIN_EMAIL}" style="color: #0d9488; text-decoration: none; font-weight: 600;">${ADMIN_EMAIL}</a> or visit <a href="${SITE_URL}" style="color: #0d9488; text-decoration: none;">${SITE_URL.replace(/^https?:\/\//, "")}</a>
+      </p>
+      <p style="margin: 0; font-size: 11px; color: #94a3b8;">
+        &copy; ${currentYear} Al-Mukhtar Institute. All rights reserved.
+      </p>
+    </div>
+  </div>
 </body>
 </html>`;
 }
 
 /**
  * Send OTP verification or password reset email.
- * @param {string} to - Recipient email
- * @param {string} otp - 6-digit OTP code
- * @param {"verify"|"reset"} type - Purpose of the OTP
- * @param {string} [username] - Optional recipient name/username
+ * Simple, standard text format without box cards.
  */
 export async function sendOtpEmail(to, otp, type = "verify", username = "") {
   if (!process.env.RESEND_API_KEY) {
@@ -119,36 +78,35 @@ export async function sendOtpEmail(to, otp, type = "verify", username = "") {
 
   const headingText = isReset ? "Reset Your Password" : "Verify Your Email Address";
   const leadText = isReset
-    ? `Hello${username ? ` ${username}` : ""}, we received a request to reset your password for your Al-Mukhtar account. Enter the verification code below to proceed:`
-    : `Hello${username ? ` ${username}` : ""}, thank you for registering with Al-Mukhtar Institute. Please use the verification code below to verify your email address:`;
+    ? `Hello${username ? ` ${username}` : ""}, we received a request to reset the password for your Al-Mukhtar account.`
+    : `Hello${username ? ` ${username}` : ""}, thank you for registering with Al-Mukhtar Institute.`;
 
   const contentHtml = `
-    <h1 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #0f172a; letter-spacing: -0.5px; line-height: 1.3;">
+    <h2 style="margin: 0 0 14px 0; font-size: 19px; font-weight: 700; color: #0f172a;">
       ${headingText}
-    </h1>
+    </h2>
     
-    <p style="margin: 0 0 28px 0; font-size: 15px; color: #475569; line-height: 1.6;">
+    <p style="margin: 0 0 16px 0; font-size: 15px; color: #334155;">
       ${leadText}
     </p>
 
-    <!-- Clean, Open OTP Display (No heavy boxes) -->
-    <div style="margin: 0 0 28px 0; padding: 24px 20px; background-color: #f0fdfa; border-radius: 12px; border: 1px solid #ccfbf1; text-align: center;">
-      <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #0d9488; margin-bottom: 8px;">
-        One-Time Verification Code
-      </div>
-      <div class="otp-code" style="font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 38px; font-weight: 800; letter-spacing: 10px; color: #0f766e; line-height: 1.2; padding-left: 10px;">
-        ${otp}
-      </div>
-      <div style="font-size: 12px; color: #64748b; margin-top: 10px; font-weight: 500;">
-        ⏱ Expires in <strong>10 minutes</strong>
-      </div>
+    <p style="margin: 0 0 8px 0; font-size: 15px; color: #334155;">
+      Your verification code is:
+    </p>
+
+    <div style="margin: 14px 0 20px 0; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace; font-size: 32px; font-weight: 700; letter-spacing: 6px; color: #0d9488;">
+      ${otp}
     </div>
 
-    <p style="margin: 0 0 12px 0; font-size: 13px; color: #64748b; line-height: 1.5;">
-      <strong>Security notice:</strong> Never share this code with anyone. Al-Mukhtar staff will never ask you for your OTP.
+    <p style="margin: 0 0 10px 0; font-size: 13px; color: #64748b;">
+      ⏱ This code will expire in <strong>10 minutes</strong>.
+    </p>
+
+    <p style="margin: 0 0 10px 0; font-size: 13px; color: #64748b;">
+      <strong>Security notice:</strong> Do not share this code with anyone. Al-Mukhtar staff will never ask you for your verification code.
     </p>
     
-    <p style="margin: 0; font-size: 13px; color: #94a3b8; line-height: 1.5;">
+    <p style="margin: 0; font-size: 13px; color: #94a3b8;">
       If you did not initiate this request, you can safely ignore this email. Your account remains secure.
     </p>
   `;
@@ -175,6 +133,7 @@ export async function sendOtpEmail(to, otp, type = "verify", username = "") {
 
 /**
  * Send Course Application Confirmation email to the student/applicant.
+ * Simple, professional academic letter layout (no nested boxes/cards).
  */
 export async function sendApplicationConfirmationEmail({
   to,
@@ -197,74 +156,70 @@ export async function sendApplicationConfirmationEmail({
   const formattedShift = shift ? shift.charAt(0).toUpperCase() + shift.slice(1) : "Morning";
 
   const contentHtml = `
-    <div style="display: inline-block; padding: 4px 12px; background-color: #ecfdf5; border-radius: 9999px; border: 1px solid #a7f3d0; margin-bottom: 16px;">
-      <span style="font-size: 12px; font-weight: 700; color: #047857;">Application Received</span>
-    </div>
+    <h2 style="margin: 0 0 14px 0; font-size: 19px; font-weight: 700; color: #0f172a;">
+      Admission Application Received
+    </h2>
 
-    <h1 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #0f172a; letter-spacing: -0.5px; line-height: 1.3;">
-      Dear ${applicantName || "Applicant"},
-    </h1>
-
-    <p style="margin: 0 0 24px 0; font-size: 15px; color: #475569; line-height: 1.6;">
-      Thank you for your interest in <strong>Al-Mukhtar Institute</strong>. We have successfully received your admission application for <strong>${courseName}</strong>.
+    <p style="margin: 0 0 14px 0; font-size: 15px; color: #334155;">
+      Dear <strong>${applicantName || "Applicant"}</strong>,
     </p>
 
-    <!-- Application Summary Details -->
-    <div style="margin: 0 0 28px 0; padding: 20px 24px; background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0;">
-      <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 14px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">
-        Application Overview
+    <p style="margin: 0 0 20px 0; font-size: 15px; color: #334155;">
+      Thank you for applying to Al-Mukhtar Institute. We have successfully received your admission application for <strong>${courseName}</strong>.
+    </p>
+
+    <div style="border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; padding: 14px 0; margin: 20px 0;">
+      <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 10px;">
+        Application Summary
       </div>
       
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size: 14px; line-height: 1.8;">
         <tr>
-          <td style="color: #64748b; width: 38%; padding: 4px 0;">Selected Course:</td>
-          <td style="color: #0f172a; font-weight: 700; padding: 4px 0;">${courseName}</td>
+          <td style="width: 140px; color: #64748b; padding: 3px 0;"><strong>Program:</strong></td>
+          <td style="color: #0f172a; font-weight: 600; padding: 3px 0;">${courseName}</td>
         </tr>
         <tr>
-          <td style="color: #64748b; padding: 4px 0;">Shift Preference:</td>
-          <td style="color: #0f172a; font-weight: 600; padding: 4px 0;">${formattedShift}</td>
+          <td style="color: #64748b; padding: 3px 0;"><strong>Shift:</strong></td>
+          <td style="color: #0f172a; padding: 3px 0;">${formattedShift}</td>
         </tr>
         ${qualification ? `
         <tr>
-          <td style="color: #64748b; padding: 4px 0;">Qualification:</td>
-          <td style="color: #0f172a; padding: 4px 0;">${qualification}</td>
+          <td style="color: #64748b; padding: 3px 0;"><strong>Qualification:</strong></td>
+          <td style="color: #0f172a; padding: 3px 0;">${qualification}</td>
         </tr>` : ""}
         ${whatsapp ? `
         <tr>
-          <td style="color: #64748b; padding: 4px 0;">Contact WhatsApp:</td>
-          <td style="color: #0f172a; padding: 4px 0;">${whatsapp}</td>
+          <td style="color: #64748b; padding: 3px 0;"><strong>WhatsApp:</strong></td>
+          <td style="color: #0f172a; padding: 3px 0;">${whatsapp}</td>
         </tr>` : ""}
         ${applicationId ? `
         <tr>
-          <td style="color: #64748b; padding: 4px 0;">Reference ID:</td>
-          <td style="font-family: monospace; color: #0d9488; font-weight: 600; padding: 4px 0;">#${applicationId.slice(-8).toUpperCase()}</td>
+          <td style="color: #64748b; padding: 3px 0;"><strong>Reference ID:</strong></td>
+          <td style="font-family: monospace; color: #0d9488; font-weight: 600; padding: 3px 0;">#${applicationId.slice(-8).toUpperCase()}</td>
         </tr>` : ""}
       </table>
     </div>
 
-    <!-- Next Steps Timeline / Guidance -->
-    <h2 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 700; color: #0f172a;">
-      What Happens Next?
-    </h2>
-    <ol style="margin: 0 0 28px 0; padding-left: 20px; font-size: 14px; color: #475569; line-height: 1.7;">
-      <li style="margin-bottom: 8px;">
-        <strong>Application Review:</strong> Our academic committee is reviewing your submitted details and prerequisites.
+    <h3 style="margin: 20px 0 10px 0; font-size: 15px; font-weight: 700; color: #0f172a;">
+      Next Steps:
+    </h3>
+    <ol style="margin: 0 0 24px 0; padding-left: 20px; font-size: 14px; color: #475569; line-height: 1.7;">
+      <li style="margin-bottom: 6px;">
+        <strong>Application Review:</strong> The admissions committee will verify your submitted details.
       </li>
-      <li style="margin-bottom: 8px;">
-        <strong>Verification & Interview:</strong> An admissions coordinator will contact you via WhatsApp or phone call within <strong>1–2 business days</strong>.
+      <li style="margin-bottom: 6px;">
+        <strong>Admissions Contact:</strong> An admissions coordinator will reach out via WhatsApp or phone call within <strong>1–2 working days</strong>.
       </li>
       <li>
-        <strong>Enrollment & Class Schedule:</strong> Upon verification, you will receive your student enrollment package and timetable.
+        <strong>Enrollment & Orientation:</strong> You will receive your class schedule and orientation details upon confirmation.
       </li>
     </ol>
 
-    <div style="padding-top: 16px; border-top: 1px solid #f1f5f9;">
-      <p style="margin: 0; font-size: 14px; color: #475569;">
-        Warm regards,<br />
-        <strong>Office of Admissions</strong><br />
-        <span style="font-size: 13px; color: #64748b;">Al-Mukhtar Institute of Islamic Sciences</span>
-      </p>
-    </div>
+    <p style="margin: 24px 0 0 0; font-size: 14px; color: #475569;">
+      Warm regards,<br />
+      <strong>Office of Admissions</strong><br />
+      <span style="font-size: 13px; color: #64748b;">Al-Mukhtar Institute of Islamic Sciences</span>
+    </p>
   `;
 
   const html = renderBaseTemplate({
@@ -293,7 +248,7 @@ export async function sendApplicationConfirmationEmail({
 
 /**
  * Send contact form submission to ADMIN_EMAIL via Resend.
- * Clean, normal, professional email layout (no nested card containers).
+ * Clean, simple, professional email layout.
  */
 export async function sendContactFormEmail({ name, email, phone, subject, message }) {
   const adminEmail = process.env.ADMIN_EMAIL || "izhar5ullah@gmail.com";
@@ -310,23 +265,13 @@ export async function sendContactFormEmail({ name, email, phone, subject, messag
     timeStyle: "short",
   });
 
-  const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${emailSubject}</title>
-</head>
-<body style="margin: 0; padding: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #1e293b; background-color: #ffffff;">
-  <div style="max-width: 600px; margin: 0 auto;">
-    <div style="padding-bottom: 14px; border-bottom: 2px solid #0d9488; margin-bottom: 18px;">
-      <h2 style="margin: 0 0 4px 0; font-size: 18px; color: #0f172a; font-weight: 700;">
-        Al-Mukhtar Institute — Website Inquiry
-      </h2>
-      <p style="margin: 0; font-size: 13px; color: #64748b;">
-        Received on ${dateString}
-      </p>
-    </div>
+  const contentHtml = `
+    <h2 style="margin: 0 0 4px 0; font-size: 18px; color: #0f172a; font-weight: 700;">
+      New Website Inquiry
+    </h2>
+    <p style="margin: 0 0 18px 0; font-size: 13px; color: #64748b;">
+      Received on ${dateString}
+    </p>
 
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 20px; font-size: 14px; line-height: 1.8;">
       <tr>
@@ -347,7 +292,7 @@ export async function sendContactFormEmail({ name, email, phone, subject, messag
       </tr>
     </table>
 
-    <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; margin-bottom: 24px;">
+    <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; margin-bottom: 20px;">
       <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 10px;">
         Message Content
       </div>
@@ -356,17 +301,16 @@ ${sanitizedMessage}
       </div>
     </div>
 
-    <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 12px; color: #94a3b8; line-height: 1.5;">
-      <p style="margin: 0 0 4px 0; color: #64748b;">
-        You can reply directly to this email to respond to ${sanitizedName} (<a href="mailto:${sanitizedEmail}" style="color: #0d9488; text-decoration: none;">${sanitizedEmail}</a>).
-      </p>
-      <p style="margin: 0;">
-        Al-Mukhtar Institute of Islamic Sciences &bull; Ghaz Masjid, Tanga Adda, Landi Arbab, Peshawar, Pakistan
-      </p>
-    </div>
-  </div>
-</body>
-</html>`;
+    <p style="margin: 0; font-size: 13px; color: #64748b;">
+      You can reply directly to this email to respond to ${sanitizedName} (<a href="mailto:${sanitizedEmail}" style="color: #0d9488; text-decoration: none;">${sanitizedEmail}</a>).
+    </p>
+  `;
+
+  const html = renderBaseTemplate({
+    title: emailSubject,
+    preheader: `New inquiry from ${sanitizedName}`,
+    contentHtml,
+  });
 
   try {
     return await resend.emails.send({
@@ -390,12 +334,12 @@ export async function sendBulkEmail(emails, subject, message) {
   const CHUNK = 50;
 
   const contentHtml = `
-    <h1 style="margin: 0 0 16px 0; font-size: 22px; font-weight: 700; color: #0f172a; letter-spacing: -0.5px; line-height: 1.3;">
+    <h2 style="margin: 0 0 16px 0; font-size: 20px; font-weight: 700; color: #0f172a; line-height: 1.3;">
       ${subject}
-    </h1>
+    </h2>
     
     <div style="font-size: 15px; color: #334155; line-height: 1.7; white-space: pre-wrap;">
-      ${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
+${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
     </div>
   `;
 

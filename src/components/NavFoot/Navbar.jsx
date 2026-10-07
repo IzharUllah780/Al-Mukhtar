@@ -170,9 +170,6 @@ export default function Navbar() {
                   }`}
                 >
                   <span>{name}</span>
-                  {active && (
-                    <span className="absolute -bottom-1 left-0 w-full h-[2.5px] bg-teal-600 dark:bg-teal-400 rounded-full shadow-xs" />
-                  )}
                 </Link>
               );
             })}
@@ -195,9 +192,6 @@ export default function Navbar() {
                     aboutDropdownOpen ? "rotate-180 text-teal-600 dark:text-teal-400" : ""
                   }`}
                 />
-                {isAboutActive && (
-                  <span className="absolute -bottom-1 left-0 w-full h-[2.5px] bg-teal-600 dark:bg-teal-400 rounded-full shadow-xs" />
-                )}
               </button>
 
               {aboutDropdownOpen && (
@@ -343,7 +337,7 @@ export default function Navbar() {
         <div className="px-3 py-3 space-y-4 flex-1 overflow-y-auto">
           
           {/* Main Navigation Section */}
-          <div className="space-y-0.5">
+          <div className="space-y-1">
             <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-3 font-mono block mb-1">
               Menu
             </span>
@@ -355,35 +349,51 @@ export default function Navbar() {
                   key={path}
                   to={path}
                   onClick={closeMenu}
-                  className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
+                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
                     active
-                      ? "text-teal-600 dark:text-teal-400 font-bold bg-teal-50/60 dark:bg-teal-950/40"
-                      : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400"
+                      ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
+                      : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
                   }`}
                 >
                   <span>{name}</span>
-                  {active && <span className="w-1.5 h-1.5 rounded-full bg-teal-600 dark:bg-teal-400" />}
+                  {active && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
                 </Link>
               );
             })}
+
+            {/* Apply / Online Admission Link */}
+            <Link
+              to="/apply"
+              onClick={closeMenu}
+              className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+                isLinkActive("/apply")
+                  ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
+                  : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+              }`}
+            >
+              <span className="flex items-center gap-2">
+                <span>Apply / Admission</span>
+              </span>
+              {isLinkActive("/apply") && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
+            </Link>
 
             {/* Examination Results Link */}
             <Link
               to="/result"
               onClick={closeMenu}
-              className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
+              className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
                 isLinkActive("/result")
-                  ? "text-teal-600 dark:text-teal-400 font-bold bg-teal-50/60 dark:bg-teal-950/40"
-                  : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400"
+                  ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
+                  : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
               }`}
             >
               <span>Examination Results</span>
-              {isLinkActive("/result") && <span className="w-1.5 h-1.5 rounded-full bg-teal-600 dark:bg-teal-400" />}
+              {isLinkActive("/result") && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
             </Link>
           </div>
 
           {/* About Section */}
-          <div className="space-y-0.5 pt-2 border-t border-slate-100 dark:border-slate-800/80">
+          <div className="space-y-1 pt-2 border-t border-slate-100 dark:border-slate-800/80">
             <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-3 font-mono block mb-1">
               About Institute
             </span>
@@ -395,14 +405,14 @@ export default function Navbar() {
                   key={path}
                   to={path}
                   onClick={closeMenu}
-                  className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
+                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
                     active
-                      ? "text-teal-600 dark:text-teal-400 font-bold bg-teal-50/60 dark:bg-teal-950/40"
-                      : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400"
+                      ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
+                      : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
                   }`}
                 >
                   <span>{name}</span>
-                  {active && <span className="w-1.5 h-1.5 rounded-full bg-teal-600 dark:bg-teal-400" />}
+                  {active && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
                 </Link>
               );
             })}
@@ -410,7 +420,7 @@ export default function Navbar() {
 
           {/* Account / Management Section (if logged in) */}
           {user && (
-            <div className="space-y-0.5 pt-2 border-t border-slate-100 dark:border-slate-800/80">
+            <div className="space-y-1 pt-2 border-t border-slate-100 dark:border-slate-800/80">
               <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-3 font-mono block mb-1">
                 Account
               </span>
@@ -419,28 +429,28 @@ export default function Navbar() {
                 <Link
                   to="/admin"
                   onClick={closeMenu}
-                  className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
+                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
                     isLinkActive("/admin")
-                      ? "text-teal-600 dark:text-teal-400 font-bold bg-teal-50/60 dark:bg-teal-950/40"
-                      : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400"
+                      ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
+                      : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
                   }`}
                 >
                   <span>Admin Dashboard</span>
-                  {isLinkActive("/admin") && <span className="w-1.5 h-1.5 rounded-full bg-teal-600 dark:bg-teal-400" />}
+                  {isLinkActive("/admin") && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
                 </Link>
               )}
 
               <Link
                 to="/profile"
                 onClick={closeMenu}
-                className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
+                className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
                   isLinkActive("/profile")
-                    ? "text-teal-600 dark:text-teal-400 font-bold bg-teal-50/60 dark:bg-teal-950/40"
-                    : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400"
+                    ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
+                    : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
                 }`}
               >
                 <span>My Profile</span>
-                {isLinkActive("/profile") && <span className="w-1.5 h-1.5 rounded-full bg-teal-600 dark:bg-teal-400" />}
+                {isLinkActive("/profile") && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
               </Link>
             </div>
           )}

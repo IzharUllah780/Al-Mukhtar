@@ -1,7 +1,13 @@
-"use client";
-
 import Signup from "@/pages_migrated/Sign-up";
 import { GuestRoute } from "@/components/ProtectedRoute";
+
+export const metadata = {
+  title: "Register | Al-Mukhtar",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function RegisterPage() {
   return (

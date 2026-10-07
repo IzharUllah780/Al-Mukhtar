@@ -49,6 +49,20 @@ export function renderFormattedDescription(text) {
   ));
 }
 
+// Isolated, Memoized Blog Content component to prevent React re-renders from wiping Google Translate translated DOM
+export const BlogContentRenderer = React.memo(
+  function BlogContentRenderer({ htmlContent }) {
+    return (
+      <div
+        className="blog-content max-w-full min-w-0 break-normal hyphens-none text-slate-800 dark:text-slate-200"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+      />
+    );
+  },
+  (prevProps, nextProps) => prevProps.htmlContent === nextProps.htmlContent
+);
+
 // Smart parser: cleans artifacts, extracts headings (H1-H6, bold headers, or paragraphs), and injects IDs
 function processArticleContent(rawHtml) {
   if (!rawHtml) return { html: "", headings: [] };
@@ -702,10 +716,7 @@ function BlogDetail() {
           <div className="lg:col-span-9 min-w-0 w-full space-y-8">
             {/* Rendered Prose Content with Natural Word Wrapping */}
             <div className="prose prose-slate dark:prose-invert max-w-full min-w-0 w-full break-normal hyphens-none [word-break:normal] [overflow-wrap:break-word] text-sm sm:text-[15px] md:text-[16px] lg:text-[16px] leading-relaxed prose-headings:font-heading prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-slate-900 dark:prose-headings:text-white prose-p:text-slate-700 dark:prose-p:text-slate-200 prose-a:text-teal-600 dark:prose-a:text-blue-400 prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-img:rounded-2xl prose-img:shadow-sm [&_img]:max-w-full [&_img]:h-auto prose-blockquote:border-l-4 prose-blockquote:border-l-[#0D9488] prose-blockquote:bg-slate-50 dark:prose-blockquote:bg-slate-900 prose-blockquote:py-2.5 prose-blockquote:px-4 prose-blockquote:rounded-r-xl prose-blockquote:text-slate-700 dark:prose-blockquote:text-slate-300 prose-blockquote:not-italic prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:bg-slate-100 dark:prose-code:bg-slate-800 prose-code:text-[#0D9488] dark:prose-code:text-teal-300 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:max-w-full prose-pre:overflow-x-auto [&_table]:max-w-full [&_table]:overflow-x-auto [&_table]:block [&_iframe]:max-w-full">
-              <div
-                className="blog-content max-w-full min-w-0 break-normal hyphens-none text-slate-800 dark:text-slate-200"
-                dangerouslySetInnerHTML={{ __html: processedContent }}
-              />
+              <BlogContentRenderer htmlContent={processedContent} />
             </div>
 
             {/* Related Topics & Category Tags */}

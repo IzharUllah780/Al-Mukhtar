@@ -41,6 +41,20 @@ function cleanCourseDetail(rawHtml) {
     .replace(/&nbsp;/g, " ");
 }
 
+// Isolated, Memoized Course Detail component to prevent React re-renders from wiping Google Translate translated DOM
+export const CourseContentRenderer = React.memo(
+  function CourseContentRenderer({ htmlContent }) {
+    return (
+      <div
+        className="course-content blog-content max-w-full min-w-0 break-normal hyphens-none text-slate-800 dark:text-slate-200 overflow-hidden"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+      />
+    );
+  },
+  (prevProps, nextProps) => prevProps.htmlContent === nextProps.htmlContent
+);
+
 function CourseDetails() {
   const { slug } = useParams();
   const queryClient = useQueryClient();
@@ -380,10 +394,7 @@ function CourseDetails() {
 
                 {/* Render Rich HTML Content from Quill - Styled matching Blog Detail */}
                 <div className="prose prose-slate dark:prose-invert max-w-full min-w-0 w-full break-normal hyphens-none [word-break:normal] [overflow-wrap:break-word] text-xs sm:text-sm md:text-[15px] leading-relaxed prose-headings:font-heading prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-slate-900 dark:prose-headings:text-white prose-h1:text-xl sm:prose-h1:text-2xl prose-h2:text-lg sm:prose-h2:text-xl prose-h3:text-base sm:prose-h3:text-lg prose-p:text-slate-700 dark:prose-p:text-slate-200 prose-p:my-2.5 sm:prose-p:my-3 prose-p:leading-relaxed prose-ul:my-2.5 sm:prose-ul:my-3 prose-ul:list-disc prose-ul:pl-5 prose-ol:my-2.5 sm:prose-ol:my-3 prose-ol:list-decimal prose-ol:pl-5 prose-li:my-1 prose-a:text-teal-600 dark:prose-a:text-teal-400 prose-a:font-semibold prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl sm:prose-img:rounded-2xl prose-img:shadow-sm [&_img]:max-w-full [&_img]:h-auto prose-blockquote:border-l-4 prose-blockquote:border-l-[#0D9488] prose-blockquote:bg-slate-50 dark:prose-blockquote:bg-slate-900 prose-blockquote:py-2.5 prose-blockquote:px-3 sm:prose-blockquote:px-4 prose-blockquote:rounded-r-xl prose-blockquote:text-slate-700 dark:prose-blockquote:text-slate-300 prose-blockquote:not-italic prose-strong:text-slate-900 dark:prose-strong:text-white prose-code:bg-slate-100 dark:prose-code:bg-slate-800 prose-code:text-[#0D9488] dark:prose-code:text-teal-300 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-slate-900 prose-pre:text-slate-100 prose-pre:max-w-full prose-pre:overflow-x-auto [&_table]:max-w-full [&_table]:overflow-x-auto [&_table]:block [&_iframe]:max-w-full [&_iframe]:w-full [&_iframe]:aspect-video overflow-hidden">
-                  <div
-                    className="course-content blog-content max-w-full min-w-0 break-normal hyphens-none text-slate-800 dark:text-slate-200 overflow-hidden"
-                    dangerouslySetInnerHTML={{ __html: processedDetail }}
-                  />
+                  <CourseContentRenderer htmlContent={processedDetail} />
                 </div>
               </div>
             ) : (

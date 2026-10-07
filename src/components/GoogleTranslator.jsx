@@ -6,14 +6,38 @@ export default function GoogleTranslator() {
   const [currentLang, setCurrentLang] = useState("en");
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    // Check existing cookie
-    const match = document.cookie.match(/googtrans=\/en\/([^;]+)/);
-    if (match && match[1]) {
-      setCurrentLang(match[1]);
+  // Helper to apply or remove RTL mode from HTML document safely
+  const applyDirection = (lang) => {
+    if (typeof document === "undefined") return;
+    const isUrdu = lang === "ur";
+    const html = document.documentElement;
+    const body = document.body;
+
+    if (isUrdu) {
+      if (html.getAttribute("dir") !== "rtl") html.setAttribute("dir", "rtl");
+      if (!html.classList.contains("urdu-mode")) {
+        html.classList.add("urdu-mode", "rtl");
+      }
+      if (body && body.getAttribute("dir") !== "rtl") body.setAttribute("dir", "rtl");
+      if (body && !body.classList.contains("urdu-mode")) {
+        body.classList.add("urdu-mode", "rtl");
+      }
     } else {
-      setCurrentLang("en");
+      if (html.getAttribute("dir") === "rtl") html.setAttribute("dir", "ltr");
+      html.classList.remove("urdu-mode", "rtl");
+      if (body && body.getAttribute("dir") === "rtl") body.setAttribute("dir", "ltr");
+      body?.classList.remove("urdu-mode", "rtl");
     }
+  };
+
+  useEffect(() => {
+    // Check existing cookie or localStorage
+    const match = document.cookie.match(/googtrans=\/en\/([^;]+)/);
+    const savedLang = localStorage.getItem("site_lang");
+    const activeLang = match && match[1] ? match[1] : (savedLang || "en");
+
+    setCurrentLang(activeLang);
+    applyDirection(activeLang);
 
     // Set up Google Translate callback
     window.googleTranslateElementInit = () => {
@@ -103,6 +127,8 @@ export default function GoogleTranslator() {
 
   const changeLanguage = (langCode) => {
     setCurrentLang(langCode);
+    localStorage.setItem("site_lang", langCode);
+    applyDirection(langCode);
 
     if (langCode === "en") {
       // Clear translation cookies to return to default English
@@ -131,6 +157,7 @@ export default function GoogleTranslator() {
       <div
         className="notranslate inline-flex items-center gap-1.5 bg-slate-900/90 border border-slate-700/80 rounded-lg p-1 text-[11px] font-sans"
         translate="no"
+        dir="ltr"
       >
         <button
           type="button"
@@ -143,21 +170,24 @@ export default function GoogleTranslator() {
           title="Switch to English"
           translate="no"
         >
-          <span className="notranslate tracking-wide">English</span>
+          <span className="notranslate tracking-wide font-sans">English</span>
         </button>
 
         <button
           type="button"
           onClick={() => changeLanguage("ur")}
-          className={`notranslate px-3 py-1 rounded-md transition-all cursor-pointer font-medium flex items-center justify-center text-[12.5px] leading-none ${
+          className={`notranslate px-3 py-1 rounded-md transition-all cursor-pointer font-medium flex items-center justify-center text-[13px] leading-none ${
             currentLang === "ur"
               ? "bg-teal-600 text-white font-bold shadow-xs ring-1 ring-teal-400/40"
               : "text-slate-300 hover:text-white hover:bg-slate-800"
           }`}
-          title="اردو میں ترجمہ کریں"
+          title="اردو میں دیکھیں (RTL)"
           translate="no"
         >
-          <span className="notranslate font-semibold" style={{ fontFamily: "serif" }}>
+          <span
+            className="notranslate font-bold"
+            style={{ fontFamily: "'Noto Nastaliq Urdu', 'Noto Sans Arabic', serif" }}
+          >
             اردو
           </span>
         </button>

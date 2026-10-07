@@ -4,20 +4,29 @@ Allow: /
 Allow: /about
 Allow: /courses
 Allow: /courses/*
+Allow: /apply
+Allow: /result
 Allow: /blog
 Allow: /blog/*
 Allow: /contact
-Allow: /apply
+Allow: /teachers
+Allow: /students
+Allow: /videos
 
-# Disallow private admin, dashboard and API endpoints
+# Disallow private admin, dashboard, authentication, and API endpoints
 Disallow: /admin
 Disallow: /admin/*
 Disallow: /api/
 Disallow: /api/*
+Disallow: /login
+Disallow: /register
+Disallow: /signup
 Disallow: /profile
+Disallow: /profile/*
 Disallow: /verify-email
 Disallow: /forgot-password
+Disallow: /notifications
 
 # Host & Sitemap location
-Host: https://almukhtar.org
-Sitemap: https://almukhtar.org/sitemap.xml
+Host: https://almukhtar.org.pk
+Sitemap: https://almukhtar.org.pk/sitemap.xml

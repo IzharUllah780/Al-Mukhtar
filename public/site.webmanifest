@@ -1,11 +1,12 @@
 {
-  "name": "Al-Mukhtar Institute",
+  "name": "Al-Mukhtar — Islamic & Academic Institute",
   "short_name": "Al-Mukhtar",
-  "description": "Excellence in Medical Imaging, Allied Health Sciences, and Classical Islamic Studies in Peshawar, Pakistan.",
+  "description": "An esteemed Islamic institution cultivating future scholars and principled leaders through traditional Islamic jurisprudence, Tajweed, Quranic sciences, Arabic linguistics, and contemporary leadership.",
   "start_url": "/",
+  "id": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#0F6E8C",
+  "background_color": "#080f19",
+  "theme_color": "#0D9488",
   "orientation": "portrait-primary",
   "icons": [
     {
@@ -16,6 +17,16 @@
     {
       "src": "/favicon-32x32.png",
       "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
       "type": "image/png"
     },
     {

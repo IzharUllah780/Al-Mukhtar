@@ -609,3 +609,243 @@ font[style*="background-color"]:hover {
   outline: none !important;
 }
 
+/* ==========================================================================
+   URDU & RIGHT-TO-LEFT (RTL) STYLES
+   ========================================================================== */
+
+/* ── 1. Global RTL Document & Typography ── */
+[dir="rtl"],
+html.urdu-mode,
+html[lang="ur"],
+body.urdu-mode,
+body[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+  letter-spacing: 0 !important;
+  word-spacing: 0.05em;
+}
+
+/* Base Body Typography for Urdu */
+[dir="rtl"] body,
+html.urdu-mode body,
+html[lang="ur"] body,
+[dir="rtl"] .blog-content,
+[dir="rtl"] .course-content,
+[dir="rtl"] .prose {
+  font-family: "Noto Nastaliq Urdu", "Noto Sans Arabic", "Gulzar", "Jameel Noori Nastaleeq", "Urdu Typesetting", "Amiri", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  line-height: 2.05 !important;
+}
+
+/* Headings & Prominent Titles in Urdu Calligraphy */
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6,
+[dir="rtl"] .font-heading,
+[dir="rtl"] .public-site h1,
+[dir="rtl"] .public-site h2,
+[dir="rtl"] .public-site h3,
+[dir="rtl"] .public-site h4,
+[dir="rtl"] .public-site h5,
+[dir="rtl"] .public-site h6,
+html.urdu-mode h1,
+html.urdu-mode h2,
+html.urdu-mode h3,
+html.urdu-mode h4,
+html.urdu-mode h5,
+html.urdu-mode h6,
+html.urdu-mode .font-heading {
+  font-family: "Gulzar", "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Urdu Typesetting", "Amiri", serif !important;
+  line-height: 2.2 !important;
+  letter-spacing: 0 !important;
+  text-align: start;
+}
+
+/* UI Elements, Navigation, Inputs & Buttons */
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select,
+[dir="rtl"] button,
+[dir="rtl"] nav a,
+[dir="rtl"] header a,
+[dir="rtl"] .notranslate[dir="ltr"] {
+  font-family: "Noto Sans Arabic", "Noto Nastaliq Urdu", "Gulzar", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: 0 !important;
+}
+
+[dir="rtl"] p,
+[dir="rtl"] span,
+[dir="rtl"] label,
+[dir="rtl"] a,
+[dir="rtl"] li,
+[dir="rtl"] td,
+[dir="rtl"] th,
+[dir="rtl"] font {
+  letter-spacing: 0 !important;
+}
+
+/* Blog & Course Content Paragraph Spacing */
+[dir="rtl"] .blog-content p,
+[dir="rtl"] .course-content p {
+  line-height: 2.15 !important;
+  margin-bottom: 1.4rem;
+}
+
+/* ── 2. Text Alignment & Content Flow in RTL ── */
+[dir="rtl"] .text-left {
+  text-align: right !important;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left !important;
+}
+
+[dir="rtl"] .sm\:text-left {
+  text-align: right !important;
+}
+
+[dir="rtl"] .sm\:text-right {
+  text-align: left !important;
+}
+
+[dir="rtl"] .md\:text-left {
+  text-align: right !important;
+}
+
+[dir="rtl"] .md\:text-right {
+  text-align: left !important;
+}
+
+/* ── 3. Icons and Directional Arrows Mirroring ── */
+[dir="rtl"] svg.lucide-arrow-right,
+[dir="rtl"] svg.lucide-chevron-right {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] svg.lucide-arrow-left,
+[dir="rtl"] svg.lucide-chevron-left {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] svg.lucide-arrow-up-right {
+  transform: scaleX(-1);
+}
+
+/* Smooth transition animations with mirrored hover directions */
+[dir="rtl"] .group:hover .group-hover\:translate-x-1 {
+  transform: scaleX(-1) translateX(4px) !important;
+}
+
+[dir="rtl"] .group:hover .group-hover\:translate-x-0\.5 {
+  transform: scaleX(-1) translateX(2px) !important;
+}
+
+[dir="rtl"] .group:hover .group-hover\:-translate-x-0\.5 {
+  transform: scaleX(-1) translateX(-2px) !important;
+}
+
+/* ── 4. Input Fields & Form Icons in RTL ── */
+[dir="rtl"] .relative > svg.absolute.left-3,
+[dir="rtl"] .relative > svg.absolute.left-3\.5,
+[dir="rtl"] .relative > svg.absolute.left-4,
+[dir="rtl"] .relative > .absolute.left-3,
+[dir="rtl"] .relative > .absolute.left-3\.5,
+[dir="rtl"] .relative > .absolute.left-4 {
+  left: auto !important;
+  right: 0.875rem !important;
+}
+
+[dir="rtl"] .relative > svg.absolute.right-3,
+[dir="rtl"] .relative > svg.absolute.right-3\.5,
+[dir="rtl"] .relative > svg.absolute.right-2\.5,
+[dir="rtl"] .relative > button.absolute.right-3,
+[dir="rtl"] .relative > button.absolute.right-2\.5,
+[dir="rtl"] .relative > div.absolute.right-2\.5,
+[dir="rtl"] .relative > div.absolute.right-3 {
+  right: auto !important;
+  left: 0.75rem !important;
+}
+
+[dir="rtl"] input.pl-10,
+[dir="rtl"] input.pl-9,
+[dir="rtl"] input.pl-11,
+[dir="rtl"] input.pl-12,
+[dir="rtl"] .pl-10,
+[dir="rtl"] .pl-9,
+[dir="rtl"] .pl-11,
+[dir="rtl"] .pl-12 {
+  padding-left: 1rem !important;
+  padding-right: 2.75rem !important;
+  text-align: right !important;
+}
+
+[dir="rtl"] input.pr-10,
+[dir="rtl"] input.pr-9,
+[dir="rtl"] input.pr-11,
+[dir="rtl"] input.pr-12,
+[dir="rtl"] .pr-10,
+[dir="rtl"] .pr-9,
+[dir="rtl"] .pr-11,
+[dir="rtl"] .pr-12 {
+  padding-right: 1rem !important;
+  padding-left: 2.75rem !important;
+}
+
+[dir="rtl"] input,
+[dir="rtl"] textarea,
+[dir="rtl"] select {
+  text-align: right !important;
+}
+
+/* ── 5. Lists & Blockquotes in RTL ── */
+[dir="rtl"] ul.list-disc,
+[dir="rtl"] ol.list-decimal,
+[dir="rtl"] .blog-content ul,
+[dir="rtl"] .blog-content ol,
+[dir="rtl"] .course-content ul,
+[dir="rtl"] .course-content ol {
+  padding-left: 0 !important;
+  padding-right: 1.5rem !important;
+}
+
+[dir="rtl"] blockquote,
+[dir="rtl"] .blog-content blockquote,
+[dir="rtl"] .course-content blockquote {
+  border-left: none !important;
+  border-right: 4px solid var(--color-brand) !important;
+  padding-left: 0 !important;
+  padding-right: 1rem !important;
+}
+
+/* ── 6. Mobile Navigation Drawer in RTL ── */
+[dir="rtl"] div[role="dialog"].fixed.inset-y-0.left-0 {
+  left: auto !important;
+  right: 0 !important;
+  border-right-width: 0 !important;
+  border-left-width: 1px !important;
+}
+
+[dir="rtl"] div[role="dialog"].fixed.inset-y-0.left-0.-translate-x-full {
+  transform: translateX(100%) !important;
+}
+
+[dir="rtl"] div[role="dialog"].fixed.inset-y-0.left-0.translate-x-0 {
+  transform: translateX(0) !important;
+}
+
+/* ── 7. Tables in RTL ── */
+[dir="rtl"] table th,
+[dir="rtl"] table td {
+  text-align: right !important;
+}
+
+/* ── 8. Language Switcher Immunity ── */
+.notranslate,
+[translate="no"] {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+}
+
+
