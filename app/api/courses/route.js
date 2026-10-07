@@ -8,25 +8,25 @@ import { courseCreateSchema, validatePayload } from "@/lib/validations";
 export async function GET() {
   try {
     await dbConnect();
-    const courses = await Course.find().sort({ createdAt: -1 }).lean();
-
-    let countMap = {};
-    try {
-      const counts = await Application.aggregate([
+    const [courses, counts] = await Promise.all([
+      Course.find().sort({ createdAt: -1 }).lean(),
+      Application.aggregate([
         {
           $group: {
             _id: "$course",
             count: { $sum: 1 },
           },
         },
-      ]);
+      ]).catch(() => []),
+    ]);
+
+    let countMap = {};
+    if (Array.isArray(counts)) {
       counts.forEach((item) => {
         if (item._id) {
           countMap[item._id] = item.count;
         }
       });
-    } catch {
-      countMap = {};
     }
 
     const coursesWithCount = courses.map((course) => {

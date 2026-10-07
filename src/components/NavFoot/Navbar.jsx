@@ -361,6 +361,56 @@ export default function Navbar() {
               );
             })}
 
+            {/* About Dropdown (Accordion) */}
+            <div>
+              <button
+                type="button"
+                onClick={() => setMobileAboutExpanded((prev) => !prev)}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer ${
+                  isAboutActive
+                    ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-semibold"
+                    : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <Building2 size={16} className="text-slate-400 dark:text-slate-500" />
+                  <span>About Institute</span>
+                </div>
+                <ChevronDown
+                  size={15}
+                  className={`transition-transform duration-200 text-slate-400 ${
+                    mobileAboutExpanded ? "rotate-180 text-teal-600 dark:text-teal-400" : ""
+                  }`}
+                />
+              </button>
+
+              {mobileAboutExpanded && (
+                <div className="ms-3 ps-3 border-s border-slate-200 dark:border-slate-800 space-y-1 my-1 animate-in fade-in slide-in-from-top-1 duration-150">
+                  {ABOUT_SUB_LINKS.map(({ name, path, icon: Icon }) => {
+                    const active = isLinkActive(path);
+                    return (
+                      <Link
+                        key={path}
+                        to={path}
+                        onClick={closeMenu}
+                        className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                          active
+                            ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
+                            : "text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
+                        }`}
+                      >
+                        <div className="flex items-center gap-2 min-w-0">
+                          <Icon size={14} className="shrink-0" />
+                          <span className="truncate">{name}</span>
+                        </div>
+                        {active && <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0" />}
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
             {/* Apply / Online Admission Link */}
             <Link
               to="/apply"
@@ -390,32 +440,6 @@ export default function Navbar() {
               <span>Examination Results</span>
               {isLinkActive("/result") && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
             </Link>
-          </div>
-
-          {/* About Section */}
-          <div className="space-y-1 pt-2 border-t border-slate-100 dark:border-slate-800/80">
-            <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest px-3 font-mono block mb-1">
-              About Institute
-            </span>
-
-            {ABOUT_SUB_LINKS.map(({ name, path }) => {
-              const active = isLinkActive(path);
-              return (
-                <Link
-                  key={path}
-                  to={path}
-                  onClick={closeMenu}
-                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
-                    active
-                      ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
-                      : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
-                  }`}
-                >
-                  <span>{name}</span>
-                  {active && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
-                </Link>
-              );
-            })}
           </div>
 
           {/* Account / Management Section (if logged in) */}
@@ -459,7 +483,7 @@ export default function Navbar() {
           <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 space-y-1">
             <div className="flex items-center justify-between px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">
               <span className="text-slate-500 dark:text-slate-400">Language</span>
-              <GoogleTranslator />
+              <GoogleTranslator onLanguageChange={closeMenu} />
             </div>
 
             <button

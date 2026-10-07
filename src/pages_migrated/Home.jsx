@@ -111,7 +111,7 @@ function Home() {
           <div className="max-w-4xl space-y-4 sm:space-y-5 text-left">
             {/* Dignified Academic Headline (Refined, Compact Proportion) */}
             <h1 className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-white leading-tight tracking-tight">
-              Your Journey Towards Islamic Knowledge Begins Here — Learn, Reflect & Grow with Al-Mukhtar
+              Your Journey Towards Islamic Knowledge Begins Here - Learn, Reflect & Grow with Al-Mukhtar
             </h1>
 
             {/* Institutional Overview Description with Line Break */}

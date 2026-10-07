@@ -819,21 +819,7 @@ html.urdu-mode .font-heading {
   padding-right: 1rem !important;
 }
 
-/* ── 6. Mobile Navigation Drawer in RTL ── */
-[dir="rtl"] div[role="dialog"].fixed.inset-y-0.left-0 {
-  left: auto !important;
-  right: 0 !important;
-  border-right-width: 0 !important;
-  border-left-width: 1px !important;
-}
 
-[dir="rtl"] div[role="dialog"].fixed.inset-y-0.left-0.-translate-x-full {
-  transform: translateX(100%) !important;
-}
-
-[dir="rtl"] div[role="dialog"].fixed.inset-y-0.left-0.translate-x-0 {
-  transform: translateX(0) !important;
-}
 
 /* ── 7. Tables in RTL ── */
 [dir="rtl"] table th,

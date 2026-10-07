@@ -22,6 +22,7 @@ export const metadata = {
   applicationName: SITE_NAME,
   keywords: [
     "Al-Mukhtar",
+    "Al-Mukhtar Official",
     "Al-Mukhtar Institute",
     "Al-Mukhtar Islamic & Academic Institute",
     "Islamic Institute Peshawar",
@@ -35,9 +36,9 @@ export const metadata = {
     "KPK",
     "Pakistan",
   ],
-  authors: [{ name: "Al-Mukhtar Institute", url: SITE_URL }],
-  creator: "Al-Mukhtar Institute",
-  publisher: "Al-Mukhtar Institute",
+  authors: [{ name: "Al-Mukhtar", url: SITE_URL }],
+  creator: "Al-Mukhtar",
+  publisher: "Al-Mukhtar",
   alternates: {
     canonical: `${SITE_URL}/`,
   },
@@ -51,7 +52,7 @@ export const metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Al-Mukhtar — Islamic & Academic Institute",
+        alt: "Al-Mukhtar — Where the Chosen Rise",
       },
     ],
     locale: "en_US",
@@ -113,29 +114,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
         />
 
-        {/* Instant RTL Script for Urdu Mode (prevents layout flash) */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  var cookieMatch = document.cookie.match(/googtrans=\\/en\\/([^;]+)/);
-                  var savedLang = localStorage.getItem('site_lang');
-                  var isUrdu = (cookieMatch && cookieMatch[1] === 'ur') || (savedLang === 'ur');
-                  if (isUrdu) {
-                    document.documentElement.setAttribute('dir', 'rtl');
-                    document.documentElement.setAttribute('lang', 'ur');
-                    document.documentElement.classList.add('urdu-mode', 'rtl');
-                  } else {
-                    document.documentElement.setAttribute('dir', 'ltr');
-                    document.documentElement.setAttribute('lang', 'en');
-                    document.documentElement.classList.remove('urdu-mode', 'rtl');
-                  }
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
+
 
         <script
           async

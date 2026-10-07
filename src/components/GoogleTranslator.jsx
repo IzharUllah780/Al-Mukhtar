@@ -1,34 +1,77 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 
-export default function GoogleTranslator() {
+export default function GoogleTranslator({ onLanguageChange }) {
   const [currentLang, setCurrentLang] = useState("en");
-  const [isLoaded, setIsLoaded] = useState(false);
+  const isUrduAppliedRef = useRef(false);
 
   // Helper to apply or remove RTL mode from HTML document safely
-  const applyDirection = (lang) => {
+  const applyDirection = useCallback((lang) => {
     if (typeof document === "undefined") return;
-    const isUrdu = lang === "ur";
     const html = document.documentElement;
     const body = document.body;
 
-    if (isUrdu) {
+    if (lang === "ur") {
       if (html.getAttribute("dir") !== "rtl") html.setAttribute("dir", "rtl");
-      if (!html.classList.contains("urdu-mode")) {
-        html.classList.add("urdu-mode", "rtl");
+      if (html.getAttribute("lang") !== "ur") html.setAttribute("lang", "ur");
+      if (!html.classList.contains("urdu-mode")) html.classList.add("urdu-mode", "rtl");
+      
+      if (body) {
+        if (body.getAttribute("dir") !== "rtl") body.setAttribute("dir", "rtl");
+        if (!body.classList.contains("urdu-mode")) body.classList.add("urdu-mode", "rtl");
       }
-      if (body && body.getAttribute("dir") !== "rtl") body.setAttribute("dir", "rtl");
-      if (body && !body.classList.contains("urdu-mode")) {
-        body.classList.add("urdu-mode", "rtl");
-      }
+      isUrduAppliedRef.current = true;
     } else {
       if (html.getAttribute("dir") === "rtl") html.setAttribute("dir", "ltr");
+      if (html.getAttribute("lang") === "ur") html.setAttribute("lang", "en");
       html.classList.remove("urdu-mode", "rtl");
-      if (body && body.getAttribute("dir") === "rtl") body.setAttribute("dir", "ltr");
-      body?.classList.remove("urdu-mode", "rtl");
+      
+      if (body) {
+        if (body.getAttribute("dir") === "rtl") body.setAttribute("dir", "ltr");
+        body.classList.remove("urdu-mode", "rtl");
+      }
+      isUrduAppliedRef.current = false;
     }
-  };
+  }, []);
+
+  // Helper to verify if the page text has actually been translated into Urdu
+  const isTranslatedToUrdu = useCallback(() => {
+    if (typeof document === "undefined") return false;
+    const html = document.documentElement;
+    const body = document.body;
+
+    // Check if Google Translate flags the page as translated
+    const hasGoogleTranslatedClass =
+      html.classList.contains("translated-ltr") ||
+      html.classList.contains("translated-rtl") ||
+      (body && (body.classList.contains("translated-ltr") || body.classList.contains("translated-rtl")));
+
+    // Regex for Urdu / Arabic unicode character range
+    const urduRegex = /[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]/;
+
+    // Check Google Translate font nodes first
+    const fontNodes = document.querySelectorAll("font");
+    for (let i = 0; i < fontNodes.length && i < 30; i++) {
+      const text = fontNodes[i].textContent || "";
+      if (urduRegex.test(text)) {
+        return true;
+      }
+    }
+
+    // Check main navigation or content texts if translation class is present
+    if (hasGoogleTranslatedClass) {
+      const sampleElements = document.querySelectorAll("nav a, header h1, header span, main h1, main h2, main p");
+      for (let i = 0; i < sampleElements.length && i < 20; i++) {
+        const text = sampleElements[i].textContent || "";
+        if (urduRegex.test(text)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }, []);
 
   useEffect(() => {
     // Check existing cookie or localStorage
@@ -37,7 +80,10 @@ export default function GoogleTranslator() {
     const activeLang = match && match[1] ? match[1] : (savedLang || "en");
 
     setCurrentLang(activeLang);
-    applyDirection(activeLang);
+
+    if (activeLang === "en") {
+      applyDirection("en");
+    }
 
     // Set up Google Translate callback
     window.googleTranslateElementInit = () => {
@@ -50,7 +96,6 @@ export default function GoogleTranslator() {
           },
           "google_translate_element"
         );
-        setIsLoaded(true);
       }
     };
 
@@ -61,8 +106,6 @@ export default function GoogleTranslator() {
       script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
       script.async = true;
       document.body.appendChild(script);
-    } else if (window.google?.translate) {
-      setIsLoaded(true);
     }
 
     // Inject high-priority global CSS rules to permanently disable hover background colors on translated text
@@ -120,32 +163,92 @@ export default function GoogleTranslator() {
 
     window.addEventListener("mouseover", handleMouseOver, true);
 
+    // Watch for DOM translations: ONLY change alignment once Urdu text is actually detected
+    let pollInterval = null;
+    let observer = null;
+
+    const checkAndApplyUrdu = () => {
+      const currentSiteLang = localStorage.getItem("site_lang");
+      const cookieM = document.cookie.match(/googtrans=\/en\/([^;]+)/);
+      const isUrduWanted = (cookieM && cookieM[1] === "ur") || (currentSiteLang === "ur");
+
+      if (isUrduWanted) {
+        if (isTranslatedToUrdu()) {
+          applyDirection("ur");
+        }
+      } else {
+        applyDirection("en");
+      }
+    };
+
+    // Check periodically for the first few seconds
+    pollInterval = setInterval(checkAndApplyUrdu, 250);
+
+    // Also observe DOM mutations (e.g. when Google Translate modifies tags)
+    if (typeof MutationObserver !== "undefined") {
+      observer = new MutationObserver(() => {
+        checkAndApplyUrdu();
+      });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["class"],
+        childList: true,
+        subtree: true,
+      });
+    }
+
+    // Stop intense polling after 15 seconds to save CPU, but observer keeps working
+    const timeoutId = setTimeout(() => {
+      if (pollInterval) clearInterval(pollInterval);
+    }, 15000);
+
     return () => {
       window.removeEventListener("mouseover", handleMouseOver, true);
+      if (pollInterval) clearInterval(pollInterval);
+      if (timeoutId) clearTimeout(timeoutId);
+      if (observer) observer.disconnect();
     };
-  }, []);
+  }, [applyDirection, isTranslatedToUrdu]);
 
   const changeLanguage = (langCode) => {
     setCurrentLang(langCode);
     localStorage.setItem("site_lang", langCode);
-    applyDirection(langCode);
+
+    // Trigger parent callback immediately so mobile drawer closes smoothly
+    if (onLanguageChange) {
+      onLanguageChange(langCode);
+    }
 
     if (langCode === "en") {
       // Clear translation cookies to return to default English
+      applyDirection("en");
       document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
       document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname};`;
-      window.location.reload();
+
+      const select = document.querySelector(".goog-te-combo");
+      if (select) {
+        select.value = "en";
+        select.dispatchEvent(new Event("change"));
+      } else {
+        window.location.reload();
+      }
       return;
     }
 
-    // Set Google Translate cookie for Urdu
+    // Set Google Translate cookie for Urdu (do NOT set dir="rtl" until translation actually finishes)
     const cookieValue = `/en/${langCode}`;
     document.cookie = `googtrans=${cookieValue}; path=/;`;
     document.cookie = `googtrans=${cookieValue}; path=/; domain=${window.location.hostname};`;
     document.cookie = `googtrans=${cookieValue}; path=/; domain=.${window.location.hostname};`;
 
-    window.location.reload();
+    const select = document.querySelector(".goog-te-combo");
+    if (select) {
+      select.value = langCode;
+      select.dispatchEvent(new Event("change"));
+    } else {
+      window.location.reload();
+    }
   };
 
   return (
