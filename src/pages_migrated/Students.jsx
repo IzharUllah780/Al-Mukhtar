@@ -199,22 +199,29 @@ function Students() {
       {/* ── 3. GRADUATE DETAILED BIO MODAL ── */}
       {activeModalStudent && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-sm overflow-y-auto"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 bg-slate-950/80 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-150"
           onClick={() => setActiveModalStudent(null)}
         >
           <div
-            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl max-w-lg w-full max-h-[90vh] shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150 text-left"
+            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl sm:max-w-3xl w-full max-h-[90vh] sm:max-h-[85vh] shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150 font-sans text-left relative"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 shrink-0">
-              <span className="text-xs font-bold uppercase tracking-wider font-mono text-slate-700 dark:text-slate-300">
-                Alumni Profile
-              </span>
+            {/* Modal Top Header Bar */}
+            <div className="flex items-center justify-between px-5 py-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 shrink-0">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-teal-700 dark:text-teal-300 uppercase tracking-wider font-mono bg-teal-50 dark:bg-teal-950/60 border border-teal-200/60 dark:border-teal-800/60">
+                  {activeModalStudent.category || "Alumni Profile"}
+                </span>
+                {activeModalStudent.batchYear && (
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                    Class of {activeModalStudent.batchYear}
+                  </span>
+                )}
+              </div>
               <button
                 type="button"
                 onClick={() => setActiveModalStudent(null)}
-                className="p-1.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white cursor-pointer transition-colors"
+                className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                 aria-label="Close"
               >
                 <X size={18} />
@@ -223,67 +230,89 @@ function Students() {
 
             {/* Modal Scrollable Body */}
             <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-4 custom-scrollbar">
-
               {/* Profile Top Row */}
-              <div className="flex items-center gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
-                <img
-                  src={getImageUrl(activeModalStudent.image, `https://ui-avatars.com/api/?name=${encodeURIComponent(activeModalStudent.name || "Student")}&background=0D9488&color=fff&bold=true`)}
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(activeModalStudent.name || "Student")}&background=0D9488&color=fff&bold=true`;
-                  }}
-                  alt={activeModalStudent.name}
-                  className="w-16 h-16 rounded-2xl object-cover object-top border border-slate-200 dark:border-slate-700 shadow-sm shrink-0"
-                />
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800 ring-4 ring-teal-500/20 shadow-sm shrink-0">
+                  <img
+                    src={getImageUrl(activeModalStudent.image, `https://ui-avatars.com/api/?name=${encodeURIComponent(activeModalStudent.name || "Student")}&background=0D9488&color=fff&bold=true`)}
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(activeModalStudent.name || "Student")}&background=0D9488&color=fff&bold=true`;
+                    }}
+                    alt={activeModalStudent.name}
+                    className="w-full h-full rounded-full object-cover object-top"
+                  />
+                </div>
 
-                <div className="space-y-0.5 flex-1 min-w-0">
-                  <span className="text-[10px] font-mono text-teal-700 dark:text-teal-400 uppercase font-bold">
-                    {activeModalStudent.category || "Graduate"}
-                  </span>
-                  <h2 className="text-lg font-bold text-slate-900 dark:text-white font-heading truncate">
+                <div className="space-y-1 text-center sm:text-left flex-1 min-w-0">
+                  <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white font-heading truncate">
                     {activeModalStudent.name}
                   </h2>
-                  <p className="text-xs font-semibold text-slate-600 dark:text-slate-400 truncate">
-                    {activeModalStudent.currentRole}
+                  <p className="text-xs sm:text-sm font-semibold text-teal-700 dark:text-teal-400 truncate">
+                    {activeModalStudent.currentRole || "Graduate Scholar"}
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                    {activeModalStudent.program || "Islamic Sciences"}
+                    {activeModalStudent.batchYear ? ` • Class of ${activeModalStudent.batchYear}` : ""}
                   </p>
                 </div>
               </div>
 
-              {/* Clean Specification List */}
-              <div className="space-y-2 text-xs">
-                <div className="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-800">
-                  <span className="text-slate-500 dark:text-slate-400">Organization</span>
-                  <span className="font-semibold text-slate-800 dark:text-slate-200 truncate max-w-[220px]">
-                    {activeModalStudent.currentOrganization || "Private Scholarly Practice"}
+              {/* Placement Details Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs">
+                {activeModalStudent.currentOrganization && (
+                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-0.5">
+                    <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5 text-[11px]">
+                      <Building2 size={13} className="text-teal-600 dark:text-teal-400 shrink-0" />
+                      Organization
+                    </span>
+                    <p className="font-semibold text-slate-800 dark:text-slate-200 truncate">
+                      {activeModalStudent.currentOrganization}
+                    </p>
+                  </div>
+                )}
+
+                {activeModalStudent.location && (
+                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-0.5">
+                    <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5 text-[11px]">
+                      <MapPin size={13} className="text-teal-600 dark:text-teal-400 shrink-0" />
+                      Location
+                    </span>
+                    <p className="font-semibold text-slate-800 dark:text-slate-200 truncate">
+                      {activeModalStudent.location}
+                    </p>
+                  </div>
+                )}
+
+                <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-0.5">
+                  <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5 text-[11px]">
+                    <GraduationCap size={13} className="text-teal-600 dark:text-teal-400 shrink-0" />
+                    Program
                   </span>
+                  <p className="font-semibold text-slate-800 dark:text-slate-200 truncate">
+                    {activeModalStudent.program || "Dars-e-Nizami & Islamic Sciences"}
+                  </p>
                 </div>
-                <div className="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-800">
-                  <span className="text-slate-500 dark:text-slate-400">Location</span>
-                  <span className="font-semibold text-slate-800 dark:text-slate-200">
-                    {activeModalStudent.location || "International"}
+
+                <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-0.5">
+                  <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 size={13} className="text-emerald-500 shrink-0" />
+                    Sanad Status
                   </span>
-                </div>
-                <div className="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-800">
-                  <span className="text-slate-500 dark:text-slate-400">Academic Program</span>
-                  <span className="font-semibold text-slate-800 dark:text-slate-200 truncate max-w-[220px]">
-                    {activeModalStudent.program}
-                  </span>
-                </div>
-                <div className="flex justify-between py-1.5 border-b border-slate-100 dark:border-slate-800">
-                  <span className="text-slate-500 dark:text-slate-400">Sanad Verification</span>
-                  <span className="font-semibold text-teal-600 dark:text-teal-400">
+                  <p className="font-bold text-emerald-600 dark:text-emerald-400 truncate">
                     Verified Alumnus
-                  </span>
+                  </p>
                 </div>
               </div>
 
               {/* Key Milestone */}
               {activeModalStudent.keyAchievement && (
-                <div className="space-y-1 pt-1">
-                  <span className="text-[10px] font-bold text-amber-700 dark:text-amber-400 uppercase font-mono tracking-wider block">
-                    Key Milestone
+                <div className="p-3 rounded-xl bg-amber-500/5 border border-amber-500/20 space-y-1">
+                  <span className="text-[10px] font-bold text-amber-700 dark:text-amber-400 uppercase font-mono tracking-wider flex items-center gap-1.5">
+                    <Award size={13} className="text-amber-500 shrink-0" />
+                    Key Milestone &amp; Achievement
                   </span>
-                  <p className="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
                     {activeModalStudent.keyAchievement}
                   </p>
                 </div>
@@ -291,8 +320,8 @@ function Students() {
 
               {/* Reflection */}
               {activeModalStudent.message && (
-                <div className="space-y-1 pt-1">
-                  <span className="text-[10px] font-bold text-teal-700 dark:text-teal-400 uppercase font-mono tracking-wider block">
+                <div className="pl-3.5 border-l-2 border-teal-600 dark:border-teal-400 py-1 space-y-1">
+                  <span className="text-[10px] font-bold text-teal-600 dark:text-teal-400 uppercase font-mono tracking-wider block">
                     Graduate Reflection
                   </span>
                   <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal italic">
@@ -303,19 +332,20 @@ function Students() {
             </div>
 
             {/* Modal Actions */}
-            <div className="grid grid-cols-2 gap-3 p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 shrink-0">
+            <div className="flex items-center justify-end gap-2.5 px-5 py-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 shrink-0">
               <button
                 type="button"
                 onClick={() => setActiveModalStudent(null)}
-                className="py-2.5 text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-200/70 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-full cursor-pointer text-center transition-colors"
+                className="py-2 px-4 rounded-lg bg-slate-200/70 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-colors cursor-pointer"
               >
                 Close
               </button>
               <Link
                 to="/apply"
-                className="py-2.5 text-xs font-bold bg-teal-600 hover:bg-teal-700 text-white rounded-full text-center transition-colors shadow-sm"
+                className="inline-flex items-center justify-center gap-1.5 py-2 px-5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold transition-all text-center shadow-xs"
               >
-                Apply Now
+                <span>Apply Now</span>
+                <ArrowRight size={13} />
               </Link>
             </div>
 

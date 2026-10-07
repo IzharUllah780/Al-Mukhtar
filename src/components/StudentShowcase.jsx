@@ -95,96 +95,158 @@ export default function StudentShowcase({ limit, showHeaderAction = false }) {
         </div>
       </div>
 
-      {/* Clean, Simple Mobile-Friendly Details Modal */}
+      {/* Clean, Wide, Screen-Constrained Details Modal */}
       {activeModalStudent && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 bg-slate-950/80 backdrop-blur-sm overflow-y-auto animate-in fade-in duration-150"
           onClick={() => setActiveModalStudent(null)}
         >
           <div
-            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full shadow-2xl overflow-hidden p-6 text-center space-y-4 animate-in zoom-in-95 duration-150 relative"
+            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl sm:max-w-3xl w-full max-h-[90vh] sm:max-h-[85vh] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-150 font-sans text-left relative"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Close Button */}
-            <button
-              type="button"
-              onClick={() => setActiveModalStudent(null)}
-              className="absolute top-4 right-4 p-1.5 rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-              aria-label="Close"
-            >
-              <X size={18} />
-            </button>
-
-            {/* Profile Avatar */}
-            <div className="relative w-20 h-20 mx-auto rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800 ring-4 ring-teal-500/20 shadow-md">
-              <img
-                src={getImageUrl(
-                  activeModalStudent.image,
-                  `https://ui-avatars.com/api/?name=${encodeURIComponent(activeModalStudent.name || "Student")}&background=0D9488&color=fff&bold=true`
+            {/* Modal Top Header Bar */}
+            <div className="flex items-center justify-between px-5 py-3 border-b border-slate-100 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 shrink-0">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold text-teal-700 dark:text-teal-300 uppercase tracking-wider font-mono bg-teal-50 dark:bg-teal-950/60 border border-teal-200/60 dark:border-teal-800/60">
+                  {activeModalStudent.category || "Alumni Profile"}
+                </span>
+                {activeModalStudent.batchYear && (
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                    Class of {activeModalStudent.batchYear}
+                  </span>
                 )}
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(activeModalStudent.name || "Student")}&background=0D9488&color=fff&bold=true`;
-                }}
-                alt={activeModalStudent.name}
-                className="w-full h-full rounded-full object-cover object-top"
-              />
-            </div>
-
-            {/* Header Text */}
-            <div className="space-y-1">
-              <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white font-heading">
-                {activeModalStudent.name}
-              </h3>
-              <p className="text-xs sm:text-sm font-semibold text-teal-700 dark:text-teal-400">
-                {activeModalStudent.currentRole || "Graduate Scholar"}
-              </p>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                {activeModalStudent.program || "Islamic Sciences"} {activeModalStudent.batchYear ? `• Class of ${activeModalStudent.batchYear}` : ""}
-              </p>
-            </div>
-
-            {/* Placement Details */}
-            <div className="pt-2 border-t border-slate-100 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300 space-y-1.5 text-left">
-              {activeModalStudent.currentOrganization && (
-                <p className="flex items-center gap-2">
-                  <Building2 size={14} className="text-teal-600 dark:text-teal-400 shrink-0" />
-                  <span className="font-medium text-slate-900 dark:text-white">{activeModalStudent.currentOrganization}</span>
-                </p>
-              )}
-              {activeModalStudent.location && (
-                <p className="flex items-center gap-2">
-                  <MapPin size={14} className="text-teal-600 dark:text-teal-400 shrink-0" />
-                  <span>{activeModalStudent.location}</span>
-                </p>
-              )}
-              {activeModalStudent.keyAchievement && (
-                <p className="flex items-start gap-2 pt-1 text-slate-700 dark:text-slate-300">
-                  <Award size={14} className="text-amber-500 shrink-0 mt-0.5" />
-                  <span>{activeModalStudent.keyAchievement}</span>
-                </p>
-              )}
-            </div>
-
-            {/* Quote / Reflection if available */}
-            {activeModalStudent.message && (
-              <blockquote className="text-xs text-slate-600 dark:text-slate-300 italic border-l-2 border-teal-600 pl-3 py-0.5 text-left">
-                &ldquo;{activeModalStudent.message}&rdquo;
-              </blockquote>
-            )}
-
-            {/* Action Buttons */}
-            <div className="pt-2 flex items-center justify-center gap-3">
+              </div>
               <button
                 type="button"
                 onClick={() => setActiveModalStudent(null)}
-                className="w-full py-2 px-4 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-colors cursor-pointer"
+                className="p-1.5 rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Modal Scrollable Body */}
+            <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-4 custom-scrollbar">
+              {/* Profile Top Row */}
+              <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 pb-4 border-b border-slate-100 dark:border-slate-800">
+                {/* Profile Avatar */}
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-slate-100 dark:bg-slate-800 ring-4 ring-teal-500/20 shadow-sm shrink-0">
+                  <img
+                    src={getImageUrl(
+                      activeModalStudent.image,
+                      `https://ui-avatars.com/api/?name=${encodeURIComponent(activeModalStudent.name || "Student")}&background=0D9488&color=fff&bold=true`
+                    )}
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(activeModalStudent.name || "Student")}&background=0D9488&color=fff&bold=true`;
+                    }}
+                    alt={activeModalStudent.name}
+                    className="w-full h-full rounded-full object-cover object-top"
+                  />
+                </div>
+
+                {/* Identity info */}
+                <div className="space-y-1 text-center sm:text-left flex-1 min-w-0">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white font-heading truncate">
+                    {activeModalStudent.name}
+                  </h3>
+                  <p className="text-xs sm:text-sm font-semibold text-teal-700 dark:text-teal-400 truncate">
+                    {activeModalStudent.currentRole || "Graduate Scholar"}
+                  </p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 truncate">
+                    {activeModalStudent.program || "Islamic Sciences"}
+                    {activeModalStudent.batchYear ? ` • Class of ${activeModalStudent.batchYear}` : ""}
+                  </p>
+                </div>
+              </div>
+
+              {/* Placement Details Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs">
+                {activeModalStudent.currentOrganization && (
+                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-0.5">
+                    <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5 text-[11px]">
+                      <Building2 size={13} className="text-teal-600 dark:text-teal-400 shrink-0" />
+                      Organization
+                    </span>
+                    <p className="font-semibold text-slate-800 dark:text-slate-200 truncate">
+                      {activeModalStudent.currentOrganization}
+                    </p>
+                  </div>
+                )}
+
+                {activeModalStudent.location && (
+                  <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-0.5">
+                    <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5 text-[11px]">
+                      <MapPin size={13} className="text-teal-600 dark:text-teal-400 shrink-0" />
+                      Location
+                    </span>
+                    <p className="font-semibold text-slate-800 dark:text-slate-200 truncate">
+                      {activeModalStudent.location}
+                    </p>
+                  </div>
+                )}
+
+                <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-0.5">
+                  <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5 text-[11px]">
+                    <GraduationCap size={13} className="text-teal-600 dark:text-teal-400 shrink-0" />
+                    Program
+                  </span>
+                  <p className="font-semibold text-slate-800 dark:text-slate-200 truncate">
+                    {activeModalStudent.program || "Dars-e-Nizami & Islamic Sciences"}
+                  </p>
+                </div>
+
+                <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800 space-y-0.5">
+                  <span className="text-slate-500 dark:text-slate-400 flex items-center gap-1.5 text-[11px]">
+                    <CheckCircle2 size={13} className="text-emerald-500 shrink-0" />
+                    Sanad Status
+                  </span>
+                  <p className="font-bold text-emerald-600 dark:text-emerald-400 truncate">
+                    Verified Alumnus
+                  </p>
+                </div>
+              </div>
+
+              {/* Key Achievement */}
+              {activeModalStudent.keyAchievement && (
+                <div className="p-3 rounded-xl bg-amber-500/5 border border-amber-500/20 space-y-1">
+                  <span className="text-[10px] font-bold text-amber-700 dark:text-amber-400 uppercase font-mono tracking-wider flex items-center gap-1.5">
+                    <Award size={13} className="text-amber-500 shrink-0" />
+                    Key Milestone &amp; Achievement
+                  </span>
+                  <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">
+                    {activeModalStudent.keyAchievement}
+                  </p>
+                </div>
+              )}
+
+              {/* Quote / Reflection if available */}
+              {activeModalStudent.message && (
+                <div className="pl-3.5 border-l-2 border-teal-600 dark:border-teal-400 py-1 space-y-1">
+                  <span className="text-[10px] font-bold text-teal-600 dark:text-teal-400 uppercase font-mono tracking-wider block">
+                    Graduate Reflection
+                  </span>
+                  <blockquote className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 italic leading-relaxed font-normal">
+                    &ldquo;{activeModalStudent.message}&rdquo;
+                  </blockquote>
+                </div>
+              )}
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex items-center justify-end gap-2.5 px-5 py-3 border-t border-slate-100 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/90 shrink-0">
+              <button
+                type="button"
+                onClick={() => setActiveModalStudent(null)}
+                className="py-2 px-4 rounded-lg bg-slate-200/70 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-semibold transition-colors cursor-pointer"
               >
                 Close
               </button>
               <Link
                 to="/apply"
-                className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-4 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold transition-all text-center"
+                className="inline-flex items-center justify-center gap-1.5 py-2 px-5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold transition-all text-center shadow-xs"
               >
                 <span>Apply Now</span>
                 <ArrowRight size={13} />
