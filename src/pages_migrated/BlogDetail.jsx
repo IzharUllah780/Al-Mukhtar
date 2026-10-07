@@ -610,7 +610,7 @@ function BlogDetail() {
             <div
               className={`grid gap-2.5 sm:gap-4 items-stretch ${
                 blogImages.length === 1
-                  ? "grid-cols-1"
+                  ? "grid-cols-1 sm:max-w-md md:max-w-lg"
                   : blogImages.length === 2
                   ? "grid-cols-1 sm:grid-cols-2"
                   : blogImages.length === 3
@@ -624,7 +624,7 @@ function BlogDetail() {
                   onClick={() => setActiveImageModal(img)}
                   className={`group relative rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-900 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer ${
                     blogImages.length === 1
-                      ? "h-56 sm:h-80 md:h-[400px] lg:h-[440px] w-full"
+                      ? "h-48 sm:h-64 md:h-76 w-full"
                       : blogImages.length === 2
                       ? "h-48 sm:h-64 md:h-76"
                       : "h-40 sm:h-52 md:h-64"

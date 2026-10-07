@@ -14,6 +14,7 @@ import {
   Sparkles,
   ChevronRight,
   X,
+  CheckCircle2,
 } from "lucide-react";
 
 import { useStudents } from "@/lib/queries";
