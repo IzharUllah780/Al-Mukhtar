@@ -8,7 +8,7 @@ export const resultKeys = {
   detail: (id) => ["results", "detail", id],
 };
 
-export function usePublicResults(filters = {}) {
+export function usePublicResults(filters = {}, options = {}) {
   return useQuery({
     queryKey: resultKeys.list({ ...filters, isReleased: true }),
     queryFn: async () => {
@@ -24,6 +24,7 @@ export function usePublicResults(filters = {}) {
       return res.data?.results || [];
     },
     staleTime: 60 * 1000,
+    ...options,
   });
 }
 

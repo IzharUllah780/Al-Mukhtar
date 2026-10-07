@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import api from "@/lib/api";
@@ -13,30 +13,18 @@ import {
   EyeOff,
   BookOpen,
   CheckCircle2,
-  Clock,
-  XCircle,
-  ShieldCheck,
   Calendar,
-  Phone,
-  MessageCircle,
-  MapPin,
-  CreditCard,
-  GraduationCap,
-  Save,
   KeyRound,
-  ArrowRight,
   LogOut,
-  Camera,
   Edit2,
   ChevronRight,
-  Info,
-  Sparkles,
   X,
-  FileText,
+  GraduationCap,
+  Save,
+  ArrowRight,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { Link, useNavigate } from "@/lib/navigation-adapter";
-import ApiErrorState from "../components/ApiErrorState.jsx";
 
 function Profile() {
   const { user, login, logout } = useAuth();
@@ -45,6 +33,7 @@ function Profile() {
 
   const [editProfileModalOpen, setEditProfileModalOpen] = useState(false);
   const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
   const [selectedApplication, setSelectedApplication] = useState(null);
 
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
@@ -68,7 +57,7 @@ function Profile() {
     gcTime: 15 * 60 * 1000,
   });
 
-  // 2. React Hook Form for Profile Updates (Username / Email)
+  // 2. Form for Profile Updates (Username / Email)
   const {
     register: registerProfile,
     handleSubmit: handleSubmitProfile,
@@ -81,8 +70,7 @@ function Profile() {
     },
   });
 
-  // Reset default values when user loads or modal opens
-  React.useEffect(() => {
+  useEffect(() => {
     if (user) {
       resetProfileForm({
         username: user.username || "",
@@ -91,7 +79,7 @@ function Profile() {
     }
   }, [user, resetProfileForm]);
 
-  // 3. React Hook Form for Password Change
+  // 3. Form for Password Change
   const {
     register: registerPassword,
     handleSubmit: handleSubmitPassword,
@@ -119,7 +107,7 @@ function Profile() {
     },
     onError: (err) => {
       toast.error(
-        err.response?.data?.message || "Failed to update profile. Try again."
+        err.response?.data?.message || "Failed to update profile. Please try again."
       );
     },
   });
@@ -138,7 +126,7 @@ function Profile() {
     },
     onError: (err) => {
       toast.error(
-        err.response?.data?.message || "Failed to change password. Try again."
+        err.response?.data?.message || "Failed to change password. Please try again."
       );
     },
   });
@@ -160,404 +148,286 @@ function Profile() {
   const initials = user?.username ? user.username.slice(0, 2).toUpperCase() : "AM";
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#020617] text-slate-800 dark:text-slate-100 font-sans pb-16 transition-colors duration-200">
+    <div className="min-h-screen bg-white dark:bg-[#070d18] text-slate-800 dark:text-slate-200 font-sans transition-colors duration-200">
       
-      {/* ── TOP HEADER / BANNER (Fully Responsive for Mobile & Laptop) ── */}
-      <section className="bg-white dark:bg-[#0f172a] border-b border-slate-200/80 dark:border-slate-800 pt-5 sm:pt-6 pb-4 sm:pb-5 px-3 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex items-center gap-3.5 sm:gap-4 min-w-0">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 lg:w-18 lg:h-18 rounded-2xl bg-gradient-to-tr from-[#0D9488] to-[#0A2540] text-white flex items-center justify-center font-heading font-black text-xl sm:text-2xl lg:text-3xl shadow-md border-2 border-white dark:border-slate-800 ring-2 ring-[#0D9488]/30 shrink-0 select-none">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-16 space-y-8 sm:space-y-10">
+        
+        {/* ── 1. CLEAN PROFILE HEADER ── */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
+          <div className="flex items-center gap-3.5 sm:gap-4">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-base sm:text-lg shrink-0 select-none">
               <span>{initials}</span>
             </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-1.5 flex-wrap">
-                <h1 className="text-base sm:text-lg lg:text-xl font-bold text-slate-900 dark:text-white font-heading truncate">
-                  {user?.username || "Student"}
+            
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-2">
+                <h1 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white font-heading">
+                  {user?.username || "Student Profile"}
                 </h1>
                 {user?.isVerified && (
-                  <CheckCircle2 size={16} className="text-[#0D9488] dark:text-teal-400 shrink-0" />
+                  <CheckCircle2 size={15} className="text-teal-600 dark:text-teal-400 shrink-0" />
                 )}
               </div>
-              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-mono truncate">
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">
                 {user?.email}
               </p>
-              <div className="pt-1 flex items-center gap-1.5 flex-wrap">
-                <span className="px-2 py-0.5 rounded-full bg-[#0D9488]/10 text-[#0D9488] dark:text-teal-300 text-[9.5px] sm:text-[10px] font-bold font-mono uppercase tracking-wider">
-                  {user?.role || "Student"}
-                </span>
-                <span className="px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-[9.5px] sm:text-[10px] font-bold font-mono">
-                  {user?.isVerified ? "Verified Account" : "Pending Verification"}
-                </span>
+              <div className="flex items-center gap-2 pt-0.5 text-[11px] text-slate-400 font-mono">
+                <span className="capitalize">{user?.role || "Student"}</span>
+                <span>•</span>
+                <span>{user?.isVerified ? "Verified Account" : "Pending Verification"}</span>
               </div>
             </div>
           </div>
 
-          <div className="w-full sm:w-auto">
+          <div className="flex items-center gap-2">
             <Link
               to="/apply"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 sm:py-2 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] active:scale-[0.98] text-white text-xs font-bold transition-all cursor-pointer shadow-xs text-center"
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold transition active:scale-98 shadow-xs"
             >
-              <BookOpen size={14} />
+              <BookOpen size={13} />
               <span>Apply for Course</span>
             </Link>
           </div>
         </div>
-      </section>
 
-      {/* ── TWO-COLUMN LAYOUT ON LAPTOP / DESKTOP (CLEAN STREAMLINED ON MOBILE) ── */}
-      <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 lg:gap-6 items-start">
+        {/* ── 2. TWO COLUMN DETAILS (ACCOUNT & APPLICATIONS) ── */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           
-          {/* ── LEFT COLUMN: PROFILE DETAILS & SECURITY ── */}
-          <div className="lg:col-span-5 space-y-4 sm:space-y-5">
+          {/* Left Column: Account Details & Security */}
+          <div className="md:col-span-5 space-y-6">
             
-            {/* GROUP 1: PERSONAL DETAILS (Single Edit Option + Name & Email) */}
-            <div className="bg-white dark:bg-[#0f172a] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs overflow-hidden divide-y divide-slate-100 dark:divide-slate-800/80">
-              
-              {/* Single Dedicated Edit Profile Action */}
-              <div
-                onClick={() => setEditProfileModalOpen(true)}
-                className="flex items-center gap-3 p-3.5 sm:p-4 hover:bg-slate-50 dark:hover:bg-slate-800/40 active:bg-slate-100/80 dark:active:bg-slate-800/70 transition-colors cursor-pointer group"
-              >
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-teal-50 dark:bg-teal-950/50 text-[#0D9488] dark:text-teal-400 flex items-center justify-center shrink-0">
-                  <Edit2 size={16} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white truncate">
-                    Edit Profile Details
-                  </p>
-                  <p className="text-[10.5px] sm:text-[11px] text-slate-400 dark:text-slate-500 truncate">
-                    Update your username and email address
-                  </p>
-                </div>
-                <ChevronRight size={16} className="text-slate-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
+            {/* Account Information */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+                <h2 className="text-xs font-bold uppercase tracking-wider font-mono text-slate-500 dark:text-slate-400">
+                  Account Details
+                </h2>
+                <button
+                  type="button"
+                  onClick={() => setEditProfileModalOpen(true)}
+                  className="text-xs font-semibold text-teal-600 dark:text-teal-400 hover:underline cursor-pointer inline-flex items-center gap-1"
+                >
+                  <Edit2 size={12} />
+                  <span>Edit</span>
+                </button>
               </div>
 
-              {/* Name Display Row */}
-              <div className="flex items-center gap-3 p-3.5 sm:p-4">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 flex items-center justify-center shrink-0">
-                  <User size={16} />
+              <div className="space-y-3 text-xs sm:text-sm">
+                <div>
+                  <span className="text-[11px] text-slate-400 block mb-0.5">Full Name</span>
+                  <p className="font-semibold text-slate-900 dark:text-white">{user?.username}</p>
                 </div>
-                <div className="flex-1 min-w-0">
-                  <span className="text-[10px] sm:text-[11px] font-medium text-slate-400 uppercase font-mono tracking-wider block">
-                    Name
-                  </span>
-                  <p className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white truncate">
-                    {user?.username}
-                  </p>
-                  <p className="text-[10.5px] sm:text-[11px] text-slate-400 dark:text-slate-500 truncate">
-                    Visible to academy instructors and students.
-                  </p>
+                <div>
+                  <span className="text-[11px] text-slate-400 block mb-0.5">Email Address</span>
+                  <p className="font-semibold text-slate-900 dark:text-white font-mono text-xs">{user?.email}</p>
                 </div>
               </div>
-
-              {/* Email Display Row */}
-              <div className="flex items-center gap-3 p-3.5 sm:p-4">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
-                  <Mail size={16} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <span className="text-[10px] sm:text-[11px] font-medium text-slate-400 uppercase font-mono tracking-wider block">
-                    Email Address
-                  </span>
-                  <p className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white truncate font-mono">
-                    {user?.email}
-                  </p>
-                  <p className="text-[10.5px] sm:text-[11px] text-emerald-600 dark:text-emerald-400 truncate">
-                    Verified Account Email
-                  </p>
-                </div>
-              </div>
-
             </div>
 
-            {/* GROUP 2: SECURITY & ACCOUNT ACTIONS */}
-            <div className="bg-white dark:bg-[#0f172a] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs overflow-hidden divide-y divide-slate-100 dark:divide-slate-800/80">
-              
-              {/* Change Password */}
-              <div
-                onClick={() => setPasswordModalOpen(true)}
-                className="flex items-center gap-3 p-3.5 sm:p-4 hover:bg-slate-50 dark:hover:bg-slate-800/40 active:bg-slate-100/80 dark:active:bg-slate-800/70 transition-colors cursor-pointer group"
-              >
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
-                  <KeyRound size={16} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white truncate">
-                    Change Password
-                  </p>
-                  <p className="text-[10.5px] sm:text-[11px] text-slate-400 dark:text-slate-500 truncate">
-                    Update your login password and credentials
-                  </p>
-                </div>
-                <ChevronRight size={16} className="text-slate-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
+            {/* Security & Actions */}
+            <div className="space-y-3 pt-2">
+              <div className="pb-2 border-b border-slate-200 dark:border-slate-800">
+                <h2 className="text-xs font-bold uppercase tracking-wider font-mono text-slate-500 dark:text-slate-400">
+                  Security &amp; Session
+                </h2>
               </div>
 
-              {/* Log Out Option */}
-              <div
-                onClick={handleLogout}
-                className="flex items-center gap-3 p-3.5 sm:p-4 hover:bg-rose-50/50 dark:hover:bg-rose-950/30 active:bg-rose-100/60 dark:active:bg-rose-950/50 transition-colors cursor-pointer group"
-              >
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-rose-50 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0">
-                  <LogOut size={16} />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-xs sm:text-sm font-bold text-rose-600 dark:text-rose-400 truncate">
-                    Sign Out
-                  </p>
-                  <p className="text-[10.5px] sm:text-[11px] text-slate-400 truncate">
-                    Safely log out of your session on this device.
-                  </p>
-                </div>
-                <ChevronRight size={16} className="text-rose-400 group-hover:translate-x-0.5 transition-transform shrink-0" />
-              </div>
+              <div className="space-y-2">
+                <button
+                  type="button"
+                  onClick={() => setPasswordModalOpen(true)}
+                  className="w-full flex items-center justify-between py-2 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 transition cursor-pointer text-left"
+                >
+                  <div className="flex items-center gap-2">
+                    <KeyRound size={14} className="text-slate-400" />
+                    <span>Change Password</span>
+                  </div>
+                  <ChevronRight size={14} className="text-slate-400" />
+                </button>
 
+                <button
+                  type="button"
+                  onClick={() => setLogoutModalOpen(true)}
+                  className="w-full flex items-center justify-between py-2 text-xs sm:text-sm font-medium text-rose-600 dark:text-rose-400 hover:underline transition cursor-pointer text-left"
+                >
+                  <div className="flex items-center gap-2">
+                    <LogOut size={14} className="text-rose-500" />
+                    <span>Sign Out</span>
+                  </div>
+                </button>
+              </div>
             </div>
 
           </div>
 
-          {/* ── RIGHT COLUMN: COURSE APPLICATIONS & ENROLLMENTS ── */}
-          <div className="lg:col-span-7 space-y-4 sm:space-y-5">
+          {/* Right Column: Submitted Course Applications */}
+          <div className="md:col-span-7 space-y-4">
             
-            <div className="bg-white dark:bg-[#0f172a] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-2xs overflow-hidden">
-              <div className="p-3.5 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2.5 min-w-0">
-                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-teal-300 flex items-center justify-center shrink-0">
-                    <BookOpen size={16} />
-                  </div>
-                  <div className="min-w-0">
-                    <h2 className="text-xs sm:text-base font-bold text-slate-900 dark:text-white font-heading truncate">
-                      My Course Applications
-                    </h2>
-                    <p className="text-[10px] sm:text-[11px] text-slate-400 font-mono">
-                      {applications.length} submitted {applications.length === 1 ? "application" : "applications"}
-                    </p>
-                  </div>
-                </div>
+            <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+              <div className="flex items-center gap-2">
+                <h2 className="text-xs font-bold uppercase tracking-wider font-mono text-slate-500 dark:text-slate-400">
+                  Course Applications
+                </h2>
+                <span className="text-[11px] font-mono text-slate-400">({applications.length})</span>
+              </div>
 
+              <Link
+                to="/courses"
+                className="text-xs font-semibold text-teal-600 dark:text-teal-400 hover:underline inline-flex items-center gap-1"
+              >
+                <span>Browse Courses</span>
+                <ArrowRight size={11} />
+              </Link>
+            </div>
+
+            {applicationsLoading ? (
+              <div className="py-8 text-center text-xs text-slate-400">
+                Loading applications...
+              </div>
+            ) : applicationsError ? (
+              <div className="py-6 text-xs text-rose-500">
+                Failed to load applications. <button onClick={() => refetchApplications()} className="underline cursor-pointer">Retry</button>
+              </div>
+            ) : applications.length === 0 ? (
+              <div className="py-8 text-center space-y-2 text-xs text-slate-500 dark:text-slate-400">
+                <p>You have not submitted any course admission applications yet.</p>
                 <Link
                   to="/apply"
-                  className="text-[11.5px] sm:text-xs font-bold text-[#0D9488] dark:text-teal-400 hover:underline inline-flex items-center gap-1 shrink-0"
+                  className="inline-block text-teal-600 dark:text-teal-400 font-semibold hover:underline pt-1"
                 >
-                  <span>New Apply</span>
-                  <ArrowRight size={12} />
+                  Submit an Application &rarr;
                 </Link>
               </div>
-
-              {applicationsLoading ? (
-                <div className="p-4 sm:p-5 space-y-3 animate-pulse">
-                  <div className="h-14 sm:h-16 bg-slate-100 dark:bg-slate-800 rounded-xl" />
-                  <div className="h-14 sm:h-16 bg-slate-100 dark:bg-slate-800 rounded-xl" />
-                </div>
-              ) : applicationsError ? (
-                <div className="p-4 sm:p-5">
-                  <ApiErrorState
-                    title="Unable to load applications"
-                    message="Please refresh to try again."
-                    onRetry={refetchApplications}
-                  />
-                </div>
-              ) : applications.length === 0 ? (
-                <div className="p-6 sm:p-8 text-center space-y-3">
-                  <GraduationCap size={36} className="text-slate-300 dark:text-slate-600 mx-auto" />
-                  <div className="space-y-1">
-                    <p className="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
-                      No course applications yet
-                    </p>
-                    <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 max-w-sm mx-auto">
-                      Explore our academic curriculum and apply for Islamic scholarship and classical language programs.
-                    </p>
-                  </div>
-                  <div className="pt-1">
-                    <Link
-                      to="/apply"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-bold shadow-xs transition-colors"
+            ) : (
+              <div className="divide-y divide-slate-100 dark:divide-slate-800 border-b border-slate-100 dark:border-slate-800">
+                {applications.map((app) => {
+                  const status = app.status || "pending";
+                  return (
+                    <div
+                      key={app._id}
+                      onClick={() => setSelectedApplication(app)}
+                      className="py-3 flex items-center justify-between gap-3 hover:text-teal-600 dark:hover:text-teal-400 transition cursor-pointer group"
                     >
-                      <span>Apply for a Course</span>
-                      <ArrowRight size={13} />
-                    </Link>
-                  </div>
-                </div>
-              ) : (
-                <div className="divide-y divide-slate-100 dark:divide-slate-800/80">
-                  {applications.map((app) => {
-                    const status = app.status || "pending";
-                    return (
-                      <div
-                        key={app._id}
-                        onClick={() => setSelectedApplication(app)}
-                        className="p-3.5 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 hover:bg-slate-50 dark:hover:bg-slate-800/40 active:bg-slate-100/70 dark:active:bg-slate-800/60 transition-colors cursor-pointer group"
-                      >
-                        <div className="min-w-0 flex-1 space-y-1">
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <h3 className="text-xs sm:text-base font-bold text-slate-900 dark:text-white capitalize truncate">
-                              {app.course?.replace(/-/g, " ") || "Course Application"}
-                            </h3>
-                            <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200/60 dark:border-slate-700">
-                              {app.shift}
-                            </span>
-                          </div>
-
-                          <div className="flex items-center gap-2.5 text-[11px] text-slate-400 font-mono">
-                            <span className="flex items-center gap-1">
-                              <Calendar size={11} />
-                              {new Date(app.createdAt).toLocaleDateString("en-US", {
-                                month: "short",
-                                day: "numeric",
-                                year: "numeric",
-                              })}
-                            </span>
-                            <span>•</span>
-                            <span>CNIC: {app.cnic || "Provided"}</span>
-                          </div>
-                        </div>
-
-                        <div className="flex items-center justify-between sm:justify-end gap-2 shrink-0 pt-1 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800/60">
-                          {status === "approved" && (
-                            <span className="px-2.5 py-0.5 rounded-full text-[10.5px] font-bold bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 font-mono">
-                              Approved
-                            </span>
-                          )}
-                          {status === "rejected" && (
-                            <span className="px-2.5 py-0.5 rounded-full text-[10.5px] font-bold bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60 font-mono">
-                              Rejected
-                            </span>
-                          )}
-                          {status === "pending" && (
-                            <span className="px-2.5 py-0.5 rounded-full text-[10.5px] font-bold bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/60 font-mono">
-                              Pending
-                            </span>
-                          )}
-                          <ChevronRight size={16} className="text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+                      <div className="space-y-0.5 min-w-0">
+                        <p className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white capitalize truncate group-hover:text-teal-600 dark:group-hover:text-teal-400">
+                          {app.course?.replace(/-/g, " ") || "Course Application"}
+                        </p>
+                        <div className="flex items-center gap-2 text-[11px] text-slate-400 font-mono">
+                          <span className="capitalize">{app.shift} Shift</span>
+                          <span>•</span>
+                          <span>
+                            {new Date(app.createdAt).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            })}
+                          </span>
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
 
-            {/* Quick Admissions Helpdesk Notice */}
-            <div className="p-3.5 sm:p-5 rounded-2xl bg-teal-50/70 dark:bg-teal-950/30 border border-teal-200/80 dark:border-teal-800/50 flex items-start gap-3">
-              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-teal-100/80 dark:bg-teal-900/60 text-[#0D9488] dark:text-teal-300 flex items-center justify-center shrink-0 mt-0.5">
-                <Info size={16} />
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span
+                          className={`text-[11px] font-mono font-semibold capitalize ${
+                            status === "approved"
+                              ? "text-teal-600 dark:text-teal-400"
+                              : status === "rejected"
+                              ? "text-rose-500"
+                              : "text-slate-500 dark:text-slate-400"
+                          }`}
+                        >
+                          {status}
+                        </span>
+                        <ChevronRight size={14} className="text-slate-400" />
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-              <div className="text-[11.5px] sm:text-xs space-y-0.5 sm:space-y-1">
-                <p className="font-bold text-slate-900 dark:text-white font-heading">
-                  Admissions Verification Notice
-                </p>
-                <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                  Application review and verification takes 1-2 business days. For urgent status verification, please contact administration.
-                </p>
-              </div>
-            </div>
+            )}
 
           </div>
 
         </div>
-      </main>
 
-      {/* ── MODAL 1: WHATSAPP-STYLE EDIT PROFILE (Name & Email) ── */}
+      </div>
+
+      {/* ── MODAL 1: EDIT PROFILE (Name & Email) ── */}
       {editProfileModalOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-xs animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs"
           onClick={() => setEditProfileModalOpen(false)}
         >
           <div
-            className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4"
+            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl max-w-sm w-full p-5 space-y-4 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-              <h2 className="font-heading text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+              <h2 className="text-sm font-bold text-slate-900 dark:text-white">
                 Edit Profile Details
               </h2>
               <button
                 type="button"
                 onClick={() => setEditProfileModalOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
               >
-                <X size={18} />
+                <X size={16} />
               </button>
             </div>
 
-            <form onSubmit={handleSubmitProfile(onUpdateProfile)} className="space-y-4">
+            <form onSubmit={handleSubmitProfile(onUpdateProfile)} className="space-y-3">
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
-                  Your Name
+                <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  Full Name
                 </label>
                 <input
                   type="text"
                   placeholder="Enter your name"
-                  className={`w-full px-3.5 py-2 rounded-xl border text-sm text-slate-900 dark:text-slate-100 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] dark:focus:border-teal-400 ${
-                    profileErrors.username
-                      ? "border-rose-400 bg-rose-50/30"
-                      : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/90"
-                  }`}
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs sm:text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-teal-600 dark:focus:border-teal-400"
                   {...registerProfile("username", {
-                    required: "Username is required",
-                    minLength: {
-                      value: 3,
-                      message: "Username must be at least 3 characters",
-                    },
-                    maxLength: {
-                      value: 25,
-                      message: "Username cannot exceed 25 characters",
-                    },
+                    required: "Name is required",
+                    minLength: { value: 3, message: "Minimum 3 characters" },
                   })}
                 />
                 {profileErrors.username && (
-                  <p className="text-xs text-rose-500 mt-1 font-medium">
-                    {profileErrors.username.message}
-                  </p>
+                  <p className="text-[11px] text-rose-500 mt-1">{profileErrors.username.message}</p>
                 )}
-                <p className="text-[11px] text-slate-400 mt-1">
-                  This is not your username or pin. This name will be visible to your instructors.
-                </p>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
+                <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
                   Email Address
                 </label>
                 <input
                   type="email"
                   placeholder="you@example.com"
-                  className={`w-full px-3.5 py-2 rounded-xl border text-sm text-slate-900 dark:text-slate-100 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] dark:focus:border-teal-400 ${
-                    profileErrors.email
-                      ? "border-rose-400 bg-rose-50/30"
-                      : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/90"
-                  }`}
+                  className="w-full px-3 py-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs sm:text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-teal-600 dark:focus:border-teal-400"
                   {...registerProfile("email", {
-                    required: "Email address is required",
+                    required: "Email is required",
                     pattern: {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: "Enter a valid email address",
+                      message: "Valid email is required",
                     },
                   })}
                 />
                 {profileErrors.email && (
-                  <p className="text-xs text-rose-500 mt-1 font-medium">
-                    {profileErrors.email.message}
-                  </p>
+                  <p className="text-[11px] text-rose-500 mt-1">{profileErrors.email.message}</p>
                 )}
               </div>
 
-              {/* 2 Buttons in a Single Row */}
-              <div className="grid grid-cols-2 gap-2.5 pt-2">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setEditProfileModalOpen(false)}
-                  className="w-full py-2 px-3 text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer"
+                  className="px-3 py-1.5 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={updateProfileMutation.isPending}
-                  className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition-all disabled:opacity-60 cursor-pointer shadow-xs"
+                  className="px-4 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold transition cursor-pointer disabled:opacity-60"
                 >
-                  <Save size={13} />
-                  <span>{updateProfileMutation.isPending ? "Saving..." : "Save"}</span>
+                  {updateProfileMutation.isPending ? "Saving..." : "Save Changes"}
                 </button>
               </div>
             </form>
@@ -568,37 +438,36 @@ function Profile() {
       {/* ── MODAL 2: CHANGE PASSWORD ── */}
       {passwordModalOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/80 backdrop-blur-xs animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs"
           onClick={() => setPasswordModalOpen(false)}
         >
           <div
-            className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-5 sm:p-6 shadow-2xl space-y-4"
+            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl max-w-sm w-full p-5 space-y-4 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-              <h2 className="font-heading text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+              <h2 className="text-sm font-bold text-slate-900 dark:text-white">
                 Change Password
               </h2>
               <button
                 type="button"
                 onClick={() => setPasswordModalOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
               >
-                <X size={18} />
+                <X size={16} />
               </button>
             </div>
 
-            <form onSubmit={handleSubmitPassword(onChangePassword)} className="space-y-3.5">
-              {/* Current Password */}
+            <form onSubmit={handleSubmitPassword(onChangePassword)} className="space-y-3">
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
+                <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
                   Current Password
                 </label>
                 <div className="relative">
                   <input
                     type={showCurrentPassword ? "text" : "password"}
-                    placeholder="Enter current password"
-                    className="w-full px-3.5 py-2 pr-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488]"
+                    placeholder="Current password"
+                    className="w-full px-3 py-2 pr-8 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs sm:text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-teal-600 dark:focus:border-teal-400"
                     {...registerPassword("currentPassword", {
                       required: "Current password is required",
                     })}
@@ -606,92 +475,84 @@ function Profile() {
                   <button
                     type="button"
                     onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400"
                   >
-                    {showCurrentPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                    {showCurrentPassword ? <EyeOff size={13} /> : <Eye size={13} />}
                   </button>
                 </div>
                 {passwordErrors.currentPassword && (
-                  <p className="text-xs text-rose-500 mt-1">{passwordErrors.currentPassword.message}</p>
+                  <p className="text-[11px] text-rose-500 mt-1">{passwordErrors.currentPassword.message}</p>
                 )}
               </div>
 
-              {/* New Password */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
+                <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
                   New Password
                 </label>
                 <div className="relative">
                   <input
                     type={showNewPassword ? "text" : "password"}
-                    placeholder="Enter new password"
-                    className="w-full px-3.5 py-2 pr-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488]"
+                    placeholder="New password"
+                    className="w-full px-3 py-2 pr-8 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs sm:text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-teal-600 dark:focus:border-teal-400"
                     {...registerPassword("newPassword", {
                       required: "New password is required",
-                      minLength: {
-                        value: 6,
-                        message: "Password must be at least 6 characters",
-                      },
+                      minLength: { value: 6, message: "Minimum 6 characters" },
                     })}
                   />
                   <button
                     type="button"
                     onClick={() => setShowNewPassword(!showNewPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400"
                   >
-                    {showNewPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                    {showNewPassword ? <EyeOff size={13} /> : <Eye size={13} />}
                   </button>
                 </div>
                 {passwordErrors.newPassword && (
-                  <p className="text-xs text-rose-500 mt-1">{passwordErrors.newPassword.message}</p>
+                  <p className="text-[11px] text-rose-500 mt-1">{passwordErrors.newPassword.message}</p>
                 )}
               </div>
 
-              {/* Confirm Password */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
-                  Confirm New Password
+                <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">
+                  Confirm Password
                 </label>
                 <div className="relative">
                   <input
                     type={showConfirmPassword ? "text" : "password"}
-                    placeholder="Confirm new password"
-                    className="w-full px-3.5 py-2 pr-10 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm text-slate-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488]"
+                    placeholder="Confirm password"
+                    className="w-full px-3 py-2 pr-8 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs sm:text-sm text-slate-900 dark:text-slate-100 outline-none focus:border-teal-600 dark:focus:border-teal-400"
                     {...registerPassword("confirmPassword", {
-                      required: "Please confirm your password",
-                      validate: (val) =>
-                        val === watch("newPassword") || "Passwords do not match",
+                      required: "Please confirm password",
+                      validate: (val) => val === watch("newPassword") || "Passwords do not match",
                     })}
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400"
                   >
-                    {showConfirmPassword ? <EyeOff size={15} /> : <Eye size={15} />}
+                    {showConfirmPassword ? <EyeOff size={13} /> : <Eye size={13} />}
                   </button>
                 </div>
                 {passwordErrors.confirmPassword && (
-                  <p className="text-xs text-rose-500 mt-1">{passwordErrors.confirmPassword.message}</p>
+                  <p className="text-[11px] text-rose-500 mt-1">{passwordErrors.confirmPassword.message}</p>
                 )}
               </div>
 
-              {/* 2 Buttons in a Single Row */}
-              <div className="grid grid-cols-2 gap-2.5 pt-2">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
                 <button
                   type="button"
                   onClick={() => setPasswordModalOpen(false)}
-                  className="w-full py-2 px-3 text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer"
+                  className="px-3 py-1.5 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={changePasswordMutation.isPending}
-                  className="w-full inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#0D9488] text-white text-xs font-bold hover:bg-[#0F766E] transition-all disabled:opacity-60 cursor-pointer shadow-xs"
+                  className="px-4 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold transition cursor-pointer disabled:opacity-60"
                 >
-                  <KeyRound size={13} />
-                  <span>{changePasswordMutation.isPending ? "Updating..." : "Update"}</span>
+                  {changePasswordMutation.isPending ? "Updating..." : "Update Password"}
                 </button>
               </div>
             </form>
@@ -699,119 +560,118 @@ function Profile() {
         </div>
       )}
 
-      {/* ── MODAL 3: APPLICATION DETAILS POPUP (Wider on Laptop, Fixed Sticky Header on Mobile) ── */}
+      {/* ── MODAL 3: APPLICATION DETAILS POPUP ── */}
       {selectedApplication && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 lg:p-6 bg-slate-950/80 backdrop-blur-xs animate-in fade-in duration-150"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs"
           onClick={() => setSelectedApplication(null)}
         >
           <div
-            className="bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden"
+            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl max-w-md w-full p-5 space-y-4 shadow-xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Fixed Sticky Header for Mobile & Laptop */}
-            <div className="sticky top-0 z-20 bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-md px-5 sm:px-7 py-3.5 sm:py-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between shrink-0">
-              <div className="flex items-center gap-2.5 min-w-0 pr-3">
-                <div className="w-8 h-8 rounded-lg bg-teal-50 dark:bg-teal-950/60 text-[#0D9488] dark:text-teal-300 flex items-center justify-center shrink-0">
-                  <GraduationCap size={17} />
-                </div>
-                <div className="min-w-0">
-                  <span className="text-[10px] font-mono text-slate-400 dark:text-slate-500 uppercase tracking-wider block">
-                    Course Application
-                  </span>
-                  <h2 className="font-heading text-sm sm:text-base lg:text-lg font-bold text-slate-900 dark:text-white capitalize truncate">
-                    {selectedApplication.course?.replace(/-/g, " ") || "Application Details"}
-                  </h2>
-                </div>
+            <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+              <div className="min-w-0 pr-2">
+                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Application</span>
+                <h2 className="text-sm font-bold text-slate-900 dark:text-white capitalize truncate">
+                  {selectedApplication.course?.replace(/-/g, " ") || "Application Details"}
+                </h2>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedApplication(null)}
-                aria-label="Close popup"
-                className="p-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shrink-0 cursor-pointer"
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
               >
-                <X size={18} />
+                <X size={16} />
               </button>
             </div>
 
-            {/* Scrollable Body with Clean 2-Column Responsive Layout */}
-            <div className="p-5 sm:p-7 overflow-y-auto custom-scrollbar flex-1 space-y-4 sm:space-y-5">
-              
-              {/* Status & Timestamp Banner */}
-              <div className="flex flex-wrap items-center justify-between gap-2 p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-100 dark:border-slate-800">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Application Status:</span>
-                  {selectedApplication.status === "approved" ? (
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-mono">Approved</span>
-                  ) : selectedApplication.status === "rejected" ? (
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 font-mono">Rejected</span>
-                  ) : (
-                    <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 font-mono">Pending Review</span>
-                  )}
-                </div>
-                <div className="text-xs text-slate-400 font-mono">
-                  Applied: {new Date(selectedApplication.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
-                </div>
+            <div className="space-y-2.5 text-xs sm:text-sm">
+              <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
+                <span className="text-slate-500 dark:text-slate-400">Status:</span>
+                <span className="font-semibold capitalize text-teal-600 dark:text-teal-400">{selectedApplication.status || "Pending"}</span>
               </div>
-
-              {/* Specifications in 2 Columns on Laptop Screen */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 divide-y md:divide-y-0 divide-slate-100 dark:divide-slate-800 text-xs sm:text-sm">
-                <div className="pt-2 md:pt-0 flex items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800/80 pb-2">
-                  <span className="text-slate-500 dark:text-slate-400 font-medium">Applicant Name</span>
-                  <span className="font-semibold text-slate-900 dark:text-white text-right">{selectedApplication.name}</span>
-                </div>
-
-                <div className="pt-2 md:pt-0 flex items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800/80 pb-2">
-                  <span className="text-slate-500 dark:text-slate-400 font-medium">Academic Shift</span>
-                  <span className="font-semibold text-slate-900 dark:text-white text-right uppercase font-mono text-xs px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800">{selectedApplication.shift}</span>
-                </div>
-
-                <div className="pt-2 md:pt-0 flex items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800/80 pb-2">
-                  <span className="text-slate-500 dark:text-slate-400 font-medium">Mobile Phone</span>
-                  <span className="font-semibold text-slate-900 dark:text-white text-right font-mono">{selectedApplication.mobile}</span>
-                </div>
-
-                <div className="pt-2 md:pt-0 flex items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800/80 pb-2">
-                  <span className="text-slate-500 dark:text-slate-400 font-medium">WhatsApp Number</span>
-                  <span className="font-semibold text-slate-900 dark:text-white text-right font-mono">{selectedApplication.whatsapp || selectedApplication.mobile}</span>
-                </div>
-
-                <div className="pt-2 md:pt-0 flex items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800/80 pb-2">
-                  <span className="text-slate-500 dark:text-slate-400 font-medium">CNIC / ID Card</span>
-                  <span className="font-semibold text-slate-900 dark:text-white text-right font-mono">{selectedApplication.cnic}</span>
-                </div>
-
-                <div className="pt-2 md:pt-0 flex items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800/80 pb-2">
-                  <span className="text-slate-500 dark:text-slate-400 font-medium">Prior Qualification</span>
-                  <span className="font-semibold text-slate-900 dark:text-white text-right">{selectedApplication.qualification}</span>
-                </div>
-
-                <div className="pt-2 md:pt-0 flex items-start justify-between gap-3 border-b border-slate-100 dark:border-slate-800/80 pb-2 md:col-span-2">
-                  <span className="text-slate-500 dark:text-slate-400 font-medium shrink-0">Residential Address</span>
-                  <span className="font-semibold text-slate-900 dark:text-white text-right max-w-lg">{selectedApplication.address}</span>
-                </div>
+              <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
+                <span className="text-slate-500 dark:text-slate-400">Applicant:</span>
+                <span className="font-semibold text-slate-900 dark:text-white">{selectedApplication.name}</span>
               </div>
-
+              <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
+                <span className="text-slate-500 dark:text-slate-400">Shift:</span>
+                <span className="font-semibold capitalize text-slate-900 dark:text-white">{selectedApplication.shift}</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
+                <span className="text-slate-500 dark:text-slate-400">Mobile / WhatsApp:</span>
+                <span className="font-semibold font-mono text-slate-900 dark:text-white">{selectedApplication.whatsapp || selectedApplication.mobile}</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
+                <span className="text-slate-500 dark:text-slate-400">CNIC / ID:</span>
+                <span className="font-semibold font-mono text-slate-900 dark:text-white">{selectedApplication.cnic}</span>
+              </div>
+              <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/60">
+                <span className="text-slate-500 dark:text-slate-400">Qualification:</span>
+                <span className="font-semibold text-slate-900 dark:text-white">{selectedApplication.qualification}</span>
+              </div>
+              <div className="py-1">
+                <span className="text-slate-500 dark:text-slate-400 block mb-0.5">Address:</span>
+                <span className="font-semibold text-slate-900 dark:text-white">{selectedApplication.address}</span>
+              </div>
             </div>
 
-            {/* Fixed Sticky Footer with 2 Paired Buttons */}
-            <div className="sticky bottom-0 z-20 bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-md px-5 sm:px-7 py-3.5 border-t border-slate-100 dark:border-slate-800 shrink-0">
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setSelectedApplication(null)}
-                  className="w-full py-2.5 px-3 text-xs font-bold text-slate-700 dark:text-slate-300 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-xl transition-colors cursor-pointer text-center"
-                >
-                  Close
-                </button>
-                <Link
-                  to="/courses"
-                  className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#0D9488] hover:bg-[#0F766E] text-white text-xs font-bold transition-all text-center shadow-xs"
-                >
-                  <span>Explore Courses</span>
-                  <ArrowRight size={13} />
-                </Link>
-              </div>
+            <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setSelectedApplication(null)}
+                className="px-4 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition cursor-pointer"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── MODAL 4: CONFIRM LOGOUT MODAL ── */}
+      {logoutModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs"
+          onClick={() => setLogoutModalOpen(false)}
+        >
+          <div
+            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl max-w-sm w-full p-5 space-y-4 shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
+              <h2 className="text-sm font-bold text-slate-900 dark:text-white">
+                Confirm Sign Out
+              </h2>
+              <button
+                type="button"
+                onClick={() => setLogoutModalOpen(false)}
+                className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              Are you sure you want to sign out of your account on this device?
+            </p>
+
+            <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100 dark:border-slate-800">
+              <button
+                type="button"
+                onClick={() => setLogoutModalOpen(false)}
+                className="px-3 py-1.5 text-xs text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="px-4 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold transition cursor-pointer"
+              >
+                Sign Out
+              </button>
             </div>
           </div>
         </div>

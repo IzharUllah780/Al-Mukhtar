@@ -167,8 +167,8 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
   const fullTextSource =
     blog.content && blog.description
       ? (blog.description.length < 300
-          ? `${blog.description} ${blog.content}`
-          : (blog.content.length > blog.description.length ? blog.content : blog.description))
+        ? `${blog.description} ${blog.content}`
+        : (blog.content.length > blog.description.length ? blog.content : blog.description))
       : (blog.content || blog.description || "");
 
   const snippet = getSnippet(
@@ -201,11 +201,10 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
               alt={blog.title || "Blog article"}
               fill
               sizes="(max-width: 640px) 112px, (max-width: 1024px) 160px, 192px"
-              className={`transition-transform duration-500 ease-out group-hover:scale-105 rounded-2xl ${
-                isFallbackLogo
-                  ? "object-contain p-3 opacity-75"
-                  : "object-cover object-center"
-              }`}
+              className={`transition-transform duration-500 ease-out group-hover:scale-105 rounded-2xl ${isFallbackLogo
+                ? "object-contain p-3 opacity-75"
+                : "object-cover object-center"
+                }`}
               onError={() => setImgError(true)}
               unoptimized
             />
@@ -213,7 +212,7 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
 
           {/* 1. Title */}
           <h2 className="text-base sm:text-lg lg:text-[19px] font-bold font-heading text-slate-900 dark:text-white leading-snug tracking-tight group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
-            <Link to={blogUrl} className="hover:underline">
+            <Link to={blogUrl} className="underline sm:no-underline sm:hover:underline underline-offset-2">
               {blog.title}
             </Link>
           </h2>
@@ -273,19 +272,18 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
   return (
     <article className="w-full bg-transparent font-sans">
       <div className="group block w-full text-left">
-        {/* Top Rounded Thumbnail Image with sleek 16:9 aspect ratio */}
+        {/* Top Rounded Thumbnail Image with sleek aspect ratio (compact on desktop) */}
         <Link to={blogUrl} className="block overflow-hidden rounded-2xl">
-          <div className="relative aspect-[16/9] sm:aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800 shadow-xs group-hover:shadow-md transition-all">
+          <div className="relative aspect-[16/9] md:aspect-[16/9] lg:aspect-[16/9] w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-800 shadow-xs group-hover:shadow-md transition-all">
             <Image
               src={thumbnailSrc}
               alt={blog.title || "Blog article"}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className={`transition-transform duration-500 ease-out group-hover:scale-105 rounded-2xl ${
-                isFallbackLogo
-                  ? "object-contain p-5 opacity-75"
-                  : "object-cover object-center"
-              }`}
+              className={`transition-transform duration-500 ease-out group-hover:scale-105 rounded-2xl ${isFallbackLogo
+                ? "object-contain p-5 opacity-75"
+                : "object-cover object-center"
+                }`}
               onError={() => setImgError(true)}
               unoptimized
             />
@@ -311,7 +309,7 @@ function BlogCard({ blog, onCategoryClick, layout = "grid" }) {
 
         {/* Title */}
         <h2 className="mt-1 text-base sm:text-lg lg:text-[19px] font-bold font-heading text-slate-900 dark:text-white leading-snug tracking-tight line-clamp-2 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
-          <Link to={blogUrl} className="hover:underline">
+          <Link to={blogUrl} className="underline sm:no-underline sm:hover:underline underline-offset-2">
             {blog.title}
           </Link>
         </h2>

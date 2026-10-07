@@ -22,14 +22,16 @@ import {
   BookOpen,
   DollarSign,
   Sparkles,
+  CheckCircle2,
 } from "lucide-react";
 import { FaFacebook, FaYoutube, FaTiktok } from "react-icons/fa";
+import { GreenDecorationBg } from "../assets/assets.js";
 
 const TOPIC_OPTIONS = [
-  { id: "admission", label: "New Admission", urdu: "نیا داخلہ", icon: GraduationCap },
-  { id: "courses", label: "Course Details", urdu: "کورس کی معلومات", icon: BookOpen },
-  { id: "fees", label: "Fee & Concession", urdu: "فیس اور رعایت", icon: DollarSign },
-  { id: "general", label: "General Question", urdu: "عام سوال", icon: HelpCircle },
+  { id: "admission", label: "Admission Inquiry", icon: GraduationCap },
+  { id: "courses", label: "Course Information", icon: BookOpen },
+  { id: "fees", label: "Fee & Concession", icon: DollarSign },
+  { id: "general", label: "General Question", icon: HelpCircle },
 ];
 
 const SIMPLE_FAQS = [
@@ -41,7 +43,7 @@ const SIMPLE_FAQS = [
   {
     question: "Where is the campus located for in-person classes & admissions?",
     answer:
-      "Our on-campus facility is situated at Ghaz Masjid, Tanga Adda, Landi Arbab, Peshawar, KPK, Pakistan. You can visit the admissions office directly or contact us via WhatsApp.",
+      "Our on-campus facility is situated at Ghaz Masjid, Tanga Adda, Landi Arbab, Peshawar, KPK, Pakistan. You can visit the admissions desk directly or connect with us online.",
   },
   {
     question: "How long does it take to receive a response to inquiries?",
@@ -51,7 +53,7 @@ const SIMPLE_FAQS = [
   {
     question: "Are fee concessions or financial assistance available?",
     answer:
-      "Yes. Deserving and motivated students can apply for fee concessions and scholarships upon submitting their inquiry or admission form.",
+      "Yes. Deserving and motivated students can apply for fee concessions and scholarships upon submitting their inquiry or admission application.",
   },
   {
     question: "Are official certificates awarded upon course completion?",
@@ -79,7 +81,7 @@ function Contact() {
   const contactMutation = useMutation({
     mutationFn: (data) => api.post("/api/contact", data),
     onSuccess: (res) => {
-      toast.success(res?.data?.message || "Your message has been sent successfully!");
+      toast.success(res?.data?.message || "Your message has been sent successfully to administration!");
       reset({
         name: "",
         email: "",
@@ -91,7 +93,7 @@ function Contact() {
     },
     onError: (error) => {
       toast.error(
-        error?.response?.data?.message || "Failed to send message. Please contact us on WhatsApp directly."
+        error?.response?.data?.message || "Failed to send message. Please reach us directly on WhatsApp."
       );
     },
   });
@@ -106,92 +108,80 @@ function Contact() {
   };
 
   return (
-    <div className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans min-h-screen transition-colors duration-200">
+    <div className="bg-white dark:bg-[#070d18] text-slate-900 dark:text-slate-100 font-sans min-h-screen transition-colors duration-200">
       
-      {/* 1. Welcoming Hero Header */}
-      <section className="bg-slate-50/70 dark:bg-slate-900/40 border-b border-slate-200/80 dark:border-slate-800 pt-8 pb-10 sm:pt-14 sm:pb-16 transition-colors">
-        <div className="max-w-4xl mx-auto px-3 sm:px-6 text-center space-y-3 sm:space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 text-[11px] font-bold font-mono uppercase tracking-wider border border-teal-200/70 dark:border-teal-800/60 max-w-full">
-            <Sparkles size={13} className="shrink-0 text-teal-500" />
-            <span className="truncate">Al-Mukhtar Student Guidance &amp; Admissions</span>
-          </div>
+      {/* ── 1. COMPACT HERO SECTION (GREEN LEAVES BG) ── */}
+      <section className="relative overflow-hidden bg-slate-950 text-white py-7 sm:py-9 border-b border-slate-800/80">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <img
+            src={GreenDecorationBg}
+            alt="Al-Mukhtar Contact Desk"
+            className="w-full h-full object-cover object-center opacity-75 sm:opacity-85"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/75 to-slate-950/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/30" />
+        </div>
 
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-black dark:text-white font-heading tracking-tight">
-            How can we help you today?
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 sm:space-y-4">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white font-heading tracking-tight">
+            Contact Al-Mukhtar
           </h1>
-          <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-xl mx-auto leading-relaxed font-normal">
-            Have questions about academic programs, admissions criteria, or fee concessions? Reach out to our admissions desk below or connect with us directly.
+          
+          <p className="text-xs sm:text-sm text-slate-200 max-w-xl mx-auto leading-relaxed font-normal">
+            Have questions about academic programs, admissions criteria, or fee concessions? Send us an inquiry below or connect directly through our helpline.
           </p>
 
-          {/* Quick Direct Actions (WhatsApp + Call) */}
-          <div className="pt-4 sm:pt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 max-w-2xl mx-auto">
+          {/* Quick Direct Actions (Only 1 WhatsApp & 1 Helpline) */}
+          <div className="pt-2 sm:pt-3 flex flex-wrap items-center justify-center gap-3">
             <a
               href="https://wa.me/923431775096?text=Assalam-o-Alaikum,%20I%20want%20information%20about%20Al-Mukhtar%20courses%20and%20admissions."
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 sm:px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95 text-center"
+              className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2 rounded-full font-semibold text-xs sm:text-sm shadow-sm transition-all active:scale-95"
             >
               <MessageCircle size={15} className="shrink-0" />
-              <span>WhatsApp 1</span>
-            </a>
-
-            <a
-              href="https://wa.me/923009338981?text=Assalam-o-Alaikum,%20I%20want%20information%20about%20Al-Mukhtar%20courses%20and%20admissions."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-4 sm:px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95 text-center"
-            >
-              <MessageCircle size={15} className="shrink-0" />
-              <span>WhatsApp 2</span>
+              <span>WhatsApp Support</span>
             </a>
 
             <a
               href="tel:+923339176894"
-              className="inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-4 sm:px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95 text-center"
+              className="inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-500 text-white px-5 py-2 rounded-full font-semibold text-xs sm:text-sm shadow-sm transition-all active:scale-95"
             >
               <Phone size={14} className="shrink-0" />
-              <span>Call Helpline 1</span>
-            </a>
-
-            <a
-              href="tel:+923329566294"
-              className="inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-900 text-white px-4 sm:px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm shadow-sm transition-all active:scale-95 text-center"
-            >
-              <Phone size={14} className="shrink-0" />
-              <span>Call Helpline 2</span>
+              <span>Call Helpline</span>
             </a>
           </div>
         </div>
       </section>
 
-      {/* 2. Main Content Layout */}
-      <section className="py-8 sm:py-16">
-        <div className="max-w-4xl mx-auto px-3 sm:px-6">
-          <div className="space-y-8 sm:space-y-12">
+      {/* ── 2. MAIN CONTACT SECTION & FORM ── */}
+      <section className="py-8 sm:py-14">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="space-y-8 sm:space-y-10">
 
-            {/* Form Header */}
-            <div className="border-b border-slate-200 dark:border-slate-800 pb-4 sm:pb-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            {/* Form Intro Bar */}
+            <div className="border-b border-slate-200 dark:border-slate-800/80 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white font-heading">
-                  Send Your Question or Message
+                  Send Your Inquiry
                 </h2>
-                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-                  Our admissions team will get in touch with you shortly.
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+                  Fill out the form below and our administration will get back to you promptly.
                 </p>
               </div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1.5 bg-slate-100 dark:bg-slate-900 px-3 py-1.5 rounded-full self-start sm:self-auto font-medium font-mono border border-slate-200 dark:border-slate-800">
+              <div className="text-xs text-slate-600 dark:text-slate-300 flex items-center gap-1.5 bg-slate-100 dark:bg-slate-900 px-3 py-1.5 rounded-full self-start sm:self-auto font-medium font-mono border border-slate-200 dark:border-slate-800">
                 <Clock size={13} className="text-teal-600 dark:text-teal-400 shrink-0" />
-                <span>Reply within 24 hours</span>
+                <span>Response within 24 hours</span>
               </div>
             </div>
 
-            {/* Step 1: Easy Topic Selection */}
-            <div className="space-y-3">
+            {/* Topic Selectors */}
+            <div className="space-y-2.5">
               <label className="block text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
-                1. What is your question about? <span className="hidden sm:inline text-xs text-slate-500 font-normal font-urdu">(سوال کی قسم منتخب کریں)</span>
+                Select Inquiry Topic
               </label>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 {TOPIC_OPTIONS.map((topic) => {
                   const Icon = topic.icon;
                   const isSelected = selectedTopic === topic.label;
@@ -200,102 +190,103 @@ function Contact() {
                       key={topic.id}
                       type="button"
                       onClick={() => handleTopicSelect(topic.label)}
-                      className={`p-3 sm:p-4 rounded-2xl text-left border transition-all cursor-pointer flex flex-col justify-center ${
+                      className={`p-3 rounded-xl text-left border transition-all cursor-pointer flex items-center gap-2.5 ${
                         isSelected
-                          ? "border-teal-600 dark:border-teal-400 bg-teal-50/70 dark:bg-teal-950/40 text-teal-800 dark:text-teal-300 ring-2 ring-teal-500/20 font-bold shadow-sm"
-                          : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-200 font-medium"
+                          ? "border-teal-600 dark:border-teal-400 bg-teal-50 dark:bg-teal-950/40 text-teal-800 dark:text-teal-300 ring-1 ring-teal-500/30 font-semibold"
+                          : "border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 hover:bg-slate-100 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-300 font-medium"
                       }`}
                     >
-                      <div className="flex items-center gap-2 sm:mb-1">
-                        <Icon size={16} className={`shrink-0 ${isSelected ? "text-teal-600 dark:text-teal-400" : "text-slate-400"}`} />
-                        <span className="text-xs sm:text-sm leading-snug">{topic.label}</span>
-                      </div>
-                      <span className="hidden sm:block text-[11px] font-urdu text-slate-500 dark:text-slate-400" dir="rtl">
-                        {topic.urdu}
-                      </span>
+                      <Icon
+                        size={16}
+                        className={`shrink-0 ${
+                          isSelected ? "text-teal-600 dark:text-teal-400" : "text-slate-400"
+                        }`}
+                      />
+                      <span className="text-xs sm:text-sm leading-tight">{topic.label}</span>
                     </button>
                   );
                 })}
               </div>
             </div>
 
-            {/* Step 2: Form Inputs */}
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 sm:space-y-6">
+            {/* Contact Form Fields */}
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 sm:space-y-5">
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 
                 {/* Full Name */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
-                    Your Name <span className="hidden sm:inline text-xs text-slate-500 font-normal font-urdu">(آپ کا نام)</span> <span className="text-rose-500">*</span>
+                  <label className="block text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">
+                    Full Name <span className="text-rose-500">*</span>
                   </label>
                   <div className="relative">
-                    <User size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none shrink-0" />
+                    <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                     <input
                       type="text"
                       placeholder="e.g. Muhammad Ahmad"
-                      className={`w-full pl-10 pr-4 py-3 rounded-xl border text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-slate-50/50 dark:bg-slate-900 placeholder:text-slate-400 outline-none transition-all focus:bg-white dark:focus:bg-slate-900 focus:border-teal-600 dark:focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 ${
+                      className={`w-full pl-10 pr-3.5 py-2.5 rounded-lg border text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-slate-50/60 dark:bg-slate-900/60 placeholder:text-slate-400 outline-none transition-all focus:bg-white dark:focus:bg-slate-900 focus:border-teal-600 dark:focus:border-teal-400 focus:ring-1 focus:ring-teal-500/20 ${
                         errors.name ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-800"
                       }`}
                       {...register("name", {
-                        required: "Please enter your name",
-                        minLength: { value: 3, message: "Name should be at least 3 letters" },
+                        required: "Please enter your full name",
+                        minLength: { value: 2, message: "Name must be at least 2 characters" },
                       })}
                     />
                   </div>
                   {errors.name && (
-                    <p className="text-xs text-rose-500 font-medium">{errors.name.message}</p>
+                    <p className="text-[11px] text-rose-500 font-medium">{errors.name.message}</p>
                   )}
                 </div>
 
-                {/* WhatsApp / Phone */}
+                {/* WhatsApp / Phone Number */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
-                    WhatsApp or Mobile Number <span className="hidden sm:inline text-xs text-slate-500 font-normal font-urdu">(موبائل / واٹس ایپ نمبر)</span>
+                  <label className="block text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">
+                    Phone / WhatsApp Number
                   </label>
                   <div className="relative">
-                    <Phone size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none shrink-0" />
+                    <Phone size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                     <input
                       type="text"
-                      placeholder="e.g. 0333 9176894"
-                      className={`w-full pl-10 pr-4 py-3 rounded-xl border text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-slate-50/50 dark:bg-slate-900 placeholder:text-slate-400 outline-none transition-all focus:bg-white dark:focus:bg-slate-900 focus:border-teal-600 dark:focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 ${
+                      placeholder="e.g. 0343 1775096"
+                      className={`w-full pl-10 pr-3.5 py-2.5 rounded-lg border text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-slate-50/60 dark:bg-slate-900/60 placeholder:text-slate-400 outline-none transition-all focus:bg-white dark:focus:bg-slate-900 focus:border-teal-600 dark:focus:border-teal-400 focus:ring-1 focus:ring-teal-500/20 ${
                         errors.phone ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-800"
                       }`}
                       {...register("phone", {
                         pattern: {
-                          value: /^[\d\s+()-]{7,15}$/,
-                          message: "Please enter a valid mobile number",
+                          value: /^[\d\s+()-]{7,16}$/,
+                          message: "Please enter a valid phone number",
                         },
                       })}
                     />
                   </div>
-                  {errors.phone && (
-                    <p className="text-xs text-rose-500 font-medium">{errors.phone.message}</p>
+                  {errors.phone ? (
+                    <p className="text-[11px] text-rose-500 font-medium">{errors.phone.message}</p>
+                  ) : (
+                    <p className="text-[11px] text-slate-400">
+                      Optional: We will reach out via WhatsApp or phone call.
+                    </p>
                   )}
-                  <p className="text-[11px] text-slate-400">
-                    We will send our answer to this phone or WhatsApp.
-                  </p>
                 </div>
 
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
                 {/* Email Address */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
-                    Email Address <span className="hidden sm:inline text-xs text-slate-500 font-normal font-urdu">(ای میل ایڈریس)</span> <span className="text-rose-500">*</span>
+                  <label className="block text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">
+                    Email Address <span className="text-rose-500">*</span>
                   </label>
                   <div className="relative">
-                    <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none shrink-0" />
+                    <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
                     <input
                       type="email"
-                      placeholder="student@gmail.com"
-                      className={`w-full pl-10 pr-4 py-3 rounded-xl border text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-slate-50/50 dark:bg-slate-900 placeholder:text-slate-400 outline-none transition-all focus:bg-white dark:focus:bg-slate-900 focus:border-teal-600 dark:focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 ${
+                      placeholder="student@example.com"
+                      className={`w-full pl-10 pr-3.5 py-2.5 rounded-lg border text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-slate-50/60 dark:bg-slate-900/60 placeholder:text-slate-400 outline-none transition-all focus:bg-white dark:focus:bg-slate-900 focus:border-teal-600 dark:focus:border-teal-400 focus:ring-1 focus:ring-teal-500/20 ${
                         errors.email ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-800"
                       }`}
                       {...register("email", {
-                        required: "Email is required",
+                        required: "Email address is required",
                         pattern: {
                           value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                           message: "Please enter a valid email address",
@@ -304,74 +295,74 @@ function Contact() {
                     />
                   </div>
                   {errors.email && (
-                    <p className="text-xs text-rose-500 font-medium">{errors.email.message}</p>
+                    <p className="text-[11px] text-rose-500 font-medium">{errors.email.message}</p>
                   )}
                 </div>
 
                 {/* Subject Field */}
                 <div className="space-y-1.5">
-                  <label className="block text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
-                    Subject / Topic <span className="hidden sm:inline text-xs text-slate-500 font-normal font-urdu">(موضوع)</span> <span className="text-rose-500">*</span>
+                  <label className="block text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">
+                    Subject / Topic <span className="text-rose-500">*</span>
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. Admission inquiry"
-                    className={`w-full px-4 py-3 rounded-xl border text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-slate-50/50 dark:bg-slate-900 placeholder:text-slate-400 outline-none transition-all focus:bg-white dark:focus:bg-slate-900 focus:border-teal-600 dark:focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 ${
+                    placeholder="e.g. Admission inquiry for Tajweed course"
+                    className={`w-full px-3.5 py-2.5 rounded-lg border text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-slate-50/60 dark:bg-slate-900/60 placeholder:text-slate-400 outline-none transition-all focus:bg-white dark:focus:bg-slate-900 focus:border-teal-600 dark:focus:border-teal-400 focus:ring-1 focus:ring-teal-500/20 ${
                       errors.subject ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-800"
                     }`}
                     {...register("subject", {
                       required: "Subject is required",
-                      minLength: { value: 3, message: "Please enter a subject" },
+                      minLength: { value: 2, message: "Please specify a subject" },
                     })}
                   />
                   {errors.subject && (
-                    <p className="text-xs text-rose-500 font-medium">{errors.subject.message}</p>
+                    <p className="text-[11px] text-rose-500 font-medium">{errors.subject.message}</p>
                   )}
                 </div>
 
               </div>
 
-              {/* Message Details */}
+              {/* Message Content */}
               <div className="space-y-1.5">
-                <label className="block text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">
-                  Your Message or Question <span className="hidden sm:inline text-xs text-slate-500 font-normal font-urdu">(آپ کا سوال یا تفصیلات)</span> <span className="text-rose-500">*</span>
+                <label className="block text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200">
+                  Your Message or Inquiry <span className="text-rose-500">*</span>
                 </label>
                 <textarea
                   rows={4}
-                  placeholder="Please write your question here..."
-                  className={`w-full p-4 rounded-xl border text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-slate-50/50 dark:bg-slate-900 placeholder:text-slate-400 outline-none transition-all resize-none focus:bg-white dark:focus:bg-slate-900 focus:border-teal-600 dark:focus:border-teal-400 focus:ring-2 focus:ring-teal-500/20 ${
+                  placeholder="Please write your detailed message or questions here..."
+                  className={`w-full p-3.5 rounded-lg border text-xs sm:text-sm text-slate-900 dark:text-slate-100 bg-slate-50/60 dark:bg-slate-900/60 placeholder:text-slate-400 outline-none transition-all resize-none focus:bg-white dark:focus:bg-slate-900 focus:border-teal-600 dark:focus:border-teal-400 focus:ring-1 focus:ring-teal-500/20 ${
                     errors.message ? "border-rose-400 bg-rose-50/20" : "border-slate-200 dark:border-slate-800"
                   }`}
                   {...register("message", {
-                    required: "Please write your question or message",
-                    minLength: { value: 10, message: "Message should be at least 10 characters long" },
+                    required: "Please enter your message",
+                    minLength: { value: 5, message: "Message should be at least 5 characters" },
                   })}
                 />
                 {errors.message && (
-                  <p className="text-xs text-rose-500 font-medium">{errors.message.message}</p>
+                  <p className="text-[11px] text-rose-500 font-medium">{errors.message.message}</p>
                 )}
               </div>
 
-              {/* Submit Button */}
-              <div className="pt-2 flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-t border-slate-100 dark:border-slate-800">
+              {/* Action Bar */}
+              <div className="pt-2 flex flex-col-reverse sm:flex-row sm:items-center justify-between gap-3 border-t border-slate-100 dark:border-slate-800/80">
                 <p className="text-xs text-slate-500 dark:text-slate-400 text-center sm:text-left">
-                  Inquiries are directly forwarded to <strong className="text-slate-700 dark:text-slate-200">izhar5ullah@gmail.com</strong>.
+                  Inquiries are delivered directly to the administration at <span className="text-slate-700 dark:text-slate-300 font-medium">izhar5ullah@gmail.com</span>.
                 </p>
 
                 <button
                   type="submit"
                   disabled={contactMutation.isPending}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-full font-bold text-xs sm:text-sm shadow-sm active:scale-98 transition-all disabled:opacity-60 cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white px-7 py-2.5 rounded-full font-semibold text-xs sm:text-sm shadow-sm active:scale-98 transition-all disabled:opacity-60 cursor-pointer"
                 >
                   {contactMutation.isPending ? (
                     <>
-                      <Loader2 size={16} className="animate-spin shrink-0" />
+                      <Loader2 size={15} className="animate-spin shrink-0" />
                       <span>Sending Message...</span>
                     </>
                   ) : (
                     <>
-                      <Send size={15} className="shrink-0" />
-                      <span>Send Message<span className="hidden sm:inline"> (پیغام بھیجیں)</span></span>
+                      <Send size={14} className="shrink-0" />
+                      <span>Send Message</span>
                     </>
                   )}
                 </button>
@@ -379,151 +370,155 @@ function Contact() {
 
             </form>
 
-            {/* Direct Contact Numbers & Campus Address */}
-            <div className="pt-8 sm:pt-10 border-t border-slate-200 dark:border-slate-800 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              
-              {/* WhatsApp Card */}
-              <div className="p-5 rounded-2xl bg-slate-50/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 space-y-2.5 shadow-sm">
-                <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-xs font-mono uppercase tracking-wider">
-                  <MessageCircle size={16} />
-                  <span>WhatsApp Support</span>
-                </div>
-                <div className="space-y-1 text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">
+            {/* ── 3. DIRECT CONTACT DETAILS (UNBOXED & EDITORIAL) ── */}
+            <div className="pt-8 border-t border-slate-200 dark:border-slate-800">
+              <div className="mb-6">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white font-heading">
+                  Direct Contact Channels
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                  Reach out directly to our administration office via WhatsApp, voice call, or visit our campus.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+                {/* WhatsApp Support */}
+                <div className="p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 space-y-1.5">
+                  <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-xs font-mono uppercase tracking-wider">
+                    <MessageCircle size={15} />
+                    <span>WhatsApp</span>
+                  </div>
                   <a
                     href="https://wa.me/923431775096"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors block"
+                    className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors block"
                   >
                     +92 343 1775096
                   </a>
-                  <a
-                    href="https://wa.me/923009338981"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors block"
-                  >
-                    +92 300 9338981
-                  </a>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    Fast messaging &amp; admission guidance
+                  </p>
                 </div>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">Direct WhatsApp messaging</p>
-              </div>
 
-              {/* Phone Helpline Card */}
-              <div className="p-5 rounded-2xl bg-slate-50/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 space-y-2.5 shadow-sm">
-                <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs font-mono uppercase tracking-wider">
-                  <Phone size={16} />
-                  <span>Call Helpline</span>
-                </div>
-                <div className="space-y-1 text-xs sm:text-sm font-semibold text-slate-900 dark:text-white">
+                {/* Call Helpline */}
+                <div className="p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 space-y-1.5">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs font-mono uppercase tracking-wider">
+                    <Phone size={15} />
+                    <span>Call Helpline</span>
+                  </div>
                   <a
                     href="tel:+923339176894"
-                    className="hover:text-teal-600 dark:hover:text-teal-400 transition-colors block"
+                    className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors block"
                   >
                     +92 333 9176894
                   </a>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    Voice call assistance
+                  </p>
+                </div>
+
+                {/* Email Desk */}
+                <div className="p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 space-y-1.5">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs font-mono uppercase tracking-wider">
+                    <Mail size={15} />
+                    <span>Email Inquiries</span>
+                  </div>
                   <a
-                    href="tel:+923329566294"
-                    className="hover:text-teal-600 dark:hover:text-teal-400 transition-colors block"
+                    href="mailto:izhar5ullah@gmail.com"
+                    className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors block truncate"
+                    title="izhar5ullah@gmail.com"
                   >
-                    +92 332 9566294
+                    izhar5ullah@gmail.com
+                  </a>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    Formal documentation &amp; verification
+                  </p>
+                </div>
+
+                {/* Campus Address */}
+                <div className="p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 space-y-1.5">
+                  <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs font-mono uppercase tracking-wider">
+                    <MapPin size={15} />
+                    <span>Campus Location</span>
+                  </div>
+                  <p className="text-xs text-slate-800 dark:text-slate-200 font-medium leading-tight">
+                    Ghaz Masjid, Tanga Adda, Landi Arbab, Peshawar, KPK
+                  </p>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Ghaz+Masjid+Tanga+Adda+Landi+Arbab+Peshawar+Pakistan"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-teal-600 dark:text-teal-400 hover:underline pt-0.5"
+                  >
+                    <span>Google Maps</span>
+                    <ArrowUpRight size={11} />
                   </a>
                 </div>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">Voice call support</p>
-              </div>
 
-              {/* Email Card */}
-              <div className="p-5 rounded-2xl bg-slate-50/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 space-y-2.5 shadow-sm">
-                <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs font-mono uppercase tracking-wider">
-                  <Mail size={16} />
-                  <span>Email Inquiries</span>
-                </div>
-                <a
-                  href="mailto:izhar5ullah@gmail.com"
-                  className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors block truncate"
-                  title="izhar5ullah@gmail.com"
-                >
-                  izhar5ullah@gmail.com
-                </a>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">Formal applications &amp; documents</p>
-              </div>
-
-              {/* Campus Address Card */}
-              <div className="p-5 rounded-2xl bg-slate-50/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 space-y-2.5 shadow-sm">
-                <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs font-mono uppercase tracking-wider">
-                  <MapPin size={16} />
-                  <span>Campus Location</span>
-                </div>
-                <p className="text-xs text-slate-800 dark:text-slate-200 font-medium leading-snug">
-                  Ghaz Masjid, Tanga Adda, Landi Arbab, Peshawar, KPK, Pakistan
-                </p>
-                <a
-                  href="https://www.google.com/maps/search/?api=1&query=Ghaz+Masjid+Tanga+Adda+Landi+Arbab+Peshawar+Pakistan"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[11px] font-bold text-teal-600 dark:text-teal-400 hover:underline pt-0.5"
-                >
-                  <span>Google Maps</span>
-                  <ArrowUpRight size={12} />
-                </a>
               </div>
 
               {/* Official Social Media Channels */}
-              <div className="p-5 rounded-2xl bg-slate-50/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 space-y-3 shadow-sm">
-                <div className="flex items-center gap-2 text-teal-700 dark:text-teal-400 font-bold text-xs font-mono uppercase tracking-wider">
-                  <Sparkles size={16} />
-                  <span>Official Channels</span>
+              <div className="mt-4 p-4 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-wider font-mono text-slate-700 dark:text-slate-300">
+                    Official Media &amp; Broadcast Channels
+                  </h4>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    Follow Al-Mukhtar on official platforms for lectures, updates, and announcements.
+                  </p>
                 </div>
-                <div className="flex items-center gap-2.5">
+
+                <div className="flex items-center gap-2">
                   <a
                     href="https://www.facebook.com/share/1QH9nYGA2p/?mibextid=wwXIfr"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-[#1877F2] hover:border-[#1877F2] text-slate-700 dark:text-slate-200 hover:text-white transition-all text-xs font-medium group"
+                    className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-[#1877F2] hover:border-[#1877F2] text-slate-700 dark:text-slate-200 hover:text-white transition-all text-xs font-medium group"
                     title="Facebook"
                   >
-                    <FaFacebook size={14} className="text-[#1877F2] group-hover:text-white transition-colors" />
+                    <FaFacebook size={13} className="text-[#1877F2] group-hover:text-white transition-colors" />
                     <span>Facebook</span>
                   </a>
                   <a
                     href="https://youtube.com/@muhammad.anwar80?feature=shared"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-[#FF0000] hover:border-[#FF0000] text-slate-700 dark:text-slate-200 hover:text-white transition-all text-xs font-medium group"
+                    className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-[#FF0000] hover:border-[#FF0000] text-slate-700 dark:text-slate-200 hover:text-white transition-all text-xs font-medium group"
                     title="YouTube"
                   >
-                    <FaYoutube size={14} className="text-[#FF0000] group-hover:text-white transition-colors" />
+                    <FaYoutube size={13} className="text-[#FF0000] group-hover:text-white transition-colors" />
                     <span>YouTube</span>
                   </a>
                   <a
                     href="https://www.tiktok.com/@mulanaanwar?_r=1&_t=ZS-9AD9P9nw4kW"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-black hover:border-black text-slate-700 dark:text-slate-200 hover:text-white transition-all text-xs font-medium group"
+                    className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-black hover:border-black text-slate-700 dark:text-slate-200 hover:text-white transition-all text-xs font-medium group"
                     title="TikTok"
                   >
-                    <FaTiktok size={13} className="text-slate-800 dark:text-slate-200 group-hover:text-white transition-colors" />
+                    <FaTiktok size={12} className="text-slate-800 dark:text-slate-200 group-hover:text-white transition-colors" />
                     <span>TikTok</span>
                   </a>
                 </div>
               </div>
-
             </div>
 
           </div>
         </div>
       </section>
 
-      {/* 3. Simple Frequently Asked Questions */}
-      <section className="border-t border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40 py-10 sm:py-16 transition-colors">
-        <div className="max-w-3xl mx-auto px-3 sm:px-6 space-y-6 sm:space-y-8">
+      {/* ── 4. FREQUENTLY ASKED QUESTIONS ── */}
+      <section className="border-t border-slate-200/80 dark:border-slate-800 bg-slate-50/40 dark:bg-slate-900/30 py-8 sm:py-12 transition-colors">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 space-y-6">
           
-          <div className="text-center space-y-2">
-            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white font-heading">
+          <div className="text-center space-y-1">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white font-heading">
               Frequently Asked Questions
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-              Click on any question below to see the quick answer.
+              Quick answers to common questions about Al-Mukhtar.
             </p>
           </div>
 
@@ -531,22 +526,22 @@ function Contact() {
             {SIMPLE_FAQS.map((faq, index) => {
               const isOpen = openFaq === index;
               return (
-                <div key={index} className="py-3.5 sm:py-4">
+                <div key={index} className="py-3">
                   <button
                     type="button"
                     onClick={() => setOpenFaq(isOpen ? null : index)}
-                    className="w-full flex items-center justify-between gap-3 text-left font-semibold text-slate-900 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors py-1 cursor-pointer"
+                    className="w-full flex items-center justify-between gap-3 text-left font-medium text-slate-900 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors py-1 cursor-pointer"
                   >
-                    <p className="text-xs sm:text-base leading-snug">{faq.question}</p>
+                    <span className="text-xs sm:text-sm">{faq.question}</span>
                     <ChevronDown
-                      size={18}
+                      size={16}
                       className={`text-slate-400 shrink-0 transition-transform duration-200 ${
                         isOpen ? "rotate-180 text-teal-600 dark:text-teal-400" : ""
                       }`}
                     />
                   </button>
                   {isOpen && (
-                    <div className="pt-2.5 pb-1 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                    <div className="pt-2 pb-1 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
                       {faq.answer}
                     </div>
                   )}

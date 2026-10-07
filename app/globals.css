@@ -552,3 +552,60 @@ button, a {
   }
 }
 
+/* ── Google Translate Clean Overrides (No Hover BG or Tooltips) ── */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame,
+#goog-gt-tt,
+#goog-gt-tt *,
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover,
+.VIpgJd-ZVi9od-ORHb-OEVmcd,
+.VIpgJd-ZVi9od-aZ2wEe-wOHMyf,
+.VIpgJd-ZVi9od-v2Yjd-g3G20b {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+body {
+  top: 0px !important;
+  position: static !important;
+}
+
+.skiptranslate:not(#google_translate_element) {
+  display: none !important;
+}
+
+#google_translate_element {
+  display: none !important;
+}
+
+/* Strip ALL background highlights on hover, focus, or active states from translated text */
+.goog-text-highlight,
+.goog-text-highlight:hover,
+.goog-text-highlight:focus,
+.goog-text-highlight:active,
+*[class*="goog-text-highlight"],
+*[class*="goog-text-highlight"]:hover,
+font,
+font:hover,
+font:focus,
+font:active,
+font[style],
+font[style]:hover,
+span[style*="background"],
+span[style*="background"]:hover,
+font[style*="background"],
+font[style*="background"]:hover,
+font[style*="background-color"],
+font[style*="background-color"]:hover {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+

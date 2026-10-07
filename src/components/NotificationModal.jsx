@@ -5,30 +5,14 @@ import { useNavigate } from "@/lib/navigation-adapter";
 import { Logo, getImageUrl } from "../assets/assets.js";
 import {
   X,
-  Sparkles,
+  Bell,
   ExternalLink,
   ArrowRight,
-  ArrowLeft,
-  Check,
-  Maximize2,
-  ZoomIn,
   ChevronLeft,
   ChevronRight,
-  Bell,
+  Maximize2,
 } from "lucide-react";
 
-/**
- * NotificationModal
- * 
- * Supports both single and MULTIPLE active notifications.
- * When multiple notifications are active:
- * - Shows an interactive slide switcher / pagination / quick tabs
- * - Next / Prev controls + Keyboard arrow navigation
- * - Notice counter (e.g. "Notice 1 of 3")
- * - 80%-90% responsive width with backdrop blur
- * - Clickable image with Fullscreen Lightbox Preview
- * - Session/Local dismiss memory per notification
- */
 export default function NotificationModal({
   notifications: rawNotifications,
   notification: singleNotification,
@@ -80,7 +64,7 @@ export default function NotificationModal({
     }
   }, [activeList.length, previewMode, forceIsOpen, allNotifications.length]);
 
-  // Lock background page scroll when notification modal is open
+  // Lock background page scroll when modal is open
   useEffect(() => {
     if (isOpen) {
       const originalOverflow = document.body.style.overflow;
@@ -98,18 +82,18 @@ export default function NotificationModal({
     }
   }, [activeList.length, currentIndex]);
 
-  // Auto-play slider: advance to next notification every 5 seconds when multiple notifications exist
+  // Auto-play slider: advance to next notification every 6 seconds when multiple exist
   useEffect(() => {
     if (!isOpen || activeList.length <= 1 || isFullscreenImage) return;
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % activeList.length);
-    }, 5000);
+    }, 6000);
 
     return () => clearInterval(timer);
   }, [isOpen, activeList.length, isFullscreenImage, currentIndex]);
 
-  // Keyboard navigation (ArrowLeft, ArrowRight, Escape)
+  // Keyboard navigation
   useEffect(() => {
     if (!isOpen) return;
 
@@ -144,28 +128,6 @@ export default function NotificationModal({
     setCurrentIndex((prev) => (prev - 1 + activeList.length) % activeList.length);
   };
 
-  const handleDismissCurrent = () => {
-    if (!currentNotification) return;
-
-    if (!previewMode && currentNotification._id) {
-      const storageKey = `dismissed_notif_${currentNotification._id}_${currentNotification.updatedAt || ""}`;
-      sessionStorage.setItem(storageKey, "true");
-      setDismissedIds((prev) => new Set([...prev, currentNotification._id]));
-    }
-
-    // If this was the last remaining notification, close modal smoothly
-    if (activeList.length <= 1) {
-      setIsClosing(true);
-      setTimeout(() => {
-        setIsOpen(false);
-        setIsClosing(false);
-        if (customOnClose) customOnClose();
-      }, 200);
-    } else {
-      handleNext();
-    }
-  };
-
   const handleDismissAll = () => {
     setIsClosing(true);
     if (!previewMode) {
@@ -193,7 +155,6 @@ export default function NotificationModal({
 
     const url = currentNotification.buttonUrl.trim();
 
-    // Completely dismiss all notifications so modal NEVER re-opens
     if (!previewMode) {
       allNotifications.forEach((n) => {
         if (n._id) {
@@ -204,7 +165,6 @@ export default function NotificationModal({
       setDismissedIds(new Set(allNotifications.map((n) => n._id)));
     }
 
-    // Immediately close the entire modal and restore document scrolling
     setIsOpen(false);
     setIsClosing(false);
     setIsFullscreenImage(false);
@@ -240,216 +200,202 @@ export default function NotificationModal({
 
   return (
     <>
-      {/* ── 1. MAIN NOTIFICATION MODAL OVERLAY (No Blur, Dark Tint) ── */}
+      {/* ── 1. AUTHENTIC NOTIFICATION CARD MODAL ── */}
       <div
         role="dialog"
         aria-modal="true"
-        aria-labelledby="notification-modal-title"
-        className={`fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-5 md:p-6 transition-all duration-300 ${
-          isClosing ? "opacity-0" : "opacity-100"
+        aria-labelledby="notification-card-title"
+        className={`fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6 transition-all duration-300 ${
+          isClosing ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
-        {/* Unblurred Dark Overlay */}
+        {/* Backdrop overlay */}
         <div
           onClick={handleDismissAll}
-          className="fixed inset-0 bg-black/70 dark:bg-black/85 transition-opacity"
+          className="fixed inset-0 bg-slate-900/60 dark:bg-black/80 backdrop-blur-xs transition-opacity"
         />
 
-        {/* Modal Card Container: Consistent Fixed Size across short/long notices */}
+        {/* ── NOTIFICATION CARD CONTAINER ── */}
         <div
-          className={`relative w-[92%] sm:w-[85%] md:w-[78%] lg:w-[70%] max-w-3xl min-h-[380px] sm:min-h-[420px] md:h-[460px] max-h-[90vh] flex flex-col justify-between overflow-hidden rounded-2xl bg-white dark:bg-[#0c1827] text-slate-800 dark:text-slate-100 shadow-2xl border border-slate-200/90 dark:border-slate-800 transition-all duration-300 transform ${
-            isClosing ? "scale-95 translate-y-4" : "scale-100 translate-y-0"
+          className={`relative w-full max-w-lg bg-white dark:bg-[#0c1424] text-slate-800 dark:text-slate-100 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col transition-all duration-300 transform ${
+            isClosing
+              ? "scale-95 translate-y-4 opacity-0"
+              : "scale-100 translate-y-0 opacity-100"
           }`}
-          style={{
-            boxShadow:
-              "0 20px 50px -10px rgba(0, 0, 0, 0.5), 0 0 30px -5px rgba(15, 110, 140, 0.25)",
-          }}
         >
-          {/* Close / Dismiss Button */}
-          <button
-            onClick={handleDismissAll}
-            aria-label="Close notifications"
-            className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors cursor-pointer"
-          >
-            <X size={17} />
-          </button>
+          {/* Top Decorative Notification Accent Line */}
+          <div className="h-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-teal-600 w-full shrink-0" />
 
-          {/* ── TOP NOTIFICATION HEADER ── */}
-          <div className="px-5 sm:px-6 pt-4 pb-3 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-3 shrink-0 pr-12 font-sans">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0">
-                <Bell size={16} />
+          {/* ── NOTIFICATION HEADER ── */}
+          <div className="px-5 py-3.5 bg-slate-50/80 dark:bg-slate-900/60 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5 min-w-0">
+              {/* Notification Bell with pulsating indicator */}
+              <div className="relative w-8 h-8 rounded-xl bg-teal-500/10 dark:bg-teal-400/10 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0 border border-teal-500/20">
+                <Bell size={15} className="animate-wiggle" />
+                <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-teal-500 rounded-full ring-2 ring-white dark:ring-[#0c1424]" />
               </div>
-              <div>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 font-mono">
-                    Website Notification
+
+              <div className="flex flex-col min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-teal-700 dark:text-teal-400 font-mono">
+                    {badge || "Announcement"}
                   </span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-[10px] text-slate-400 dark:text-slate-500">
+                    • Official Notice
+                  </span>
                 </div>
-                <div className="flex items-center gap-2 text-[11px] text-slate-500 dark:text-slate-400">
-                  <span className="font-semibold text-slate-700 dark:text-slate-300">{badge || "Announcement"}</span>
-                  {hasMultiple && (
-                    <>
-                      <span>•</span>
-                      <span className="font-mono text-[10px] bg-slate-100 dark:bg-slate-800 px-1.5 py-0.2 rounded text-slate-600 dark:text-slate-300">
-                        Notice {currentIndex + 1} of {totalNotices}
-                      </span>
-                    </>
-                  )}
-                </div>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                  Al-Mukhtar Islamic Sciences
+                </span>
               </div>
             </div>
-          </div>
 
-          {/* ── MAIN CONTENT AREA ── */}
-          <div className="px-5 sm:px-6 py-4 flex-1 flex flex-col justify-center overflow-y-auto no-scrollbar font-sans">
-            <div className={`grid grid-cols-1 ${hasImage ? "md:grid-cols-12 gap-5 md:gap-6 items-center" : "gap-3"} w-full`}>
-              {/* Image Preview */}
-              {hasImage && (
-                <div className="md:col-span-5 flex items-center justify-center">
-                  <div
-                    onClick={() => setIsFullscreenImage(true)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === "Enter" && setIsFullscreenImage(true)}
-                    title="Click to view image in full screen"
-                    className="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-100 dark:bg-slate-900 shadow-xs w-full h-44 sm:h-52 md:h-56 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  >
-                    <img
-                      src={notificationImage}
-                      onError={(e) => {
-                        e.currentTarget.onerror = null;
-                        e.currentTarget.src = Logo;
-                      }}
-                      alt={title || "Notification banner"}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300 ease-out"
-                      loading="lazy"
-                    />
-
-                    {/* Hover Fullscreen Badge */}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/80 text-white text-[11px] font-semibold border border-white/20 shadow-md">
-                        <ZoomIn size={13} />
-                        <span>View Full Screen</span>
-                      </span>
-                    </div>
-
-                    <div className="absolute top-2 right-2 p-1 rounded-md bg-black/60 text-white opacity-70 group-hover:opacity-100 transition-opacity">
-                      <Maximize2 size={12} />
-                    </div>
-                  </div>
+            <div className="flex items-center gap-1.5 shrink-0">
+              {hasMultiple && (
+                <div className="flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-200/70 dark:bg-slate-800 text-[11px] font-mono text-slate-600 dark:text-slate-300">
+                  <span>{currentIndex + 1}</span>
+                  <span className="text-slate-400">/</span>
+                  <span>{totalNotices}</span>
                 </div>
               )}
 
-              {/* Notification Message Details */}
-              <div className={`${hasImage ? "md:col-span-7 space-y-2.5" : "space-y-3 max-w-xl mx-auto w-full"}`}>
-                {/* Title */}
-                {hasTitle && (
-                  <div className="flex items-center gap-2.5">
-                    {!hasImage && (
-                      <span className="relative flex h-3 w-3 shrink-0">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-600"></span>
-                      </span>
-                    )}
-                    <h2
-                      id="notification-modal-title"
-                      className="text-base sm:text-lg md:text-xl font-bold font-heading text-slate-900 dark:text-white tracking-tight leading-snug"
-                    >
-                      {title}
-                    </h2>
-                  </div>
-                )}
-
-                {/* Announcement Message Box */}
-                {hasDesc && (
-                  <div className={`p-3.5 rounded-xl border-l-4 border-teal-600 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed whitespace-pre-line font-sans max-h-36 sm:max-h-44 overflow-y-auto custom-scrollbar shadow-2xs ${
-                    !hasImage && !hasTitle ? "flex items-start gap-2.5" : ""
-                  }`}>
-                    {!hasImage && !hasTitle && (
-                      <span className="relative flex h-2.5 w-2.5 shrink-0 mt-1">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-500 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-teal-600"></span>
-                      </span>
-                    )}
-                    <div className="flex-1">
-                      {description}
-                    </div>
-                  </div>
-                )}
-
-                {/* In-Content Action */}
-                {hasAction && (
-                  <div className="pt-1">
-                    <button
-                      type="button"
-                      onClick={handleActionClick}
-                      className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-semibold shadow-xs transition-all group cursor-pointer"
-                    >
-                      <span>{buttonText}</span>
-                      {buttonUrl.startsWith("http") ? (
-                        <ExternalLink size={13} className="group-hover:translate-x-0.5 transition-transform" />
-                      ) : (
-                        <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
-                      )}
-                    </button>
-                  </div>
-                )}
-              </div>
+              <button
+                onClick={handleDismissAll}
+                aria-label="Close notification"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800 transition cursor-pointer"
+                title="Dismiss"
+              >
+                <X size={16} />
+              </button>
             </div>
           </div>
 
-          {/* ── BOTTOM ACTION BAR ── */}
-          {hasMultiple && (
-            <div className="px-5 sm:px-6 py-2.5 border-t border-slate-100 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-900/30 flex items-center justify-end shrink-0">
+          {/* ── NOTIFICATION BODY ── */}
+          <div className="p-5 space-y-3.5 max-h-[60vh] overflow-y-auto custom-scrollbar">
+            {/* Optional Attached Notice Image / Flyer */}
+            {hasImage && (
+              <div
+                onClick={() => setIsFullscreenImage(true)}
+                className="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800/80 bg-slate-100 dark:bg-slate-900 max-h-52"
+              >
+                <img
+                  src={notificationImage}
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = Logo;
+                  }}
+                  alt={title || "Notification banner"}
+                  className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1.5 text-white text-xs font-medium backdrop-blur-xs">
+                  <Maximize2 size={14} />
+                  <span>Click to expand flyer</span>
+                </div>
+              </div>
+            )}
+
+            {/* Notification Title */}
+            {hasTitle && (
+              <h2
+                id="notification-card-title"
+                className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug font-heading tracking-tight"
+              >
+                {title}
+              </h2>
+            )}
+
+            {/* Notification Text */}
+            {hasDesc && (
+              <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-line font-sans">
+                {description}
+              </div>
+            )}
+          </div>
+
+          {/* ── NOTIFICATION FOOTER & ACTIONS ── */}
+          <div className="px-5 py-3.5 bg-slate-50 dark:bg-slate-900/80 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+            {/* Multiple notices pagination arrows */}
+            {hasMultiple ? (
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition cursor-pointer"
+                  title="Previous notice"
+                >
+                  <ChevronLeft size={14} />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700/80 text-slate-600 dark:text-slate-300 hover:bg-slate-200/60 dark:hover:bg-slate-800 transition cursor-pointer"
+                  title="Next notice"
+                >
+                  <ChevronRight size={14} />
+                </button>
+              </div>
+            ) : (
+              <span className="text-[11px] text-slate-400 font-mono">
+                Recent update
+              </span>
+            )}
+
+            {/* Buttons */}
+            <div className="flex items-center gap-2">
               <button
                 type="button"
-                onClick={handleNext}
-                className="inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white text-xs sm:text-sm font-semibold shadow-xs w-auto transition-colors cursor-pointer shrink-0"
+                onClick={handleDismissAll}
+                className="px-3.5 py-1.5 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800 transition cursor-pointer"
               >
-                <span>Next</span>
-                <ChevronRight size={15} />
+                Dismiss
               </button>
+
+              {hasAction && (
+                <button
+                  type="button"
+                  onClick={handleActionClick}
+                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold shadow-sm hover:shadow transition cursor-pointer"
+                >
+                  <span>{buttonText}</span>
+                  {buttonUrl.startsWith("http") ? (
+                    <ExternalLink size={12} />
+                  ) : (
+                    <ArrowRight size={12} />
+                  )}
+                </button>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </div>
 
-      {/* ── 2. FULLSCREEN IMAGE LIGHTBOX PREVIEW (70% Max Height) ── */}
+      {/* ── 2. FULLSCREEN IMAGE LIGHTBOX PREVIEW ── */}
       {isFullscreenImage && hasImage && (
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-[1000000] flex items-center justify-center p-3 sm:p-6 bg-black/95 backdrop-blur-xl animate-in fade-in duration-200"
+          className="fixed inset-0 z-[1000000] flex items-center justify-center p-4 bg-black/95 animate-in fade-in duration-150"
         >
           <div
             onClick={() => setIsFullscreenImage(false)}
             className="fixed inset-0 cursor-zoom-out"
           />
 
-          <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-30 flex items-center gap-3">
-            <button
-              type="button"
-              onClick={() => setIsFullscreenImage(false)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold border border-white/20 backdrop-blur-md shadow-xl transition-all cursor-pointer group"
-            >
-              <X size={16} className="group-hover:rotate-90 transition-transform" />
-              <span>Cancel Preview</span>
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setIsFullscreenImage(false)}
+            className="absolute top-4 right-4 z-30 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition cursor-pointer"
+            aria-label="Close preview"
+          >
+            <X size={18} />
+          </button>
 
-          <div className="relative z-10 max-w-[90vw] max-h-[75vh] flex flex-col items-center justify-center">
+          <div className="relative z-10 max-w-[90vw] max-h-[85vh] flex flex-col items-center justify-center">
             <img
-              src={image}
+              src={notificationImage}
               alt={title || "Fullscreen preview"}
-              className="max-w-full max-h-[70vh] object-contain rounded-2xl shadow-2xl border border-white/10"
+              className="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl"
             />
-            {title && (
-              <p className="mt-2.5 text-xs sm:text-sm text-slate-300 font-medium text-center bg-black/60 px-4 py-1 rounded-full border border-white/10 backdrop-blur-md max-w-lg truncate">
-                {title}
-              </p>
-            )}
           </div>
         </div>
       )}

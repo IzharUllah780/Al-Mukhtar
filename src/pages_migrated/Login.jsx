@@ -83,9 +83,14 @@ function Login() {
               alt="Madrasa Logo"
               className="w-11 h-11 rounded-xl object-cover ring-2 ring-[#5EEAD4]/40 shadow-sm"
             />
-            <span className="text-white font-heading font-extrabold text-lg tracking-tight">
-              Al-Mukhtar Institute
-            </span>
+            <div className="flex flex-col min-w-0">
+              <span className="text-white font-heading font-extrabold text-lg tracking-tight leading-tight">
+                Al-Mukhtar
+              </span>
+              <span className="text-[11px] text-[#5EEAD4]/80 font-normal">
+                Where the chosen rise
+              </span>
+            </div>
           </div>
 
           {/* Main message */}

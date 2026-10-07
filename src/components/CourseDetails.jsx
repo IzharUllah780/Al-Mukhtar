@@ -13,7 +13,6 @@ import {
   ArrowRight,
   Loader2,
   AlertTriangle,
-  Eye,
   Sparkles,
   CheckCircle2,
   GraduationCap,
@@ -119,9 +118,47 @@ function CourseDetails() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-white dark:bg-[#080f19] flex flex-col items-center justify-center gap-3">
-        <Loader2 size={36} className="animate-spin text-[#0D9488]" />
-        <p className="text-xs font-mono text-slate-500 font-bold uppercase tracking-wider">Loading Course Details...</p>
+      <div className="bg-white dark:bg-[#080f19] font-sans min-h-screen animate-pulse">
+        {/* Hero Section Skeleton */}
+        <div className="bg-slate-900 border-b border-slate-800 py-10 sm:py-14">
+          <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 space-y-6">
+            <div className="w-28 h-4 bg-slate-800 rounded" />
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              <div className="lg:col-span-8 space-y-4">
+                <div className="flex gap-2">
+                  <div className="w-24 h-6 bg-slate-800 rounded-md" />
+                  <div className="w-24 h-6 bg-slate-800 rounded-md" />
+                  <div className="w-20 h-6 bg-slate-800 rounded-md" />
+                </div>
+                <div className="w-3/4 h-8 sm:h-10 bg-slate-800 rounded-lg" />
+                <div className="w-full h-16 bg-slate-800/80 rounded-lg" />
+                <div className="flex gap-3 pt-2">
+                  <div className="w-36 h-11 bg-slate-800 rounded-xl" />
+                  <div className="w-36 h-11 bg-slate-800/60 rounded-xl" />
+                </div>
+              </div>
+              <div className="lg:col-span-4 hidden lg:block">
+                <div className="w-full h-48 bg-slate-800 rounded-2xl" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Content & Sidebar Skeleton */}
+        <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <div className="lg:col-span-8 space-y-4">
+              <div className="w-48 h-6 bg-slate-200 dark:bg-slate-800 rounded" />
+              <div className="w-full h-4 bg-slate-200 dark:bg-slate-800 rounded" />
+              <div className="w-full h-4 bg-slate-200 dark:bg-slate-800 rounded" />
+              <div className="w-4/5 h-4 bg-slate-200 dark:bg-slate-800 rounded" />
+              <div className="w-full h-40 bg-slate-100 dark:bg-slate-850 rounded-xl" />
+            </div>
+            <div className="lg:col-span-4 space-y-4">
+              <div className="w-full h-64 bg-slate-100 dark:bg-slate-800/80 rounded-2xl" />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -198,47 +235,48 @@ function CourseDetails() {
     <div className="bg-white dark:bg-[#080f19] font-sans text-slate-800 dark:text-slate-100 min-h-screen">
       {/* ── 1. Top Part / Hero Section (Title & Description at Top) ── */}
       <section className="relative text-white overflow-hidden border-b border-teal-900/30">
-        {/* Background Image Container */}
-        <div className="absolute inset-0 z-0">
+        {/* Background Image Container with Enhanced Visibility */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
           <img
             src={heroBgImage}
             alt="Course Background"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-center brightness-[0.98] contrast-[1.05]"
           />
-          <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-[1px]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-slate-950/70" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/50 to-slate-950/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-slate-950/30" />
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 pt-6 sm:pt-10 pb-10 sm:pb-14">
-          {/* Breadcrumb / Back Link */}
-          <div className="mb-4 sm:mb-6">
+        <div className="relative z-10 max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 pt-5 sm:pt-8 pb-8 sm:pb-12">
+          {/* Breadcrumb / Simple Professional Back Link (No Border, No Shadow) */}
+          <div className="mb-3 sm:mb-5">
             <Link
               to="/courses"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/40 hover:bg-black/60 text-white text-xs font-semibold backdrop-blur-md border border-white/20 transition-all font-mono uppercase tracking-wider"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-slate-300 hover:text-white transition-colors duration-200 group"
             >
-              <ArrowLeft size={14} /> Back to Courses
+              <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform duration-200 text-teal-400" />
+              <span>Back to Courses</span>
             </Link>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-start">
             {/* Left / Main Column: Title & Description in Top Part */}
-            <div className="lg:col-span-8 space-y-4 sm:space-y-6">
-              {/* Meta Badges */}
+            <div className="lg:col-span-8 space-y-4 sm:space-y-5">
+              {/* Refined Meta Badges */}
               <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
                 {course.level && (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-emerald-950/70 border border-emerald-400/40 text-emerald-200 text-[10.5px] sm:text-[11px] font-bold font-mono tracking-wider uppercase backdrop-blur-md shadow-xs">
-                    <Sparkles size={12} className="text-emerald-300" />
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[11px] sm:text-xs font-semibold tracking-wide backdrop-blur-xs">
+                    <Sparkles size={13} className="text-emerald-300 shrink-0" />
                     <span>{course.level} Level</span>
                   </span>
                 )}
-                <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-black/40 border border-white/20 text-slate-100 text-[10.5px] sm:text-[11px] font-semibold font-mono tracking-wider backdrop-blur-md shadow-xs">
-                  <GraduationCap size={13} className="text-teal-300" />
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/10 text-teal-200 border border-white/20 text-[11px] sm:text-xs font-semibold tracking-wide backdrop-blur-xs">
+                  <GraduationCap size={13} className="text-teal-300 shrink-0" />
                   <span>Curriculum</span>
                 </span>
                 {course.duration && (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full bg-black/40 border border-white/20 text-slate-100 text-[10.5px] sm:text-[11px] font-semibold font-mono tracking-wider backdrop-blur-md shadow-xs">
-                    <Clock size={12} className="text-emerald-300" />
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/10 text-slate-200 border border-white/20 text-[11px] sm:text-xs font-semibold tracking-wide backdrop-blur-xs">
+                    <Clock size={13} className="text-slate-300 shrink-0" />
                     <span>{course.duration}</span>
                   </span>
                 )}
@@ -256,32 +294,30 @@ function CourseDetails() {
                 </p>
               ) : null}
 
-              {/* Action Buttons & Stat Details in Top Part */}
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1 sm:pt-2">
-                <Link
-                  to={`/apply?course=${encodeURIComponent(course.title)}`}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#0D9488] hover:bg-[#0F766E] text-white px-5 sm:px-6 py-3 rounded-xl font-bold transition-all text-xs sm:text-sm shadow-md active:scale-95 text-center"
-                >
-                  <span>Apply for this Course</span>
-                  <ArrowRight size={15} />
-                </Link>
+              {/* Action Buttons (Single Row on Mobile & Desktop) & Stat Details */}
+              <div className="space-y-3 pt-1 sm:pt-2">
+                <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:items-center sm:gap-3 max-w-md sm:max-w-none">
+                  <Link
+                    to={`/apply?course=${encodeURIComponent(course.title)}`}
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-[#0D9488] hover:bg-[#0F766E] text-white px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl font-bold transition-all text-xs sm:text-sm shadow-sm active:scale-95 text-center"
+                  >
+                    <span className="truncate">Apply for Course</span>
+                    <ArrowRight size={14} className="shrink-0" />
+                  </Link>
 
-                <Link
-                  to="/contact"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs sm:text-sm font-semibold backdrop-blur-md border border-white/20 transition-all text-center"
-                >
-                  <span>Inquire Admissions</span>
-                </Link>
+                  <Link
+                    to="/contact"
+                    className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs sm:text-sm font-semibold backdrop-blur-md border border-white/20 transition-all text-center"
+                  >
+                    <span className="truncate">Inquire Admissions</span>
+                  </Link>
+                </div>
 
-                {/* Enrollment & View stats */}
-                <div className="flex items-center justify-start sm:justify-start gap-4 text-xs text-slate-300 font-mono pt-1 sm:pt-0 sm:ml-2">
+                {/* Enrollment stats */}
+                <div className="flex items-center gap-4 text-xs text-slate-300 font-mono pt-1">
                   <span className="flex items-center gap-1.5">
-                    <Users size={14} className="text-emerald-300" />
+                    <Users size={14} className="text-teal-300 shrink-0" />
                     <span>{enrolledCount} Enrolled</span>
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Eye size={14} className="text-emerald-300" />
-                    <span>{course.views ?? 0} Views</span>
                   </span>
                 </div>
               </div>
@@ -338,7 +374,7 @@ function CourseDetails() {
                 <div className="border-b border-slate-200 dark:border-slate-800 pb-3 flex items-center gap-2.5">
                   <FileText size={20} className="text-[#0D9488] dark:text-teal-400" />
                   <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-900 dark:text-white tracking-tight">
-                    Course Syllabus &amp; Curriculum Detail
+                    Course Overview
                   </h2>
                 </div>
 
@@ -356,7 +392,7 @@ function CourseDetails() {
                 <div className="border-b border-slate-200 dark:border-slate-800 pb-3 flex items-center gap-2.5">
                   <BookOpen size={20} className="text-[#0D9488] dark:text-teal-400" />
                   <h2 className="text-xl sm:text-2xl font-bold font-heading text-slate-900 dark:text-white tracking-tight">
-                    Course Information &amp; Objectives
+                    Course Overview &amp; Objectives
                   </h2>
                 </div>
 
@@ -455,20 +491,20 @@ function CourseDetails() {
               </div>
 
               {/* Direct Quick Action Buttons */}
-              <div className="space-y-2 pt-2">
+              <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-col sm:space-y-2 sm:gap-0 pt-2">
                 <Link
                   to={`/apply?course=${encodeURIComponent(course.title)}`}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold py-2.5 px-4 rounded-lg transition-all text-xs text-center shadow-xs"
+                  className="w-full inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-[#0D9488] hover:bg-[#0F766E] text-white font-bold py-2.5 px-3 sm:px-4 rounded-lg transition-all text-xs text-center shadow-xs"
                 >
-                  <span>Submit Application</span>
-                  <ArrowRight size={14} />
+                  <span className="truncate">Submit Application</span>
+                  <ArrowRight size={13} className="shrink-0" />
                 </Link>
 
                 <Link
                   to="/contact"
-                  className="w-full inline-flex items-center justify-center gap-1.5 border border-slate-300 dark:border-slate-700 hover:border-[#0D9488] dark:hover:border-teal-400 text-slate-700 dark:text-slate-200 font-bold py-2.5 px-4 rounded-lg transition-all text-xs text-center"
+                  className="w-full inline-flex items-center justify-center gap-1.5 border border-slate-300 dark:border-slate-700 hover:border-[#0D9488] dark:hover:border-teal-400 text-slate-700 dark:text-slate-200 font-bold py-2.5 px-3 sm:px-4 rounded-lg transition-all text-xs text-center"
                 >
-                  <span>Contact Admissions</span>
+                  <span className="truncate">Contact Admissions</span>
                 </Link>
               </div>
             </div>
@@ -490,9 +526,6 @@ function CourseDetails() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div className="space-y-1">
-              <span className="text-[10px] font-bold text-[#0D9488] dark:text-teal-400 font-mono tracking-wider uppercase">
-                Explore Curricula
-              </span>
               <h2 className="font-heading text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
                 More Courses to Explore
               </h2>
@@ -512,20 +545,24 @@ function CourseDetails() {
 
           {/* Courses Grid */}
           {isAllCoursesLoading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
               {[1, 2, 3].map((n) => (
-                <div key={n} className="border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 space-y-3 animate-pulse">
-                  <div className="w-full h-40 bg-slate-100 dark:bg-slate-800" />
-                  <div className="space-y-2">
-                    <div className="h-4 bg-slate-100 dark:bg-slate-800 rounded w-1/3" />
-                    <div className="h-4 bg-slate-100 dark:bg-slate-800 rounded w-3/4" />
-                    <div className="h-3 bg-slate-100 dark:bg-slate-800 rounded w-full" />
+                <div key={n} className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 overflow-hidden animate-pulse">
+                  <div className="w-full aspect-[16/9] bg-slate-100 dark:bg-slate-800" />
+                  <div className="p-4 space-y-2.5">
+                    <div className="w-20 h-3 bg-slate-100 dark:bg-slate-800 rounded" />
+                    <div className="w-4/5 h-4 bg-slate-100 dark:bg-slate-800 rounded" />
+                    <div className="w-full h-3 bg-slate-100 dark:bg-slate-800 rounded" />
+                    <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-between">
+                      <div className="w-16 h-3 bg-slate-100 dark:bg-slate-800 rounded" />
+                      <div className="w-16 h-3 bg-slate-100 dark:bg-slate-800 rounded" />
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
           ) : moreCourses.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-start">
               {moreCourses.map((c) => (
                 <CourseCard key={c._id || c.slug} course={c} />
               ))}

@@ -104,7 +104,7 @@ function VideoCard({ video, compact = false }) {
           <div className="flex items-center justify-between gap-2 text-xs text-slate-500 dark:text-slate-400 font-mono">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-50 dark:bg-red-950/50 text-red-700 dark:text-red-400 border border-red-200/60 dark:border-red-800/40 text-[10.5px] font-bold tracking-wide uppercase">
               <FaYoutube size={13} className="text-red-600 dark:text-red-400" />
-              <span>Video Lecture</span>
+              <span>YouTube Video</span>
             </span>
             {video.createdAt && (
               <span className="flex items-center gap-1 text-[11px]">

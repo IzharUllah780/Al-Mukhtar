@@ -28,7 +28,7 @@ const blogSchema = new mongoose.Schema(
     images: [{ type: String }],
     status: { type: String, enum: ["published", "draft"], default: "published" },
     author: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    views: { type: Number, default: 1 },
+    views: { type: Number, default: 0 },
     comments: [commentSchema],
   },
   { timestamps: true }

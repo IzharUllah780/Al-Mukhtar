@@ -176,7 +176,7 @@ function BlogDetail() {
   const [activeImageModal, setActiveImageModal] = useState(null);
   const responsesRef = useRef(null);
 
-  // Fetch current blog post with real-time view increment and cache synchronization
+  // Fetch current blog post
   const {
     data: blog,
     isLoading,
@@ -187,34 +187,9 @@ function BlogDetail() {
     queryKey: ["blog", slug],
     queryFn: async () => {
       const res = await api.get(`/api/blogs/${slug}`);
-      const fetchedBlog = res.data?.blog;
-      if (fetchedBlog) {
-        // Synchronize updated views to global blogs cache in real-time
-        queryClient.setQueryData(["blogs"], (oldBlogs) => {
-          if (!Array.isArray(oldBlogs)) return oldBlogs;
-          return oldBlogs.map((b) =>
-            b.slug === slug || b._id === fetchedBlog._id || b.slug === fetchedBlog.slug
-              ? { ...b, views: fetchedBlog.views }
-              : b
-          );
-        });
-        queryClient.setQueryData(["adminBlogs"], (oldAdminBlogs) => {
-          if (!Array.isArray(oldAdminBlogs)) return oldAdminBlogs;
-          return oldAdminBlogs.map((b) =>
-            b.slug === slug || b._id === fetchedBlog._id || b.slug === fetchedBlog.slug
-              ? { ...b, views: fetchedBlog.views }
-              : b
-          );
-        });
-      }
-      return fetchedBlog;
+      return res.data?.blog || null;
     },
-    placeholderData: () => {
-      const all = queryClient.getQueryData(["blogs"]);
-      return Array.isArray(all) ? all.find((b) => b.slug === slug || b._id === slug) : undefined;
-    },
-    staleTime: 0,
-    refetchOnMount: "always",
+    staleTime: 60 * 1000,
   });
 
   // Fetch all blogs for "More from Al-Mukhtar"
@@ -788,7 +763,7 @@ function BlogDetail() {
                     <span className="text-slate-300 dark:text-slate-600">•</span>
                     <span className="flex items-center gap-1">
                       <Eye className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-slate-400 dark:text-slate-500" />
-                      <span>{blog.views || 1} views</span>
+                      <span>{blog.views ?? 0} views</span>
                     </span>
                   </div>
                 </div>

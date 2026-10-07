@@ -7,31 +7,20 @@ import {
   MapPin,
   Phone,
   Mail,
-  Clock,
-  ArrowRight,
 } from "lucide-react";
 import { FaFacebook, FaYoutube, FaTiktok } from "react-icons/fa";
 
-const quickLinks = [
+const websiteLinks = [
+  { label: "Home", to: "/" },
   { label: "About Institute", to: "/about" },
+  { label: "Courses", to: "/courses" },
   { label: "Faculty & Scholars", to: "/teachers" },
-  { label: "Alumni & Graduates", to: "/students" },
-  { label: "Courses & Curricula", to: "/courses" },
+  { label: "Alumni & Students", to: "/students" },
   { label: "Video Lectures", to: "/videos" },
-  { label: "Blog & Publications", to: "/blog" },
-  { label: "Admissions & Apply", to: "/apply" },
+  { label: "Blog & Articles", to: "/blog" },
+  { label: "Online Admission", to: "/apply" },
+  { label: "Exam Results", to: "/result" },
   { label: "Contact Us", to: "/contact" },
-  { label: "Examination Results", to: "/result" },
-];
-
-const courseLinks = [
-  { label: "Quran Recitation & Tajweed", to: "/courses/quran-tajweed-course" },
-  {
-    label: "Islamic Studies Fundamentals",
-    to: "/courses/islamic-studies-fundamentals",
-  },
-  { label: "Arabic Language", to: "/courses" },
-  { label: "Hifz Program", to: "/courses" },
 ];
 
 const socialLinks = [
@@ -58,23 +47,30 @@ const socialLinks = [
 function Footer() {
   return (
     <footer className="bg-[#0F172A] text-white relative overflow-hidden border-t border-slate-800 font-sans">
-      <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 py-14 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
-          <div className="lg:col-span-4">
-            <div className="flex items-center gap-2.5 mb-5">
-              <div className="w-10 h-10 rounded-xl bg-teal-600 flex items-center justify-center shrink-0 shadow-sm border border-teal-500/30">
-                <BookOpen size={20} className="text-white" />
-              </div>
-              <span className="font-heading text-lg font-extrabold text-white tracking-tight">
-                Al-Mukhtar Institute
-              </span>
-            </div>
-            <p className="text-slate-300 text-sm leading-relaxed mb-6 max-w-xs break-normal hyphens-none">
-              Authentic Islamic education integrated with modern academic
-              learning — guided by qualified scholars, built on discipline,
-              sincerity, and care.
-            </p>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-12 sm:py-14">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-10">
+          
+          {/* Col 1: Brand & About */}
+          <div className="md:col-span-4 lg:col-span-4 space-y-4">
             <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-xl bg-teal-600 flex items-center justify-center shrink-0 shadow-sm border border-teal-500/30">
+                <BookOpen size={18} className="text-white" />
+              </div>
+              <div className="flex flex-col min-w-0">
+                <span className="font-heading text-lg font-extrabold text-white tracking-tight leading-tight">
+                  Al-Mukhtar
+                </span>
+                <span className="text-[11px] text-slate-400 font-normal">
+                  Where the chosen rise
+                </span>
+              </div>
+            </div>
+            
+            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-sm">
+              Authentic Islamic education integrated with modern academic learning — guided by qualified scholars, built on discipline, sincerity, and classical scholarship.
+            </p>
+
+            <div className="flex items-center gap-2 pt-1">
               {socialLinks.map((social, i) => {
                 const Icon = social.icon;
                 return (
@@ -84,10 +80,10 @@ function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className={`w-9 h-9 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-center ${social.color} group transition-all`}
+                    className={`w-8 h-8 rounded-lg bg-slate-800/90 border border-slate-700/80 flex items-center justify-center ${social.color} group transition-all`}
                   >
                     <Icon
-                      size={15}
+                      size={14}
                       className="text-slate-300 group-hover:text-white transition-colors"
                     />
                   </a>
@@ -96,38 +92,17 @@ function Footer() {
             </div>
           </div>
 
-          <div className="lg:col-span-3">
-            <h4 className="text-teal-400 text-xs font-bold tracking-wider uppercase font-mono mb-5">
-              Quick Links
+          {/* Col 2: All Website Pages in 2 Columns */}
+          <div className="md:col-span-4 lg:col-span-5">
+            <h4 className="text-teal-400 text-xs font-bold tracking-wider uppercase font-mono mb-4">
+              Website Navigation
             </h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link, i) => (
+            <ul className="grid grid-cols-2 gap-x-4 sm:gap-x-6 gap-y-2.5">
+              {websiteLinks.map((link, i) => (
                 <li key={i}>
                   <Link
                     to={link.to}
-                    className="group inline-flex items-center gap-1.5 text-slate-300 text-sm hover:text-teal-300 transition-colors"
-                  >
-                    <ArrowRight
-                      size={13}
-                      className="text-teal-400 opacity-0 -translate-x-1.5 group-hover:opacity-100 group-hover:translate-x-0 transition-all"
-                    />
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg:col-span-2">
-            <h4 className="text-teal-400 text-xs font-bold tracking-wider uppercase font-mono mb-5">
-              Courses
-            </h4>
-            <ul className="space-y-3">
-              {courseLinks.map((link, i) => (
-                <li key={i}>
-                  <Link
-                    to={link.to}
-                    className="text-slate-300 text-sm hover:text-teal-300 transition-colors"
+                    className="text-slate-300 text-xs sm:text-sm hover:text-teal-300 hover:underline transition-colors block py-0.5"
                   >
                     {link.label}
                   </Link>
@@ -136,14 +111,15 @@ function Footer() {
             </ul>
           </div>
 
-          <div className="lg:col-span-3">
-            <h4 className="text-teal-400 text-xs font-bold tracking-wider uppercase font-mono mb-5">
+          {/* Col 3: Direct Contact Information */}
+          <div className="md:col-span-4 lg:col-span-3">
+            <h4 className="text-teal-400 text-xs font-bold tracking-wider uppercase font-mono mb-4">
               Contact Us
             </h4>
-            <ul className="space-y-4">
+            <ul className="space-y-4 sm:space-y-4.5">
               <li className="flex items-start gap-3">
-                <MapPin size={16} className="text-teal-400 mt-0.5 shrink-0" />
-                <span className="text-slate-300 text-sm leading-relaxed break-normal hyphens-none">
+                <MapPin size={16} className="text-teal-400 mt-1 shrink-0" />
+                <span className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                   Ghaz Masjid, Tanga Adda, Landi Arbab, Peshawar, KPK, Pakistan
                 </span>
               </li>
@@ -151,7 +127,7 @@ function Footer() {
                 <Phone size={16} className="text-teal-400 shrink-0" />
                 <a
                   href="tel:+923339176894"
-                  className="text-slate-300 text-sm hover:text-teal-300 transition-colors"
+                  className="text-slate-300 text-xs sm:text-sm hover:text-teal-300 hover:underline transition-colors"
                 >
                   +92 333 9176894
                 </a>
@@ -160,26 +136,21 @@ function Footer() {
                 <Mail size={16} className="text-teal-400 shrink-0" />
                 <a
                   href="mailto:izhar5ullah@gmail.com"
-                  className="text-slate-300 text-sm hover:text-teal-300 transition-colors"
+                  className="text-slate-300 text-xs sm:text-sm hover:text-teal-300 hover:underline transition-colors truncate"
+                  title="izhar5ullah@gmail.com"
                 >
                   izhar5ullah@gmail.com
                 </a>
               </li>
-              <li className="flex items-start gap-3">
-                <Clock size={16} className="text-teal-400 mt-0.5 shrink-0" />
-                <span className="text-slate-300 text-sm leading-relaxed">
-                  Sat – Thu: 8:00 AM – 6:00 PM
-                  <br />
-                  Friday: Closed
-                </span>
-              </li>
             </ul>
           </div>
+
         </div>
       </div>
 
+      {/* Bottom Copyright Strip */}
       <div className="relative z-10 border-t border-slate-800/80 bg-[#020617]">
-        <div className="max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-4 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs text-slate-400">
           <p className="text-center sm:text-left">
             © {new Date().getFullYear()} Al-Mukhtar Institute. All rights reserved.
           </p>

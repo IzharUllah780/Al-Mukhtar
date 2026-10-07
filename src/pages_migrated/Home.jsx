@@ -120,20 +120,20 @@ function Home() {
               <span className="block mt-2">Guided by qualified Islamic scholars holding authentic chains of transmission (Sanad), our programs provide a disciplined, step-by-step learning journey tailored for university students, professionals, and seekers of all backgrounds.</span>
             </p>
 
-            {/* Action Buttons (Full width on mobile, inline on desktop) */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 w-full sm:w-auto">
+            {/* Action Buttons (Single Row on Mobile & Desktop) */}
+            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:items-center sm:gap-3 pt-2 w-full sm:w-auto max-w-md sm:max-w-none">
               <Link
                 to="/courses"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-3 text-xs sm:text-sm transition-all text-center rounded-xl shadow-xs hover:shadow-md active:scale-98"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-teal-600 hover:bg-teal-700 text-white font-bold px-3 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm transition-all text-center rounded-xl shadow-xs hover:shadow-md active:scale-98"
               >
-                <span>Explore Courses</span>
+                <span className="truncate">Explore Courses</span>
               </Link>
               <Link
                 to="/blog"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/25 font-bold px-6 py-3 text-xs sm:text-sm transition-all text-center rounded-xl shadow-xs hover:shadow-md active:scale-98 backdrop-blur-xs"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/25 font-bold px-3 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm transition-all text-center rounded-xl shadow-xs hover:shadow-md active:scale-98 backdrop-blur-xs"
               >
-                <span>Read Blogs</span>
-                <ArrowRight size={15} className="shrink-0" />
+                <span className="truncate">Read Blogs</span>
+                <ArrowRight size={14} className="shrink-0" />
               </Link>
             </div>
 
@@ -421,12 +421,19 @@ function Home() {
           </div>
 
           {coursesLoading && featuredCourses.length === 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
               {[...Array(6)].map((_, i) => (
-                <div key={i} className="border border-slate-200 dark:border-slate-800 overflow-hidden animate-pulse bg-white dark:bg-slate-900 p-4 space-y-3 rounded-xl">
-                  <div className="h-44 bg-slate-100 dark:bg-slate-800" />
-                  <div className="h-4 bg-slate-100 dark:bg-slate-800 w-3/4" />
-                  <div className="h-3 bg-slate-100 dark:bg-slate-800 w-full" />
+                <div key={i} className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/80 dark:border-slate-800 overflow-hidden animate-pulse">
+                  <div className="w-full aspect-[16/9] bg-slate-100 dark:bg-slate-800" />
+                  <div className="p-4 space-y-2.5">
+                    <div className="w-20 h-3 bg-slate-100 dark:bg-slate-800 rounded" />
+                    <div className="w-4/5 h-4 bg-slate-100 dark:bg-slate-800 rounded" />
+                    <div className="w-full h-3 bg-slate-100 dark:bg-slate-800 rounded" />
+                    <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-between">
+                      <div className="w-16 h-3 bg-slate-100 dark:bg-slate-800 rounded" />
+                      <div className="w-16 h-3 bg-slate-100 dark:bg-slate-800 rounded" />
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -442,7 +449,7 @@ function Home() {
 
           {featuredCourses.length > 0 && (
             <div className="space-y-6 sm:space-y-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 items-start">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 items-start">
                 {featuredCourses.map((course) => (
                   <CourseCard key={course._id || course.slug} course={course} />
                 ))}
@@ -677,19 +684,19 @@ function Home() {
             <p className="text-slate-600 dark:text-slate-300 text-xs sm:text-sm sm:text-base leading-relaxed font-normal max-w-xl mx-auto">
               Join students learning under qualified scholars in a structured, supportive academic environment.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+            <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-row sm:items-center sm:justify-center sm:gap-3 pt-2 max-w-md mx-auto sm:max-w-none">
               <Link
                 to="/apply"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-teal-600 hover:bg-teal-700 dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold px-6 py-3 shadow-xs transition-all text-xs sm:text-sm rounded-xl hover:shadow-md active:scale-98"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-teal-600 hover:bg-teal-700 dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold px-3 sm:px-6 py-2.5 sm:py-3 shadow-xs transition-all text-xs sm:text-sm rounded-xl hover:shadow-md active:scale-98"
               >
-                <span>Apply Now</span>
-                <ArrowRight size={14} />
+                <span className="truncate">Apply Now</span>
+                <ArrowRight size={14} className="shrink-0" />
               </Link>
               <Link
                 to="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold px-6 py-3 transition-all text-xs sm:text-sm rounded-xl hover:shadow-md active:scale-98"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 sm:gap-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold px-3 sm:px-6 py-2.5 sm:py-3 transition-all text-xs sm:text-sm rounded-xl hover:shadow-md active:scale-98"
               >
-                <span>Contact Admissions</span>
+                <span className="truncate">Contact Us</span>
               </Link>
             </div>
           </div>

@@ -645,7 +645,7 @@ function AdminBlog() {
                     <td className="py-2.5 px-3 whitespace-nowrap">
                       <div className="flex items-center gap-1 text-[11px] text-slate-600 dark:text-slate-300 font-mono">
                         <Eye className="w-3 h-3 text-slate-400 dark:text-slate-500" />
-                        <span>{blog.views || 1}</span>
+                        <span>{blog.views ?? 0}</span>
                       </div>
                     </td>
 

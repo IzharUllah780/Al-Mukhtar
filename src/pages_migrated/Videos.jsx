@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import { Link } from "@/lib/navigation-adapter";
 import { useVideos } from "@/lib/queries";
 import VideoCard from "@/components/VideoCard.jsx";
 import ApiErrorState from "@/components/ApiErrorState.jsx";
-import { Search, ArrowLeft, Play } from "lucide-react";
+import { Search, ArrowUpRight } from "lucide-react";
 import { FaYoutube } from "react-icons/fa";
 
 function Videos() {
@@ -25,52 +24,55 @@ function Videos() {
   return (
     <div className="bg-white dark:bg-[#070d18] font-sans text-slate-900 dark:text-slate-100 min-h-screen transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 py-6 sm:py-10 space-y-6 sm:space-y-8">
-        {/* Simple & Professional Hero Header */}
-        <header className="space-y-3 sm:space-y-4">
-          {/* Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
-            <Link to="/" className="hover:text-slate-900 dark:hover:text-white transition-colors">
-              Home
-            </Link>
-            <span className="text-slate-400">/</span>
-            <span className="text-teal-600 dark:text-teal-400 font-bold">Video Lectures</span>
-          </div>
-
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        {/* Professional Hero Header */}
+        <header className="space-y-5">
+          {/* Main Title & YouTube Channel Link */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="space-y-1.5 max-w-2xl">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black dark:text-white font-heading tracking-tight">
-                Video Lectures
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white font-heading tracking-tight">
+                YouTube Videos & Lectures
               </h1>
-              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
-                Authentic Islamic lectures, lessons, and scholarly discourses delivered by resident faculty.
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+                Explore our collection of Islamic discourses, lessons, and scholarly lectures published directly from our official YouTube channel.
               </p>
             </div>
 
-            {/* Search Input */}
-            <div className="relative w-full md:w-80 shrink-0">
+            {/* Redirect Link with Arrow */}
+            <a
+              href="https://youtube.com/@muhammad.anwar80?feature=shared"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 active:scale-[0.98] text-white text-xs sm:text-sm font-semibold transition-all shadow-sm hover:shadow-red-500/20 shrink-0 w-fit group cursor-pointer"
+            >
+              <FaYoutube size={16} className="text-white shrink-0" />
+              <span>Visit YouTube Channel</span>
+              <ArrowUpRight size={15} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            </a>
+          </div>
+
+          {/* Search Bar & Count Toolbar */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+            <div className="relative w-full sm:max-w-md">
               <Search
                 size={16}
-                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 pointer-events-none"
               />
               <input
                 type="text"
-                placeholder="Search lectures..."
+                placeholder="Search YouTube videos by title or topic..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-teal-600 dark:focus:border-teal-400 transition-colors shadow-2xs"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none focus:border-red-500 dark:focus:border-red-500 focus:ring-2 focus:ring-red-500/10 transition-all shadow-2xs"
               />
             </div>
+
+            {videos.length > 0 && !isLoading && (
+              <div className="text-xs text-slate-500 dark:text-slate-400 font-mono self-start sm:self-center">
+                Showing <strong className="text-slate-900 dark:text-white font-bold">{filteredVideos.length}</strong> of {videos.length} YouTube videos
+              </div>
+            )}
           </div>
         </header>
-
-        {/* Video Count Tag */}
-        {videos.length > 0 && !isLoading && (
-          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-mono">
-            <span>
-              Showing <strong className="text-slate-900 dark:text-white font-bold">{filteredVideos.length}</strong> of {videos.length} videos
-            </span>
-          </div>
-        )}
 
         {/* Loading State */}
         {isLoading && (
@@ -93,8 +95,8 @@ function Videos() {
         {/* Error State */}
         {isError && !isLoading && (
           <ApiErrorState
-            title="Unable to load video lectures"
-            message="Could not retrieve the video catalog from the server. Check your network connection and click refresh."
+            title="Unable to load YouTube videos"
+            message="Could not retrieve the YouTube videos list from the server. Check your network connection and click refresh."
             onRetry={refetch}
             isRetrying={isFetching}
           />
@@ -108,12 +110,12 @@ function Videos() {
             </div>
             <div className="space-y-1">
               <h3 className="font-heading font-bold text-slate-900 dark:text-white text-base sm:text-lg">
-                No Video Lectures Found
+                No YouTube Videos Found
               </h3>
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
                 {search
                   ? `No video matches the search term "${search}". Try searching with different keywords.`
-                  : "Video lectures will be uploaded here shortly. Please check back soon."}
+                  : "YouTube videos will be posted here shortly. Please check back soon."}
               </p>
             </div>
             {search && (

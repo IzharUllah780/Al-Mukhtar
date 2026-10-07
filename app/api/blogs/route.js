@@ -44,7 +44,7 @@ export async function POST(req) {
     const blog = await Blog.create({
       ...validation.data,
       author: auth.id,
-      views: 1,
+      views: 0,
     });
 
     return NextResponse.json({ success: true, blog }, { status: 201 });

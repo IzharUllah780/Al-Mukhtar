@@ -293,55 +293,80 @@ export async function sendApplicationConfirmationEmail({
 
 /**
  * Send contact form submission to ADMIN_EMAIL via Resend.
+ * Clean, normal, professional email layout (no nested card containers).
  */
 export async function sendContactFormEmail({ name, email, phone, subject, message }) {
   const adminEmail = process.env.ADMIN_EMAIL || "izhar5ullah@gmail.com";
-  const emailSubject = `[Inquiry] ${subject || "New Message from Website"}`;
+  const emailSubject = `[Inquiry] ${subject || "New Message from Website"} - ${name}`;
 
-  const contentHtml = `
-    <div style="display: inline-block; padding: 4px 12px; background-color: #f1f5f9; border-radius: 9999px; margin-bottom: 16px;">
-      <span style="font-size: 12px; font-weight: 700; color: #475569;">Website Contact Form</span>
-    </div>
+  const sanitizedName = (name || "Visitor").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const sanitizedEmail = (email || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const sanitizedPhone = (phone || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const sanitizedSubject = (subject || "General Inquiry").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const sanitizedMessage = (message || "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-    <h1 style="margin: 0 0 16px 0; font-size: 20px; font-weight: 700; color: #0f172a; line-height: 1.3;">
-      New Inquiry from ${name}
-    </h1>
-
-    <div style="margin: 0 0 24px 0; padding: 18px 20px; background-color: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; font-size: 14px; line-height: 1.8;">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td style="color: #64748b; width: 30%; padding: 4px 0;">Sender:</td>
-          <td style="color: #0f172a; font-weight: 600; padding: 4px 0;">${name}</td>
-        </tr>
-        <tr>
-          <td style="color: #64748b; padding: 4px 0;">Email:</td>
-          <td style="color: #0d9488; font-weight: 600; padding: 4px 0;"><a href="mailto:${email}" style="color: #0d9488; text-decoration: none;">${email}</a></td>
-        </tr>
-        <tr>
-          <td style="color: #64748b; padding: 4px 0;">Phone:</td>
-          <td style="color: #0f172a; padding: 4px 0;">${phone || "Not provided"}</td>
-        </tr>
-        <tr>
-          <td style="color: #64748b; padding: 4px 0;">Subject:</td>
-          <td style="color: #0f172a; font-weight: 600; padding: 4px 0;">${subject}</td>
-        </tr>
-      </table>
-    </div>
-
-    <div style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 8px;">
-      Message Content:
-    </div>
-    
-    <div style="padding: 16px 20px; background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; font-size: 14px; color: #1e293b; line-height: 1.7; white-space: pre-wrap;">
-      ${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
-    </div>
-  `;
-
-  const html = renderBaseTemplate({
-    title: emailSubject,
-    preheader: `New message from ${name}: ${subject}`,
-    contentHtml,
+  const dateString = new Date().toLocaleString("en-US", {
+    dateStyle: "medium",
+    timeStyle: "short",
   });
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${emailSubject}</title>
+</head>
+<body style="margin: 0; padding: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #1e293b; background-color: #ffffff;">
+  <div style="max-width: 600px; margin: 0 auto;">
+    <div style="padding-bottom: 14px; border-bottom: 2px solid #0d9488; margin-bottom: 18px;">
+      <h2 style="margin: 0 0 4px 0; font-size: 18px; color: #0f172a; font-weight: 700;">
+        Al-Mukhtar Institute — Website Inquiry
+      </h2>
+      <p style="margin: 0; font-size: 13px; color: #64748b;">
+        Received on ${dateString}
+      </p>
+    </div>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 20px; font-size: 14px; line-height: 1.8;">
+      <tr>
+        <td style="width: 140px; color: #64748b; vertical-align: top; padding: 3px 0;"><strong>Sender:</strong></td>
+        <td style="color: #0f172a; font-weight: 600; padding: 3px 0;">${sanitizedName}</td>
+      </tr>
+      <tr>
+        <td style="color: #64748b; vertical-align: top; padding: 3px 0;"><strong>Email:</strong></td>
+        <td style="color: #0d9488; padding: 3px 0;"><a href="mailto:${sanitizedEmail}" style="color: #0d9488; text-decoration: none; font-weight: 600;">${sanitizedEmail}</a></td>
+      </tr>
+      <tr>
+        <td style="color: #64748b; vertical-align: top; padding: 3px 0;"><strong>Phone / WhatsApp:</strong></td>
+        <td style="color: #0f172a; padding: 3px 0;">${sanitizedPhone || "Not provided"}</td>
+      </tr>
+      <tr>
+        <td style="color: #64748b; vertical-align: top; padding: 3px 0;"><strong>Subject:</strong></td>
+        <td style="color: #0f172a; font-weight: 600; padding: 3px 0;">${sanitizedSubject}</td>
+      </tr>
+    </table>
+
+    <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; margin-bottom: 24px;">
+      <div style="font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #64748b; margin-bottom: 10px;">
+        Message Content
+      </div>
+      <div style="font-size: 15px; color: #0f172a; line-height: 1.7; white-space: pre-wrap;">
+${sanitizedMessage}
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 12px; color: #94a3b8; line-height: 1.5;">
+      <p style="margin: 0 0 4px 0; color: #64748b;">
+        You can reply directly to this email to respond to ${sanitizedName} (<a href="mailto:${sanitizedEmail}" style="color: #0d9488; text-decoration: none;">${sanitizedEmail}</a>).
+      </p>
+      <p style="margin: 0;">
+        Al-Mukhtar Institute of Islamic Sciences &bull; Ghaz Masjid, Tanga Adda, Landi Arbab, Peshawar, Pakistan
+      </p>
+    </div>
+  </div>
+</body>
+</html>`;
 
   try {
     return await resend.emails.send({

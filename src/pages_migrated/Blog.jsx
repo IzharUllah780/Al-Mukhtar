@@ -204,19 +204,17 @@ function Blog() {
                     key={cat}
                     type="button"
                     onClick={() => handleCategorySelect(cat)}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all shrink-0 cursor-pointer whitespace-nowrap flex items-center gap-2 ${
-                      isActive
+                    className={`px-4 py-2 rounded-full text-xs font-semibold transition-all shrink-0 cursor-pointer whitespace-nowrap flex items-center gap-2 ${isActive
                         ? "bg-teal-600 dark:bg-teal-600 text-white shadow-sm font-bold"
                         : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700"
-                    }`}
+                      }`}
                   >
                     <span>{cat}</span>
                     <span
-                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${
-                        isActive
+                      className={`text-[10px] px-2 py-0.5 rounded-full font-mono ${isActive
                           ? "bg-white/20 text-white"
                           : "bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400"
-                      }`}
+                        }`}
                     >
                       {count}
                     </span>
@@ -249,11 +247,10 @@ function Blog() {
                 <button
                   type="button"
                   onClick={() => setViewMode("grid")}
-                  className={`p-1.5 rounded-lg transition-all cursor-pointer ${
-                    viewMode === "grid"
+                  className={`p-1.5 rounded-lg transition-all cursor-pointer ${viewMode === "grid"
                       ? "bg-white dark:bg-slate-700 text-teal-600 dark:text-teal-300 shadow-sm font-bold"
                       : "text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200"
-                  }`}
+                    }`}
                   title="Grid View"
                 >
                   <LayoutGrid className="w-4 h-4" />
@@ -261,11 +258,10 @@ function Blog() {
                 <button
                   type="button"
                   onClick={() => setViewMode("list")}
-                  className={`p-1.5 rounded-lg transition-all cursor-pointer ${
-                    viewMode === "list"
+                  className={`p-1.5 rounded-lg transition-all cursor-pointer ${viewMode === "list"
                       ? "bg-white dark:bg-slate-700 text-teal-600 dark:text-teal-300 shadow-sm font-bold"
                       : "text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-200"
-                  }`}
+                    }`}
                   title="List View"
                 >
                   <ListIcon className="w-4 h-4" />
@@ -408,11 +404,10 @@ function Blog() {
                             key={`page-${item}`}
                             type="button"
                             onClick={() => handlePageChange(item)}
-                            className={`w-9 h-9 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${
-                              isPageActive
+                            className={`w-9 h-9 rounded-full text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${isPageActive
                                 ? "bg-teal-600 text-white shadow-sm scale-105"
                                 : "border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:border-teal-600 dark:hover:border-teal-400 hover:text-teal-600 dark:hover:text-teal-300 shadow-sm"
-                            }`}
+                              }`}
                           >
                             {item}
                           </button>
