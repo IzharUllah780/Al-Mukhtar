@@ -210,7 +210,7 @@ export default function NotificationModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="notification-card-title"
-        className={`fixed inset-0 z-[99999] flex items-center justify-center p-4 sm:p-6 transition-all duration-300 ${
+        className={`fixed inset-0 z-99999 flex items-center justify-center p-4 sm:p-6 transition-all duration-300 ${
           isClosing ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
@@ -229,7 +229,7 @@ export default function NotificationModal({
           }`}
         >
           {/* Top Decorative Notification Accent Line */}
-          <div className="h-1 bg-gradient-to-r from-teal-500 via-emerald-500 to-teal-600 w-full shrink-0" />
+          <div className="h-1 bg-linear-to-r from-teal-500 via-emerald-500 to-teal-600 w-full shrink-0" />
 
           {/* ── NOTIFICATION HEADER ── */}
           <div className="px-5 py-3.5 bg-slate-50/80 dark:bg-slate-900/60 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
@@ -379,7 +379,7 @@ export default function NotificationModal({
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-[1000000] flex items-center justify-center p-4 bg-black/95 animate-in fade-in duration-150"
+          className="fixed inset-0 z-1000000 flex items-center justify-center p-4 bg-black/95 animate-in fade-in duration-150"
         >
           <div
             onClick={() => setIsFullscreenImage(false)}
