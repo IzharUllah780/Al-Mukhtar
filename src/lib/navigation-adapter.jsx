@@ -159,6 +159,12 @@ export function useSearchParams() {
     return new URLSearchParams();
   });
 
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      setParams(new URLSearchParams(window.location.search));
+    }
+  }, [pathname]);
+
   const setSearchParams = React.useCallback(
     (newParams) => {
       const current = new URLSearchParams(
@@ -173,7 +179,9 @@ export function useSearchParams() {
           }
         });
       }
-      router.push(`${pathname}?${current.toString()}`);
+      const qs = current.toString();
+      router.push(qs ? `${pathname}?${qs}` : pathname);
+      setParams(current);
     },
     [params, pathname, router]
   );

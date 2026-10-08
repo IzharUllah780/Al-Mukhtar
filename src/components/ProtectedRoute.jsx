@@ -1,14 +1,15 @@
 "use client";
 
-import React from "react";
-import { Navigate, useLocation } from "@/lib/navigation-adapter";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useLocation } from "@/lib/navigation-adapter";
 import { useAuth } from "./AuthContext.jsx";
 
 /** Shows a centered spinner while auth is being loaded */
 function AuthLoader() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-      <div className="w-8 h-8 border-4 border-teal-200 border-t-[#0D9488] rounded-full animate-spin" />
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-[#070d18] transition-colors">
+      <div className="w-9 h-9 border-3 border-teal-200 dark:border-teal-900 border-t-[#0D9488] rounded-full animate-spin" />
     </div>
   );
 }
@@ -19,8 +20,18 @@ function AuthLoader() {
  */
 export function GuestRoute({ children }) {
   const { user, loading } = useAuth();
-  if (loading) return <AuthLoader />;
-  if (user) return <Navigate to="/" replace />;
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && user) {
+      router.replace("/");
+    }
+  }, [loading, user, router]);
+
+  if (loading || user) {
+    return <AuthLoader />;
+  }
+
   return children;
 }
 
@@ -31,22 +42,43 @@ export function GuestRoute({ children }) {
 export function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
   const location = useLocation();
-  if (loading) return <AuthLoader />;
-  if (!user) {
-    const fullRedirect = location.pathname + (location.search || "");
-    return <Navigate to={`/login?redirect=${encodeURIComponent(fullRedirect)}`} replace />;
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      const fullRedirect = location.pathname + (location.search || "");
+      router.replace(`/login?redirect=${encodeURIComponent(fullRedirect)}`);
+    }
+  }, [loading, user, location.pathname, location.search, router]);
+
+  if (loading || !user) {
+    return <AuthLoader />;
   }
+
   return children;
 }
 
 /**
- * AdminRoute — only accessible when logged in AND role === "admin".
+ * AdminRoute — only accessible when logged in AND role === "admin" / "superadmin".
  * Non-admins are redirected to "/".
  */
 export function AdminRoute({ children }) {
   const { user, loading } = useAuth();
-  if (loading) return <AuthLoader />;
-  if (!user) return <Navigate to="/login" replace />;
-  if (user.role !== "admin" && user.role !== "superadmin") return <Navigate to="/" replace />;
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading) {
+      if (!user) {
+        router.replace("/login");
+      } else if (user.role !== "admin" && user.role !== "superadmin") {
+        router.replace("/");
+      }
+    }
+  }, [loading, user, router]);
+
+  if (loading || !user || (user.role !== "admin" && user.role !== "superadmin")) {
+    return <AuthLoader />;
+  }
+
   return children;
 }
