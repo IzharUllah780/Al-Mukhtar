@@ -52,54 +52,70 @@ function StepEmail({ onNext }) {
   });
 
   return (
-    <div className="w-full max-w-[420px]">
-      <div className="mb-8">
-        <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center mb-5 border border-teal-100">
-          <Mail size={22} />
+    <div className="w-full max-w-[440px]">
+      <div className="flex flex-col items-center lg:items-start text-center lg:text-left mb-6">
+        <div className="w-14 h-14 rounded-2xl bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center mb-4 border border-teal-200/60 dark:border-teal-800/60 shadow-sm shadow-teal-500/10">
+          <Mail size={24} />
         </div>
-        <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 mb-1.5 tracking-tight">
+        <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
           Forgot your password?
         </h2>
-        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
-          Enter your registered email address. We'll send you a 6-digit OTP to reset your password.
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-normal mt-1.5 max-w-xs sm:max-w-none">
+          Enter your registered email address. We'll send you a 6-digit verification code to reset your password.
         </p>
       </div>
 
       {mutation.isError && (
-        <div className="mb-5 text-xs sm:text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 font-medium">
+        <div className="mb-5 text-xs sm:text-sm text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/80 rounded-2xl px-4 py-3 font-medium animate-in fade-in duration-200">
           {getSanitizedError(mutation.error, "Something went wrong. Please try again.")}
         </div>
       )}
 
       <form onSubmit={handleSubmit((d) => mutation.mutate(d))} className="space-y-4">
-        <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+        <div className="space-y-1.5">
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             Email Address
           </label>
-          <input
-            type="email"
-            placeholder="you@example.com"
-            className={`w-full px-4 py-2.5 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] ${errors.email ? "border-rose-400 bg-rose-50/30" : "border-slate-200 bg-white"
+          <div className="relative flex items-center">
+            <div className="absolute left-3.5 pointer-events-none text-slate-400 dark:text-slate-500">
+              <Mail size={17} />
+            </div>
+            <input
+              type="email"
+              placeholder="you@example.com"
+              autoComplete="email"
+              className={`w-full pl-10 pr-4 py-3 sm:py-2.5 rounded-xl sm:rounded-xl border text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] dark:focus:border-[#0D9488] ${
+                errors.email
+                  ? "border-rose-400 bg-rose-50/30 dark:bg-rose-950/20"
+                  : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80"
               }`}
-            {...register("email", {
-              required: "Email is required",
-              pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Enter a valid email" },
-            })}
-          />
-          {errors.email && <p className="text-xs text-rose-500 mt-1.5 font-medium">{errors.email.message}</p>}
+              {...register("email", {
+                required: "Email is required",
+                pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: "Enter a valid email" },
+              })}
+            />
+          </div>
+          {errors.email && <p className="text-xs text-rose-500 mt-1 font-medium">{errors.email.message}</p>}
         </div>
 
         <button
           type="submit"
           disabled={mutation.isPending}
-          className="w-full bg-[#0D9488] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0F766E] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed text-center"
+          className="w-full h-12 rounded-xl sm:rounded-xl bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white font-bold text-sm sm:text-base shadow-sm shadow-teal-600/25 active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-2 flex items-center justify-center cursor-pointer"
         >
-          {mutation.isPending ? "Sending OTP..." : "Send OTP"}
+          {mutation.isPending ? (
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <span>Sending OTP...</span>
+            </div>
+          ) : (
+            <span>Send Reset Code</span>
+          )}
         </button>
       </form>
 
-      <p className="text-xs sm:text-sm text-center text-slate-500 mt-6">
-        <Link to="/login" className="inline-flex items-center gap-1.5 text-[#0D9488] font-bold hover:underline">
+      <p className="text-xs sm:text-sm text-center text-slate-500 dark:text-slate-400 mt-6">
+        <Link to="/login" className="inline-flex items-center gap-1.5 text-teal-600 dark:text-teal-400 font-bold hover:underline">
           <ArrowLeft size={14} /> Back to Login
         </Link>
       </p>
@@ -127,64 +143,77 @@ function StepOtp({ email, onNext }) {
   });
 
   return (
-    <div className="w-full max-w-[420px]">
-      <div className="mb-8">
-        <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center mb-5 border border-teal-100">
-          <KeyRound size={22} />
+    <div className="w-full max-w-[440px]">
+      <div className="flex flex-col items-center lg:items-start text-center lg:text-left mb-6">
+        <div className="w-14 h-14 rounded-2xl bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center mb-4 border border-teal-200/60 dark:border-teal-800/60 shadow-sm shadow-teal-500/10">
+          <KeyRound size={24} />
         </div>
-        <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 mb-1.5 tracking-tight">
-          Enter the OTP
+        <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+          Enter verification code
         </h2>
-        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
-          We sent a 6-digit code to <span className="font-semibold text-slate-800">{email}</span>. It expires in 10 minutes.
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-normal mt-1.5 max-w-xs sm:max-w-none">
+          We sent a 6-digit code to <strong className="font-semibold text-slate-900 dark:text-white break-all">{email}</strong>. It expires in 10 minutes.
         </p>
       </div>
 
       {mutation.isError && (
-        <div className="mb-5 text-xs sm:text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 font-medium">
+        <div className="mb-5 text-xs sm:text-sm text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/80 rounded-2xl px-4 py-3 font-medium animate-in fade-in duration-200">
           {getSanitizedError(mutation.error, "Invalid or expired OTP. Please try again.")}
         </div>
       )}
       {resendMutation.isSuccess && (
-        <div className="mb-5 text-xs sm:text-sm text-teal-800 bg-teal-50 border border-teal-200 rounded-xl px-4 py-3 font-medium">
-          A new OTP has been sent to your email.
+        <div className="mb-5 text-xs sm:text-sm text-teal-800 dark:text-teal-200 bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 rounded-2xl px-4 py-3 font-medium flex items-center gap-2">
+          <CheckCircle2 size={16} className="text-teal-600 dark:text-teal-400 shrink-0" />
+          <span>A fresh code has been sent to your email.</span>
         </div>
       )}
 
       <form onSubmit={handleSubmit((d) => mutation.mutate(d))} className="space-y-4">
-        <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+        <div className="space-y-1.5">
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             6-Digit OTP
           </label>
           <input
             type="text"
+            inputMode="numeric"
             maxLength={6}
-            placeholder="e.g. 482910"
-            className={`w-full px-4 py-2.5 rounded-xl border text-center text-2xl font-bold tracking-[0.4em] text-slate-900 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] bg-white ${errors.otp ? "border-rose-400 bg-rose-50/30" : "border-slate-200"
-              }`}
+            placeholder="••••••"
+            className={`w-full px-4 py-3.5 sm:py-3 rounded-xl sm:rounded-2xl border text-center text-2xl font-black tracking-[0.35em] text-slate-900 dark:text-white outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] dark:focus:border-[#0D9488] ${
+              errors.otp
+                ? "border-rose-400 bg-rose-50/30 dark:bg-rose-950/20"
+                : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80"
+            }`}
             {...register("otp", {
               required: "OTP is required",
               pattern: { value: /^\d{6}$/, message: "Enter a valid 6-digit OTP" },
             })}
           />
-          {errors.otp && <p className="text-xs text-rose-500 mt-1.5 font-medium">{errors.otp.message}</p>}
+          {errors.otp && <p className="text-xs text-rose-500 mt-1 font-medium">{errors.otp.message}</p>}
         </div>
 
         <button
           type="submit"
           disabled={mutation.isPending}
-          className="w-full bg-[#0D9488] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0F766E] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed text-center"
+          className="w-full h-12 rounded-xl sm:rounded-xl bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white font-bold text-sm sm:text-base shadow-sm shadow-teal-600/25 active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-2 flex items-center justify-center cursor-pointer"
         >
-          {mutation.isPending ? "Verifying..." : "Verify OTP"}
+          {mutation.isPending ? (
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <span>Verifying Code...</span>
+            </div>
+          ) : (
+            <span>Verify OTP</span>
+          )}
         </button>
       </form>
 
-      <p className="text-xs sm:text-sm text-center text-slate-500 mt-5">
+      <p className="text-xs sm:text-sm text-center text-slate-500 dark:text-slate-400 mt-5">
         Didn't receive it?{" "}
         <button
+          type="button"
           onClick={() => resendMutation.mutate()}
           disabled={resendMutation.isPending}
-          className="text-[#0D9488] font-bold hover:underline disabled:opacity-50"
+          className="text-teal-600 dark:text-teal-400 font-bold hover:underline disabled:opacity-50 cursor-pointer"
         >
           {resendMutation.isPending ? "Sending..." : "Resend OTP"}
         </button>
@@ -213,34 +242,40 @@ function StepNewPassword({ resetToken, onDone }) {
   });
 
   return (
-    <div className="w-full max-w-[420px]">
-      <div className="mb-8">
-        <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center mb-5 border border-teal-100">
-          <Lock size={22} />
+    <div className="w-full max-w-[440px]">
+      <div className="flex flex-col items-center lg:items-start text-center lg:text-left mb-6">
+        <div className="w-14 h-14 rounded-2xl bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center mb-4 border border-teal-200/60 dark:border-teal-800/60 shadow-sm shadow-teal-500/10">
+          <Lock size={24} />
         </div>
-        <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 mb-1.5 tracking-tight">
+        <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
           Set a new password
         </h2>
-        <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
-          Choose a strong password with at least 6 characters.
+        <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-normal mt-1.5 max-w-xs sm:max-w-none">
+          Choose a strong, secure password with at least 6 characters.
         </p>
       </div>
 
       {mutation.isError && (
-        <div className="mb-5 text-xs sm:text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 font-medium">
+        <div className="mb-5 text-xs sm:text-sm text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/80 rounded-2xl px-4 py-3 font-medium animate-in fade-in duration-200">
           {getSanitizedError(mutation.error, "Something went wrong. Please try again.")}
         </div>
       )}
 
       <form onSubmit={handleSubmit((d) => mutation.mutate(d))} className="space-y-4">
-        <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">New Password</label>
-          <div className="relative">
+        <div className="space-y-1.5">
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">New Password</label>
+          <div className="relative flex items-center">
+            <div className="absolute left-3.5 pointer-events-none text-slate-400 dark:text-slate-500">
+              <Lock size={17} />
+            </div>
             <input
               type={showPwd ? "text" : "password"}
               placeholder="Enter new password"
-              className={`w-full px-4 py-2.5 pr-11 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] bg-white ${errors.newPassword ? "border-rose-400 bg-rose-50/30" : "border-slate-200"
-                }`}
+              className={`w-full pl-10 pr-11 py-3 sm:py-2.5 rounded-xl sm:rounded-xl border text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] dark:focus:border-[#0D9488] ${
+                errors.newPassword
+                  ? "border-rose-400 bg-rose-50/30 dark:bg-rose-950/20"
+                  : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80"
+              }`}
               {...register("newPassword", {
                 required: "Password is required",
                 minLength: { value: 6, message: "At least 6 characters" },
@@ -250,22 +285,28 @@ function StepNewPassword({ resetToken, onDone }) {
               type="button"
               tabIndex={-1}
               onClick={() => setShowPwd((p) => !p)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+              className="absolute right-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-1.5 cursor-pointer"
             >
-              {showPwd ? <EyeOff size={16} /> : <Eye size={16} />}
+              {showPwd ? <EyeOff size={17} /> : <Eye size={17} />}
             </button>
           </div>
-          {errors.newPassword && <p className="text-xs text-rose-500 mt-1.5 font-medium">{errors.newPassword.message}</p>}
+          {errors.newPassword && <p className="text-xs text-rose-500 mt-1 font-medium">{errors.newPassword.message}</p>}
         </div>
 
-        <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Confirm Password</label>
-          <div className="relative">
+        <div className="space-y-1.5">
+          <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Confirm Password</label>
+          <div className="relative flex items-center">
+            <div className="absolute left-3.5 pointer-events-none text-slate-400 dark:text-slate-500">
+              <Lock size={17} />
+            </div>
             <input
               type={showConfirm ? "text" : "password"}
               placeholder="Confirm new password"
-              className={`w-full px-4 py-2.5 pr-11 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] bg-white ${errors.confirmPassword ? "border-rose-400 bg-rose-50/30" : "border-slate-200"
-                }`}
+              className={`w-full pl-10 pr-11 py-3 sm:py-2.5 rounded-xl sm:rounded-xl border text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] dark:focus:border-[#0D9488] ${
+                errors.confirmPassword
+                  ? "border-rose-400 bg-rose-50/30 dark:bg-rose-950/20"
+                  : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80"
+              }`}
               {...register("confirmPassword", {
                 required: "Please confirm your password",
                 validate: (v) => v === watch("newPassword") || "Passwords do not match",
@@ -275,22 +316,29 @@ function StepNewPassword({ resetToken, onDone }) {
               type="button"
               tabIndex={-1}
               onClick={() => setShowConfirm((p) => !p)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"
+              className="absolute right-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 p-1.5 cursor-pointer"
             >
-              {showConfirm ? <EyeOff size={16} /> : <Eye size={16} />}
+              {showConfirm ? <EyeOff size={17} /> : <Eye size={17} />}
             </button>
           </div>
           {errors.confirmPassword && (
-            <p className="text-xs text-rose-500 mt-1.5 font-medium">{errors.confirmPassword.message}</p>
+            <p className="text-xs text-rose-500 mt-1 font-medium">{errors.confirmPassword.message}</p>
           )}
         </div>
 
         <button
           type="submit"
           disabled={mutation.isPending}
-          className="w-full bg-[#0D9488] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0F766E] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed text-center"
+          className="w-full h-12 rounded-xl sm:rounded-xl bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white font-bold text-sm sm:text-base shadow-sm shadow-teal-600/25 active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-2 flex items-center justify-center cursor-pointer"
         >
-          {mutation.isPending ? "Resetting..." : "Reset Password"}
+          {mutation.isPending ? (
+            <div className="flex items-center gap-2">
+              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+              <span>Resetting Password...</span>
+            </div>
+          ) : (
+            <span>Reset Password</span>
+          )}
         </button>
       </form>
     </div>
@@ -303,17 +351,19 @@ function StepNewPassword({ resetToken, onDone }) {
 function StepSuccess() {
   const navigate = useNavigate();
   return (
-    <div className="w-full max-w-[420px] text-center">
-      <div className="w-16 h-16 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center mx-auto mb-6 border border-teal-100">
+    <div className="w-full max-w-[440px] text-center">
+      <div className="w-16 h-16 rounded-2xl bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center mx-auto mb-5 border border-teal-200/60 dark:border-teal-800 shadow-sm shadow-teal-500/10">
         <CheckCircle2 size={32} />
       </div>
-      <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 mb-2 tracking-tight">Password reset!</h2>
-      <p className="text-xs sm:text-sm text-slate-500 leading-relaxed mb-6 font-normal">
+      <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mb-2 tracking-tight">
+        Password reset!
+      </h2>
+      <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-6 font-normal max-w-xs mx-auto">
         Your password has been reset successfully. You can now sign in with your new password.
       </p>
       <button
         onClick={() => navigate("/login")}
-        className="w-full bg-[#0D9488] text-white py-3 rounded-xl font-bold hover:bg-[#0F766E] transition-all text-sm shadow-sm text-center"
+        className="w-full h-12 rounded-xl sm:rounded-xl bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white font-bold text-sm sm:text-base shadow-sm shadow-teal-600/25 active:scale-[0.99] transition-all flex items-center justify-center cursor-pointer"
       >
         Go to Login
       </button>
@@ -335,8 +385,8 @@ function ForgotPassword() {
   const stepIndex = STEPS.indexOf(step);
 
   return (
-    <div className="min-h-screen min-h-[100dvh] w-full flex bg-slate-50 font-sans">
-      {/* Left Panel */}
+    <div className="min-h-screen min-h-[100dvh] w-full flex bg-slate-50 dark:bg-[#070d18] font-sans transition-colors">
+      {/* Left Panel (Desktop Large Screens Only) */}
       <div className="hidden lg:flex lg:w-[42%] relative bg-gradient-to-br from-[#0A2540] via-[#081E2E] to-[#0D9488] overflow-hidden">
         <img
           src={moon_light}
@@ -390,26 +440,25 @@ function ForgotPassword() {
         </div>
       </div>
 
-      {/* Right Panel (Starts from top on mobile with full screen height, centered on desktop) */}
-      <div className="w-full lg:w-[58%] flex flex-col justify-start lg:justify-center items-center px-3 pt-6 pb-10 sm:px-14 sm:py-12 min-h-[100dvh] lg:min-h-screen overflow-y-auto">
-        <div className="w-full max-w-[420px] flex flex-col justify-start">
-          {/* Back to Home Button on top left */}
-          <div className="mb-4 sm:mb-6 self-start">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#0D9488] bg-white hover:bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200/80 transition-all group shadow-2xs"
-            >
-              <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
-              <span>Back to Home</span>
-            </Link>
-          </div>
+      {/* Right Panel (Premium Brand App UI on Mobile, Centered Form on Desktop) */}
+      <div className="w-full lg:w-[58%] flex flex-col justify-between items-center px-4 py-5 sm:px-10 sm:py-10 lg:px-14 lg:py-12 min-h-[100dvh] lg:min-h-screen overflow-y-auto">
+        
+        {/* Top Back Navigation (Clean Arrow + Text for both mobile and desktop) */}
+        <div className="w-full max-w-[440px] flex items-center justify-between mb-5 self-center">
+          <Link
+            to="/login"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors group"
+          >
+            <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
+            <span>Back to Login</span>
+          </Link>
+          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-950/60 px-2.5 py-1 rounded-full border border-teal-200/60 dark:border-teal-800/60">
+            {step === "email" ? "Step 1 of 3" : step === "otp" ? "Step 2 of 3" : step === "password" ? "Step 3 of 3" : "Completed"}
+          </span>
+        </div>
 
-          {/* Mobile logo */}
-          <div className="flex lg:hidden items-center gap-2.5 mb-6 self-start">
-            <img src={Logo} alt="Logo" className="w-9 h-9 rounded-none object-cover shadow-2xs" />
-            <span className="font-heading font-extrabold text-base text-slate-900">Al-Mukhtar Institute</span>
-          </div>
-
+        {/* Main Step Container */}
+        <div className="w-full max-w-[440px] flex-1 flex flex-col justify-center my-auto">
           {step === "email" && (
             <StepEmail
               onNext={(e) => {
@@ -435,6 +484,15 @@ function ForgotPassword() {
           )}
           {step === "done" && <StepSuccess />}
         </div>
+
+        {/* Mobile Bottom Footer Brand / Privacy Notice */}
+        <div className="w-full max-w-[440px] pt-4 mt-auto text-center">
+          <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400 dark:text-slate-500 font-normal">
+            <CheckCircle2 size={13} className="text-teal-600 dark:text-teal-400" />
+            <span>Al-Mukhtar Account Security</span>
+          </div>
+        </div>
+
       </div>
     </div>
   );

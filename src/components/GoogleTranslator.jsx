@@ -161,7 +161,7 @@ export default function GoogleTranslator({ onLanguageChange }) {
         >
           <span
             className="notranslate font-bold"
-            style={{ fontFamily: "'Noto Nastaliq Urdu', 'Noto Sans Arabic', serif" }}
+            style={{ fontFamily: "'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', 'Noto Sans Arabic', serif" }}
           >
             اردو
           </span>

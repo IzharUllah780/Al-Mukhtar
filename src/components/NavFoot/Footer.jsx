@@ -57,7 +57,7 @@ function Footer() {
                 <BookOpen size={18} className="text-white" />
               </div>
               <div className="flex flex-col min-w-0">
-                <span className="font-heading text-lg font-extrabold text-white tracking-tight leading-tight">
+                <span className="font-brand text-xl sm:text-[22px] font-bold text-white tracking-tight leading-tight">
                   Al-Mukhtar
                 </span>
                 <span className="text-[11px] text-slate-400 font-normal">

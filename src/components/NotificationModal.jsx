@@ -220,9 +220,9 @@ export default function NotificationModal({
           className="fixed inset-0 bg-slate-900/60 dark:bg-black/80 backdrop-blur-xs transition-opacity"
         />
 
-        {/* ── NOTIFICATION CARD CONTAINER ── */}
+        {/* ── NOTIFICATION CARD CONTAINER (FIXED UNIFORM DIMENSIONS) ── */}
         <div
-          className={`relative w-full max-w-lg bg-white dark:bg-[#0c1424] text-slate-800 dark:text-slate-100 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col transition-all duration-300 transform ${
+          className={`relative w-[92vw] sm:w-[500px] max-w-[500px] h-[480px] sm:h-[500px] max-h-[88vh] bg-white dark:bg-[#0c1424] text-slate-800 dark:text-slate-100 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col transition-all duration-300 transform ${
             isClosing
               ? "scale-95 translate-y-4 opacity-0"
               : "scale-100 translate-y-0 opacity-100"
@@ -232,7 +232,7 @@ export default function NotificationModal({
           <div className="h-1 bg-linear-to-r from-teal-500 via-emerald-500 to-teal-600 w-full shrink-0" />
 
           {/* ── NOTIFICATION HEADER ── */}
-          <div className="px-5 py-3.5 bg-slate-50/80 dark:bg-slate-900/60 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+          <div className="px-5 py-3.5 bg-slate-50/80 dark:bg-slate-900/60 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
             <div className="flex items-center gap-2.5 min-w-0">
               {/* Notification Bell with pulsating indicator */}
               <div className="relative w-8 h-8 rounded-xl bg-teal-500/10 dark:bg-teal-400/10 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0 border border-teal-500/20">
@@ -276,12 +276,12 @@ export default function NotificationModal({
           </div>
 
           {/* ── NOTIFICATION BODY ── */}
-          <div className="p-5 space-y-3.5 max-h-[60vh] overflow-y-auto custom-scrollbar">
+          <div className="p-5 space-y-3.5 flex-1 min-h-0 overflow-y-auto custom-scrollbar flex flex-col">
             {/* Optional Attached Notice Image / Flyer */}
             {hasImage && (
               <div
                 onClick={() => setIsFullscreenImage(true)}
-                className="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800/80 bg-slate-100 dark:bg-slate-900 max-h-52"
+                className="relative group cursor-pointer overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800/80 bg-slate-100 dark:bg-slate-900 h-44 sm:h-48 w-full shrink-0"
               >
                 <img
                   src={notificationImage}
@@ -303,7 +303,7 @@ export default function NotificationModal({
             {hasTitle && (
               <h2
                 id="notification-card-title"
-                className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug font-heading tracking-tight"
+                className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-snug font-heading tracking-tight shrink-0"
               >
                 {title}
               </h2>
@@ -318,7 +318,7 @@ export default function NotificationModal({
           </div>
 
           {/* ── NOTIFICATION FOOTER & ACTIONS ── */}
-          <div className="px-5 py-3.5 bg-slate-50 dark:bg-slate-900/80 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
+          <div className="px-5 py-3.5 bg-slate-50 dark:bg-slate-900/80 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
             {/* Multiple notices pagination arrows */}
             {hasMultiple ? (
               <div className="flex items-center gap-1">

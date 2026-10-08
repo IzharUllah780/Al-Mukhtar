@@ -608,27 +608,25 @@ function BlogDetail() {
         {blogImages.length > 0 && (
           <div className="w-full">
             <div
-              className={`grid gap-2.5 sm:gap-4 items-stretch ${
-                blogImages.length === 1
-                  ? "grid-cols-1 sm:max-w-md md:max-w-lg"
-                  : blogImages.length === 2
+              className={`grid gap-2.5 sm:gap-4 items-stretch ${blogImages.length === 1
+                ? "grid-cols-1 sm:max-w-md md:max-w-lg"
+                : blogImages.length === 2
                   ? "grid-cols-1 sm:grid-cols-2"
                   : blogImages.length === 3
-                  ? "grid-cols-1 sm:grid-cols-3"
-                  : "grid-cols-2 sm:grid-cols-2 md:grid-cols-4"
-              }`}
+                    ? "grid-cols-1 sm:grid-cols-3"
+                    : "grid-cols-2 sm:grid-cols-2 md:grid-cols-4"
+                }`}
             >
               {blogImages.map((img, idx) => (
                 <div
                   key={idx}
                   onClick={() => setActiveImageModal(img)}
-                  className={`group relative rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-900 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer ${
-                    blogImages.length === 1
-                      ? "h-48 sm:h-64 md:h-76 w-full"
-                      : blogImages.length === 2
+                  className={`group relative rounded-xl sm:rounded-2xl overflow-hidden bg-slate-100 dark:bg-slate-900 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer ${blogImages.length === 1
+                    ? "h-48 sm:h-64 md:h-76 w-full"
+                    : blogImages.length === 2
                       ? "h-48 sm:h-64 md:h-76"
                       : "h-40 sm:h-52 md:h-64"
-                  }`}
+                    }`}
                   title="Click to view full image"
                 >
                   <img
@@ -683,24 +681,27 @@ function BlogDetail() {
                   {mobileTocOpen ? "Collapse" : "Explore Sections"}
                 </span>
                 <ChevronDown
-                  className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${mobileTocOpen ? "rotate-180" : ""
-                    }`}
+                  className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                    mobileTocOpen ? "rotate-180" : ""
+                  }`}
                 />
               </div>
             </button>
 
             {mobileTocOpen && (
-              <nav className="mt-3 pt-2 space-y-1 max-h-64 overflow-y-auto">
+              <nav className="mt-3 pt-2 space-y-1 max-h-64 overflow-y-auto toc-scrollbar pr-1">
                 {headings.map((h) => (
                   <button
                     key={h.id}
                     type="button"
                     onClick={() => scrollToHeading(h.id)}
-                    className={`block w-full text-left py-2 px-2.5 rounded-xl text-xs cursor-pointer transition-all hover:underline underline-offset-3 hover:text-teal-600 dark:hover:text-blue-400 ${h.level === 3 ? "pl-5 text-[11px]" : "font-semibold"
-                      } ${activeHeadingId === h.id
+                    className={`block w-full text-left py-2 px-2.5 rounded-xl text-xs cursor-pointer transition-all hover:underline underline-offset-3 hover:text-teal-600 dark:hover:text-blue-400 ${
+                      h.level === 3 ? "pl-5 text-[11px]" : "font-semibold"
+                    } ${
+                      activeHeadingId === h.id
                         ? "bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 font-bold underline border border-teal-200/60 dark:border-teal-800/60"
                         : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
-                      }`}
+                    }`}
                   >
                     {h.text}
                   </button>
@@ -838,7 +839,7 @@ function BlogDetail() {
                   </span>
                 </div>
 
-                <nav className="flex-1 overflow-y-auto pr-1.5 mt-3 space-y-1.5 text-xs border-l-2 border-slate-200 dark:border-slate-700 pl-2.5 scroll-smooth">
+                <nav className="flex-1 overflow-y-auto pr-1.5 mt-3 space-y-1.5 text-xs border-l-2 border-slate-200 dark:border-slate-700 pl-2.5 scroll-smooth toc-scrollbar">
                   {headings.map((h) => {
                     const isActive = activeHeadingId === h.id;
                     return (
@@ -846,11 +847,13 @@ function BlogDetail() {
                         key={h.id}
                         type="button"
                         onClick={() => scrollToHeading(h.id)}
-                        className={`block w-full text-left transition-all py-1 leading-snug cursor-pointer break-normal hover:underline underline-offset-3 hover:text-teal-600 dark:hover:text-blue-400 ${h.level === 3 ? "pl-2.5 text-[11px]" : "font-semibold"
-                          } ${isActive
+                        className={`block w-full text-left transition-all py-1 leading-snug cursor-pointer break-normal hover:underline underline-offset-3 hover:text-teal-600 dark:hover:text-blue-400 ${
+                          h.level === 3 ? "pl-2.5 text-[11px]" : "font-semibold"
+                        } ${
+                          isActive
                             ? "text-teal-600 dark:text-teal-400 font-bold underline translate-x-1"
                             : "text-slate-600 dark:text-slate-300 hover:translate-x-0.5"
-                          }`}
+                        }`}
                       >
                         {h.text}
                       </button>

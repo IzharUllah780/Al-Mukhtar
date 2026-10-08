@@ -96,7 +96,14 @@ export default function RootLayout({ children }) {
         <meta name="google-site-verification" content="X4KwyEHF-QaAKtrY1ctfAEeMaC2QG2j_lT63WGuOJOg" />
         <meta name="theme-color" content="#0D9488" />
         
-        {/* Urdu & Arabic High-Quality Calligraphy & Sans Fonts (Gulzar, Noto Nastaliq Urdu, Noto Sans Arabic, Amiri) */}
+        {/* Urdu & Arabic High-Quality Calligraphy & Sans Fonts */}
+        <link
+          rel="preload"
+          href="/fonts/jameel-noori-nastaleeq.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

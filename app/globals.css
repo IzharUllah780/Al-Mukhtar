@@ -4,6 +4,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ── Typography & Premier Academic Font Families ── */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,700&display=swap');
 @import "@fontsource/plus-jakarta-sans/400.css";
 @import "@fontsource/plus-jakarta-sans/500.css";
 @import "@fontsource/plus-jakarta-sans/600.css";
@@ -23,12 +24,36 @@
 @import "@fontsource/jetbrains-mono/500.css";
 @import "@fontsource/jetbrains-mono/600.css";
 
+/* ── Urdu Nastaleeq Font (Jameel Noori Nastaleeq) ── */
+@font-face {
+  font-family: "Jameel Noori Nastaleeq";
+  src: url("/fonts/jameel-noori-nastaleeq.ttf") format("truetype"),
+       url("/fonts/JameelNooriNastaleeq.ttf") format("truetype"),
+       url("/fonts/Jameel%20Noori%20Nastaleeq%20Regular.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JameelNooriNastaleeq";
+  src: url("/fonts/jameel-noori-nastaleeq.ttf") format("truetype"),
+       url("/fonts/JameelNooriNastaleeq.ttf") format("truetype"),
+       url("/fonts/Jameel%20Noori%20Nastaleeq%20Regular.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-heading: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-sans: "Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-body: "Inter", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-serif: "Playfair Display", Georgia, serif;
+  --font-brand: "Cinzel", "Playfair Display", Georgia, serif;
+  --font-logo: "Cinzel", "Playfair Display", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-urdu: "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", serif;
 
   /* Brand color palette - Modern Prestigious Academic System */
   --color-brand: #0D9488;
@@ -76,6 +101,12 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
+.font-brand,
+.font-logo {
+  font-family: var(--font-brand), "Cinzel", "Playfair Display", Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
 /* ── Public Website: Extra Bold & Heavy Headings ── */
 .public-site h1,
 .public-site h2,
@@ -97,6 +128,55 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
   letter-spacing: -0.02em;
 }
+
+/* ── Urdu Typography Scale (+2px exact increment across all elements) ── */
+html:is([lang="ur"], .urdu-mode, .translated-rtl) {
+  font-size: 18px; /* Standard base is 16px; +2px gives 18px */
+}
+
+html:is([lang="ur"], .urdu-mode, .translated-rtl) body {
+  font-family: var(--font-urdu), "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", serif;
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+html:is([lang="ur"], .urdu-mode, .translated-rtl) h1,
+html:is([lang="ur"], .urdu-mode, .translated-rtl) h2,
+html:is([lang="ur"], .urdu-mode, .translated-rtl) h3,
+html:is([lang="ur"], .urdu-mode, .translated-rtl) h4,
+html:is([lang="ur"], .urdu-mode, .translated-rtl) h5,
+html:is([lang="ur"], .urdu-mode, .translated-rtl) h6,
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .font-heading {
+  font-family: var(--font-urdu), "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", serif;
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+
+/* Explicit pixel text classes +2px scale in Urdu */
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[9px\] { font-size: 11px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[9\.5px\] { font-size: 11.5px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[10px\] { font-size: 12px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[10\.5px\] { font-size: 12.5px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[11px\] { font-size: 13px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[12px\] { font-size: 14px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[13px\] { font-size: 15px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[13\.5px\] { font-size: 15.5px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[14px\] { font-size: 16px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[15px\] { font-size: 17px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[16px\] { font-size: 18px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[17px\] { font-size: 19px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[18px\] { font-size: 20px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[20px\] { font-size: 22px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[22px\] { font-size: 24px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[24px\] { font-size: 26px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[26px\] { font-size: 28px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[28px\] { font-size: 30px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[32px\] { font-size: 34px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[36px\] { font-size: 38px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[38px\] { font-size: 40px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[40px\] { font-size: 42px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[42px\] { font-size: 44px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[48px\] { font-size: 50px; }
 
 button {
   cursor: pointer;
@@ -135,6 +215,62 @@ button {
 .custom-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: rgba(13, 148, 136, 0.4) transparent;
+}
+
+/* Smart TOC Scroller */
+.toc-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(13, 148, 136, 0.45) rgba(148, 163, 184, 0.08);
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+.toc-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.toc-scrollbar::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.08);
+  border-radius: 9999px;
+  margin: 2px 0;
+}
+
+.toc-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(13, 148, 136, 0.45);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  transition: all 0.2s ease-in-out;
+}
+
+.toc-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #0D9488;
+}
+
+.toc-scrollbar::-webkit-scrollbar-thumb:active {
+  background: #0F766E;
+}
+
+/* Dark mode scroller */
+html.dark .toc-scrollbar {
+  scrollbar-color: rgba(45, 212, 191, 0.5) rgba(255, 255, 255, 0.05);
+}
+
+html.dark .toc-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+html.dark .toc-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(45, 212, 191, 0.45);
+}
+
+html.dark .toc-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #2dd4bf;
+}
+
+html.dark .toc-scrollbar::-webkit-scrollbar-thumb:active {
+  background: #14b8a6;
 }
 
 /* Dark mode overrides for blog & course rich text content */
@@ -618,7 +754,8 @@ font[style*="background-color"]:hover {
 html.urdu-mode,
 html[lang="ur"],
 body.urdu-mode,
-body[dir="rtl"] {
+body[dir="rtl"],
+.translated-rtl {
   direction: rtl;
   text-align: right;
   letter-spacing: 0 !important;
@@ -629,14 +766,21 @@ body[dir="rtl"] {
 [dir="rtl"] body,
 html.urdu-mode body,
 html[lang="ur"] body,
+.translated-rtl body,
 [dir="rtl"] .blog-content,
 [dir="rtl"] .course-content,
-[dir="rtl"] .prose {
-  font-family: "Noto Nastaliq Urdu", "Noto Sans Arabic", "Gulzar", "Jameel Noori Nastaleeq", "Urdu Typesetting", "Amiri", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  line-height: 2.05 !important;
+[dir="rtl"] .prose,
+html.urdu-mode .blog-content,
+html.urdu-mode .course-content,
+html.urdu-mode .prose,
+html[lang="ur"] .blog-content,
+html[lang="ur"] .course-content,
+html[lang="ur"] .prose {
+  font-family: "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", "Noto Sans Arabic", "Gulzar", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  line-height: 2.15 !important;
 }
 
-/* Headings & Prominent Titles in Urdu Calligraphy */
+/* Headings & Prominent Titles in Jameel Noori Nastaleeq */
 [dir="rtl"] h1,
 [dir="rtl"] h2,
 [dir="rtl"] h3,
@@ -656,9 +800,22 @@ html.urdu-mode h3,
 html.urdu-mode h4,
 html.urdu-mode h5,
 html.urdu-mode h6,
-html.urdu-mode .font-heading {
-  font-family: "Gulzar", "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Urdu Typesetting", "Amiri", serif !important;
-  line-height: 2.2 !important;
+html.urdu-mode .font-heading,
+html[lang="ur"] h1,
+html[lang="ur"] h2,
+html[lang="ur"] h3,
+html[lang="ur"] h4,
+html[lang="ur"] h5,
+html[lang="ur"] h6,
+html[lang="ur"] .font-heading,
+.translated-rtl h1,
+.translated-rtl h2,
+.translated-rtl h3,
+.translated-rtl h4,
+.translated-rtl h5,
+.translated-rtl h6 {
+  font-family: "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", "Gulzar", serif !important;
+  line-height: 2.1 !important;
   letter-spacing: 0 !important;
   text-align: start;
 }
@@ -670,20 +827,56 @@ html.urdu-mode .font-heading {
 [dir="rtl"] button,
 [dir="rtl"] nav a,
 [dir="rtl"] header a,
-[dir="rtl"] .notranslate[dir="ltr"] {
-  font-family: "Noto Sans Arabic", "Noto Nastaliq Urdu", "Gulzar", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+html.urdu-mode input,
+html.urdu-mode textarea,
+html.urdu-mode select,
+html.urdu-mode button,
+html.urdu-mode nav a,
+html.urdu-mode header a,
+html[lang="ur"] input,
+html[lang="ur"] textarea,
+html[lang="ur"] select,
+html[lang="ur"] button,
+html[lang="ur"] nav a,
+html[lang="ur"] header a {
+  font-family: "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", "Noto Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   letter-spacing: 0 !important;
 }
 
+/* All Paragraphs, Spans, Labels, Links, Lists, and Translated Font Tags in Urdu */
 [dir="rtl"] p,
-[dir="rtl"] span,
+[dir="rtl"] span:not(.notranslate):not([dir="ltr"]),
 [dir="rtl"] label,
 [dir="rtl"] a,
 [dir="rtl"] li,
 [dir="rtl"] td,
 [dir="rtl"] th,
-[dir="rtl"] font {
+[dir="rtl"] font,
+html.urdu-mode p,
+html.urdu-mode span:not(.notranslate):not([dir="ltr"]),
+html.urdu-mode label,
+html.urdu-mode a,
+html.urdu-mode li,
+html.urdu-mode td,
+html.urdu-mode th,
+html.urdu-mode font,
+html[lang="ur"] p,
+html[lang="ur"] span:not(.notranslate):not([dir="ltr"]),
+html[lang="ur"] label,
+html[lang="ur"] a,
+html[lang="ur"] li,
+html[lang="ur"] td,
+html[lang="ur"] th,
+html[lang="ur"] font,
+.translated-rtl p,
+.translated-rtl span:not(.notranslate):not([dir="ltr"]),
+.translated-rtl font,
+.urdu-font,
+.font-urdu,
+*:lang(ur) {
+  font-family: "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", "Noto Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   letter-spacing: 0 !important;
+  line-height: 2.1 !important;
 }
 
 /* Blog & Course Content Paragraph Spacing */

@@ -63,7 +63,7 @@ function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
               <GraduationCap size={15} />
             </div>
             <div className="min-w-0">
-              <span className="font-heading font-bold text-sm tracking-tight text-white block leading-tight">
+              <span className="font-brand font-bold text-[15px] tracking-tight text-white block leading-tight">
                 Al-Mukhtar
               </span>
               <span className="text-[9px] text-[#5EEAD4] font-mono uppercase tracking-wider font-semibold block">
@@ -91,7 +91,7 @@ function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
               end={item.end}
               onClick={() => setSidebarOpen(false)}
               className={({ isActive }) =>
-                `flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                `flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13.5px] lg:text-xs font-medium transition-all ${
                   isActive
                     ? "bg-[#0D9488] text-white font-semibold shadow-xs"
                     : "text-slate-300 hover:bg-white/[0.06] hover:text-white"
@@ -108,7 +108,7 @@ function AdminSidebar({ sidebarOpen, setSidebarOpen }) {
         <div className="p-3 border-t border-slate-800/80 shrink-0 bg-[#050D17]">
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium text-slate-400 hover:bg-rose-500/10 hover:text-rose-400 transition-colors"
+            className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13.5px] lg:text-xs font-medium text-slate-400 hover:bg-rose-500/10 hover:text-rose-400 transition-colors"
           >
             <LogOut size={15} className="shrink-0" />
             <span>Sign Out</span>

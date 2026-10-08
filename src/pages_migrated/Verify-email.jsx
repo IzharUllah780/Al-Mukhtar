@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate, useSearchParams } from "@/lib/navigation-adapter";
 import api from "@/lib/api";
-import { Mail, ArrowLeft } from "lucide-react";
+import { Mail, ArrowLeft, ShieldCheck, CheckCircle2, RefreshCw } from "lucide-react";
 import { Logo, moon_light } from "../assets/assets.js";
 
 
@@ -95,8 +95,9 @@ function VerifyEmail() {
   };
 
   return (
-    <div className="min-h-screen min-h-[100dvh] w-full flex bg-slate-50 font-sans">
-
+    <div className="min-h-screen min-h-[100dvh] w-full flex bg-slate-50 dark:bg-[#070d18] font-sans transition-colors">
+      
+      {/* Left Panel - Branding (Desktop Large Screens Only) */}
       <div className="hidden lg:flex lg:w-[42%] relative bg-gradient-to-br from-[#0A2540] via-[#081E2E] to-[#0D9488] overflow-hidden">
         <img
           src={moon_light}
@@ -132,50 +133,44 @@ function VerifyEmail() {
         </div>
       </div>
 
-      {/* Right Panel - Form (Starts from top on mobile with full screen height, centered on desktop) */}
-      <div className="w-full lg:w-[58%] flex flex-col justify-start lg:justify-center items-center px-3 pt-6 pb-10 sm:px-14 sm:py-12 min-h-[100dvh] lg:min-h-screen overflow-y-auto">
-        <div className="w-full max-w-[420px] flex flex-col justify-start">
-          {/* Back to Home Button on top left */}
-          <div className="mb-4 sm:mb-6 self-start">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-xs font-bold text-slate-600 hover:text-[#0D9488] bg-white hover:bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200/80 transition-all group shadow-2xs"
-            >
-              <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-0.5" />
-              <span>Back to Home</span>
-            </Link>
-          </div>
+      {/* Right Panel - Form (Premium Brand App UI on Mobile, Centered Form on Desktop) */}
+      <div className="w-full lg:w-[58%] flex flex-col justify-between items-center px-4 py-5 sm:px-10 sm:py-10 lg:px-14 lg:py-12 min-h-[100dvh] lg:min-h-screen overflow-y-auto">
+        
+        {/* Top Back Navigation (Clean Arrow + Text for both mobile and desktop) */}
+        <div className="w-full max-w-[440px] flex items-center justify-between mb-5 self-center">
+          <Link
+            to="/signup"
+            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 transition-colors group"
+          >
+            <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
+            <span>Back to Signup</span>
+          </Link>
+          <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-50 dark:bg-teal-950/60 px-2.5 py-1 rounded-full border border-teal-200/60 dark:border-teal-800/60">
+            Step 2 of 2
+          </span>
+        </div>
 
-          {/* Mobile logo */}
-          <div className="flex lg:hidden items-center gap-2.5 mb-6">
-            <img
-              src={Logo}
-              alt="Madrasa Logo"
-              className="w-9 h-9 rounded-xl object-cover shadow-2xs"
-            />
-            <span className="font-heading font-extrabold text-base text-slate-900">
-              Al-Mukhtar Institute
-            </span>
-          </div>
+        {/* Main Content Card Container */}
+        <div className="w-full max-w-[440px] flex-1 flex flex-col justify-center my-auto">
+          
+          {/* Header & Emblem */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left mb-6">
+            <div className="w-14 h-14 rounded-2xl bg-teal-50 dark:bg-teal-950/60 text-teal-600 dark:text-teal-400 flex items-center justify-center mb-4 border border-teal-200/60 dark:border-teal-800/60 shadow-sm shadow-teal-500/10">
+              <Mail size={24} />
+            </div>
 
-          {/* Icon */}
-          <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center mb-6 border border-teal-100">
-            <Mail size={22} />
-          </div>
-
-          <div className="mb-8">
-            <h2 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 mb-1.5 tracking-tight">
+            <h1 className="font-heading text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
               Verify your email
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-normal mt-1.5 max-w-xs sm:max-w-none">
               We've sent a 6-digit verification code to{" "}
-              <span className="font-semibold text-slate-800">{email}</span>.
+              <strong className="font-semibold text-slate-900 dark:text-white break-all">{email || "your email"}</strong>.
               Enter it below to confirm your account.
             </p>
           </div>
 
           {verifyMutation.isError && (
-            <div className="mb-6 text-xs sm:text-sm text-rose-700 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3 font-medium">
+            <div className="mb-5 text-xs sm:text-sm text-rose-700 dark:text-rose-300 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/80 rounded-2xl px-4 py-3 font-medium animate-in fade-in duration-200">
               {(() => {
                 const msg = verifyMutation.error?.response?.data?.message;
                 if (
@@ -194,9 +189,16 @@ function VerifyEmail() {
             </div>
           )}
 
+          {resendMutation.isSuccess && (
+            <div className="mb-5 text-xs sm:text-sm text-teal-800 dark:text-teal-200 bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 rounded-2xl px-4 py-3 font-medium flex items-center gap-2">
+              <CheckCircle2 size={16} className="text-teal-600 dark:text-teal-400 shrink-0" />
+              <span>A fresh verification code has been sent to your email.</span>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* OTP Boxes */}
-            <div className="flex items-center justify-between gap-2 mb-2">
+            <div className="flex items-center justify-between gap-1.5 sm:gap-2 mb-3">
               {[0, 1, 2, 3, 4, 5].map((index) => (
                 <input
                   key={index}
@@ -211,44 +213,70 @@ function VerifyEmail() {
                   onChange={(e) => handleChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
                   onPaste={index === 0 ? handlePaste : undefined}
-                  className={`w-11 h-13 sm:w-14 sm:h-15 text-center text-xl font-bold rounded-xl border text-slate-900 outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] bg-white ${errors[`otp${index}`] ? "border-rose-400 bg-rose-50/30" : "border-slate-200"
-                    }`}
+                  className={`w-11 h-13 sm:w-13 sm:h-14 text-center text-xl sm:text-2xl font-black rounded-xl sm:rounded-2xl border text-slate-900 dark:text-white outline-none transition-all focus:ring-2 focus:ring-[#0D9488]/20 focus:border-[#0D9488] dark:focus:border-[#0D9488] ${
+                    errors[`otp${index}`]
+                      ? "border-rose-400 bg-rose-50/30 dark:bg-rose-950/20"
+                      : "border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 shadow-2xs"
+                  }`}
                 />
               ))}
             </div>
             {Object.keys(errors).length > 0 && (
-              <p className="text-xs text-rose-500 mt-1.5 mb-4 font-medium">
+              <p className="text-xs text-rose-500 mb-3 text-center font-medium">
                 Please enter all 6 digits
               </p>
             )}
 
-            {/* Submit */}
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={verifyMutation.isPending}
-              className="w-full bg-[#0D9488] text-white py-3 rounded-xl font-bold text-sm shadow-sm hover:bg-[#0F766E] active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-6 text-center"
+              className="w-full h-12 rounded-xl sm:rounded-xl bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white font-bold text-sm sm:text-base shadow-sm shadow-teal-600/25 active:scale-[0.99] transition-all disabled:opacity-60 disabled:cursor-not-allowed mt-4 flex items-center justify-center cursor-pointer"
             >
-              {verifyMutation.isPending ? "Verifying..." : "Verify Email"}
+              {verifyMutation.isPending ? (
+                <div className="flex items-center gap-2">
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <span>Verifying Code...</span>
+                </div>
+              ) : (
+                <span>Verify &amp; Continue</span>
+              )}
             </button>
           </form>
 
-          {/* Resend */}
-          <p className="text-xs sm:text-sm text-center text-slate-500 mt-6">
-            Didn't receive the code?{" "}
-            <button
-              type="button"
-              onClick={() => resendMutation.mutate()}
-              disabled={resendCooldown > 0 || resendMutation.isPending}
-              className="text-[#0D9488] font-bold hover:underline disabled:text-slate-400 disabled:no-underline disabled:cursor-not-allowed"
-            >
-              {resendCooldown > 0
-                ? `Resend in ${resendCooldown}s`
-                : resendMutation.isPending
-                  ? "Sending..."
-                  : "Resend code"}
-            </button>
-          </p>
+          {/* Resend Action */}
+          <div className="mt-6 text-center">
+            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+              Didn't receive the code?{" "}
+              <button
+                type="button"
+                onClick={() => resendMutation.mutate()}
+                disabled={resendCooldown > 0 || resendMutation.isPending}
+                className="text-teal-600 dark:text-teal-400 font-bold hover:underline disabled:text-slate-400 dark:disabled:text-slate-600 disabled:no-underline disabled:cursor-not-allowed cursor-pointer inline-flex items-center gap-1"
+              >
+                {resendMutation.isPending ? (
+                  <>
+                    <RefreshCw size={12} className="animate-spin" />
+                    <span>Sending...</span>
+                  </>
+                ) : resendCooldown > 0 ? (
+                  <span>Resend in {resendCooldown}s</span>
+                ) : (
+                  <span>Resend Code</span>
+                )}
+              </button>
+            </p>
+          </div>
         </div>
+
+        {/* Mobile Bottom Footer Brand / Privacy Notice */}
+        <div className="w-full max-w-[440px] pt-4 mt-auto text-center">
+          <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-400 dark:text-slate-500 font-normal">
+            <ShieldCheck size={13} className="text-teal-600 dark:text-teal-400" />
+            <span>Al-Mukhtar Islamic &amp; Academic Institute</span>
+          </div>
+        </div>
+
       </div>
     </div>
   );

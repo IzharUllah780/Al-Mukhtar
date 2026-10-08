@@ -146,7 +146,7 @@ export default function Navbar() {
               <img src={Logo} alt="Al-Mukhtar Logo" className="w-full h-full object-cover rounded-none" />
             </div>
             <div className="flex flex-col min-w-0">
-              <span className="text-base font-extrabold text-slate-900 dark:text-white font-heading tracking-tight leading-tight group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors truncate">
+              <span className="text-[17px] sm:text-[18px] font-bold text-slate-900 dark:text-white font-brand tracking-tight leading-tight group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors truncate">
                 Al-Mukhtar
               </span>
               <span className="text-[10.5px] font-normal text-slate-500 dark:text-slate-400 truncate">
@@ -266,7 +266,7 @@ export default function Navbar() {
                   Log in
                 </Link>
                 <Link
-                  to="/apply"
+                  to="/login?redirect=%2Fapply"
                   className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs shadow-2xs transition-all hover:shadow-xs active:scale-95"
                 >
                   <span>Apply Now</span>
@@ -315,7 +315,7 @@ export default function Navbar() {
               <img src={Logo} alt="Al-Mukhtar" className="w-full h-full object-cover" />
             </div>
             <div className="flex flex-col min-w-0">
-              <span className="text-sm font-bold text-slate-900 dark:text-white font-heading tracking-tight truncate">
+              <span className="text-[15px] font-bold text-slate-900 dark:text-white font-brand tracking-tight truncate">
                 Al-Mukhtar
               </span>
               <span className="text-[10px] font-normal text-slate-500 dark:text-slate-400 truncate">
@@ -349,7 +349,7 @@ export default function Navbar() {
                   key={path}
                   to={path}
                   onClick={closeMenu}
-                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-[13.5px] sm:text-sm font-medium transition-all ${
                     active
                       ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
                       : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
@@ -366,16 +366,13 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setMobileAboutExpanded((prev) => !prev)}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all cursor-pointer ${
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-[13.5px] sm:text-sm font-medium transition-all cursor-pointer ${
                   isAboutActive
                     ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-semibold"
                     : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
                 }`}
               >
-                <div className="flex items-center gap-2.5">
-                  <Building2 size={16} className="text-slate-400 dark:text-slate-500" />
-                  <span>About Institute</span>
-                </div>
+                <span>About Institute</span>
                 <ChevronDown
                   size={15}
                   className={`transition-transform duration-200 text-slate-400 ${
@@ -386,23 +383,20 @@ export default function Navbar() {
 
               {mobileAboutExpanded && (
                 <div className="ms-3 ps-3 border-s border-slate-200 dark:border-slate-800 space-y-1 my-1 animate-in fade-in slide-in-from-top-1 duration-150">
-                  {ABOUT_SUB_LINKS.map(({ name, path, icon: Icon }) => {
+                  {ABOUT_SUB_LINKS.map(({ name, path }) => {
                     const active = isLinkActive(path);
                     return (
                       <Link
                         key={path}
                         to={path}
                         onClick={closeMenu}
-                        className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                        className={`flex items-center justify-between px-3 py-2 rounded-lg text-[13.5px] font-medium transition-all ${
                           active
                             ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
                             : "text-slate-600 dark:text-slate-400 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/50"
                         }`}
                       >
-                        <div className="flex items-center gap-2 min-w-0">
-                          <Icon size={14} className="shrink-0" />
-                          <span className="truncate">{name}</span>
-                        </div>
+                        <span className="truncate">{name}</span>
                         {active && <span className="w-1.5 h-1.5 rounded-full bg-white shrink-0" />}
                       </Link>
                     );
@@ -413,17 +407,15 @@ export default function Navbar() {
 
             {/* Apply / Online Admission Link */}
             <Link
-              to="/apply"
+              to={user ? "/apply" : "/login?redirect=%2Fapply"}
               onClick={closeMenu}
-              className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+              className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-[13.5px] sm:text-sm font-medium transition-all ${
                 isLinkActive("/apply")
                   ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
                   : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
               }`}
             >
-              <span className="flex items-center gap-2">
-                <span>Apply / Admission</span>
-              </span>
+              <span>Apply / Admission</span>
               {isLinkActive("/apply") && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
             </Link>
 
@@ -431,7 +423,7 @@ export default function Navbar() {
             <Link
               to="/result"
               onClick={closeMenu}
-              className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+              className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-[13.5px] sm:text-sm font-medium transition-all ${
                 isLinkActive("/result")
                   ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
                   : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
@@ -453,7 +445,7 @@ export default function Navbar() {
                 <Link
                   to="/admin"
                   onClick={closeMenu}
-                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-[13.5px] sm:text-sm font-medium transition-all ${
                     isLinkActive("/admin")
                       ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
                       : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
@@ -467,7 +459,7 @@ export default function Navbar() {
               <Link
                 to="/profile"
                 onClick={closeMenu}
-                className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+                className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-[13.5px] sm:text-sm font-medium transition-all ${
                   isLinkActive("/profile")
                     ? "bg-teal-600 text-white dark:bg-teal-600 dark:text-white font-semibold shadow-xs"
                     : "text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800/60"
@@ -481,7 +473,7 @@ export default function Navbar() {
 
           {/* Appearance & Language Section */}
           <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 space-y-1">
-            <div className="flex items-center justify-between px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300">
+            <div className="flex items-center justify-between px-3 py-1.5 text-[13.5px] sm:text-sm font-medium text-slate-700 dark:text-slate-300">
               <span className="text-slate-500 dark:text-slate-400">Language</span>
               <GoogleTranslator onLanguageChange={closeMenu} />
             </div>
@@ -489,7 +481,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={toggleTheme}
-              className="w-full flex items-center justify-between px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer text-left"
+              className="w-full flex items-center justify-between px-3 py-1.5 text-[13.5px] sm:text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer text-left"
             >
               <div className="flex items-center gap-2">
                 {isDark ? <Moon size={15} className="text-slate-400" /> : <Sun size={15} className="text-slate-400" />}
@@ -511,14 +503,14 @@ export default function Navbar() {
               <Link
                 to="/login"
                 onClick={closeMenu}
-                className="w-full text-center py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                className="w-full text-center py-2 px-3 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-[13.5px] font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
               >
                 Log In
               </Link>
               <Link
-                to="/apply"
+                to={user ? "/apply" : "/login?redirect=%2Fapply"}
                 onClick={closeMenu}
-                className="w-full text-center py-2 px-3 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold transition-all"
+                className="w-full text-center py-2 px-3 rounded-lg bg-teal-600 hover:bg-teal-700 text-white text-[13.5px] font-semibold transition-all"
               >
                 Apply Now
               </Link>
