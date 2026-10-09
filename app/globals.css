@@ -128,15 +128,11 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-/* ── Urdu Typography Scale (+2px exact increment across all elements) ── */
-html:is([lang="ur"], .urdu-mode, .translated-rtl) {
-  font-size: 18px; /* Standard base is 16px; +2px gives 18px */
-}
-
+/* ── Urdu Typography Scale (+2px Font-Size on Text & Headings Only) ── */
 html:is([lang="ur"], .urdu-mode, .translated-rtl) body {
   font-family: var(--font-urdu), "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", serif;
-  font-size: 18px;
-  line-height: 1.8;
+  font-size: 18px; /* 16px + 2px */
+  line-height: 1.65;
 }
 
 html:is([lang="ur"], .urdu-mode, .translated-rtl) h1,
@@ -147,35 +143,80 @@ html:is([lang="ur"], .urdu-mode, .translated-rtl) h5,
 html:is([lang="ur"], .urdu-mode, .translated-rtl) h6,
 html:is([lang="ur"], .urdu-mode, .translated-rtl) .font-heading {
   font-family: var(--font-urdu), "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", serif;
-  line-height: 1.45;
+  line-height: 1.35;
   letter-spacing: 0;
 }
 
-/* Explicit pixel text classes +2px scale in Urdu */
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[9px\] { font-size: 11px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[9\.5px\] { font-size: 11.5px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[10px\] { font-size: 12px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[10\.5px\] { font-size: 12.5px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[11px\] { font-size: 13px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[12px\] { font-size: 14px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[13px\] { font-size: 15px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[13\.5px\] { font-size: 15.5px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[14px\] { font-size: 16px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[15px\] { font-size: 17px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[16px\] { font-size: 18px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[17px\] { font-size: 19px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[18px\] { font-size: 20px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[20px\] { font-size: 22px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[22px\] { font-size: 24px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[24px\] { font-size: 26px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[26px\] { font-size: 28px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[28px\] { font-size: 30px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[32px\] { font-size: 34px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[36px\] { font-size: 38px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[38px\] { font-size: 40px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[40px\] { font-size: 42px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[42px\] { font-size: 44px; }
-html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[48px\] { font-size: 50px; }
+/* Base text utility classes +2px in Urdu */
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-xs, [dir="rtl"] .text-xs { font-size: 14px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-sm, [dir="rtl"] .text-sm { font-size: 16px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-base, [dir="rtl"] .text-base { font-size: 18px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-lg, [dir="rtl"] .text-lg { font-size: 20px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-xl, [dir="rtl"] .text-xl { font-size: 22px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-2xl, [dir="rtl"] .text-2xl { font-size: 26px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-3xl, [dir="rtl"] .text-3xl { font-size: 32px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-4xl, [dir="rtl"] .text-4xl { font-size: 38px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-5xl, [dir="rtl"] .text-5xl { font-size: 50px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-6xl, [dir="rtl"] .text-6xl { font-size: 62px; }
+
+/* Explicit pixel text classes +2px in Urdu */
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[9px\], [dir="rtl"] .text-\[9px\] { font-size: 11px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[9\.5px\], [dir="rtl"] .text-\[9\.5px\] { font-size: 11.5px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[10px\], [dir="rtl"] .text-\[10px\] { font-size: 12px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[10\.5px\], [dir="rtl"] .text-\[10\.5px\] { font-size: 12.5px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[11px\], [dir="rtl"] .text-\[11px\] { font-size: 13px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[12px\], [dir="rtl"] .text-\[12px\] { font-size: 14px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[13px\], [dir="rtl"] .text-\[13px\] { font-size: 15px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[13\.5px\], [dir="rtl"] .text-\[13\.5px\] { font-size: 15.5px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[14px\], [dir="rtl"] .text-\[14px\] { font-size: 16px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[15px\], [dir="rtl"] .text-\[15px\] { font-size: 17px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[16px\], [dir="rtl"] .text-\[16px\] { font-size: 18px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[17px\], [dir="rtl"] .text-\[17px\] { font-size: 19px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[18px\], [dir="rtl"] .text-\[18px\] { font-size: 20px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[20px\], [dir="rtl"] .text-\[20px\] { font-size: 22px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[22px\], [dir="rtl"] .text-\[22px\] { font-size: 24px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[24px\], [dir="rtl"] .text-\[24px\] { font-size: 26px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[26px\], [dir="rtl"] .text-\[26px\] { font-size: 28px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[28px\], [dir="rtl"] .text-\[28px\] { font-size: 30px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[32px\], [dir="rtl"] .text-\[32px\] { font-size: 34px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[36px\], [dir="rtl"] .text-\[36px\] { font-size: 38px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[38px\], [dir="rtl"] .text-\[38px\] { font-size: 40px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[40px\], [dir="rtl"] .text-\[40px\] { font-size: 42px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[42px\], [dir="rtl"] .text-\[42px\] { font-size: 44px; }
+html:is([lang="ur"], .urdu-mode, .translated-rtl) .text-\[48px\], [dir="rtl"] .text-\[48px\] { font-size: 50px; }
+
+/* Responsive utility classes +2px in Urdu */
+@media (min-width: 640px) {
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .sm\:text-xs, [dir="rtl"] .sm\:text-xs { font-size: 14px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .sm\:text-sm, [dir="rtl"] .sm\:text-sm { font-size: 16px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .sm\:text-base, [dir="rtl"] .sm\:text-base { font-size: 18px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .sm\:text-lg, [dir="rtl"] .sm\:text-lg { font-size: 20px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .sm\:text-xl, [dir="rtl"] .sm\:text-xl { font-size: 22px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .sm\:text-2xl, [dir="rtl"] .sm\:text-2xl { font-size: 26px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .sm\:text-3xl, [dir="rtl"] .sm\:text-3xl { font-size: 32px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .sm\:text-4xl, [dir="rtl"] .sm\:text-4xl { font-size: 38px; }
+}
+
+@media (min-width: 768px) {
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .md\:text-xs, [dir="rtl"] .md\:text-xs { font-size: 14px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .md\:text-sm, [dir="rtl"] .md\:text-sm { font-size: 16px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .md\:text-base, [dir="rtl"] .md\:text-base { font-size: 18px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .md\:text-lg, [dir="rtl"] .md\:text-lg { font-size: 20px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .md\:text-xl, [dir="rtl"] .md\:text-xl { font-size: 22px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .md\:text-2xl, [dir="rtl"] .md\:text-2xl { font-size: 26px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .md\:text-3xl, [dir="rtl"] .md\:text-3xl { font-size: 32px; }
+}
+
+@media (min-width: 1024px) {
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .lg\:text-xs, [dir="rtl"] .lg\:text-xs { font-size: 14px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .lg\:text-sm, [dir="rtl"] .lg\:text-sm { font-size: 16px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .lg\:text-base, [dir="rtl"] .lg\:text-base { font-size: 18px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .lg\:text-lg, [dir="rtl"] .lg\:text-lg { font-size: 20px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .lg\:text-xl, [dir="rtl"] .lg\:text-xl { font-size: 22px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .lg\:text-2xl, [dir="rtl"] .lg\:text-2xl { font-size: 26px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .lg\:text-3xl, [dir="rtl"] .lg\:text-3xl { font-size: 32px; }
+  html:is([lang="ur"], .urdu-mode, .translated-rtl) .lg\:text-4xl, [dir="rtl"] .lg\:text-4xl { font-size: 38px; }
+}
 
 button {
   cursor: pointer;
@@ -765,18 +806,9 @@ body[dir="rtl"],
 [dir="rtl"] body,
 html.urdu-mode body,
 html[lang="ur"] body,
-.translated-rtl body,
-[dir="rtl"] .blog-content,
-[dir="rtl"] .course-content,
-[dir="rtl"] .prose,
-html.urdu-mode .blog-content,
-html.urdu-mode .course-content,
-html.urdu-mode .prose,
-html[lang="ur"] .blog-content,
-html[lang="ur"] .course-content,
-html[lang="ur"] .prose {
-  font-family: "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", "Noto Sans Arabic", "Gulzar", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-  line-height: 2.15 !important;
+.translated-rtl body {
+  font-family: var(--font-urdu), "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", "Noto Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  line-height: 1.65;
 }
 
 /* Headings & Prominent Titles in Jameel Noori Nastaleeq */
@@ -813,36 +845,57 @@ html[lang="ur"] .font-heading,
 .translated-rtl h4,
 .translated-rtl h5,
 .translated-rtl h6 {
-  font-family: "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", "Gulzar", serif !important;
-  line-height: 2.1 !important;
+  font-family: var(--font-urdu), "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", serif !important;
+  line-height: 1.35;
   letter-spacing: 0 !important;
   text-align: start;
 }
 
-/* UI Elements, Navigation, Inputs & Buttons */
-[dir="rtl"] input,
-[dir="rtl"] textarea,
-[dir="rtl"] select,
-[dir="rtl"] button,
+/* UI Elements, Navigation, Inputs & Buttons - Keep Compact Exact Height as English */
+[dir="rtl"] header,
+[dir="rtl"] nav,
 [dir="rtl"] nav a,
 [dir="rtl"] header a,
-html.urdu-mode input,
-html.urdu-mode textarea,
-html.urdu-mode select,
-html.urdu-mode button,
+[dir="rtl"] header span,
+[dir="rtl"] nav span,
+[dir="rtl"] button,
+[dir="rtl"] input,
+[dir="rtl"] select,
+[dir="rtl"] textarea,
+html.urdu-mode header,
+html.urdu-mode nav,
 html.urdu-mode nav a,
 html.urdu-mode header a,
+html.urdu-mode header span,
+html.urdu-mode nav span,
+html.urdu-mode button,
+html.urdu-mode input,
+html.urdu-mode select,
+html.urdu-mode textarea,
+html[lang="ur"] header,
+html[lang="ur"] nav,
+html[lang="ur"] nav a,
+html[lang="ur"] header a,
+html[lang="ur"] header span,
+html[lang="ur"] nav span,
+html[lang="ur"] button,
 html[lang="ur"] input,
 html[lang="ur"] textarea,
 html[lang="ur"] select,
-html[lang="ur"] button,
-html[lang="ur"] nav a,
-html[lang="ur"] header a {
-  font-family: "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", "Noto Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+.translated-rtl header,
+.translated-rtl nav,
+.translated-rtl nav a,
+.translated-rtl header a,
+.translated-rtl header span,
+.translated-rtl nav span,
+.translated-rtl button,
+.translated-rtl input {
+  font-family: var(--font-urdu), "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", "Noto Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: inherit;
   letter-spacing: 0 !important;
 }
 
-/* All Paragraphs, Spans, Labels, Links, Lists, and Translated Font Tags in Urdu */
+/* All Paragraphs, Spans, Labels, Links, Lists in Urdu */
 [dir="rtl"] p,
 [dir="rtl"] span:not(.notranslate):not([dir="ltr"]),
 [dir="rtl"] label,
@@ -850,7 +903,6 @@ html[lang="ur"] header a {
 [dir="rtl"] li,
 [dir="rtl"] td,
 [dir="rtl"] th,
-[dir="rtl"] font,
 html.urdu-mode p,
 html.urdu-mode span:not(.notranslate):not([dir="ltr"]),
 html.urdu-mode label,
@@ -858,7 +910,6 @@ html.urdu-mode a,
 html.urdu-mode li,
 html.urdu-mode td,
 html.urdu-mode th,
-html.urdu-mode font,
 html[lang="ur"] p,
 html[lang="ur"] span:not(.notranslate):not([dir="ltr"]),
 html[lang="ur"] label,
@@ -866,23 +917,42 @@ html[lang="ur"] a,
 html[lang="ur"] li,
 html[lang="ur"] td,
 html[lang="ur"] th,
-html[lang="ur"] font,
 .translated-rtl p,
 .translated-rtl span:not(.notranslate):not([dir="ltr"]),
-.translated-rtl font,
 .urdu-font,
 .font-urdu,
 *:lang(ur) {
-  font-family: "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", "Noto Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-family: var(--font-urdu), "Jameel Noori Nastaleeq", "JameelNooriNastaleeq", "Noto Nastaliq Urdu", "Noto Sans Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   letter-spacing: 0 !important;
-  line-height: 2.1 !important;
+}
+
+/* Google Translate Injected Elements Immunity */
+font,
+font:hover,
+font:focus,
+font:active {
+  line-height: inherit !important;
+  vertical-align: baseline !important;
+  display: inline !important;
 }
 
 /* Blog & Course Content Paragraph Spacing */
+[dir="rtl"] .blog-content,
+[dir="rtl"] .course-content,
+[dir="rtl"] .prose,
+html.urdu-mode .blog-content,
+html.urdu-mode .course-content,
+html.urdu-mode .prose,
+html[lang="ur"] .blog-content,
+html[lang="ur"] .course-content,
+html[lang="ur"] .prose {
+  line-height: 1.85 !important;
+}
+
 [dir="rtl"] .blog-content p,
 [dir="rtl"] .course-content p {
-  line-height: 2.15 !important;
-  margin-bottom: 1.4rem;
+  line-height: 1.85 !important;
+  margin-bottom: 1.1rem;
 }
 
 /* ── 2. Text Alignment & Content Flow in RTL ── */

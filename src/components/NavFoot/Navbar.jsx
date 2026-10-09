@@ -15,7 +15,9 @@ import {
   UserCheck,
   GraduationCap,
   Mail,
+  Phone,
 } from "lucide-react";
+import { FaFacebook, FaYoutube, FaTiktok } from "react-icons/fa";
 import { Logo } from "../../assets/assets.js";
 import { useAuth } from "../AuthContext.jsx";
 import { useTheme } from "../../context/ThemeContext.jsx";
@@ -103,16 +105,53 @@ export default function Navbar() {
       <div className="bg-slate-950 text-slate-300 text-[11px] font-sans border-b border-slate-800/80 hidden sm:block py-1.5 transition-colors">
         <div className="w-full max-w-7xl mx-auto px-3 sm:px-10 lg:px-16 flex items-center justify-between gap-4">
           
-          {/* Left: Admissions & Campus info */}
-          <div className="flex items-center gap-3 min-w-0">
-            <span className="flex items-center gap-1.5 text-teal-400 font-medium shrink-0">
-              <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-              <span>Admissions Open • Academic Session 2026</span>
-            </span>
-            <span className="text-slate-700 hidden md:inline">|</span>
-            <span className="text-slate-400 hidden md:inline truncate">
-              Peshawar Campus, KPK, Pakistan
-            </span>
+          {/* Left: Contact Helpline & Social Media Icons */}
+          <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+            {/* Helpline / Contact Number */}
+            <a
+              href="tel:+923339176894"
+              className="flex items-center gap-1.5 text-slate-300 hover:text-teal-400 transition-colors font-medium shrink-0"
+              title="Call Helpline"
+            >
+              <Phone size={12} className="text-teal-400 shrink-0" />
+              <span>+92 333 9176894</span>
+            </a>
+
+            <span className="text-slate-700">|</span>
+
+            {/* Social Media Links */}
+            <div className="flex items-center gap-2.5">
+              <a
+                href="https://youtube.com/@muhammad.anwar80?feature=shared"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube Channel"
+                title="YouTube"
+                className="text-slate-400 hover:text-red-500 transition-colors flex items-center"
+              >
+                <FaYoutube size={14} />
+              </a>
+              <a
+                href="https://www.facebook.com/share/1QH9nYGA2p/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook Page"
+                title="Facebook"
+                className="text-slate-400 hover:text-[#1877F2] transition-colors flex items-center"
+              >
+                <FaFacebook size={13} />
+              </a>
+              <a
+                href="https://www.tiktok.com/@mulanaanwar?_r=1&_t=ZS-9AD9P9nw4kW"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok Profile"
+                title="TikTok"
+                className="text-slate-400 hover:text-white transition-colors flex items-center"
+              >
+                <FaTiktok size={12} />
+              </a>
+            </div>
           </div>
 
           {/* Right: Simple Links & Language Switcher */}

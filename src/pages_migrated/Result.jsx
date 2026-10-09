@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { usePublicResults, useResultsMeta } from "@/lib/queries/results";
 import AdSenseBanner from "@/components/AdSenseBanner";
 import {
@@ -12,9 +12,7 @@ import {
   RefreshCw,
   ExternalLink,
   X,
-  ChevronDown,
   ArrowDownToLine,
-  Check,
   ShieldCheck,
   Award,
   MessageCircle,
@@ -22,9 +20,7 @@ import {
 
 export default function Result() {
   const [selectedCourse, setSelectedCourse] = useState("");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const dropdownRef = useRef(null);
   
   // Search state: Only fetch/show results when search button has been clicked
   const [hasSearched, setHasSearched] = useState(false);
@@ -33,7 +29,7 @@ export default function Result() {
   // PDF Preview Modal
   const [previewResult, setPreviewResult] = useState(null);
 
-  // TanStack Query for course metadata (available in dropdown)
+  // TanStack Query for course metadata (available in select options)
   const { data: courses = [] } = useResultsMeta();
 
   // Results query: Only enabled once the user clicks "Search Result" with a selected course
@@ -41,17 +37,6 @@ export default function Result() {
     { courseName: activeCourse },
     { enabled: Boolean(hasSearched && activeCourse) }
   );
-
-  // Close dropdown on click outside
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   const handleSearch = () => {
     if (!selectedCourse) {
@@ -61,12 +46,6 @@ export default function Result() {
     setErrorMessage("");
     setActiveCourse(selectedCourse);
     setHasSearched(true);
-  };
-
-  const handleSelectCourse = (course) => {
-    setSelectedCourse(course);
-    setErrorMessage("");
-    setDropdownOpen(false);
   };
 
   const handleReset = () => {
@@ -115,64 +94,41 @@ export default function Result() {
         <div className="space-y-2">
           <div className="flex flex-wrap items-center gap-2.5 pb-4 border-b border-slate-200 dark:border-slate-800">
             
-            {/* Custom Dropdown for Course Selection */}
-            <div className="relative" ref={dropdownRef}>
-              <button
-                type="button"
-                onClick={() => setDropdownOpen((prev) => !prev)}
-                className={`inline-flex items-center justify-between gap-2 px-3.5 py-2 rounded-lg border text-xs sm:text-sm transition cursor-pointer min-w-[200px] sm:min-w-[240px] ${
+            {/* HTML Select and Options for Course Selection */}
+            <div className="w-full sm:w-auto">
+              <select
+                id="result-course-select"
+                aria-label="Select Course"
+                value={selectedCourse}
+                onChange={(e) => {
+                  setSelectedCourse(e.target.value);
+                  setErrorMessage("");
+                }}
+                className={`w-full sm:w-auto px-3.5 py-2 rounded-lg border text-xs sm:text-sm transition cursor-pointer min-w-[200px] sm:min-w-[260px] bg-slate-50 dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 ${
                   selectedCourse
-                    ? "bg-slate-50 dark:bg-slate-900 border-teal-600/60 dark:border-teal-500/60 text-slate-900 dark:text-white font-medium"
-                    : "bg-slate-50 dark:bg-slate-900/80 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400"
+                    ? "font-medium border-teal-600/60 dark:border-teal-500/60"
+                    : "text-slate-500 dark:text-slate-400"
                 }`}
               >
-                <div className="flex items-center gap-2 truncate">
-                  <BookOpen size={14} className={selectedCourse ? "text-teal-600 dark:text-teal-400 shrink-0" : "text-slate-400 shrink-0"} />
-                  <span className="truncate">{selectedCourse || "Select Course"}</span>
-                </div>
-                <ChevronDown
-                  size={14}
-                  className={`text-slate-400 shrink-0 transition-transform duration-150 ${
-                    dropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
-
-              {/* Dropdown Menu */}
-              {dropdownOpen && (
-                <div className="absolute left-0 top-full mt-1.5 w-72 max-h-64 overflow-y-auto rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg py-1 z-30 divide-y divide-slate-100 dark:divide-slate-800/60">
-                  
-                  {/* Disabled Header / Prompt */}
-                  <div className="px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 font-mono select-none">
-                    Select Course
-                  </div>
-
-                  {/* Course Options */}
-                  {courses.length === 0 ? (
-                    <div className="px-3.5 py-2 text-xs text-slate-400">
-                      No courses available
-                    </div>
-                  ) : (
-                    courses.map((course, idx) => (
-                      <button
-                        key={idx}
-                        type="button"
-                        onClick={() => handleSelectCourse(course)}
-                        className={`w-full px-3.5 py-2 text-left text-xs transition cursor-pointer flex items-center justify-between ${
-                          selectedCourse === course
-                            ? "bg-teal-50 dark:bg-teal-950/40 text-teal-700 dark:text-teal-300 font-semibold"
-                            : "text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
-                        }`}
-                      >
-                        <span className="truncate pr-2">{course}</span>
-                        {selectedCourse === course && (
-                          <Check size={13} className="text-teal-600 dark:text-teal-400 shrink-0" />
-                        )}
-                      </button>
-                    ))
-                  )}
-                </div>
-              )}
+                <option value="" className="text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900">
+                  Select Course
+                </option>
+                {courses.length === 0 ? (
+                  <option value="" disabled className="text-slate-400 bg-white dark:bg-slate-900">
+                    No courses available
+                  </option>
+                ) : (
+                  courses.map((course, idx) => (
+                    <option
+                      key={idx}
+                      value={course}
+                      className="text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-900 py-1"
+                    >
+                      {course}
+                    </option>
+                  ))
+                )}
+              </select>
             </div>
 
             {/* Search Result Button */}
