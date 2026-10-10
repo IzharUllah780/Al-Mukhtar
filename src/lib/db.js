@@ -1,4 +1,12 @@
+import dns from "node:dns";
 import mongoose from "mongoose";
+
+// Resolve MongoDB Atlas SRV / TXT record timeouts on Windows / local ISPs
+try {
+  dns.setServers(["8.8.8.8", "1.1.1.1", "8.8.4.4"]);
+} catch (e) {
+  // Ignore in environments where setting DNS is restricted
+}
 
 const MONGODB_URI = process.env.MONGODB_URI;
 

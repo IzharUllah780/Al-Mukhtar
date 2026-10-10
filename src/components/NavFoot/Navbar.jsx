@@ -9,19 +9,16 @@ import {
   ArrowRight,
   ChevronRight,
   ChevronDown,
-  Sun,
-  Moon,
   Building2,
   UserCheck,
   GraduationCap,
   Mail,
   Phone,
+  User,
 } from "lucide-react";
 import { FaFacebook, FaYoutube, FaTiktok } from "react-icons/fa";
 import { Logo } from "../../assets/assets.js";
 import { useAuth } from "../AuthContext.jsx";
-import { useTheme } from "../../context/ThemeContext.jsx";
-import UserProfileMenu from "../UserProfileMenu.jsx";
 import NotificationBell from "../NotificationBell.jsx";
 import GoogleTranslator from "../GoogleTranslator.jsx";
 
@@ -48,7 +45,6 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   const { user, loading, logout } = useAuth();
-  const { isDark, toggleTheme } = useTheme();
   const isAdmin = user?.role === "admin" || user?.role === "superadmin";
 
   const isLinkActive = (path) =>
@@ -293,7 +289,14 @@ export default function Navbar() {
                   </Link>
                 )}
                 <NotificationBell />
-                <UserProfileMenu />
+                <Link
+                  to="/profile"
+                  className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-teal-600 dark:hover:bg-teal-600 text-slate-700 dark:text-slate-300 hover:text-white dark:hover:text-white border border-slate-200 dark:border-slate-700 flex items-center justify-center transition-all shadow-2xs hover:shadow-xs active:scale-95 group shrink-0"
+                  title="My Profile"
+                  aria-label="My Profile"
+                >
+                  <User size={17} className="transition-transform group-hover:scale-110" />
+                </Link>
               </>
             ) : (
               <div className="flex items-center gap-2">
@@ -510,26 +513,12 @@ export default function Navbar() {
             </div>
           )}
 
-          {/* Appearance & Language Section */}
-          <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 space-y-1">
+          {/* Language Section */}
+          <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80">
             <div className="flex items-center justify-between px-3 py-1.5 text-[13.5px] sm:text-sm font-medium text-slate-700 dark:text-slate-300">
               <span className="text-slate-500 dark:text-slate-400">Language</span>
               <GoogleTranslator onLanguageChange={closeMenu} />
             </div>
-
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="w-full flex items-center justify-between px-3 py-1.5 text-[13.5px] sm:text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors cursor-pointer text-left"
-            >
-              <div className="flex items-center gap-2">
-                {isDark ? <Moon size={15} className="text-slate-400" /> : <Sun size={15} className="text-slate-400" />}
-                <span>Theme</span>
-              </div>
-              <span className="text-[11px] font-mono text-slate-400">
-                {isDark ? "Dark" : "Light"}
-              </span>
-            </button>
           </div>
 
         </div>
