@@ -14,20 +14,17 @@ import {
   BookOpen,
   CheckCircle2,
   AlertCircle,
-  Calendar,
   KeyRound,
   LogOut,
   Edit2,
   ChevronRight,
   X,
-  GraduationCap,
-  Save,
-  ArrowRight,
   Sun,
   Moon,
   ShieldCheck,
   LayoutDashboard,
-  Sparkles,
+  ArrowRight,
+  Loader2,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useTheme } from "@/context/ThemeContext";
@@ -35,7 +32,7 @@ import { Link, useNavigate } from "@/lib/navigation-adapter";
 
 function Profile() {
   const { user: authUser, login, logout, loading: authLoading } = useAuth();
-  const { theme, isDark, toggleTheme, setTheme } = useTheme();
+  const { isDark, setTheme } = useTheme();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -48,31 +45,30 @@ function Profile() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // 1. Fetch user profile data on page load (direct fetch when visiting profile page)
+  // 1. Fetch real user profile data on page load
   const {
-    data: fetchedUser,
-    isLoading: profileLoading,
-    isError: profileError,
-    refetch: refetchProfile,
+    data: liveUser,
+    isLoading: userLoading,
+    refetch: refetchUser,
   } = useQuery({
-    queryKey: ["userProfileLive"],
+    queryKey: ["authUserProfile"],
     queryFn: async () => {
       const res = await api.get("/api/auth/me");
       if (res.data?.success && res.data.user) {
-        // Keep context in sync
         login(res.data.user);
         return res.data.user;
       }
       return null;
     },
     staleTime: 0,
+    refetchOnMount: "always",
     retry: 1,
   });
 
-  const user = fetchedUser || authUser;
-  const isInitialLoading = (profileLoading || authLoading) && !user;
+  const user = liveUser || authUser;
+  const isPageLoading = (userLoading || authLoading) && !user?.username;
 
-  // 2. Fetch user's applied courses
+  // 2. Fetch user's real applied courses
   const {
     data: applicationsData,
     isLoading: applicationsLoading,
@@ -84,12 +80,11 @@ function Profile() {
       const res = await api.get("/api/applications/my-applications");
       return res.data?.applications || [];
     },
-    enabled: !!user,
-    staleTime: 5 * 60 * 1000,
-    gcTime: 15 * 60 * 1000,
+    enabled: Boolean(user?._id || user?.email),
+    staleTime: 10 * 1000,
   });
 
-  // 3. Form for Profile Updates (Username / Email)
+  // 3. Form for Profile Updates
   const {
     register: registerProfile,
     handleSubmit: handleSubmitProfile,
@@ -97,16 +92,16 @@ function Profile() {
     formState: { errors: profileErrors },
   } = useForm({
     defaultValues: {
-      username: user?.username || "",
-      email: user?.email || "",
+      username: "",
+      email: "",
     },
   });
 
   useEffect(() => {
-    if (user) {
+    if (user?.username && user?.email) {
       resetProfileForm({
-        username: user.username || "",
-        email: user.email || "",
+        username: user.username,
+        email: user.email,
       });
     }
   }, [user, resetProfileForm]);
@@ -130,12 +125,12 @@ function Profile() {
   const updateProfileMutation = useMutation({
     mutationFn: (data) => api.put("/api/auth/update-profile", data),
     onSuccess: (res) => {
-      toast.success(res.data.message || "Profile updated successfully!");
-      if (res.data.user) {
+      toast.success(res.data?.message || "Profile updated successfully!");
+      if (res.data?.user) {
         login(res.data.user);
       }
       queryClient.invalidateQueries({ queryKey: ["authUser"] });
-      queryClient.invalidateQueries({ queryKey: ["userProfileLive"] });
+      queryClient.invalidateQueries({ queryKey: ["authUserProfile"] });
       setEditProfileModalOpen(false);
     },
     onError: (err) => {
@@ -153,7 +148,7 @@ function Profile() {
         newPassword: data.newPassword,
       }),
     onSuccess: (res) => {
-      toast.success(res.data.message || "Password updated successfully!");
+      toast.success(res.data?.message || "Password updated successfully!");
       resetPasswordForm();
       setPasswordModalOpen(false);
     },
@@ -177,53 +172,20 @@ function Profile() {
     navigate("/login");
   };
 
-  const applications = applicationsData || [];
-  const isAdmin = user?.role === "admin" || user?.role === "superadmin";
-
-  // Initial Loading Skeleton (Prevents displaying any placeholder/mock data)
-  if (isInitialLoading) {
+  // Pure Loading Screen - Never displays placeholder text
+  if (isPageLoading) {
     return (
-      <div className="min-h-screen bg-white dark:bg-[#070d18] text-slate-800 dark:text-slate-200 font-sans transition-colors duration-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-16 space-y-8 animate-pulse">
-          {/* Header Skeleton */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-full bg-slate-200 dark:bg-slate-800 shrink-0" />
-              <div className="space-y-2">
-                <div className="h-5 w-40 bg-slate-200 dark:bg-slate-800 rounded-md" />
-                <div className="h-3.5 w-48 bg-slate-200 dark:bg-slate-800 rounded-md" />
-                <div className="h-3 w-32 bg-slate-200 dark:bg-slate-800 rounded-md" />
-              </div>
-            </div>
-            <div className="h-9 w-32 bg-slate-200 dark:bg-slate-800 rounded-lg" />
-          </div>
-
-          {/* Grid Skeleton */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-            <div className="md:col-span-5 space-y-6">
-              <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
-                <div className="h-4 w-28 bg-slate-200 dark:bg-slate-800 rounded-md" />
-                <div className="h-4 w-44 bg-slate-200 dark:bg-slate-800 rounded-md" />
-                <div className="h-4 w-36 bg-slate-200 dark:bg-slate-800 rounded-md" />
-              </div>
-              <div className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
-                <div className="h-4 w-28 bg-slate-200 dark:bg-slate-800 rounded-md" />
-                <div className="h-8 w-full bg-slate-200 dark:bg-slate-800 rounded-lg" />
-              </div>
-            </div>
-            <div className="md:col-span-7 space-y-4">
-              <div className="h-4 w-36 bg-slate-200 dark:bg-slate-800 rounded-md" />
-              <div className="h-20 w-full bg-slate-200 dark:bg-slate-800 rounded-xl" />
-              <div className="h-20 w-full bg-slate-200 dark:bg-slate-800 rounded-xl" />
-            </div>
-          </div>
+      <div className="min-h-screen bg-white dark:bg-[#070d18] flex items-center justify-center p-6">
+        <div className="flex flex-col items-center gap-3 text-slate-500 dark:text-slate-400">
+          <div className="w-10 h-10 border-3 border-teal-600/30 border-t-teal-600 rounded-full animate-spin" />
+          <p className="text-xs font-medium">Loading profile...</p>
         </div>
       </div>
     );
   }
 
-  // If user is not logged in after check
-  if (!user && !profileLoading && !authLoading) {
+  // If unauthenticated after load
+  if (!user || !user.username) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center px-4 bg-white dark:bg-[#070d18]">
         <div className="max-w-md w-full text-center space-y-4 p-8 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-900/60 shadow-sm">
@@ -232,14 +194,14 @@ function Profile() {
           </div>
           <h2 className="text-lg font-bold text-slate-900 dark:text-white">Authentication Required</h2>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-            Please log in with your credentials to access and manage your profile details.
+            Please log in to view your profile details.
           </p>
           <div className="pt-2">
             <Link
               to="/login?redirect=%2Fprofile"
               className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold shadow-xs transition-all"
             >
-              <span>Sign In to Account</span>
+              <span>Sign In</span>
               <ArrowRight size={13} />
             </Link>
           </div>
@@ -248,19 +210,19 @@ function Profile() {
     );
   }
 
-  const initials = user?.username
-    ? user.username.slice(0, 2).toUpperCase()
-    : "AM";
+  const applications = applicationsData || [];
+  const isAdmin = user.role === "admin" || user.role === "superadmin";
+  const userInitials = user.username.trim().slice(0, 2).toUpperCase();
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#070d18] text-slate-800 dark:text-slate-200 font-sans transition-colors duration-200">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-6 sm:pt-10 pb-16 space-y-8 sm:space-y-10">
         
-        {/* ── 1. CLEAN PROFILE HEADER (REAL DATA ONLY) ── */}
+        {/* ── 1. PROFILE HEADER (REAL DATA ONLY) ── */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200 dark:border-slate-800">
           <div className="flex items-center gap-3.5 sm:gap-4">
             <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-base sm:text-lg shrink-0 select-none shadow-xs">
-              <span>{initials}</span>
+              <span>{userInitials}</span>
             </div>
             
             <div className="space-y-0.5">
@@ -288,7 +250,7 @@ function Profile() {
                   {isAdmin ? "Administrator" : "Student"}
                 </span>
                 <span>•</span>
-                <span>Member</span>
+                <span>Account</span>
               </div>
             </div>
           </div>
@@ -313,7 +275,7 @@ function Profile() {
           </div>
         </div>
 
-        {/* ── 2. TWO COLUMN DETAILS (ACCOUNT, APPEARANCE & APPLICATIONS) ── */}
+        {/* ── 2. TWO COLUMN DETAILS ── */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
           
           {/* Left Column: Account Details, Appearance & Security */}
@@ -353,7 +315,7 @@ function Profile() {
               </div>
             </div>
 
-            {/* ── APPEARANCE & THEME SECTION (Desktop & Mobile) ── */}
+            {/* Appearance & Theme (Desktop & Mobile) */}
             <div className="space-y-3 pt-2">
               <div className="pb-2 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
                 <h2 className="text-xs font-bold uppercase tracking-wider font-mono text-slate-500 dark:text-slate-400">
@@ -383,7 +345,7 @@ function Profile() {
                   </div>
                   <div>
                     <span className="text-xs font-bold block">Light</span>
-                    <span className="text-[10px] text-slate-400">Clean bright style</span>
+                    <span className="text-[10px] text-slate-400">Bright Theme</span>
                   </div>
                 </button>
 
@@ -405,7 +367,7 @@ function Profile() {
                   </div>
                   <div>
                     <span className="text-xs font-bold block">Dark</span>
-                    <span className="text-[10px] text-slate-400">Midnight dark style</span>
+                    <span className="text-[10px] text-slate-400">Midnight Theme</span>
                   </div>
                 </button>
               </div>
@@ -447,7 +409,7 @@ function Profile() {
 
           </div>
 
-          {/* Right Column: Submitted Course Applications */}
+          {/* Right Column: Submitted Course Applications (REAL DATA ONLY) */}
           <div className="md:col-span-7 space-y-4">
             
             <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
@@ -469,8 +431,8 @@ function Profile() {
 
             {applicationsLoading ? (
               <div className="py-8 text-center text-xs text-slate-400 space-y-2">
-                <div className="w-5 h-5 border-2 border-teal-600 border-t-transparent rounded-full animate-spin mx-auto" />
-                <p>Loading your applications...</p>
+                <Loader2 size={18} className="animate-spin text-teal-600 mx-auto" />
+                <p>Loading applications...</p>
               </div>
             ) : applicationsError ? (
               <div className="py-6 text-xs text-rose-500">
@@ -498,7 +460,7 @@ function Profile() {
                     >
                       <div className="space-y-0.5 min-w-0">
                         <p className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white capitalize truncate group-hover:text-teal-600 dark:group-hover:text-teal-400">
-                          {app.course?.replace(/-/g, " ") || "Course Application"}
+                          {app.course ? app.course.replace(/-/g, " ") : "Application"}
                         </p>
                         <div className="flex items-center gap-2 text-[11px] text-slate-400 font-mono">
                           <span className="capitalize">{app.shift} Shift</span>
@@ -762,7 +724,7 @@ function Profile() {
               <div className="min-w-0 pr-2">
                 <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block">Application</span>
                 <h2 className="text-sm font-bold text-slate-900 dark:text-white capitalize truncate">
-                  {selectedApplication.course?.replace(/-/g, " ") || "Application Details"}
+                  {selectedApplication.course ? selectedApplication.course.replace(/-/g, " ") : "Application Details"}
                 </h2>
               </div>
               <button
